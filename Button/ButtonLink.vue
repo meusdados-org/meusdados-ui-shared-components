@@ -1,0 +1,67 @@
+<template>
+    <button :class="{ 'boldButton': bold }" :disabled="disabled">
+        <text1 :class="{ 'bold': bold }">
+            <Icon v-if="type" :type="type" size="1rem"/>
+            <slot></slot>
+        </text1>
+    </button>
+</template>
+
+<script>
+import text1 from '../Font/Text/Text1Component.vue';
+import Icon from '../Icon/Icon.vue';
+
+export default {
+    name: 'ButtonLink',
+    props: {
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        type: {
+            type: String,
+            default: '',
+        },
+        bold: {
+            type: Boolean,
+            default: true,
+        },
+    },
+    components: {
+        text1,
+        Icon,
+    }
+}
+</script>
+
+<style scoped>
+.bold {
+    font-weight: 700;
+    font-size: var(--spacing-5);
+}
+
+button {
+    font-size: 14px;
+    background-color: transparent;
+    border: none;
+    color: var(--blue-1);
+    column-gap: var(--spacing-3);
+    cursor: pointer;
+}
+
+button:hover {
+    color: var(--purple-1);
+}
+
+.boldButton:focus {
+    border-bottom: 2px solid var(--black);
+}
+
+button:focus {
+    border-bottom: 1px solid var(--black);
+}
+
+button:disabled {
+    color: var(--gray-2);
+}
+</style>
