@@ -42,6 +42,7 @@ export default {
 
 .backLink {
     cursor: pointer;
+    color: var(--blue-1);
 }
 
 .backLink:hover {
