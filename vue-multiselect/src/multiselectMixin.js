@@ -711,7 +711,7 @@ export default {
       if (typeof window === 'undefined') return
 
       const spaceAbove = this.$el.getBoundingClientRect().top
-      const spaceBelow = document.querySelector('.card-cadastro').clientHeight - this.$el.getBoundingClientRect().bottom
+      const spaceBelow = document.querySelector('.card-cadastro') ? document.querySelector('.card-cadastro').clientHeight : window.innerHeight - this.$el.getBoundingClientRect().bottom
       const hasEnoughSpaceBelow = spaceBelow > this.maxHeight
 
       if (hasEnoughSpaceBelow || spaceBelow > spaceAbove || this.openDirection === 'below' || this.openDirection === 'bottom') {
