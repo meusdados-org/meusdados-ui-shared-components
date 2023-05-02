@@ -38,11 +38,11 @@ export default {
 
 .breadcrumb-title {
     margin-right: 1rem;
+    color: var(--blue-1);
 }
 
 .backLink {
     cursor: pointer;
-    color: var(--blue-1);
 }
 
 .backLink:hover {
