@@ -41,7 +41,7 @@
                                 <Icon class="delete" size="1.25rem" type="x-square" v-on:click="deletar(td.id || td.file_name)" />
                             </div>
                             <div v-if="customAction">
-                                <slot :id="td.id"></slot>
+                                <slot :id="td.id" :item="td"></slot>
                             </div>
                         </div>
                     </td>
@@ -175,19 +175,17 @@ export default {
                     title: "Tem certeza que deseja excluir esse registro?",
                     message: "Após excluido, não será possível recuperá-lo.",
                     showCancelButton: true,
-                }).then(result => {
-                    if(result.isConfirmed) {
-                        new this.service().delete(id).then(() => {
-                            const entriesCopy = this.entries;
-                            const index = entriesCopy.findIndex(entry => entry.id === id);
-                            entriesCopy.splice(index, 1);
-                            this.$emit('delete', entriesCopy);
-                            this.$refs.pagination.deleteItem(entriesCopy);
-                        }).catch(error => {
-                            console.log(error)
-                            this.$dialog({title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error'});
-                        })
-                    }
+                }).then(() => {
+                    new this.service().delete(id).then(() => {
+                        const entriesCopy = this.entries;
+                        const index = entriesCopy.findIndex(entry => entry.id === id);
+                        entriesCopy.splice(index, 1);
+                        this.$emit('delete', entriesCopy);
+                        this.$refs.pagination.deleteItem(entriesCopy);
+                    }).catch(error => {
+                        console.log(error)
+                        this.$dialog({title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error'});
+                    })
                 })
             } else {
                 this.$emit('delete', id)

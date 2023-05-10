@@ -81,7 +81,7 @@ export default {
     height: 100%;
     background-color: var(--black-low-opacity);
     display: flex;
-    z-index: 5;
+    z-index: 999;
     justify-content: center;
     align-items: center;
 }
@@ -95,7 +95,7 @@ export default {
 
     width: 564px;
     height: 292px;
-    z-index: 3;
+    z-index: 997;
 
     background-color: var(--white);
     border-radius: var(--border-radius-1);

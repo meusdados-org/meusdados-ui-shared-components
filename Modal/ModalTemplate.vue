@@ -34,7 +34,7 @@ export default {
 }
 
 .modal {
-    z-index: 999;
+    z-index: 2;
     width: 50rem;
     opacity: 1 !important;
 }
