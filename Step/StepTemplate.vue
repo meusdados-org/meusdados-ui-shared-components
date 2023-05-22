@@ -12,26 +12,28 @@ const props = defineProps({
 </script>
 
 <template>
-  <header>
-    <div class="steps">
-      <Title4Component>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</Title4Component>
+  <div class="container">
+    <header>
+      <div class="steps" v-if="props.currentStep && props.finalStep">
+        <Title4Component>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</Title4Component>
+      </div>
+      <div class="main-title">
+        <Title1Component>{{ props.mainTitle }}</Title1Component>
+      </div>
+      <slot name="header"></slot>
+    </header>
+    <div class="content">
+      <slot name="content"></slot>
     </div>
-    <div class="main-title">
-      <Title1Component>{{ props.mainTitle }}</Title1Component>
+    <div class="footer">
+      <slot name="footer"></slot>
     </div>
-    <slot name="header"></slot>
-  </header>
-  <div class="content">
-    <slot name="content"></slot>
-  </div>
-  <div class="footer">
-    <slot name="footer"></slot>
-  </div>
-  <div class="pattern1">
-    <img :src="pattern1"/>
-  </div>
-  <div class="pattern2">
-    <img :src="pattern2"/>
+    <div class="pattern1">
+      <img :src="pattern1"/>
+    </div>
+    <div class="pattern2">
+      <img :src="pattern2"/>
+    </div>
   </div>
 </template>
 
@@ -41,6 +43,14 @@ header {
   flex-direction: column;
   row-gap: 1rem;
   margin-bottom: 4rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
 }
 
 .footer {
