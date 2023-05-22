@@ -165,7 +165,7 @@ export default {
                 const filterArray = filter.split(', ');
                 return entry.all(x => filterArray.includes(x));
             }
-            return filter === entry;
+            return filter === entry || dataConversor(entry) === filter;
 
         },
         deletar(id) {
@@ -242,7 +242,6 @@ export default {
 .table-wrapper {
     overflow: auto;
     color: transparent;
-    margin-top: 1rem;
     border-radius: var(--border-radius-1);
     max-height: 70vh;
     box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 20%);

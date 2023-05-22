@@ -1,5 +1,5 @@
 <template>
-    <button :disabled="disabled"><span class="text-button"><slot></slot></span></button>
+    <button :type="type" :disabled="disabled"><span class="text-button"><slot></slot></span></button>
 </template>
 
 <script>
@@ -10,6 +10,10 @@ export default {
         disabled: {
             type: Boolean,
             default: false,
+        },
+        type: {
+            type: String,
+            default: 'button'
         }
     }
 }

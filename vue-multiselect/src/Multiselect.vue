@@ -77,8 +77,8 @@
         @mousedown.prevent="toggle"
       >
         <slot name="singleLabel" :option="singleValue">
-          {{ currentOptionLabel }}
         </slot>
+        {{ filter ? currentOptionLabel.substring(0, 25) : currentOptionLabel }}
       </span>
       <span
         class="multiselect__placeholder"
@@ -313,6 +313,10 @@ export default {
     tabindex: {
       type: Number,
       default: 0
+    },
+    filter: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {

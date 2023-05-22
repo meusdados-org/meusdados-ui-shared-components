@@ -1,7 +1,10 @@
 <template>
     <multiselect v-bind="$attrs" :placeholder="placeholder" :searchable="true"
     :modelValue="value"
-    selectedLabel="" class="filter">
+    selectedLabel="" class="filter" :filter="true">
+        <template v-slot:singleLabel>
+            {{ placeholder.substring(0, 4) }}:
+        </template>
         <template v-slot:caret="slotProps" v-if="!close">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
             <Icon type="filter" size="15px" stroke-width="1"/></div>
@@ -45,7 +48,6 @@ export default {
 .filter {
     min-width: 144px;
     max-width: fit-content;
-    height: 2rem;
     background-color: var(--white);
     border-radius: var(--border-radius-1);
     box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 20%);
