@@ -1,0 +1,64 @@
+<script setup>
+import Title4Component from '../Font/Title/Title4Component.vue';
+import Title1Component from '../Font/Title/Title1Component.vue';
+import pattern1 from './assets/img/pattern1.svg';
+import pattern2 from './assets/img/pattern2.svg';
+
+const props = defineProps({
+  mainTitle: String,
+  currentStep: String,
+  finalStep: String
+})
+</script>
+
+<template>
+  <header>
+    <div class="steps">
+      <Title4Component>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</Title4Component>
+    </div>
+    <div class="main-title">
+      <Title1Component>{{ props.mainTitle }}</Title1Component>
+    </div>
+    <slot name="header"></slot>
+  </header>
+  <div class="content">
+    <slot name="content"></slot>
+  </div>
+  <div class="footer">
+    <slot name="footer"></slot>
+  </div>
+  <div class="pattern1">
+    <img :src="pattern1"/>
+  </div>
+  <div class="pattern2">
+    <img :src="pattern2"/>
+  </div>
+</template>
+
+<style scoped>
+header {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  margin-bottom: 4rem;
+}
+
+.footer {
+  padding: 2rem;
+  margin-bottom: 1rem;
+}
+
+.pattern1, .pattern2 {
+  position: absolute;
+  right: 0;
+  z-index: -1;
+}
+
+.pattern1 {
+  top: 143px;
+}
+
+.pattern2 {
+  top: 299px;
+}
+</style>
