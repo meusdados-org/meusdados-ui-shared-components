@@ -3,7 +3,7 @@
         <div class="input-button-container">
             <label class="label">
                 <input class="input" type="file" ref="file" @change="selectFile" />
-                <span>Escolher arquivo</span>
+                <span>{{ label }}</span>
             </label>
             <span v-if="currentFile"><Text2Component :class="{'errorText': error}">{{ currentFile.name }}</Text2Component></span>
         </div>
@@ -37,6 +37,11 @@ export default {
             type: Number,
             required: false,
             default: 4000000  // 4MB
+        },
+        label: {
+            type: String,
+            required: false,
+            default: 'Escolher Arquivo'
         }
     },
     data() {
@@ -100,7 +105,8 @@ label.label input[type="file"] {
 }
 
 .label {
-    width: 12rem;
+    width: fit-content;
+    padding: 0 1.5rem;
     height: 2.5rem;
     display: flex;
     font-weight: 700;
