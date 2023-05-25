@@ -3,6 +3,8 @@ import Title4Component from '../Font/Title/Title4Component.vue';
 import Title1Component from '../Font/Title/Title1Component.vue';
 import pattern1 from './assets/img/pattern1.svg';
 import pattern2 from './assets/img/pattern2.svg';
+import meusDadosColorido from './assets/img/meus-dados-colorido.png';
+import meusDadosBranco from './assets/img/meus-dados-branco.png';
 
 const props = defineProps({
   mainTitle: String,
@@ -12,6 +14,9 @@ const props = defineProps({
 </script>
 
 <template>
+  <header class="logo-header">
+    <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco" width="100" />
+  </header>
   <div class="container">
     <header>
       <div class="steps" v-if="props.currentStep && props.finalStep">
@@ -38,6 +43,11 @@ const props = defineProps({
 </template>
 
 <style scoped>
+.logo-header {
+  display: flex;
+  justify-content: flex-start;
+  padding: var(--spacing-7);
+}
 header {
   display: flex;
   flex-direction: column;
@@ -50,7 +60,6 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
 }
 
 .footer {
