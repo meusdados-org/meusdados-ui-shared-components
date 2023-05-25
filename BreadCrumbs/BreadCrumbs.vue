@@ -9,12 +9,14 @@
 <script>
 import Icon from '@/components/shared/Icon/Icon.vue';
 import Title3Component from '../Font/Title/Title3Component.vue';
+import Tag from '../Tag/Tag.vue';
 
 export default {
     name: 'BreadCrumbs',
     components: {
         Icon,
-        Title3Component
+        Title3Component,
+        Tag
     },
     computed: {
         crumbs() {
