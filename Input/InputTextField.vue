@@ -14,7 +14,7 @@
         :value="value"
         @input="$emit('update:value', $event.target.value)"
       />
-      <label>{{ label }}</label>
+      <label v-if="label">{{ label }}</label>
     </div>
   </template>
   
@@ -24,7 +24,7 @@
     props: {
       label: {
         type: String,
-        required: true,
+        required: false,
       },
       type: {
         type: String,
@@ -51,7 +51,7 @@
         isPassword: false,
         passwordFieldType: 'password',
         inputProps: {
-          name: this.label.toLowerCase(),
+          name: this.label ? this.label.toLowerCase() : Math.random(),
           disabled: this.disabled,
           maxlength: this.maxlength,
           placeholder: ' ',
@@ -95,7 +95,7 @@
     transition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
-    background-color: white;
+    background-color: transparent;
 }
 
 .container-InputTextField > input:-webkit-autofill{

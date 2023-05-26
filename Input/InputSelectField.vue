@@ -1,7 +1,7 @@
 <template>
     <multiselect v-bind="$attrs" :placeholder="placeholder" :searchable="false"
     :modelValue="value"
-    selectedLabel="Selecionado">
+    selectedLabel="">
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
             <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>

@@ -3,7 +3,7 @@
     :modelValue="value"
     :multiple="true"
     :taggable="true"
-    selectedLabel="Selecionado">
+    selectedLabel="">
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
             <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>

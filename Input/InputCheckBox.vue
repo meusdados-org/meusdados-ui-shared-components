@@ -1,5 +1,5 @@
 <template>
-    <label class="container-InputTextField"> <text1>{{ label }}</text1>
+    <label class="container-InputTextField"> <text1><slot>{{ label }}</slot></text1>
         <input type="checkbox" :disabled="isDisabled" class="input" :name="name" :id="id" :checked="value" @input="$emit('update:checked', $event.target.checked)" placeholder=" " />
         <span class="checkbox">
             <div class="hover-square"></div>
@@ -35,10 +35,10 @@ export default {
 },
     computed: {
         name() {
-            return this.label.toLowerCase();
+            return this.label ? this.label.toLowerCase() : Math.random();
         },
         id() {
-            return this.label.toLowerCase() + Math.random();
+            return this.label ? this.label.toLowerCase() + Math.random(): Math.random();
         },
         isDisabled() {
             return this.disabled;

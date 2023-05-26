@@ -2,7 +2,7 @@
     <div class="container-container-textarea">
         <label>{{ label }}</label>
         <div class="container-textarea">
-            <textarea :value="value" rows="6" @input="$emit('update:value', $event.target.value)" placeholder="Digite um texto aqui..." :maxlength="maxlength"></textarea>
+            <textarea :value="value" rows="6" @input="$emit('update:value', $event.target.value)" :placeholder="placeholder" :maxlength="maxlength"></textarea>
         </div>
     </div>
 </template>
@@ -28,6 +28,11 @@ export default {
             type: String,
             required: false,
             default: '2.5rem',
+        },
+        placeholder: {
+            type: String,
+            required: false,
+            default: 'Digite um texto aqui...'
         }
     },
 }
@@ -70,6 +75,7 @@ textarea {
     font-weight: 400;
     line-height: 125%;
     resize: none;
+    background-color: transparent;
 }
 
 textarea:focus {
