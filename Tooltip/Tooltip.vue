@@ -5,19 +5,25 @@ import Text3Component from '../Font/Text/Text3Component.vue';
 import Icon from '../Icon/Icon.vue';
 
 const open = ref<boolean>(false);
+const props = defineProps({
+  red: {
+    type: Boolean,
+    default: false
+  },
+})
+
+const switchOpen = () => {
+  open.value = !open.value;
+}
 </script>
 
 <template>
-<div class="tooltip-wrapper" @click="open = false">
-</div>
-<div class="tooltip-container" @click.stop="">
-  <ButtonLink class="help-icon" v-on:click="open = !open" :border-bottom="false">
-    <Icon type="help-circle" size="1rem"/>
-  </ButtonLink>
+<div class="tooltip-container" @mouseover="open = true" @mouseleave="open = false">
+  <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
   <div class="help-text" v-if="open">
     <Text3Component>
-      <slot name="text">Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
-      <Icon class="close-help-text" type="x" size="6px" v-on:click="open = false"/>
+      <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
+      <Icon class="close-help-text" type="x" size="8px" v-on:click="switchOpen"/>
     </Text3Component>
   </div>
 </div>
@@ -25,20 +31,28 @@ const open = ref<boolean>(false);
 
 <style scoped>
 .tooltip-wrapper {
-  position: absolute;
+  z-index: 999;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
 }
+
 .tooltip-container {
-  display: flex;
-  width: fit-content;
   position: relative;
+}
+
+.red {
+  color: var(--red-1) !important;
 }
 
 .help-icon:hover {
   color: var(--gray-2);
+}
+
+.red:hover {
+  color: var(--red-1-low-opacity) !important;
 }
 
 .help-text {
