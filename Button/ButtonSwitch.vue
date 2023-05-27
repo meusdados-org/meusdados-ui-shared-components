@@ -1,5 +1,5 @@
 <template>
-    <input type="checkbox" :disabled="isDisabled" :name="name" :id="id" :checked="value" @input="$emit('update:checked', $event.target.checked)" placeholder=" " v-on:click="$emit('switchFlag')" :class="{ mini: mini }"/>
+    <input type="checkbox" :disabled="isDisabled" :name="name" :id="id" :checked="value" @input="$emit('update:checked', $event.target.checked)" placeholder=" " v-on:click="$emit('switchFlag')" :class="{ mini, red }"/>
     <text1 v-if="showLabel">{{ label }}</text1>
 </template>
 
@@ -29,6 +29,10 @@ export default {
         showLabel: {
             type: Boolean,
             default: true,
+        },
+        red: {
+            type: Boolean,
+            default: false
         }
     },
     components: {
@@ -87,6 +91,14 @@ input::after {
 
 input:checked {
     background-color: var(--purple-1);
+}
+
+input.red:checked {
+    background-color: var(--red-1);
+}
+
+input.red:checked ~ span{
+    color: var(--red-1);
 }
 
 input:checked::after {

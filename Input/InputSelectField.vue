@@ -1,5 +1,5 @@
 <template>
-    <multiselect v-bind="$attrs" :placeholder="placeholder" :searchable="false"
+    <multiselect v-bind="$attrs" :placeholder="placeholder" :maxHeight="maxHeight" :searchable="false"
     :modelValue="value"
     selectedLabel="">
         <template v-slot:caret="slotProps">
@@ -28,6 +28,7 @@ export default {
     props: {
         placeholder: String,
         value: String,
+        maxHeight: Number,
         // adiciona a prop rest para receber outras props
         ...Multiselect.props
     }
