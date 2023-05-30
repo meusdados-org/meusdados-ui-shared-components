@@ -3,6 +3,7 @@
     :modelValue="value"
     :multiple="true"
     :taggable="true"
+    :trackBy="trackBy"
     selectedLabel="">
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
@@ -30,6 +31,10 @@ export default {
     props: {
         placeholder: String,
         value: String,
+        trackBy: {
+            type: String,
+            default: undefined
+        },
         // adiciona a prop rest para receber outras props
         ...Multiselect.props
     }

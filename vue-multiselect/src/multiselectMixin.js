@@ -625,6 +625,9 @@ export default {
         : this.valueKeys.indexOf(option)
 
       if (this.multiple) {
+        console.log(this.internalValue);
+        console.log(option);
+        console.log(index);
         const newValue = this.internalValue.slice(0, index).concat(this.internalValue.slice(index + 1))
         this.$emit('update:modelValue', newValue)
       } else {
