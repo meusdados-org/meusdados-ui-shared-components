@@ -19,7 +19,7 @@
       <label v-if="label">{{ label }}</label>
     </div>
   </template>
-  
+
   <script>
   export default {
     name: 'InputTextField',
