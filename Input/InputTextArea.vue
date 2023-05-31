@@ -40,6 +40,11 @@ export default {
             id: `inputTextArea-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`
         }
     },
+    data() {
+        return {
+            id: `inputTextArea-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`
+        }
+    },
 }
 </script>
 
