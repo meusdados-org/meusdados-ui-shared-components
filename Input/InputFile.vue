@@ -48,6 +48,7 @@ export default {
         return {
             currentFile: undefined,
             errorMessage: undefined,
+            id: `inputFile-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`,
         }
     },
     computed: {

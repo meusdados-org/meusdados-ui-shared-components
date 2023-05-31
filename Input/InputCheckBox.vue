@@ -38,7 +38,7 @@ export default {
             return this.label ? this.label.toLowerCase() : Math.random();
         },
         id() {
-            return this.label ? this.label.toLowerCase() + Math.random(): Math.random();
+            return `inputCheckBox-${this.label ? this.label.toLocaleLowerCase().replace(/\s/g, '-') : Math.random()}`
         },
         isDisabled() {
             return this.disabled;
