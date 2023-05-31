@@ -1,7 +1,7 @@
 <template>
     <multiselect v-bind="$attrs" :placeholder="placeholder" :searchable="false"
     :modelValue="value"
-    selectedLabel="Selecionado">
+    selectedLabel="Selecionado" :id="id">
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
             <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>
@@ -30,7 +30,12 @@ export default {
         value: String,
         // adiciona a prop rest para receber outras props
         ...Multiselect.props
-    }
+    },
+    data() {
+        return {
+          id: `inputSelectField-${this.placeholder.toLocaleLowerCase().replace(/\s/g, '-')}`,
+        }
+    },
 }
 </script>
 

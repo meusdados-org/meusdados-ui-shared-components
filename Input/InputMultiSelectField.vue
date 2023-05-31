@@ -32,7 +32,12 @@ export default {
         value: String,
         // adiciona a prop rest para receber outras props
         ...Multiselect.props
-    }
+    },
+    data() {
+        return {
+          id: `inputMultiSelectField-${this.placeholder.toLocaleLowerCase().replace(/\s/g, '-')}`,
+        }
+    },
 }
 </script>
 

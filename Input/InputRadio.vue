@@ -37,7 +37,7 @@ export default {
           return this.label.toLowerCase();
       },
       id() {
-          return this.label.toLowerCase() + Math.random();
+        return `inputRadio-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`
       },
       isDisabled() {
           return this.disabled;

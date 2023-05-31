@@ -52,6 +52,7 @@
         passwordFieldType: 'password',
         inputProps: {
           name: this.label.toLowerCase(),
+          id: `inputTextField-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`,
           disabled: this.disabled,
           maxlength: this.maxlength,
           placeholder: ' ',

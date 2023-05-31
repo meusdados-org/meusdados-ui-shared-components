@@ -31,7 +31,12 @@ export default {
         value: String,
         // adiciona a prop rest para receber outras props
         ...Multiselect.props
-    }
+    },
+    data() {
+        return {
+          id: `inputAutoComplete-${this.placeholder.toLocaleLowerCase().replace(/\s/g, '-')}`,
+        }
+    },
 }
 </script>
 

@@ -17,7 +17,12 @@ export default {
             type: Date,
             required: true
         }
-    }
+    },
+    data() {
+        return {
+          id: `inputDatePicker-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`,
+        }
+    },
 }
 </script>
 

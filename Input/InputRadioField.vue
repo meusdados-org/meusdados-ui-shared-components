@@ -2,8 +2,13 @@
 import InputRadio from './InputRadio.vue';
 
 const props = defineProps({
-  value: undefined,
-  options: []
+  value: {
+    type: String
+  },
+  options: {
+    type: Array<String>,
+    default: []
+  }
 });
 
 const emit = defineEmits(['uValue'])

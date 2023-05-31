@@ -2,7 +2,7 @@
     <div class="container-container-textarea">
         <label>{{ label }}</label>
         <div class="container-textarea">
-            <textarea :value="value" rows="6" @input="$emit('update:value', $event.target.value)" placeholder="Digite um texto aqui..." :maxlength="maxlength"></textarea>
+            <textarea :value="value" :id="id" rows="6" @input="$emit('update:value', $event.target.value)" placeholder="Digite um texto aqui..." :maxlength="maxlength"></textarea>
         </div>
     </div>
 </template>
@@ -28,6 +28,11 @@ export default {
             type: String,
             required: false,
             default: '2.5rem',
+        }
+    },
+    data() {
+        return {
+            id: `inputTextArea-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`
         }
     },
 }
