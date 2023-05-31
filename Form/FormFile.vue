@@ -12,7 +12,7 @@
                 {{ progress }}%
             </div>
         </div>
-        <ButtonPrimary :disabled="!currentFile" v-on:click="upload">{{ title }}</ButtonPrimary>
+        <ButtonPrimary id="button-upload-file" :disabled="!currentFile" v-on:click="upload">{{ title }}</ButtonPrimary>
     </div>
 </template>
 

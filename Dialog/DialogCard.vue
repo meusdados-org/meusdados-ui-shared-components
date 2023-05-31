@@ -10,8 +10,8 @@
                 <Text1Component>{{ message }}</Text1Component>
             </div>
             <div class="dialog-buttons">
-                <ButtonLink v-if="showCancelButton" @click="onCancel">Cancelar</ButtonLink>
-                <ButtonPrimary @click="onConfirm">Confirmar</ButtonPrimary>
+                <ButtonLink id="button-cancelar-dialog" v-if="showCancelButton" @click="onCancel">Cancelar</ButtonLink>
+                <ButtonPrimary id="button-confirmar-dialog" @click="onConfirm">Confirmar</ButtonPrimary>
             </div>
         </div>
     </div>

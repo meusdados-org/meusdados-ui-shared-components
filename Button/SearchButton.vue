@@ -1,6 +1,6 @@
 <template>
     <div class="busca">
-        <input type="text" class="busca-text" placeholder="Buscar" :value="value" @input="$emit('update:value', $event.target.value)"/>
+        <input type="text" class="busca-text" id="inputsearch-table" placeholder="Buscar" :value="value" @input="$emit('update:value', $event.target.value)"/>
         <Icon class='icon' :class="{ iconActive }" size="15px" type="search"/>
     </div>
 </template>
