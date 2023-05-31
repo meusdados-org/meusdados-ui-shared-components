@@ -37,14 +37,10 @@ export default {
     },
     data() {
         return {
-            id: `inputTextArea-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`
+            id: `inputTextArea-${this.label ? this.label.toLowerCase().replace(/\s/g, '-') : Math.random()}`
         }
     },
-    data() {
-        return {
-            id: `inputTextArea-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`
-        }
-    },
+
 }
 </script>
 

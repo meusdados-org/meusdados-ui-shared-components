@@ -107,7 +107,7 @@ export default {
     outline-offset: 1px;
 }
 
-.container-InputTextField input:hover:not(:checked) ~ .checkbox .hover-square {
+.container-InputTextField input:hover:not(:checked):not(:disabled) ~ .checkbox .hover-square {
     height: 6px;
     width: 6px;
     background-color: var(--gray-2);
@@ -119,11 +119,13 @@ export default {
 .container-InputTextField input:disabled ~ .checkbox {
     background-color: var(--gray-3);
     border-color: var(--gray-2);
+    cursor: default;
 }
 
 
 label {
     color: var(--gray-1);
+    text-align: left;
 }
 
 </style>
