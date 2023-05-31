@@ -6,6 +6,7 @@
         :type="isPassword ? passwordFieldType : type"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
+        @blur="$emit('bluring')"
       />
       <input
         v-else
@@ -13,6 +14,7 @@
         v-mask="mask"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
+        @blur="$emit('bluring')"
       />
       <label v-if="label">{{ label }}</label>
     </div>
