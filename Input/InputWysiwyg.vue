@@ -252,7 +252,8 @@ export default {
 }
 
 .wysiwyg-container .multiselect__option {
-  padding: .5rem;
+  padding: .25rem .5rem;
+  font-size: 12px;
   min-height: 0px;
 }
 

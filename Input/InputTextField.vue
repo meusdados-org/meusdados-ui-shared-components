@@ -1,5 +1,5 @@
 <template>
-    <div class="container-InputTextField">
+    <div class="container-InputTextField" :class="{ formGroupVersion }">
       <input
         v-if="!mask"
         v-bind="inputProps"
@@ -47,6 +47,10 @@
         type: Boolean,
         default: false,
       },
+      formGroupVersion: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
       return {
@@ -99,6 +103,12 @@
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     background-color: transparent;
+}
+
+.container-InputTextField.formGroupVersion > input {
+  height: 18px;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .container-InputTextField > input:-webkit-autofill{

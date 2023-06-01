@@ -1,18 +1,20 @@
 <template>
-    <multiselect v-bind="$attrs" :placeholder="placeholder" :allowEmpty="allowEmpty" :openDirection="openDirection" :maxHeight="maxHeight" :searchable="false"
-    :modelValue="value"
-    selectedLabel="" :id="id">
-        <template v-slot:caret="slotProps">
-            <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
-            <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>
-        </template>
-        <template v-slot:noOptions>
-            A lista está vazia.
-        </template>
-        <template v-slot:noResult>
-            Nenhum resultado encontrado.
-        </template>
-    </multiselect>
+    <div :class="{ formGroupVersion }" >
+        <multiselect v-bind="$attrs" :placeholder="placeholder" :allowEmpty="allowEmpty" :maxHeight="maxHeight" :searchable="false"
+        :modelValue="value"
+        selectedLabel="" :id="id" :openDirection="formGroupVersion ? 'bottom' : openDirection">
+            <template v-slot:caret="slotProps">
+                <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
+                <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>
+            </template>
+            <template v-slot:noOptions>
+                A lista está vazia.
+            </template>
+            <template v-slot:noResult>
+                Nenhum resultado encontrado.
+            </template>
+        </multiselect>
+    </div>
 </template>
 
 <script>
@@ -37,6 +39,10 @@ export default {
             type: String,
             default: ''
         },
+        formGroupVersion: {
+            type: Boolean,
+            default: false
+        },
         // adiciona a prop rest para receber outras props
         ...Multiselect.props
     },
@@ -48,5 +54,28 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+.formGroupVersion .multiselect, .formGroupVersion .multiselect--above {
+    min-height: 18px;
+    min-width: 112px;
+}
+
+.formGroupVersion .multiselect__option {
+    padding: .25rem .5rem;
+    font-size: 12px;
+    min-height: 0px;
+}
+
+.formGroupVersion .multiselect__select {
+    top: -1px;
+    right: 8px;
+}
+
+.formGroupVersion .multiselect__tags {
+    min-height: 18px;
+}
+
+.formGroupVersion .multiselect__single {
+    font-size: 12px;
+}
 </style>
