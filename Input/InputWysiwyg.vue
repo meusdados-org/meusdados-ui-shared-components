@@ -1,5 +1,5 @@
 <template>
-  <div class="wysiwyg-container">
+  <div class="wysiwyg-container" ref="wysiwygContainer">
     <div class="buttons">
       <InputSelectField
         class="select"
@@ -34,23 +34,23 @@
           },
         ]"
         label="label"
-        maxHeight="100"
         placeholder=""
         :value="selected"
         openDirection="bottom"
         :allowEmpty="false"
         @select="applyHeading"
+        @mousedown.prevent
       />
-      <ButtonLink @click="applyBold" class="button" :class="{ active: false }">
+      <ButtonLink @click="applyBold" class="button" :class="{ active: isBold }" @mousedown.prevent>
         <Icon type="bold"/>
       </ButtonLink>
-      <ButtonLink @click="applyItalic" class="button" :class="{ active: false }">
+      <ButtonLink @click="applyItalic" class="button" :class="{ active: isItalic }" @mousedown.prevent>
         <Icon type="italic"/>
       </ButtonLink>
-      <ButtonLink @click="applyUnderline" class="button" :class="{ active: false }">
+      <ButtonLink @click="applyUnderline" class="button" :class="{ active: isUnderline }" @mousedown.prevent>
         <Icon type="underline"/>
       </ButtonLink>
-      <ButtonLink @click="applyUl" class="button">
+      <ButtonLink @click="applyUl" class="button" @mousedown.prevent>
         <Icon type="list"/>
       </ButtonLink>
     </div>
@@ -60,12 +60,21 @@
       contenteditable="true"
       ref="wysiwyg"
       class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300"
+      @dragover="handleDragOver"
+      @drop="handleDrop"
+      @dragenter="handleDragEnter"
+      @dragleave="handleDragLeave"
+      @paste="handlePaste"
     />
+    <div class="attachments" v-if="files.length > 0">
+      <FragmentAttachment v-for="file in files" :key="file.name" :fileName="file.name"/>
+    </div>
   </div>
 </template>
 
 <script>
 import ButtonLink from '../Button/ButtonLink.vue';
+import FragmentAttachment from '../Fragments/FragmentAttachment.vue';
 import Icon from '../Icon/Icon.vue';
 import InputSelectField from './InputSelectField.vue';
 import { Marked } from '@ts-stack/markdown';
@@ -112,53 +121,118 @@ export default {
             selected: '',
             innerValue: Marked.parse(this.value) || '<p><br></p>',
             updated: false,
+            files: []
         };
     },
     methods: {
-        onInput(event) {
-          const turndown = new TurndownService({
-            emDelimiter: '_',
-            linkStyle: 'inlined',
-            headingStyle: 'atx'
-          })
-          this.$emit("input", turndown.turndown(event.target.innerHTML));
-        },
-        applyBold() {
-          this.isBold = !this.isBold;
-          document.execCommand('bold')
-        },
-        applyItalic() {
-          this.isItalic = !this.isItalic;
-          document.execCommand('italic')
-        },
-        applyUnderline() {
-          this.isUnderline = !this.isUnderline;
-          document.execCommand('underline')
-        },
-        applyHeading(obj) {
-          const key = obj.key;
-          this.selected = obj;
-          document.execCommand('formatBlock', false, key)
-        },
-        applyUl() {
-          document.execCommand('insertUnorderedList')
-        },
-        applyOl() {
-          document.execCommand('insertOrderedList')
-        },
-        undo() {
-          document.execCommand('undo')
-        },
-        redo() {
-          document.execCommand('redo')
+      isCursorInsideBoldTag() {
+        const selection = window.getSelection();
+        if (selection && selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          const parentNode = range.startContainer.parentNode;
+          return parentNode.nodeName === 'B' || parentNode.closest('b') !== null;
         }
+        return false;
+      },
+      onInput(event) {
+        const turndown = new TurndownService({
+          emDelimiter: '_',
+          linkStyle: 'inlined',
+          headingStyle: 'atx'
+        })
+        this.$emit("input", turndown.turndown(event.target.innerHTML));
+      },
+      applyBold() {
+        document.execCommand('bold')
+        const isSelectionBold = document.queryCommandState('bold');
+        this.isBold = isSelectionBold;
+      },
+      applyItalic() {
+        document.execCommand('italic')
+        const isSelectionItalic = document.queryCommandState('italic');
+        this.isItalic = isSelectionItalic;
+      },
+      applyUnderline() {
+        document.execCommand('underline', false, null);
+        const isSelectionUnderline = document.queryCommandState('underline');
+        this.isUnderline = isSelectionUnderline;
+      },
+      applyHeading(obj) {
+        const key = obj.key;
+        this.selected = obj;
+        document.execCommand('formatBlock', false, key)
+      },
+      applyUl() {
+        document.execCommand('insertUnorderedList')
+      },
+      applyOl() {
+        document.execCommand('insertOrderedList')
+      },
+      undo() {
+        document.execCommand('undo')
+      },
+      redo() {
+        document.execCommand('redo')
+      },
+      handleDragOver(event) {
+        event.preventDefault();
+      },
+      handleDrop(event) {
+        event.preventDefault();
+        const files = event.dataTransfer.files;
+        console.log(files.length);
+        for (let i = 0; i < files.length; i++) {
+          const file = files[i];
+          if (file.type.startsWith('image/')) {
+            this.displayImage(file);
+          } else {
+            this.saveAttachment(file);
+          }
+        }
+      },
+      displayImage(file) {
+        const reader = new FileReader();
+
+        reader.onload = (event) => {
+          const imgSrc = event.target.result;
+          const imgElement = `<img style="max-width: 580px;" src=${imgSrc} alt="${file.name}">`;
+
+          document.execCommand('insertHTML', false, imgElement);
+        }
+
+        reader.readAsDataURL(file);
+      },
+      saveAttachment(file) {
+        // Lógica para salvar o arquivo em anexo
+        this.files.push(file);
+        console.log('Arquivo salvo:', file);
+      },
+      handlePaste(event) {
+        const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+
+        for (const item of items) {
+          if (item.kind === 'file' && item.type.startsWith('image/')) {
+            const file = item.getAsFile();
+            this.displayImage(file);
+          } else if (item.kind == 'file') {
+            const file = item.getAsFile();
+            this.saveAttachment(file);
+          }
+        }
+      },
     },
-    components: { Icon, InputSelectField, ButtonLink },
+    components: { Icon, InputSelectField, ButtonLink, FragmentAttachment },
     created() {
       this.selected = this.options[0];
     },
     mounted() {
       document.execCommand('defaultParagraphSeparator', false, 'p')
+      // Adicionar ouvinte de evento para o editor
+      this.$refs.wysiwyg.addEventListener('focus', this.handleSelectionChange);
+    },
+    beforeUnmount() {
+      // Remover ouvinte de evento antes de desmontar o componente
+      this.$refs.wysiwyg.removeEventListener('focus', this.handleSelectionChange);
     },
 }
 </script>
@@ -218,18 +292,18 @@ export default {
   padding: 1rem;
   outline: none;
 }
-.wysiwyg-output p {
-  @apply pb-4;
+
+.wysiwyg-container.dragover {
+  border-color: var(--purple-1);
 }
-.wysiwyg-output p {
-  @apply pb-4;
-}
-.wysiwyg-output ul {
-  @apply ml-6;
-  @apply list-disc;
-}
-.wysiwyg-output ol {
-  @apply ml-6;
-  @apply list-decimal;
+
+.attachments {
+  display: flex;
+  column-gap: .5rem;
+  row-gap: .5rem;
+  width: 90%;
+  flex-wrap: wrap;
+  padding: 1rem;
+  padding-top: .5rem;
 }
 </style>
