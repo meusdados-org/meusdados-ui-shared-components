@@ -23,11 +23,12 @@ const switchOpen = () => {
 
 <template>
 <div class="tooltip-container" @mouseover="open = true" @mouseleave="open = false">
-  <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
+  <slot name="icon">
+    <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
+  </slot>
   <div class="help-text" :class="{ openToRight }" v-if="open">
     <Text3Component>
       <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
-      <Icon class="close-help-text" type="x" size="8px" v-on:click="switchOpen"/>
     </Text3Component>
   </div>
 </div>
@@ -61,7 +62,7 @@ const switchOpen = () => {
 
 .help-text {
   padding: 12px;
-  width: 182px;
+  max-width: 182px;
   background-color: var(--gray-3);
   border-radius: var(--border-radius-1);
   text-align: left;

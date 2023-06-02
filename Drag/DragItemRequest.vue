@@ -4,19 +4,21 @@ import Text3Component from '../Font/Text/Text3Component.vue';
 import Title4Component from '../Font/Title/Title4Component.vue';
 import Tooltip from '../Tooltip/Tooltip.vue';
 import Tag from '../Tag/Tag.vue';
+import FragmentIndicatorBullet from '../Fragments/FragmentIndicatorBullet.vue';
 
 defineProps({
   solicitacao: {
     type: Object,
     default: {
       request_id: 'AD001',
-      prioridade: 'Baixa',
-      titular_verificado: false,
+      prioridade: 'Alta',
+      titular_verificado: true,
       titular: {
         nome: 'Lorem Ipsum',
       },
       tipo_solicitacao: 'Acesso aos Dados',
-      data_solicitacao: '21/03/23'
+      data_solicitacao: '21/03/23',
+      atrasado: true,
     }
   }
 })
@@ -28,8 +30,11 @@ defineProps({
     <div class="drag-item-request">
       <div class="drag-item-request-header">
         <Text3Component>{{ solicitacao.request_id }}</Text3Component>
-        <Tooltip :open-to-right="true" v-if="solicitacao.titular_verificado">FragmentIndicatorBullet</Tooltip>
-        <Tag v-else>Não verificado</Tag>
+        <div class="drag-item-request-indicators">
+          <Tag background-color="var(--red-1)" color="var(--white)">Atrasado</Tag>
+          <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular_verificado"/>
+          <Tag v-else>Não verificado</Tag>
+        </div>
       </div>
       <div class="drag-item-request-content">
         <Title4Component>{{ solicitacao.titular?.nome }}</Title4Component>
@@ -63,7 +68,15 @@ defineProps({
 
 .drag-item-request-header, .drag-item-request-footer {
   display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+
+.drag-item-request-indicators {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  column-gap: .5rem;
 }
 
 .drag-item-request-content {
