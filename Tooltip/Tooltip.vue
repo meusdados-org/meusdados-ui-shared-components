@@ -10,6 +10,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  openToRight: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const switchOpen = () => {
@@ -20,7 +24,7 @@ const switchOpen = () => {
 <template>
 <div class="tooltip-container" @mouseover="open = true" @mouseleave="open = false">
   <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
-  <div class="help-text" v-if="open">
+  <div class="help-text" :class="{ openToRight }" v-if="open">
     <Text3Component>
       <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
       <Icon class="close-help-text" type="x" size="8px" v-on:click="switchOpen"/>
@@ -64,7 +68,15 @@ const switchOpen = () => {
   position: absolute;
   z-index: 999;
   bottom: 0px;
+}
+
+.help-text:not(.openToRight) {
   left: 30px;
+}
+
+.help-text.openToRight {
+  bottom: -10px;
+  right: 20px;
 }
 
 .close-help-text {

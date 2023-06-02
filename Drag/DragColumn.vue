@@ -1,6 +1,6 @@
 <template>
   <Draggable class="drag-columns column-drag-handle">
-    <Card :title="column.name" class="drag-column">
+    <Card :title="column.name" :hasPadding="false" class="drag-column">
       <template v-slot:action>
         <ButtonLink>
           <Icon class="edit-column" size="1rem" type="more-vertical"></Icon>
@@ -15,11 +15,7 @@
         </div>
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
-            <Draggable v-for="card in items" :key="card.id" class="card">
-              <div>
-                {{ card.text }}
-              </div>
-            </Draggable>
+            <DragItemRequest v-for="card in items" :key="card.id" class="card"/>
             <div :class="{ hover: index !== 0 }">
               button
             </div>
@@ -37,6 +33,7 @@ import Icon from "../Icon/Icon.vue";
 import Text3Component from "../Font/Text/Text3Component.vue";
 import { applyDrag } from "./helpers";
 import ButtonLink from "../Button/ButtonLink.vue";
+import DragItemRequest from "./DragItemRequest.vue";
 
 export default {
   components: {
@@ -45,7 +42,8 @@ export default {
     Card,
     Icon,
     Text3Component,
-    ButtonLink
+    ButtonLink,
+    DragItemRequest
 },
   props: {
     column: {
@@ -115,20 +113,25 @@ export default {
 }
 
 .background-options{
-    display: flex;
-    flex-direction: column;
-    row-gap: .5rem;
-    height: 434px;
-
-    overflow: auto;
-    overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+  margin: 0 -1rem;
+  padding-top: .5rem;
+  margin-top: -.5rem;
+  row-gap: .5rem;
+  height: 434px;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .background-options::-webkit-scrollbar {
-    background-color: var(--gray-3);
-    border-radius: 10px;
-    /* margin-left: 1rem; */
-    width: 2px;
+  position: relative;
+  right: -250px;
+  background-color: var(--gray-3);
+  border-radius: 10px;
+  /* margin-left: 1rem; */
+  width: 2px;
 }
 .background-options::-webkit-scrollbar-thumb {
     border-radius: 10px;

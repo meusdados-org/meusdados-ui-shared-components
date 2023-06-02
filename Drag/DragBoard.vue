@@ -45,7 +45,7 @@ export default {
           const scene = Object.assign({}, this.scene);
           // const column = scene.children[currentColumnPosition];
           scene.children = applyDrag(scene.children, dropResult)
-          this.scene = scene;
+          this.scene.children = scene.children;
           // new EtapaService(localStorage).update(column.id, { posicao: newColumnPosition + 1 }).then(() => {
           //     this.scene = scene
           // }).catch(error => {

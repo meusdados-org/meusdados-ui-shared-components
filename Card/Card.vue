@@ -25,7 +25,16 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 
 export default {
   name: "Card",
-  props: ['title', 'to'],
+  props: {
+    title: {
+      type: String,
+      required: false
+    },
+    to: {
+      type: String,
+      required: false
+    },
+  },
   components: {
       Icon
   }
