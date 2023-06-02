@@ -24,7 +24,8 @@ const props = defineProps({
   display: flex;
   justify-content: left;
   text-align: left;
-  min-width: 108px;
+  min-width: 4rem;
+  max-width: 10rem;
   width: fit-content;
   flex-direction: column;
   row-gap: .5rem;
