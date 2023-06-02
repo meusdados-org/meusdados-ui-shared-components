@@ -28,4 +28,11 @@ import Text2Component from '../Font/Text/Text2Component.vue';
   color: var(--gray-2);
   text-align: left;
 }
+
+.tab-items {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  column-gap: 1rem;
+}
 </style>

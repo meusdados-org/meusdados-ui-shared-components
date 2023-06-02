@@ -4,6 +4,14 @@
       <template #title>
         Solicitações
       </template>
+      <template #items>
+        <TabsItem>
+          Comentários Internos
+        </TabsItem>
+        <TabsItem :active="true">
+          Comentários Externos
+        </TabsItem>
+      </template>
     </TabsGroup>
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
       <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
@@ -20,6 +28,7 @@ import { Container } from 'vue3-smooth-dnd';
 import { applyDrag } from './helpers';
 import DragAdd from './DragAdd.vue';
 import TabsGroup from '../Tabs/TabsGroup.vue';
+import TabsItem from '../Tabs/TabsItem.vue';
 
 export default {
   name: 'SolicitacoesTableView',
@@ -27,7 +36,8 @@ export default {
     DragColumn,
     Container,
     DragAdd,
-    TabsGroup
+    TabsGroup,
+    TabsItem
 },
   props: {
     scene: {
