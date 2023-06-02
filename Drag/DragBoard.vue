@@ -1,11 +1,16 @@
 <template>
   <div class="board">
-      <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
-          <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
-          <DragAdd class="nova-etapa">
-            Nova Etapa
-          </DragAdd>
-        </Container>
+    <TabsGroup>
+      <template #title>
+        Solicitações
+      </template>
+    </TabsGroup>
+    <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
+      <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
+      <DragAdd class="nova-etapa">
+        Nova Etapa
+      </DragAdd>
+    </Container>
   </div>
 </template>
 
@@ -14,14 +19,16 @@ import DragColumn from '@/components/shared/Drag/DragColumn.vue';
 import { Container } from 'vue3-smooth-dnd';
 import { applyDrag } from './helpers';
 import DragAdd from './DragAdd.vue';
+import TabsGroup from '../Tabs/TabsGroup.vue';
 
 export default {
   name: 'SolicitacoesTableView',
   components: {
-      DragColumn,
-      Container,
-      DragAdd
-  },
+    DragColumn,
+    Container,
+    DragAdd,
+    TabsGroup
+},
   props: {
     scene: {
       type: Object,
