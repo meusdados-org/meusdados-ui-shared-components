@@ -16,9 +16,9 @@
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
             <DragItemRequest v-for="card in items" :key="card.id" class="card"/>
-            <div :class="{ hover: index !== 0 }">
-              button
-            </div>
+            <DragAdd :class="{ hover: index !== 0 }">
+              Nova Solicitação
+            </DragAdd>
           </Container>
         </div>
       </template>
@@ -34,6 +34,7 @@ import Text3Component from "../Font/Text/Text3Component.vue";
 import { applyDrag } from "./helpers";
 import ButtonLink from "../Button/ButtonLink.vue";
 import DragItemRequest from "./DragItemRequest.vue";
+import DragAdd from "./DragAdd.vue";
 
 export default {
   components: {
@@ -43,8 +44,9 @@ export default {
     Icon,
     Text3Component,
     ButtonLink,
-    DragItemRequest
-},
+    DragItemRequest,
+    DragAdd
+  },
   props: {
     column: {
       type: Object,
@@ -139,7 +141,7 @@ export default {
 }
 
 .background-options:hover > .hover {
-  display: block;
+  display: flex;
 }
 
 .hover {
@@ -147,7 +149,7 @@ export default {
 }
 
 .edit-column {
-    color: var(--gray-2);
+  color: var(--gray-2);
 }
 
 .edit-column:hover {
