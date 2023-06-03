@@ -243,6 +243,7 @@ export default {
     overflow: auto;
     color: transparent;
     border-radius: var(--border-radius-1);
+    margin-top: 1rem;
     max-height: 70vh;
     box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 20%);
 }

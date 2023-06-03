@@ -2,7 +2,6 @@
 import { Draggable } from 'vue3-smooth-dnd';
 import Text3Component from '../Font/Text/Text3Component.vue';
 import Title4Component from '../Font/Title/Title4Component.vue';
-import Tooltip from '../Tooltip/Tooltip.vue';
 import Tag from '../Tag/Tag.vue';
 import FragmentIndicatorBullet from '../Fragments/FragmentIndicatorBullet.vue';
 
@@ -31,7 +30,7 @@ defineProps({
       <div class="drag-item-request-header">
         <Text3Component>{{ solicitacao.request_id }}</Text3Component>
         <div class="drag-item-request-indicators">
-          <Tag background-color="var(--red-1)" color="var(--white)">Atrasado</Tag>
+          <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
           <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular_verificado"/>
           <Tag v-else>Não verificado</Tag>
         </div>
@@ -56,7 +55,7 @@ defineProps({
 
 .drag-item-request {
   padding: 1rem;
-  width: 256px;
+  width: 224px;
   background-color: var(--white);
   box-shadow: var(--box-shadow-1);
   border-radius: var(--border-radius-1);

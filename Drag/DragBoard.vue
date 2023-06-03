@@ -1,9 +1,5 @@
 <template>
   <div class="board">
-    <FragmentIndicatorLabel label="Abertas" number="18" />
-    <FragmentIndicatorLabel label="Baixa" number="18" background-color="var(--green-1)" />
-    <FragmentIndicatorLabel label="Média" number="18" background-color="var(--yellow-1)" />
-    <FragmentIndicatorLabel label="Alta" number="18" background-color="var(--red-1)" />
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
       <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
       <DragAdd class="nova-etapa">
@@ -76,8 +72,13 @@ export default {
 </script>
 
 <style scoped>
+.board {
+  padding: 0;
+  margin: 0;
+}
 .orientador-colunas {
   border-collapse: separate;
+  margin-top: -14px;
   margin-left: -14px;
   margin-right: -14px;
   border-spacing: 15px;

@@ -15,7 +15,7 @@
         </div>
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
-            <DragItemRequest v-for="card in items" :key="card.id" class="card"/>
+            <DragItemRequest v-for="solicitacoes in items" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card"/>
             <DragAdd :class="{ hover: index !== 0 }">
               Nova Solicitação
             </DragAdd>
@@ -107,11 +107,9 @@ export default {
 
 <style scoped>
 
-.drag-columns{
-    display: flex;
-    width: 18rem;
-    min-width: 18rem;
-    height: 434px;
+.drag-column{
+  display: flex;
+  width: 18rem;
 }
 
 .background-options{
@@ -120,7 +118,7 @@ export default {
   padding: .5rem 1rem;
   margin: -.5rem -1rem;
   row-gap: .5rem;
-  height: 434px;
+  height: 350px;
   overflow-x: hidden;
   overflow-y: auto;
 }

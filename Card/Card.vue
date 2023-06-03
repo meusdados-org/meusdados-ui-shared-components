@@ -4,9 +4,6 @@
           <div class="card-header">
               <div class="main-title">{{ title }}</div>
               <slot name="action">
-                <router-link to="{{ to }}" class="action">
-                  ver todos <Icon type="arrow-right-circle"/>
-                </router-link>
               </slot>
           </div>
           <div class="card-content">
@@ -49,19 +46,26 @@ export default {
   width: 100%;
 }
 
+.main-title {
+  font-size: 14px;
+  color: var(--gray-2);
+  font-weight: 400;
+}
+
 .card-container{
   display: flex;
   flex-direction: column;
   padding: 1rem;
   row-gap: .5rem;
 }
+
 .card-header{
   display: flex;
   text-align: left;
   justify-content: space-between;
+  width: 100%;
   font-size: 100%;
   color: var(--gray-2);
-  width: 100%;
 }
 
 .card-content {
