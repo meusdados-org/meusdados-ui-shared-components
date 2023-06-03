@@ -1,19 +1,9 @@
 <template>
   <div class="board">
-    <TabsGroup>
-      <template #title>
-        Solicitações
-      </template>
-      <template #items>
-        <TabsItem>
-          Comentários Internos
-        </TabsItem>
-        <TabsItem :active="true">
-          Comentários Externos
-        </TabsItem>
-      </template>
-    </TabsGroup>
-    <CollabChat/>
+    <FragmentIndicatorLabel label="Abertas" number="18" />
+    <FragmentIndicatorLabel label="Baixa" number="18" background-color="var(--green-1)" />
+    <FragmentIndicatorLabel label="Média" number="18" background-color="var(--yellow-1)" />
+    <FragmentIndicatorLabel label="Alta" number="18" background-color="var(--red-1)" />
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
       <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
       <DragAdd class="nova-etapa">
@@ -32,6 +22,7 @@ import TabsGroup from '../Tabs/TabsGroup.vue';
 import TabsItem from '../Tabs/TabsItem.vue';
 import CollabComment from '../Collab/CollabComment.vue';
 import CollabChat from '../Collab/CollabChat.vue';
+import FragmentIndicatorLabel from '../Fragments/FragmentIndicatorLabel.vue';
 
 export default {
   name: 'SolicitacoesTableView',
@@ -42,7 +33,8 @@ export default {
     TabsGroup,
     TabsItem,
     CollabComment,
-    CollabChat
+    CollabChat,
+    FragmentIndicatorLabel
 },
   props: {
     scene: {
