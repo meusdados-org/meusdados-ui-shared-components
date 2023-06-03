@@ -117,10 +117,8 @@ export default {
 .background-options{
   display: flex;
   flex-direction: column;
-  padding: 0 1rem;
-  margin: 0 -1rem;
-  padding-top: .5rem;
-  margin-top: -.5rem;
+  padding: .5rem 1rem;
+  margin: -.5rem -1rem;
   row-gap: .5rem;
   height: 434px;
   overflow-x: hidden;

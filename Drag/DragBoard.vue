@@ -13,7 +13,7 @@
         </TabsItem>
       </template>
     </TabsGroup>
-    <CollabComment></CollabComment>
+    <CollabChat/>
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
       <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
       <DragAdd class="nova-etapa">
@@ -31,6 +31,7 @@ import DragAdd from './DragAdd.vue';
 import TabsGroup from '../Tabs/TabsGroup.vue';
 import TabsItem from '../Tabs/TabsItem.vue';
 import CollabComment from '../Collab/CollabComment.vue';
+import CollabChat from '../Collab/CollabChat.vue';
 
 export default {
   name: 'SolicitacoesTableView',
@@ -40,7 +41,8 @@ export default {
     DragAdd,
     TabsGroup,
     TabsItem,
-    CollabComment
+    CollabComment,
+    CollabChat
 },
   props: {
     scene: {

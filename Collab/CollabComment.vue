@@ -36,7 +36,7 @@ const tagProps = ref({
 <template>
   <div class="collab-comment">
     <div class="collab-comment-header">
-      <Tag v-bind="tagProps"><Title4Component class="externo-tag" v-if="mensagem.externo">Titular:</Title4Component> {{ mensagem.usuario.nome }}</Tag>
+      <Tag v-bind="tagProps"><Title4Component class="externo-tag" v-if="mensagem.externo">Titular:</Title4Component> <Text3Component class="collab-comment-user">{{ mensagem.usuario.nome }}</Text3Component></Tag>
       <Text3Component>{{ mensagem.data }}</Text3Component>
       <Text3Component>{{ mensagem.hora }}</Text3Component>
     </div>
@@ -55,7 +55,6 @@ const tagProps = ref({
   display: flex;
   flex-direction: column;
   row-gap: 1rem;
-  max-width: 623px;
 }
 
 .collab-comment-header {
@@ -76,5 +75,9 @@ const tagProps = ref({
 
 .externo-tag {
   font-size: 12px;
+}
+
+.collab-comment-user {
+  line-height: 200%;
 }
 </style>
