@@ -35,7 +35,9 @@ const props = defineProps({
   }
 })
 
+
 const isTheLastComment = (index) => {
+  console.log(index === props.mensagens?.length - 1)
   return index === props.mensagens?.length - 1;
 }
 </script>
@@ -51,15 +53,18 @@ const isTheLastComment = (index) => {
 
 <style scoped>
 .collab-chat {
-  max-width: 623px;
+  width: 100%;
+  max-height: 25rem;
+  overflow-y: auto;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   row-gap: 2rem;
 }
 
 .collab-chat-separator {
   height: 1px;
   background-color: var(--gray-3);
+  width: 625px;
   border: none;
 }
 </style>

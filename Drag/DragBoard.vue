@@ -1,11 +1,14 @@
 <template>
   <div class="board">
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
-      <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" :items="column.solicitacoes"/>
+      <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" :items="column.solicitacoes"/>
       <DragAdd class="nova-etapa">
         Nova Etapa
       </DragAdd>
     </Container>
+    <ModalTemplate :open="open" @close="open = false">
+      <CardDashboard :id="id"/>
+    </ModalTemplate>
   </div>
 </template>
 
@@ -19,6 +22,11 @@ import TabsItem from '../Tabs/TabsItem.vue';
 import CollabComment from '../Collab/CollabComment.vue';
 import CollabChat from '../Collab/CollabChat.vue';
 import FragmentIndicatorLabel from '../Fragments/FragmentIndicatorLabel.vue';
+import ModalTemplate from '../Modal/ModalTemplate.vue';
+import Card from '../Card/Card.vue';
+import Icon from '../Icon/Icon.vue';
+import ButtonLink from '../Button/ButtonLink.vue';
+import CardDashboard from '@/components/Cards/CardsSolicitacoes/CardDashboard.vue';
 
 export default {
   name: 'SolicitacoesTableView',
@@ -30,7 +38,12 @@ export default {
     TabsItem,
     CollabComment,
     CollabChat,
-    FragmentIndicatorLabel
+    FragmentIndicatorLabel,
+    ModalTemplate,
+    Card,
+    Icon,
+    ButtonLink,
+    CardDashboard
 },
   props: {
     scene: {
@@ -45,6 +58,8 @@ export default {
               animationDuration: '150',
               showOnTop: true
           },
+          id: undefined,
+          open: false,
       }
   },
   methods: {
@@ -66,7 +81,11 @@ export default {
           // }).catch(error => {
           //     this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
           // })
-      }
+      },
+    openModal(id) {
+      this.id = id,
+      this.open = true;
+    }
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { computed, onMounted } from 'vue';
 import Tag from '../Tag/Tag.vue';
 import Title4Component from '../Font/Title/Title4Component.vue';
 import Text3Component from '../Font/Text/Text3Component.vue';
@@ -26,9 +26,11 @@ const props = defineProps({
   }
 });
 
-const tagProps = ref({
-  backgroundColor: props.mensagem.externo ? 'var(--purple-1)' : 'var(--blue-1)',
-  color: 'var(--white)'
+const tagProps = computed(() => {
+  return {
+    backgroundColor: props.mensagem.externo ? 'var(--purple-1)' : 'var(--blue-1)',
+    color: 'var(--white)'
+  }
 });
 
 </script>
@@ -54,6 +56,7 @@ const tagProps = ref({
 .collab-comment {
   display: flex;
   flex-direction: column;
+  max-width: 623px;
   row-gap: 1rem;
 }
 

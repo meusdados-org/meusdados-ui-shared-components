@@ -62,7 +62,7 @@ const switchOpen = () => {
 
 .help-text {
   padding: 12px;
-  max-width: 182px;
+  width: 182px;
   background-color: var(--gray-3);
   border-radius: var(--border-radius-1);
   text-align: left;

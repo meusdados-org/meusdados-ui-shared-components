@@ -64,8 +64,12 @@
       @drop="handleDrop"
       @dragenter="handleDragEnter"
       @dragleave="handleDragLeave"
+      :style="{ 'max-height': maxHeight }"
       @paste="handlePaste"
     />
+    <ButtonLink v-if="showSendButton" class="send-button">
+      <Icon type="send"/>
+    </ButtonLink>
     <div class="attachments" v-if="files.length > 0">
       <FragmentAttachment v-for="file in files" :key="file.name" :fileName="file.name"/>
     </div>
@@ -82,7 +86,7 @@ import TurndownService from 'turndown';
 
 export default {
     name: "InputWysiwyg",
-    props: ["value"],
+    props: ["value", "showSendButton", "maxHeight"],
     data() {
         return {
             options: [
@@ -242,6 +246,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 100%;
+  max-width: 100%;
   border: 1px solid var(--gray-1);
   border-radius: var(--border-radius-1);
   overflow: hidden;
@@ -289,13 +294,23 @@ export default {
 
 .wysiwyg-output {
   text-align: left;
-  min-height: 150px;
-  padding: 1rem;
+  min-height: 5px;
+  max-height: 300px;
+  max-width: 100%;
+  font-size: 14px;
+  padding: 1rem;;
+  overflow-y: auto;
   outline: none;
 }
 
 .wysiwyg-container.dragover {
   border-color: var(--purple-1);
+}
+
+.send-button {
+  position: relative;
+  bottom: 2px;
+  right: -300px;
 }
 
 .attachments {

@@ -30,7 +30,7 @@ defineProps({
 .form-horizontal-group-container {
   display: flex;
   column-gap: 1rem;
-  width: fit-content;
+  width: 95%;
   align-items: center;
 }
 

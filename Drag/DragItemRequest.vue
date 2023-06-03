@@ -48,7 +48,7 @@ defineProps({
 
 <style scoped>
 .item-drag-handle:active {
-  cursor: grab;
+  cursor: grab !important;
   outline: 2px solid var(--black);
   border-radius: var(--border-radius-1);
 }
@@ -63,6 +63,10 @@ defineProps({
   flex-direction: column;
   gap: 4px;
   z-index: 2;
+}
+
+.drag-item-request:hover {
+  cursor: pointer;
 }
 
 .drag-item-request-header, .drag-item-request-footer {

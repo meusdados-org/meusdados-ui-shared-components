@@ -1,5 +1,5 @@
 <template>
-    <div :class="{ formGroupVersion }" >
+    <div class="notFormGroupVersion" :class="{ formGroupVersion }" >
         <multiselect v-bind="$attrs" :placeholder="placeholder" :allowEmpty="allowEmpty" :maxHeight="maxHeight" :searchable="false"
         :modelValue="value"
         selectedLabel="" :id="id" :openDirection="formGroupVersion ? 'bottom' : openDirection">
@@ -55,6 +55,10 @@ export default {
 </script>
 
 <style>
+.notFormGroupVersion {
+    width: 100%;
+}
+
 .formGroupVersion .multiselect, .formGroupVersion .multiselect--above {
     min-height: 18px;
     min-width: 112px;
