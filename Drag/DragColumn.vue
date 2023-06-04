@@ -2,7 +2,7 @@
   <Draggable class="drag-columns column-drag-handle">
     <Card :title="column.name" :hasPadding="false" class="drag-column">
       <template v-slot:action>
-        <ButtonLink>
+        <ButtonLink @click="$emit('openForm', column.id)">
           <Icon class="edit-column" size="1rem" type="more-vertical"></Icon>
         </ButtonLink>
       </template>

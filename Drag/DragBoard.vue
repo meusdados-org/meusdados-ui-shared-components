@@ -1,13 +1,16 @@
 <template>
   <div class="board">
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
-      <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" :items="column.solicitacoes"/>
-      <DragAdd class="nova-etapa">
+      <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" :items="column.solicitacoes"/>
+      <DragAdd class="nova-etapa" @click="openModalForm(undefined)">
         Nova Etapa
       </DragAdd>
     </Container>
     <ModalTemplate :open="open" @close="open = false">
       <CardDashboard :id="id"/>
+    </ModalTemplate>
+    <ModalTemplate :open="openForm" @close="openForm = false">
+      <CardEditarEtapa :id="idEtapa" @close="openForm = false"/>
     </ModalTemplate>
   </div>
 </template>
@@ -27,6 +30,7 @@ import Card from '../Card/Card.vue';
 import Icon from '../Icon/Icon.vue';
 import ButtonLink from '../Button/ButtonLink.vue';
 import CardDashboard from '@/components/Cards/CardsSolicitacoes/CardDashboard.vue';
+import CardEditarEtapa from '@/components/Cards/CardsSolicitacoes/CardsForms/CardEditarEtapa.vue';
 
 export default {
   name: 'SolicitacoesTableView',
@@ -43,7 +47,8 @@ export default {
     Card,
     Icon,
     ButtonLink,
-    CardDashboard
+    CardDashboard,
+    CardEditarEtapa
 },
   props: {
     scene: {
@@ -60,6 +65,8 @@ export default {
           },
           id: undefined,
           open: false,
+          idEtapa: undefined,
+          openForm: false,
       }
   },
   methods: {
@@ -85,6 +92,11 @@ export default {
     openModal(id) {
       this.id = id,
       this.open = true;
+    },
+    openModalForm(id) {
+      console.log(id)
+      this.idEtapa = id;
+      this.openForm = true;
     }
   },
 };
