@@ -16,7 +16,7 @@
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
             <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card"/>
-            <DragAdd :class="{ hover: index !== 0 }">
+            <DragAdd @click="open = true" :class="{ hover: index !== 0 }">
               Nova Solicitação
             </DragAdd>
           </Container>
@@ -24,6 +24,9 @@
       </template>
     </Card>
   </Draggable>
+  <ModalTemplate :open="open" @close="open = false">
+    <CardNovaSolicitacao :id_etapa="column.id" @close="open = false"/>
+  </ModalTemplate>
 </template>
 
 <script>
@@ -36,6 +39,7 @@ import ButtonLink from "../Button/ButtonLink.vue";
 import DragItemRequest from "./DragItemRequest.vue";
 import DragAdd from "./DragAdd.vue";
 import ModalTemplate from "../Modal/ModalTemplate.vue";
+import CardNovaSolicitacao from "@/components/Cards/CardsSolicitacoes/CardsForms/CardNovaSolicitacao.vue";
 
 export default {
   components: {
@@ -47,8 +51,9 @@ export default {
     ButtonLink,
     DragItemRequest,
     DragAdd,
-    ModalTemplate
-  },
+    ModalTemplate,
+    CardNovaSolicitacao
+},
   props: {
     column: {
       type: Object,
@@ -78,7 +83,7 @@ export default {
         showOnTop: true
       },
       openId: undefined,
-      open: true,
+      open: false,
     }
   },
   methods: {
