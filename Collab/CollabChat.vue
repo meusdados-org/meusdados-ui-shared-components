@@ -54,7 +54,6 @@ const isTheLastComment = (index) => {
 <style scoped>
 .collab-chat {
   width: 100%;
-  max-height: 25rem;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;

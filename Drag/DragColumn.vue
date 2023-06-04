@@ -1,8 +1,8 @@
 <template>
   <Draggable class="drag-columns column-drag-handle">
-    <Card :title="column.name" :hasPadding="false" class="drag-column">
+    <Card :title="column.nome" :hasPadding="false" class="drag-column">
       <template v-slot:action>
-        <ButtonLink @click="$emit('openForm', column.id)">
+        <ButtonLink class="edit-button-link" @click="$emit('openForm', column.id)">
           <Icon class="edit-column" size="1rem" type="more-vertical"></Icon>
         </ButtonLink>
       </template>
@@ -10,7 +10,7 @@
         <div class="responsavel">
           <Text3Component>
             <Icon size="0.8rem" type="user" />
-            {{ column.areasUsuarios || 'Sem área/usuário específico' }}
+            {{ column.responsaveis?.length > 0 ? column.responsaveis.map(x => x.nome).join(', ') : 'Sem área/usuário específico' }}
           </Text3Component>
         </div>
         <div class="background-options">
@@ -40,6 +40,7 @@ import DragItemRequest from "./DragItemRequest.vue";
 import DragAdd from "./DragAdd.vue";
 import ModalTemplate from "../Modal/ModalTemplate.vue";
 import CardNovaSolicitacao from "@/components/Cards/CardsSolicitacoes/CardsForms/CardNovaSolicitacao.vue";
+import { SolicitacaoService } from "@/services/solicitacao";
 
 export default {
   components: {
@@ -90,19 +91,20 @@ export default {
     onCardDrop (columnId, dropResult) {
       console.log(columnId, dropResult);
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        const scene = Object.assign({}, this.scene)
+        const scene = Object.assign({}, this.scene);
+        const sceneBackup = Object.assign({}, this.scene);
         const column = scene.children.filter(p => p.id === columnId)[0]
         const columnIndex = scene.children.indexOf(column)
         const newColumn = Object.assign({}, column);
-        // const solicitacao = dropResult.payload;
-        // const id_etapa = dropResult.addedIndex !== null ? { id_etapa: columnId } : {};
-        // new SolicitacaoService(localStorage).update(solicitacao.id, id_etapa).then(() => {
-            newColumn.solicitacoes = applyDrag(newColumn.solicitacoes, dropResult)
-            scene.children.splice(columnIndex, 1, newColumn);
-            this.scene.children = scene.children;
-        // }).catch(error => {
-        //     this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
-        // })
+        newColumn.solicitacoes = applyDrag(newColumn.solicitacoes, dropResult)
+        scene.children.splice(columnIndex, 1, newColumn);
+        this.scene.children = scene.children;
+        const solicitacao = dropResult.payload;
+        const id_etapa = dropResult.addedIndex !== null ? { id_etapa: columnId } : {};
+        new SolicitacaoService(localStorage).update(solicitacao.id, id_etapa).then().catch(error => {
+            this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
+            this.scene.children = sceneBackup.children;
+        })
       }
     },
     getCardPayload () {
@@ -159,6 +161,9 @@ export default {
 
 .edit-column:hover {
   color: var(--purple-1);
+}
+.edit-button-link {
+  margin-right: -.5rem;
 }
 
 .responsavel {

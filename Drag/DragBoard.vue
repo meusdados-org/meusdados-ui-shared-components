@@ -17,6 +17,7 @@
 
 <script>
 import DragColumn from '@/components/shared/Drag/DragColumn.vue';
+import { EtapaService } from '@/services/etapa';
 import { Container } from 'vue3-smooth-dnd';
 import { applyDrag } from './helpers';
 import DragAdd from './DragAdd.vue';
@@ -77,17 +78,17 @@ export default {
           this.search = search;
       },
       onColumnDrop (dropResult) {
-          // const currentColumnPosition = dropResult.removedIndex
-          // const newColumnPosition = dropResult.addedIndex
+          const currentColumnPosition = dropResult.removedIndex
+          const newColumnPosition = dropResult.addedIndex
           const scene = Object.assign({}, this.scene);
-          // const column = scene.children[currentColumnPosition];
+          const sceneBackup = Object.assign({}, this.scene);
+          const column = scene.children[currentColumnPosition];
           scene.children = applyDrag(scene.children, dropResult)
           this.scene.children = scene.children;
-          // new EtapaService(localStorage).update(column.id, { posicao: newColumnPosition + 1 }).then(() => {
-          //     this.scene = scene
-          // }).catch(error => {
-          //     this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
-          // })
+          new EtapaService(localStorage).update(column.id, { posicao: newColumnPosition + 1 }).then().catch(error => {
+            this.scene.children = sceneBackup.children;
+            this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
+          })
       },
     openModal(id) {
       this.id = id,

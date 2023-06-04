@@ -33,11 +33,5 @@ export default {
     background-color: rgba(0, 0, 0, .75);
 }
 
-.modal {
-    z-index: 2;
-    width: 50rem;
-    opacity: 1 !important;
-}
-
 
 </style>

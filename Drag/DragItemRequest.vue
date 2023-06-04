@@ -1,5 +1,6 @@
 <script setup>
 import { Draggable } from 'vue3-smooth-dnd';
+import { dataConversorShortYear } from '@/utils/data';
 import Text3Component from '../Font/Text/Text3Component.vue';
 import Title4Component from '../Font/Title/Title4Component.vue';
 import Tag from '../Tag/Tag.vue';
@@ -11,12 +12,12 @@ defineProps({
     default: {
       request_id: 'AD001',
       prioridade: 'Alta',
-      titular_verificado: true,
       titular: {
         nome: 'Lorem Ipsum',
+        verificado: true
       },
       tipo_solicitacao: 'Acesso aos Dados',
-      data_solicitacao: '21/03/23',
+      data_abertura: '21/03/23',
       atrasado: true,
     }
   }
@@ -31,7 +32,7 @@ defineProps({
         <Text3Component>{{ solicitacao.request_id }}</Text3Component>
         <div class="drag-item-request-indicators">
           <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
-          <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular_verificado"/>
+          <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular.verificado"/>
           <Tag v-else>Não verificado</Tag>
         </div>
       </div>
@@ -40,7 +41,7 @@ defineProps({
       </div>
       <div class="drag-item-request-footer">
         <Text3Component>{{ solicitacao.tipo_solicitacao }}</Text3Component>
-        <Text3Component>{{ solicitacao.data_solicitacao }}</Text3Component>
+        <Text3Component>{{ dataConversorShortYear(solicitacao.data_abertura) }}</Text3Component>
       </div>
     </div>
   </Draggable>

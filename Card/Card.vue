@@ -43,7 +43,6 @@ export default {
   border-radius: var(--border-radius-1);
   background-color: white;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 15%);
-  width: 100%;
 }
 
 .main-title {
@@ -56,6 +55,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 1rem;
+  flex: 1;
   row-gap: .5rem;
 }
 
