@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import Tooltip from '../Tooltip/Tooltip.vue';
 
 const props = defineProps({
@@ -9,21 +9,19 @@ const props = defineProps({
   }
 })
 
-const backgroundColor = ref('var(--yellow-1)');
 
-onMounted(() => {
+const backgroundColor = computed(() => {
   switch (props.prioridade) {
     case 'Baixa':
-      backgroundColor.value = 'var(--green-1)';
-      break;
+      return'var(--green-1)';
     case 'Alta':
-      backgroundColor.value = 'var(--red-1)';
-      break;
+      return'var(--red-1)';
     default:
-      backgroundColor.value = 'var(--yellow-1)';
-      break;
+      return'var(--yellow-1)';
   }
-})
+});
+
+
 </script>
 
 <template>

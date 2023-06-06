@@ -75,6 +75,7 @@
         v-if="isSingleLabelVisible"
         class="multiselect__single"
         @mousedown.prevent="toggle"
+        :style="{ color: this.optionColors ? this.optionColors[this.options.indexOf(this.singleValue)] : undefined }"
       >
         <slot name="singleLabel" :option="singleValue">
         </slot>
@@ -122,7 +123,7 @@
                 :data-deselect="deselectLabelText"
                 class="multiselect__option">
                 <slot name="option" :option="option" :search="search" :index="index">
-                  <span v-html="getOptionLabel(option)"></span>
+                  <span v-html="getOptionLabel(option)" :style="{color: this.optionColors ? this.optionColors[index] : 'inherit' }"></span>
                 </slot>
               </span>
               <span
@@ -317,6 +318,10 @@ export default {
     filter: {
       type: Boolean,
       default: false
+    },
+    optionColors: {
+      type: Array,
+      default: undefined
     }
   },
   computed: {

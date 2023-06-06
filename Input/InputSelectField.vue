@@ -1,7 +1,7 @@
 <template>
     <div class="notFormGroupVersion" :class="{ formGroupVersion }" >
         <multiselect v-bind="$attrs" :placeholder="placeholder" :allowEmpty="allowEmpty" :maxHeight="maxHeight" :searchable="false"
-        :modelValue="value"
+        :modelValue="value" :optionColors="optionColors"
         selectedLabel="" :id="id" :openDirection="formGroupVersion ? 'bottom' : openDirection">
             <template v-slot:caret="slotProps">
                 <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
@@ -42,6 +42,10 @@ export default {
         formGroupVersion: {
             type: Boolean,
             default: false
+        },
+        optionColors: {
+            type: Array,
+            default: undefined
         },
         // adiciona a prop rest para receber outras props
         ...Multiselect.props

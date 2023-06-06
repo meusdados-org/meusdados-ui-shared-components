@@ -2,6 +2,7 @@
 import Text3Component from '../Font/Text/Text3Component.vue';
 import Icon from '../Icon/Icon.vue';
 
+const emit = defineEmits(['download'])
 
 const props = defineProps({
   fileName: {
@@ -13,7 +14,7 @@ const props = defineProps({
 
 <template>
   <div class="fragment-attachment-container">
-    <Icon type="download"/>
+    <Icon class="icon" v-on:click="emit('download')" type="download"/>
     <Text3Component>{{ fileName }}</Text3Component>
   </div>
 </template>
@@ -33,5 +34,9 @@ const props = defineProps({
   background-color: var(--gray-3);
   border-radius: var(--border-radius-1);
   color: var(--black);
+}
+
+.icon {
+  cursor: pointer;
 }
 </style>

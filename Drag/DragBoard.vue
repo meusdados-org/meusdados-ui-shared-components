@@ -1,13 +1,13 @@
 <template>
   <div class="board">
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
-      <DragColumn v-for="(column, i) in scene.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" :items="column.solicitacoes"/>
+      <DragColumn v-for="(column, i) in scene?.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" :items="column.solicitacoes"/>
       <DragAdd class="nova-etapa" @click="openModalForm(undefined)">
         Nova Etapa
       </DragAdd>
     </Container>
     <ModalTemplate :open="open" @close="open = false">
-      <CardDashboard :id="id"/>
+      <CardDashboard :id="id" @refresh="$emit('refresh')" @close="open = false"/>
     </ModalTemplate>
     <ModalTemplate :open="openForm" @close="openForm = false">
       <CardEditarEtapa :id="idEtapa" @close="openForm = false"/>
@@ -52,7 +52,7 @@ export default {
     CardEditarEtapa
 },
   props: {
-    scene: {
+    scene_: {
       type: Object,
       required: true
     }
@@ -69,6 +69,11 @@ export default {
           idEtapa: undefined,
           openForm: false,
       }
+  },
+  computed: {
+    scene() {
+      return this.scene_;
+    }
   },
   methods: {
       getFluxos(fluxos) {

@@ -64,15 +64,17 @@
       @drop="handleDrop"
       @dragenter="handleDragEnter"
       @dragleave="handleDragLeave"
+      aria-label="Escreva um comentário..."
+      aria-placeholder="Escreva um comentário..."
       :style="{ 'max-height': maxHeight }"
       @paste="handlePaste"
     />
-    <ButtonLink v-if="showSendButton" class="send-button">
-      <Icon type="send"/>
-    </ButtonLink>
     <div class="attachments" v-if="files.length > 0">
       <FragmentAttachment v-for="file in files" :key="file.name" :fileName="file.name"/>
     </div>
+    <ButtonLink v-if="showSendButton" @click="$emit('sendMessage', innerValue, files)" class="send-button">
+      <Icon type="send"/>
+    </ButtonLink>
   </div>
 </template>
 
@@ -144,7 +146,7 @@ export default {
           linkStyle: 'inlined',
           headingStyle: 'atx'
         })
-        this.$emit("input", turndown.turndown(event.target.innerHTML));
+        this.$emit("input", Marked.parse(event.target.innerHTML));
       },
       applyBold() {
         document.execCommand('bold')
@@ -199,7 +201,7 @@ export default {
 
         reader.onload = (event) => {
           const imgSrc = event.target.result;
-          const imgElement = `<img style="max-width: 580px;" src=${imgSrc} alt="${file.name}">`;
+          const imgElement = `<img style="max-width: 380px;" src=${imgSrc} alt="${file.name}">`;
 
           document.execCommand('insertHTML', false, imgElement);
         }
@@ -245,6 +247,7 @@ export default {
 .wysiwyg-container {
   display: flex;
   flex-direction: column;
+  position: relative;
   width: 100%;
   max-width: 100%;
   border: 1px solid var(--gray-1);
@@ -308,9 +311,9 @@ export default {
 }
 
 .send-button {
-  position: relative;
-  bottom: 2px;
-  right: -300px;
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
 }
 
 .attachments {

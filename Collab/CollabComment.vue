@@ -5,13 +5,14 @@ import Title4Component from '../Font/Title/Title4Component.vue';
 import Text3Component from '../Font/Text/Text3Component.vue';
 import FragmentAttachment from '../Fragments/FragmentAttachment.vue';
 
+const emit = defineEmits(['download']);
 
 const props = defineProps({
   mensagem: {
     type: Object,
     default: {
       externo: true,
-      texto: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
+      mensagem: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
       data: '29/11/2022',
       hora: '14:44',
       usuario: {
@@ -44,10 +45,10 @@ const tagProps = computed(() => {
     </div>
     <div
       class="collab-comment-content"
-      v-html="mensagem.texto"
+      v-html="mensagem.mensagem"
     />
     <div class="collab-comment-attachments" v-if="mensagem.attachments.length > 0">
-      <FragmentAttachment v-for="attachment in mensagem.attachments" :key="attachment.name" :file-name="attachment.name"/>
+      <FragmentAttachment @download="emit('download', mensagem.id, attachment)" v-for="attachment in mensagem.attachments" :key="attachment" :file-name="attachment"/>
     </div>
   </div>
 </template>
@@ -67,8 +68,20 @@ const tagProps = computed(() => {
 }
 
 .collab-comment-content {
+  width: 623px;
   font-size: 14px;
   text-align: left;
+  word-break: break-all;
+  overflow: hidden;
+}
+
+.collab-comment-content > * {
+  width: 623px;
+  word-break: break-all;
+}
+
+.collab-comment-content > p > img {
+  max-width: 300px;
 }
 
 .collab-comment-attachments {
