@@ -108,6 +108,7 @@ export default {
 .dialog-message {
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
     row-gap: var(--spacing-3);
 }
