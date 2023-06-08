@@ -1,6 +1,6 @@
 <script setup>
-import Text3Component from '../Font/Text/Text3Component.vue';
-import Title3Component from '../Font/Title/Title3Component.vue';
+import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import Title3Component from '@/components/shared/Typography/Title/Title3Component.vue';
 
 const props = defineProps({
   label: {

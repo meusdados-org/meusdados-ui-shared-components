@@ -1,6 +1,6 @@
 <script setup>
-import Text3Component from '../Font/Text/Text3Component.vue';
-import Icon from '../Icon/Icon.vue';
+import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import Icon from '@/components/shared/Icon/Icon.vue';
 
 const emit = defineEmits(['download'])
 

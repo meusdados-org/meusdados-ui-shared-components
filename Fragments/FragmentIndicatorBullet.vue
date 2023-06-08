@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import Tooltip from '../Tooltip/Tooltip.vue';
+import Tooltip from '@/components/shared/Inputs/Tooltip/Tooltip.vue';
 
 const props = defineProps({
   prioridade: {

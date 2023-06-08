@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    name: 'IconTemplate',
+    name: 'Icon',
     props: {
         type: {
             type: String,
@@ -30,8 +30,8 @@ export default {
 </script>
 
 <style>
-    .svg {
-        top: .125rem;
-        position: relative;
-    }
+.svg {
+    top: .125rem;
+    position: relative;
+}
 </style>
