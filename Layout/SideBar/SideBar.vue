@@ -37,22 +37,25 @@
         </header>
         <div class="links" :class="{ collapsed: collapsed }">
             <div v-for="link in links" :key="link.titleHeader">
-                <SideBarLinkGroup
-                    v-if="link.children"
-                    :titleHeader="link.titleHeader"
-                    :iconHeader="link.iconHeader"
-                    :children="link.children"
-                    :activeGroup="activeGroup === link.titleHeader"
-                    :currentPage="link.children.some(child => currentPage === child.to)"
-                    @activateGroup="activateGroup"
-                    @changeRoute="changeRoute"/>
-                <BarraLateralLink
-                    v-else
-                    :icon="link.iconHeader"
-                    :to="link.to"
-                    @changeRoute="changeRoute">
-                    {{ link.titleHeader }}
-                </BarraLateralLink>
+                <template v-if="(!link.permission || permissions[link.permission])">
+                    <SideBarLinkGroup
+                        v-if="link.children"
+                        :titleHeader="link.titleHeader"
+                        :iconHeader="link.iconHeader"
+                        :children="link.children"
+                        :activeGroup="activeGroup === link.titleHeader"
+                        :userPermissions="permissions"
+                        :currentPage="link.children.some(child => currentPage === child.to)"
+                        @activateGroup="activateGroup"
+                        @changeRoute="changeRoute"/>
+                    <BarraLateralLink
+                        v-else
+                        :icon="link.iconHeader"
+                        :to="link.to"
+                        @changeRoute="changeRoute">
+                        {{ link.titleHeader }}
+                    </BarraLateralLink>
+                </template>
             </div>
         </div>
         <div class="create" style="display: none;" :class="{ collapsed }">
@@ -122,6 +125,7 @@ export default {
                 {
                     titleHeader: 'Mapeamento de Dados',
                     iconHeader: 'hard-drive',
+                    permission: 'mapeamento_dados',
                     children: [
                         {
                             title: 'Área',
@@ -156,6 +160,7 @@ export default {
                 {
                     titleHeader: 'Titulares',
                     iconHeader: 'users',
+                    permission: 'titulares',
                     children: [
                         {
                             title: 'Todos titulares',
@@ -183,11 +188,13 @@ export default {
                     },
                     {
                         title: 'Usuários',
+                        permission: 'usuarios',
                         to: '/configuracoes/usuarios',
                         icon: 'settings'
                     },
                     {
                         title: 'Perfis',
+                        permission: 'usuarios',
                         to: '/configuracoes/perfis',
                         icon: 'settings'
                     },

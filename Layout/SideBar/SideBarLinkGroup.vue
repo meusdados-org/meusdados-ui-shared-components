@@ -8,7 +8,7 @@
     </div>
     <ul class="link-group-children" :class="{ activeChildren: activeGroup }">
       <li v-for="child in children" :key="child.to">
-        <Text2Component>
+        <Text2Component v-if="!child.permission || userPermissions[child.permission]">
           <SideBarLink class="child" :to="child.to" v-on:changeRoute="to => $emit('changeRoute', to, titleHeader)" @isActive="mantainActive">{{ child.title }}</SideBarLink>
         </Text2Component>
       </li>
@@ -42,6 +42,10 @@ export default {
       type: Array,
       required: true
     },
+    userPermissions: {
+      type: Object,
+      required: true
+    },
     activeGroup: {
       type: Boolean,
       required: false,
@@ -51,7 +55,7 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    }
+    },
   },
   methods: {
     activate() {
