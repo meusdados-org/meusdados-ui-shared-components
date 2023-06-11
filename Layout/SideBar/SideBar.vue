@@ -207,6 +207,7 @@ export default {
         getUserInfo() {
             usuarioEmpresa.getUserInfo().then(response => {
                 this.usuario = response.data
+                localStorage.setItem('usuario', JSON.stringify(response.data));
             })
         },
         activateGroup(status, titleHeader) {

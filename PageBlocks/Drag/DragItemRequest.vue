@@ -37,7 +37,7 @@ defineProps({
         </div>
       </div>
       <div class="drag-item-request-content">
-        <Title4Component>{{ solicitacao.titular?.nome }}</Title4Component>
+        <Title4Component>{{ solicitacao.titular?.nome }} {{ solicitacao.titular?.sobrenome }}</Title4Component>
       </div>
       <div class="drag-item-request-footer">
         <Text3Component>{{ solicitacao.tipo_solicitacao }}</Text3Component>

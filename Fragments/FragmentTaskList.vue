@@ -59,6 +59,7 @@ defineProps({
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
+  text-align: left;
   justify-content: space-between;
   gap: 8px;
   width: 100%;

@@ -44,7 +44,7 @@ const chartOptions = reactive({
 
 <template>
   <div id="chart" class="chart">
-    <apexchart type="donut" width="300px" :options="chartOptions" :series="series"></apexchart>
+    <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
   </div>
 </template>
 
