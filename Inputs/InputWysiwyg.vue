@@ -53,6 +53,9 @@
       <ButtonLink @click="applyUl" class="button" @mousedown.prevent>
         <Icon type="list"/>
       </ButtonLink>
+      <ButtonLink @click="addAttachment" class="button" @mousedown.prevent>
+        <Icon type="paperclip"/>
+      </ButtonLink>
     </div>
     <div
       @input="onInput"
@@ -70,7 +73,7 @@
       @paste="handlePaste"
     />
     <div class="attachments" v-if="files.length > 0">
-      <FragmentAttachment v-for="file in files" :key="file.name" :fileName="file.name"/>
+      <FragmentAttachment v-for="file in files" :key="file.name" :base64_="file.type.startsWith('image/') ? convertIntoBase64(file): undefined" :fileName="file.name"/>
     </div>
     <ButtonLink v-if="showSendButton" @click="$emit('sendMessage', innerValue, files)" class="send-button">
       <Icon type="send"/>
@@ -168,6 +171,20 @@ export default {
         this.selected = obj;
         document.execCommand('formatBlock', false, key)
       },
+      addAttachment() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.multiple = true;
+        input.accept = 'image/*, application/pdf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-powerpoint, application/vnd.openxmlformats-officedocument.presentationml.presentation';
+        input.onchange = (event) => {
+          const files = event.target.files;
+          for (let i = 0; i < files.length; i++) {
+            const file = files[i];
+            this.saveAttachment(file);
+          }
+        };
+        input.click();
+      },
       applyUl() {
         document.execCommand('insertUnorderedList')
       },
@@ -226,6 +243,14 @@ export default {
           }
         }
       },
+      convertIntoBase64(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.readAsDataURL(file);
+          reader.onload = () => resolve(reader.result);
+          reader.onerror = error => reject(error);
+        });
+      },
     },
     components: { Icon, InputSelectField, ButtonLink, FragmentAttachment },
     created() {
@@ -259,6 +284,10 @@ export default {
   min-height: 1.5rem;
 }
 
+.wysiwyg-container .multiselect__single {
+  color: var(--gray-1);
+}
+
 .wysiwyg-container .multiselect__option {
   padding: .25rem .5rem;
   font-size: 12px;
@@ -282,6 +311,7 @@ export default {
   background-color: white;
   display: flex;
   align-items: center;
+  column-gap: .5rem;
   padding: .5rem 1rem;
   border-bottom: 1px solid var(--gray-1);
 }
@@ -293,6 +323,10 @@ export default {
 .wysiwyg-container .select {
   width: 112px;
   font-size: 12px;
+}
+
+.button:hover {
+  color: var(--gray-2) !important;
 }
 
 .wysiwyg-output {
