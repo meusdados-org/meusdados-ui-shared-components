@@ -28,7 +28,7 @@ const emit = defineEmits(['close']);
 <template>
   <span class="tag" :style="{ backgroundColor, color }">
     <Icon class="icon" :align="false" v-if="props.type" :type="props.type" size="12px"/>
-    <Text3Component>
+    <Text3Component class="text">
       <slot>Texto 1</slot>
     </Text3Component>
     <Icon class="icon close" v-if="props.canClose" type="x" size="12px" @click="emit('close')"/>
@@ -54,5 +54,11 @@ const emit = defineEmits(['close']);
 
 .close {
   cursor: pointer;
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-2);
 }
 </style>

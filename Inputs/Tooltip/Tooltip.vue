@@ -50,6 +50,7 @@ const switchOpen = () => {
 
 .tooltip-container {
   position: relative;
+  display: inline-block;
 }
 
 .red {
