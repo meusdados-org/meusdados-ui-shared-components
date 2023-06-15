@@ -48,4 +48,8 @@ defineProps({
   color: var(--gray-1);
 }
 
+.form-horizontal-group-input {
+  flex: 1;
+}
+
 </style>

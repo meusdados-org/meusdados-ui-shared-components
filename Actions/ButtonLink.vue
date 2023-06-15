@@ -51,6 +51,7 @@ button {
     color: var(--blue-1);
     column-gap: var(--spacing-3);
     cursor: pointer;
+    padding: 0;
 }
 
 button:hover {

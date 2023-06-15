@@ -65,7 +65,7 @@ export default {
 
 .formGroupVersion .multiselect, .formGroupVersion .multiselect--above {
     min-height: 18px;
-    min-width: 112px;
+    width: 100%;
 }
 
 .formGroupVersion .multiselect__option {

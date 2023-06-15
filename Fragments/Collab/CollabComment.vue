@@ -40,8 +40,8 @@ const tagProps = computed(() => {
   <div class="collab-comment">
     <div class="collab-comment-header">
       <Tag v-bind="tagProps"><Title4Component class="externo-tag" v-if="mensagem.externo">Titular:</Title4Component> <Text3Component class="collab-comment-user">{{ mensagem.usuario.nome }}</Text3Component></Tag>
-      <Text3Component>{{ mensagem.data }}</Text3Component>
-      <Text3Component>{{ mensagem.hora }}</Text3Component>
+      <Text3Component style="color: var(--gray-1);">{{ mensagem.data }}</Text3Component>
+      <Text3Component style="color: var(--gray-1);">{{ mensagem.hora }}</Text3Component>
     </div>
     <div
       class="collab-comment-content"

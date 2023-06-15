@@ -1,6 +1,6 @@
 <template>
     <div class="container-container-date">
-        <input type="date" :value="value" @input="$emit('update:value', $event.target.value)">
+        <input type="date" :disabled="disabled" :value="value" @input="$emit('update:value', $event.target.value)">
         <label>{{ label }}</label>
     </div>
 </template>
@@ -16,6 +16,10 @@ export default {
         value: {
             type: Date,
             required: true
+        },
+        disabled: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
