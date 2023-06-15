@@ -25,7 +25,7 @@ const backgroundColor = computed(() => {
 </script>
 
 <template>
-  <Tooltip :open-to-right="true">
+  <Tooltip :fit-content="true" :open-to-right="true">
     <template #icon>
       <div class="dot" :style="{ 'background-color': backgroundColor }"/>
     </template>

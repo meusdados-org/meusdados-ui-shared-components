@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import Text3Component from '../../Typography/Text/Text3Component.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
@@ -12,12 +12,17 @@ const props = defineProps({
   openToRight: {
     type: Boolean,
     default: false
+  },
+  fitContent: {
+    type: Boolean,
+    default: false
   }
 })
 
 const switchOpen = () => {
   open.value = !open.value;
 }
+
 </script>
 
 <template>
@@ -25,8 +30,8 @@ const switchOpen = () => {
   <slot name="icon">
     <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
   </slot>
-  <div class="help-text" :class="{ openToRight }" v-if="open">
-    <Text3Component>
+  <div class="help-text" :class="{ openToRight, fitContent }" v-if="open">
+    <Text3Component class="help-text__inner" id="help-text">
       <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
     </Text3Component>
   </div>
@@ -61,13 +66,21 @@ const switchOpen = () => {
 
 .help-text {
   padding: 12px;
-  width: 182px;
   background-color: var(--gray-3);
+  width: 182px;
   border-radius: var(--border-radius-1);
   text-align: left;
   position: absolute;
   z-index: 999;
   bottom: 0px;
+}
+
+.help-text.fitContent {
+  width: fit-content;
+}
+
+.help-text__inner {
+  display: block;
 }
 
 .help-text:not(.openToRight) {

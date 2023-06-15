@@ -35,7 +35,7 @@ defineProps({
       <div class="drag-item-request-header">
         <Text3Component v-if="!mini">{{ solicitacao.request_id }}</Text3Component>
         <div class="drag-item-request-indicators">
-          <Tag  background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
+          <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
           <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular.verificado && !mini"/>
           <Tag v-else-if="!solicitacao.titular.verificado">Não verificado</Tag>
         </div>
