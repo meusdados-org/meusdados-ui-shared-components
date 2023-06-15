@@ -20,6 +20,10 @@ defineProps({
       data_abertura: '21/03/23',
       atrasado: true,
     }
+  },
+  mini: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -29,15 +33,16 @@ defineProps({
   <Draggable class="item-drag-handle">
     <div class="drag-item-request">
       <div class="drag-item-request-header">
-        <Text3Component>{{ solicitacao.request_id }}</Text3Component>
+        <Text3Component v-if="!mini">{{ solicitacao.request_id }}</Text3Component>
         <div class="drag-item-request-indicators">
-          <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
-          <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular.verificado"/>
-          <Tag v-else>Não verificado</Tag>
+          <Tag  background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
+          <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular.verificado && !mini"/>
+          <Tag v-else-if="!solicitacao.titular.verificado">Não verificado</Tag>
         </div>
       </div>
       <div class="drag-item-request-content">
         <Title4Component>{{ solicitacao.titular?.nome }} {{ solicitacao.titular?.sobrenome }}</Title4Component>
+        <Tag  background-color="var(--red-1)" color="var(--white)" v-if="mini && solicitacao.atrasado">Atrasado</Tag>
       </div>
       <div class="drag-item-request-footer">
         <Text3Component>{{ solicitacao.tipo_solicitacao }}</Text3Component>
@@ -56,7 +61,7 @@ defineProps({
 
 .drag-item-request {
   padding: 1rem;
-  width: 224px;
+  flex: 1;
   background-color: var(--white);
   box-shadow: var(--box-shadow-1);
   border-radius: var(--border-radius-1);
@@ -84,6 +89,9 @@ defineProps({
 }
 
 .drag-item-request-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   text-align: left;
 }
 </style>

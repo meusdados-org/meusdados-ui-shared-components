@@ -26,6 +26,7 @@ export default {
     },
     methods: {
         async logout() {
+            localStorage.clear();
             await authService.logout();
         }
     },

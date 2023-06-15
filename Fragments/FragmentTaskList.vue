@@ -17,7 +17,7 @@ defineProps({
       <div class="fragment-task-list__body__task" v-for="[task, info] in Object.entries(taskList)" :key="task.id">
         <div class="fragment-task-list__body__task__text">
           <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status }">
-            <Icon type="check" size="10" :align="false" v-if="info.status" />
+            <Icon type="check" size="9px" :align="false" v-if="info.status" />
           </span>
           <Text3Component>{{ task }}</Text3Component>
         </div>

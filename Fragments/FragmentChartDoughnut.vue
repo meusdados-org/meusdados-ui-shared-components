@@ -31,8 +31,10 @@ const chartOptions = reactive({
     fontFamily: 'Montserrat',
     verticalAlign: 'center',
     fontSize: '12px',
-  },
-  options: {
+    markers: {
+      width: 8,
+      height: 8,
+    }
   },
   dataLabels: {
     enabled: false
@@ -58,9 +60,8 @@ svg#SvgjsSvg4260 {
   display: flex;
   text-align: left;
   padding: 0;
-  row-gap: .25rem;
   margin: 0;
-  margin-top: -22px;
+  margin-top: -25px;
   justify-content: center;
 }
 </style>

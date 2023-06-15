@@ -61,6 +61,7 @@ const chartOptions = reactive({
     <Title2Component class="percentage-text">
       {{ props.percentage }}%
     </Title2Component>
+    <div class="chart-percentage-glass"></div>
   </div>
 </template>
 
@@ -78,5 +79,14 @@ const chartOptions = reactive({
   top: 48%;
   left: 52%;
   transform: translate(-50%, -50%);
+}
+
+.chart-percentage-glass {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: transparent;
+  opacity: 0.5;
 }
 </style>
