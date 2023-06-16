@@ -68,7 +68,8 @@ const download = (mensagemId, filename) => {
 .collab-chat-separator {
   height: 1px;
   background-color: var(--gray-3);
-  width: 625px;
+  width: 615px;
   border: none;
+  flex-shrink: 0;
 }
 </style>

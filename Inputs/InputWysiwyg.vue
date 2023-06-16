@@ -73,7 +73,7 @@
       @paste="handlePaste"
     />
     <div class="attachments" v-if="files.length > 0">
-      <FragmentAttachment v-for="file in files" :key="file.name" :base64_="file.type.startsWith('image/') ? convertIntoBase64(file): undefined" :fileName="file.name"/>
+      <FragmentAttachment v-for="file in files" :key="file.name" :close="true" :base64_="file.type.startsWith('image/') ? convertIntoBase64(file): undefined" :fileName="file.name" @close="removeFile(file)"/>
     </div>
     <ButtonLink v-if="showSendButton" @click="$emit('sendMessage', innerValue, files)" class="send-button">
       <Icon type="send"/>
@@ -250,6 +250,10 @@ export default {
           reader.onload = () => resolve(reader.result);
           reader.onerror = error => reject(error);
         });
+      },
+      removeFile(file) {
+        const index = this.files.indexOf(file);
+        this.files.splice(index, 1);
       },
     },
     components: { Icon, InputSelectField, ButtonLink, FragmentAttachment },

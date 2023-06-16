@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
-const emit = defineEmits(['download'])
+const emit = defineEmits(['download', 'close'])
 
 const props = defineProps({
   fileName: {
@@ -13,7 +13,12 @@ const props = defineProps({
   base64_: {
     type: Promise,
     required: false,
-  }
+  },
+  close: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 })
 
 const base64 = ref(null);
@@ -26,10 +31,13 @@ if (props.base64_) {
 </script>
 
 <template>
-  <div class="fragment-attachment-container">
+  <div class="fragment-attachment-container" :class="{ withBackground: base64 }">
     <img v-if="base64_" :src="`${base64}`" alt="Imagem do anexo" width="100%" class="background-img"/>
-    <Icon class="icon" v-on:click="emit('download')" type="download"/>
-    <Text3Component style="z-index: 1;">{{ fileName }}</Text3Component>
+    <Icon class="icon" v-if="!close" v-on:click="emit('download')" type="download"/>
+    <div class="icon-close-wrapper" v-else>
+      <Icon class="icon" v-on:click="emit('close')" type="x"/>
+    </div>
+    <Text3Component style="z-index: 1; flex: 1;">{{ fileName }}</Text3Component>
   </div>
 </template>
 
@@ -43,6 +51,7 @@ if (props.base64_) {
   max-width: 10rem;
   width: fit-content;
   flex-direction: column;
+  word-break: break-all;
   row-gap: .5rem;
   padding: .5rem;
   background-color: var(--gray-3);
@@ -52,6 +61,11 @@ if (props.base64_) {
   overflow: hidden;
 }
 
+.fragment-attachment-container.withBackground {
+  background-color: var(--black);
+  color: var(--white);
+}
+
 .background-img {
   position: absolute;
   border-radius: var(--border-radius-1);
@@ -59,10 +73,16 @@ if (props.base64_) {
   top: -.5rem;
   left: -.5rem;
   z-index: 0;
-  opacity: .3;
+  opacity: .5;
 }
 
 .icon {
   cursor: pointer;
 }
+
+.icon-close-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
 </style>

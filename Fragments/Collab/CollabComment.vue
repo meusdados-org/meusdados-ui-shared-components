@@ -86,7 +86,8 @@ const tagProps = computed(() => {
 
 .collab-comment-attachments {
   display: flex;
-  column-gap: .5rem;
+  gap: .5rem;
+  flex-wrap: wrap;
 }
 
 .externo-tag {
