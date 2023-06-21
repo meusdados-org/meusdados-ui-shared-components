@@ -1,16 +1,16 @@
 <template>
-    <ButtonDefaultVue class="export-button">
+    <ButtonPrimaryVue class="export-button">
         <Icon size="1rem" type="external-link"/> Exportar
-    </ButtonDefaultVue>
+    </ButtonPrimaryVue>
 </template>
 
 <script>
-import ButtonDefaultVue from '@/components/shared/Actions/ButtonPrimary.vue';
+import ButtonPrimaryVue from '@/components/shared/Actions/ButtonPrimary.vue';
 import Icon from '@/components//shared/Icon/Icon.vue'
 
 export default {
     components: {
-        ButtonDefaultVue,
+        ButtonPrimaryVue,
         Icon
     }
 }

@@ -1,5 +1,5 @@
 <template>
-    <label class="container-InputTextField"> <text1><slot>{{ label }}</slot></text1>
+    <label class="container-InputTextFieldField"> <text1><slot>{{ label }}</slot></text1>
         <input type="checkbox" :disabled="isDisabled" class="input" :name="name" :id="id" :checked="value" @input="$emit('update:checked', $event.target.checked)" placeholder=" " />
         <span class="checkbox">
             <div class="hover-square"></div>
@@ -13,7 +13,7 @@ import text1 from '@/components/shared/Typography/Text/Text1Component.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 export default {
-    name: 'InputTextField',
+    name: 'InputTextFieldField',
     props: {
         label: {
             type: String,
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.container-InputTextField{
+.container-InputTextFieldField{
     display: block;
     position: relative;
     padding-left: 23px;
@@ -57,7 +57,7 @@ export default {
     width: fit-content;
 }
 
-.container-InputTextField input {
+.container-InputTextFieldField input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -84,7 +84,7 @@ export default {
     display: none;
 }
 
-.container-InputTextField input:checked ~ .checkbox {
+.container-InputTextFieldField input:checked ~ .checkbox {
     background-color: var(--purple-1);
     border-color: var(--purple-1);
 }
@@ -107,7 +107,7 @@ export default {
     outline-offset: 1px;
 }
 
-.container-InputTextField input:hover:not(:checked):not(:disabled) ~ .checkbox .hover-square {
+.container-InputTextFieldField input:hover:not(:checked):not(:disabled) ~ .checkbox .hover-square {
     height: 6px;
     width: 6px;
     background-color: var(--gray-2);
@@ -116,7 +116,7 @@ export default {
     display: block;
 }
 
-.container-InputTextField input:disabled ~ .checkbox {
+.container-InputTextFieldField input:disabled ~ .checkbox {
     background-color: var(--gray-3);
     border-color: var(--gray-2);
     cursor: default;

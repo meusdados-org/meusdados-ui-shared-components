@@ -1,5 +1,5 @@
 <template>
-    <div class="container-InputTextField" :class="{ formGroupVersion }">
+    <div class="container-InputTextFieldField" :class="{ formGroupVersion }">
       <input
         v-if="!mask"
         v-bind="inputProps"
@@ -22,7 +22,7 @@
 
   <script>
   export default {
-    name: 'InputTextField',
+    name: 'InputTextFieldField',
     props: {
       label: {
         type: String,
@@ -58,7 +58,7 @@
         passwordFieldType: 'password',
         inputProps: {
           name: this.label ? this.label.toLowerCase() : Math.random(),
-          id: `inputTextField-${this.label ? this.label.toLocaleLowerCase().replace(/\s/g, '-') : Math.random()}`,
+          id: `InputTextFieldField-${this.label ? this.label.toLocaleLowerCase().replace(/\s/g, '-') : Math.random()}`,
           disabled: this.disabled,
           maxlength: this.maxlength,
           placeholder: ' ',
@@ -78,14 +78,14 @@
   </script>
 
 <style scoped>
-.container-InputTextField{
+.container-InputTextFieldField{
     display: flex;
     flex-direction: column;
     position: relative;
     width: 100%;
 }
 
-.container-InputTextField > input{
+.container-InputTextFieldField > input{
     border-bottom: 1px solid var(--gray-2);
     box-sizing: border-box;
     border-top: none;
@@ -105,30 +105,30 @@
     background-color: transparent;
 }
 
-.container-InputTextField.formGroupVersion > input {
+.container-InputTextFieldField.formGroupVersion > input {
   height: 18px;
   font-size: 12px;
   font-weight: 400;
 }
 
-.container-InputTextField > input:-webkit-autofill{
+.container-InputTextFieldField > input:-webkit-autofill{
     box-shadow: 0 0 0 30px var(--white) inset;
 }
 
-.container-InputTextField > input:hover{
+.container-InputTextFieldField > input:hover{
     border-bottom-color: var(--black);
 }
 
-.container-InputTextField > input:focus{
+.container-InputTextFieldField > input:focus{
     outline: none;
     border-bottom-color:var(--purple-1);
     transition: all .1s linear;
 }
-.container-InputTextField input::placeholder{
+.container-InputTextFieldField input::placeholder{
     color: transparent;
 }
 
-.container-InputTextField > label{
+.container-InputTextFieldField > label{
     pointer-events: none;
     position: absolute;
     top: 25%;
@@ -139,24 +139,24 @@
     box-sizing: border-box;
     padding: 0 .5rem;
 }
-.container-InputTextField input:required:invalid + label{
+.container-InputTextFieldField input:required:invalid + label{
     color: var(--red-1);
 }
-.container-InputTextField  input:focus:required:invalid{
+.container-InputTextFieldField  input:focus:required:invalid{
     border-bottom-color: var(--red-1);
 }
-.container-InputTextField  input:required:invalid + label:before{
+.container-InputTextFieldField  input:required:invalid + label:before{
     content: '*';
 }
-.container-InputTextField  input:focus + label,
-.container-InputTextField  input:not(:placeholder-shown) + label{
+.container-InputTextFieldField  input:focus + label,
+.container-InputTextFieldField  input:not(:placeholder-shown) + label{
     font-size: 12px;
     top: -12px;
     color: var(--purple-1);
 }
 
-.container-InputTextField  input:not(:focus) + label,
-.container-InputTextField  input:not(:placeholder-shown) + label{
+.container-InputTextFieldField  input:not(:focus) + label,
+.container-InputTextFieldField  input:not(:placeholder-shown) + label{
     color: rgba(12, 12, 12, 0.651);
 }
 

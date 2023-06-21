@@ -1,13 +1,13 @@
 <template>
-  <Draggable class="drag-columns column-drag-handle">
+  <Draggable class="drag-columns" :class="{ 'column-drag-handle': !isTitular }">
     <Card :title="column.nome" :hasPadding="false" class="drag-column">
-      <template v-slot:action>
+      <template v-slot:action v-if="!isTitular">
         <ButtonLink class="edit-button-link" @click="$emit('openForm', column.id)">
           <Icon class="edit-column" size="1rem" type="more-vertical"></Icon>
         </ButtonLink>
       </template>
       <template v-slot:content>
-        <div class="responsavel">
+        <div class="responsavel" v-if="!isTitular">
           <Text3Component>
             <Icon size="0.8rem" type="user" />
             {{ column.responsaveis?.length > 0 ? column.responsaveis.map(x => x.nome).join(', ') : 'Sem área/usuário específico' }}
@@ -15,8 +15,8 @@
         </div>
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
-            <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card"/>
-            <DragAdd @click="open = true" :class="{ hover: index !== 0 }">
+            <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card" :isTitular="isTitular"/>
+            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="!isTitular || index === 0">
               Nova Solicitação
             </DragAdd>
           </Container>
@@ -74,6 +74,10 @@ export default {
     index: {
       type: Number,
       required: true
+    },
+    isTitular: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -123,7 +127,7 @@ export default {
   width: 18rem;
 }
 
-.background-options{
+.background-options {
   display: flex;
   flex-direction: column;
   padding: .5rem 1rem;
@@ -176,4 +180,5 @@ export default {
 .column-drag-handle:active {
   cursor: grab;
 }
+
 </style>

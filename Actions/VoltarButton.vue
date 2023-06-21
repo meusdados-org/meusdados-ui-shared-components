@@ -1,18 +1,18 @@
 <template>
     <!-- <router-link :to='to'> -->
-        <ButtonDefaultLong class="btn-criar">
+        <ButtonPrimary class="btn-criar">
             <Icon size=".950rem" type="arrow-left-circle"/> Voltar
-        </ButtonDefaultLong>
+        </ButtonPrimary>
     <!-- </router-link> -->
 </template>
 
 <script>
-import ButtonDefaultLong from '@/components/shared/Actions/ButtonPrimary.vue';
+import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 import Icon from '@/components//shared/Icon/Icon.vue'
 
 export default {
     components: {
-        ButtonDefaultLong,
+        ButtonPrimary,
         Icon
     },
 }
