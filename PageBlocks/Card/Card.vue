@@ -4,6 +4,9 @@
           <div class="card-header">
               <div class="main-title">{{ title }}</div>
               <slot name="action">
+                <ButtonLink @click="$emit('close')">
+                  <Icon type="x"/>
+                </ButtonLink>
               </slot>
           </div>
           <div class="card-content">
@@ -19,6 +22,7 @@
 
 <script>
 import Icon from '@/components/shared/Icon/Icon.vue';
+import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
 
 export default {
   name: "Card",
@@ -33,7 +37,8 @@ export default {
     },
   },
   components: {
-      Icon
+      Icon,
+      ButtonLink
   }
 }
 </script>  

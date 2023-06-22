@@ -6,6 +6,10 @@ const props = defineProps({
   prioridade: {
     type: String,
     default: 'Média'
+  },
+  withTooltip: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -25,7 +29,7 @@ const backgroundColor = computed(() => {
 </script>
 
 <template>
-  <Tooltip :fit-content="true" :open-to-right="true">
+  <Tooltip v-if="withTooltip" :fit-content="true" :open-to-right="true">
     <template #icon>
       <div class="dot" :style="{ 'background-color': backgroundColor }"/>
     </template>
@@ -33,6 +37,7 @@ const backgroundColor = computed(() => {
       {{ prioridade }}
     </template>
   </Tooltip>
+  <div v-else class="dot" :style="{ 'background-color': backgroundColor }"/>
 </template>
 
 <style scoped>
