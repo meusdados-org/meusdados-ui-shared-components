@@ -33,7 +33,7 @@ export default {
     background-color: white;
     border:none;
     border-radius: var(--border-radius-1);
-    box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 20%);
+    box-shadow: var(--box-shadow-1);
     width: 319px;
     height: 2rem;
 }
