@@ -93,8 +93,9 @@ export default {
     justify-content: center;
     row-gap: var(--spacing-5);
 
-    width: 564px;
+    width: 532px;
     height: 292px;
+    padding: 0 1rem;
     z-index: 997;
 
     background-color: var(--white);

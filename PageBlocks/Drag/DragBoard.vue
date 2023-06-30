@@ -111,6 +111,8 @@ export default {
 .board {
   padding: 0;
   margin: 0;
+  padding-top: 2rem;
+  margin-top: -2rem;
   overflow-x: auto;
 }
 .orientador-colunas {
