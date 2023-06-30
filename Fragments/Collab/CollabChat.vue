@@ -38,7 +38,7 @@ const props = defineProps({
 })
 
 const isTheLastComment = (index) => {
-  console.log(index === props.mensagens?.length - 1)
+
   return index === props.mensagens?.length - 1;
 }
 

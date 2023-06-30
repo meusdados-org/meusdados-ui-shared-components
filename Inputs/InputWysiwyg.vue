@@ -203,7 +203,7 @@ export default {
       handleDrop(event) {
         event.preventDefault();
         const files = event.dataTransfer.files;
-        console.log(files.length);
+        ;
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           if (file.type.startsWith('image/')) {
@@ -228,7 +228,7 @@ export default {
       saveAttachment(file) {
         // Lógica para salvar o arquivo em anexo
         this.files.push(file);
-        console.log('Arquivo salvo:', file);
+        ;
       },
       handlePaste(event) {
         const items = (event.clipboardData || event.originalEvent.clipboardData).items;

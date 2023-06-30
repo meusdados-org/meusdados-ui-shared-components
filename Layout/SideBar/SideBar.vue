@@ -214,7 +214,7 @@ export default {
             this.activeGroup = status ? titleHeader : undefined;
         },
         changeRoute(to, titleHeader = undefined) {
-            console.log(to, titleHeader)
+
             this.activeGroup = titleHeader;
             this.currentPage = to;
         }

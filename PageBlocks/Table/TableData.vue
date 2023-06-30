@@ -158,7 +158,7 @@ export default {
             this.$router.push({ path });
         },
         compareEntry(entry, filter) {
-            console.log(typeof entry, entry, filter)
+
             if (typeof entry === 'boolean') {
                 return entry ? filter === 'Sim' : filter === 'Não';
             } else if (Array.isArray(entry)) {
@@ -183,7 +183,7 @@ export default {
                         this.$emit('delete', entriesCopy);
                         this.$refs.pagination.deleteItem(entriesCopy);
                     }).catch(error => {
-                        console.log(error)
+
                         this.$dialog({title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error'});
                     })
                 })

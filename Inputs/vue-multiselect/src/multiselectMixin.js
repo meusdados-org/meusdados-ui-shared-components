@@ -531,12 +531,12 @@ export default {
         if (this.multiple) {
           this.$emit('update:modelValue', this.internalValue.concat([option]))
         } else {
-          console.log('foo')
+
           this.$emit('update:modelValue', option)
         }
-        console.log('foo2')
+
         this.$emit('select', option, this.id)
-        console.log('foo3')
+
 
         /* istanbul ignore else */
         if (this.clearOnSelect) this.search = ''
@@ -625,9 +625,9 @@ export default {
         : this.valueKeys.indexOf(option)
 
       if (this.multiple) {
-        console.log(this.internalValue);
-        console.log(option);
-        console.log(index);
+        ;
+        ;
+        ;
         const newValue = this.internalValue.slice(0, index).concat(this.internalValue.slice(index + 1))
         this.$emit('update:modelValue', newValue)
       } else {

@@ -60,7 +60,7 @@ export default {
         currentFile() {
             const fullTypeName = this.currentFile.type;
             const type = fullTypeName.split('/')[1];
-            console.log(type);
+            ;
             if (!this.typesAllowed.some(t => t.value === type)) {
                 this.errorMessage = `Formatos permitidos: ${this.typesAllowed.map(t => t.label).join(', ')}`;
                 this.$emit('select', undefined);

@@ -93,7 +93,7 @@ export default {
   },
   methods: {
     onCardDrop (columnId, dropResult) {
-      console.log(columnId, dropResult);
+      ;
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
         const scene = Object.assign({}, this.scene);
         const sceneBackup = Object.assign({}, this.scene);
