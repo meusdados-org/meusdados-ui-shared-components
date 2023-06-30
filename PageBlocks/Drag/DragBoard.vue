@@ -100,7 +100,6 @@ export default {
       this.open = true;
     },
     openModalForm(id) {
-      console.log(id)
       this.idEtapa = id;
       this.openForm = true;
     }
@@ -112,6 +111,7 @@ export default {
 .board {
   padding: 0;
   margin: 0;
+  overflow-x: auto;
 }
 .orientador-colunas {
   border-collapse: separate;
