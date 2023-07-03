@@ -58,28 +58,37 @@ export default {
     },
     watch: {
         currentFile() {
-            const fullTypeName = this.currentFile.type;
-            const type = fullTypeName.split('/')[1];
-            ;
-            if (!this.typesAllowed.some(t => t.value === type)) {
-                this.errorMessage = `Formatos permitidos: ${this.typesAllowed.map(t => t.label).join(', ')}`;
-                this.$emit('select', undefined);
-                return;
-            }
-            if (this.currentFile.size > this.maxSize) {
-                this.errorMessage = `Tamanho máximo: ${this.maxSize / 1000000}MB`;
-                this.$emit('select', undefined);
-                return;
+            const err = this.validateFile()
+            if (err) {
+                this.errorMessage = err;
             }
 
         }
     },
     methods: {
+        validateFile() {
+            const fullTypeName = this.currentFile.type;
+            const type = fullTypeName.split('/')[1];
+            console.log(this.currentFile)
+
+            if (!this.typesAllowed.some(t => t.value === type)) {
+                return `Formatos permitidos: ${this.typesAllowed.map(t => t.label).join(', ')}`;
+            }
+            if (this.currentFile.size > this.maxSize) {
+                return `Tamanho máximo: ${this.maxSize / 1000000}MB`;
+            }
+        },
         selectFile() {
-            this.errorMessage = undefined;
+            this.errorMessage = undefined
             const selectedFiles = this.$refs.file.files;
             this.currentFile = selectedFiles[0];
-            this.$emit('select', this.currentFile);
+            const err = this.validateFile();
+            if (!err) {
+                this.$emit('select', this.currentFile);
+            } else {
+                console.log('here')
+                this.errorMessage = err;
+            }
         }
     }
 }
