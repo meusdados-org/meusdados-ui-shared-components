@@ -127,7 +127,6 @@ export default {
                 const mappedValues = values.map(value => (typeof value === "string" || typeof value === "number") && String(value).toLowerCase().includes(this.search.toLowerCase()));
                 return mappedValues.some(x => x);
             })
-            this.$refs.pagination.updatePageCounting(this.tableEntries);
         },
         filters() {
             this.tableEntries = [...this.entries];
@@ -139,7 +138,6 @@ export default {
         },
         entries() {
             this.tableEntries = this.entries;
-            this.$refs.pagination.updatePageCounting(this.tableEntries);
         }
     },
     methods: {
