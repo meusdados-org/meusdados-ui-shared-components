@@ -6,6 +6,9 @@
           <Icon class="edit-column" size="1rem" type="more-vertical"></Icon>
         </ButtonLink>
       </template>
+      <template v-slot:action v-else>
+        <div style="width: 0; height: 0; display: none;"></div>
+      </template>
       <template v-slot:content>
         <div class="responsavel" v-if="!isTitular">
           <Text3Component>
@@ -16,7 +19,7 @@
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
             <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card" :isTitular="isTitular"/>
-            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="!isTitular || index === 0">
+            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="(!isTitular || index === 0) && !(isTitular && column.nome === 'Fechado')">
               Nova Solicitação
             </DragAdd>
           </Container>
