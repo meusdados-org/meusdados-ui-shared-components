@@ -27,7 +27,7 @@
                         </div>
                         <div v-else-if="column.key === 'termo'" class="icons">
                             <div class="action-buttons">
-                                <button class="action-button termo" v-on:click="$emit('openTermo', td.processo.termos)">
+                                <button class="action-button termo" v-on:click="$emit('openTermo', td.processo, td.arquivos_evidencia, td.id)">
                                     <Icon type="book-open"/>
                                 </button>
                             </div>
