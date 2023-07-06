@@ -16,6 +16,10 @@ const props = defineProps({
   fitContent: {
     type: Boolean,
     default: false
+  },
+  adjustTop: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -30,7 +34,7 @@ const switchOpen = () => {
   <slot name="icon">
     <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
   </slot>
-  <div class="help-text" :class="{ openToRight, fitContent }" v-if="open">
+  <div class="help-text" :class="{ openToRight, fitContent, adjustTop }" v-if="open">
     <Text3Component class="help-text__inner" id="help-text">
       <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
     </Text3Component>
@@ -86,6 +90,10 @@ const switchOpen = () => {
 
 .help-text:not(.openToRight) {
   left: 30px;
+}
+
+.help-text.adjustTop {
+  bottom: -30px;
 }
 
 .help-text.openToRight {

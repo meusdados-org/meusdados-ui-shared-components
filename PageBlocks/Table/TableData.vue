@@ -12,7 +12,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="td in tableEntries.slice(this.start, this.stop) " :key="td">
+                <tr v-for="(td, i) in tableEntries.slice(this.start, this.stop) " :key="td">
                     <td v-for="column in tableHeader" :key="column">
                         <div v-if="column.key === 'ativo'" class="icons">
                             <ButtonSwitch label="ativo" :value="td[column.key]" @switchFlag="changeAtivo(td)" :showLabel="false"/>
@@ -26,7 +26,14 @@
                             {{ td[column.key] ? dataConversor(td[column.key]) : '-' }}
                         </div>
                         <div v-else>
-                            {{(td[column.key] || '-').toString().substring(0, 50)}}<span v-if="(td[column.key] || '').toString().length >= 50">...</span>
+                            {{(td[column.key] || '-').toString().substring(0, 50)}}<span v-if="(td[column.key] || '').toString().length >= 50">
+                                <Tooltip :adjust-top="i === 0">
+                                    <template #icon>
+                                        ...
+                                    </template>
+                                    {{td[column.key]}}
+                                </Tooltip>
+                            </span>
                         </div>
                     </td>
                     <td v-if="actions">
@@ -59,6 +66,7 @@ import { dataConversor } from '@/utils/data';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import ButtonPagination from '@/components/shared/Actions/ButtonPagination.vue';
 import ButtonSwitch from '@/components/shared/Actions/ButtonSwitch.vue';
+import Tooltip from '../../Inputs/Tooltip/Tooltip.vue';
 import { CallBackend } from '@/services/_backend';
 
 const itemsPerTable = 10;
@@ -115,7 +123,7 @@ export default {
             return this.columns || [];
         },
     },
-    components: { Icon, ButtonPagination, ButtonSwitch },
+    components: { Icon, ButtonPagination, ButtonSwitch, Tooltip },
     watch: {
         search() {
             this.tableEntries = this.entries.filter(entry => {
