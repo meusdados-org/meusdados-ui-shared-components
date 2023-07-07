@@ -38,6 +38,7 @@ button {
 
 button:hover {
     background-color: var(--purple-1);
+    color: var(--white);
     cursor: pointer;
 }
 

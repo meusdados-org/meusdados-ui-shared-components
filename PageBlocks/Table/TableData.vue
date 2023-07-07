@@ -18,7 +18,10 @@
                             <ButtonSwitch label="ativo" :value="td[column.key]" @switchFlag="changeAtivo(td)" :showLabel="false"/>
                         </div>
                         <div v-else-if="td[column.key] === true || td[column.key] === false">
-                            <div v-if="td[column.key] === true" class="icons">
+                            <div v-if="td[column.key] === false && column.reverse" class="icons">
+                                <Icon size="12px" type="check"/>
+                            </div>
+                            <div v-else-if="td[column.key] === true && !column.reverse" class="icons">
                                 <Icon size="12px" type="check"/>
                             </div>
                         </div>

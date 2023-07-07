@@ -67,7 +67,8 @@ export default {
     transition: all .1s linear;
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
-    background-color: white;
+    background-color: transparent;
+    color: var(--black);
 
 }
 
@@ -106,11 +107,11 @@ input[type="date"]:focus::-webkit-calendar-picker-indicator {
 
 .container-container-date  input:not(:focus) + label,
 .container-container-date  input:not(:placeholder-shown) + label{
-    color: rgba(12, 12, 12, 0.651);
+    color: var(--black);
 }
 
 .container-container-date>  input:not(:focus){
-    color: rgba(12, 12, 12, 0.651);
+    color: var(--black);
 }
 
 
