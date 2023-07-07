@@ -2,7 +2,7 @@
   <div class="board">
     <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
       <DragColumn v-for="(column, i) in scene?.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" @refresh="$emit('refresh')" :items="column.solicitacoes"/>
-      <DragAdd class="nova-etapa" @click="openModalForm(undefined)">
+      <DragAdd v-if="scene?.children[0]?.id || scene.children.length > 1" class="nova-etapa" @click="openModalForm(undefined)">
         Nova Etapa
       </DragAdd>
     </Container>

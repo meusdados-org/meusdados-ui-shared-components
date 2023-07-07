@@ -1,10 +1,11 @@
 <template>
-  <Draggable class="drag-columns" :class="{ 'column-drag-handle': !isTitular }">
+  <Draggable class="drag-columns" :class="{ 'column-drag-handle': !(isTitular || column.nome === 'Fechado' || column.nome === 'Cancelado') }">
     <Card :title="column.nome" :hasPadding="false" class="drag-column">
       <template v-slot:action v-if="!isTitular">
-        <ButtonLink class="edit-button-link" @click="$emit('openForm', column.id)">
+        <ButtonLink v-if="column.id" class="edit-button-link" @click="$emit('openForm', column.id)">
           <Icon class="edit-column" size="1rem" type="more-vertical"></Icon>
         </ButtonLink>
+        <div style="width: 0; height: 0; display: none;"></div>
       </template>
       <template v-slot:action v-else>
         <div style="width: 0; height: 0; display: none;"></div>
@@ -19,7 +20,7 @@
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
             <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card" :isTitular="isTitular"/>
-            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="(!isTitular || index === 0) && !(isTitular && column.nome === 'Fechado')">
+            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="(!isTitular || index === 0) && !(column.nome === 'Fechado' || column.nome === 'Cancelado')">
               Nova Solicitação
             </DragAdd>
           </Container>
