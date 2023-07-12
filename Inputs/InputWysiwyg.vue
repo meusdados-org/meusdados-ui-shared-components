@@ -6,27 +6,27 @@
         :options="[
           {
             key: '<h1>',
-            label: 'Heading 1',
+            label: 'h1',
           },
           {
             key: '<h2>',
-            label: 'Heading 2',
+            label: 'h2',
           },
           {
             key: '<h3>',
-            label: 'Heading 3',
+            label: 'h3',
           },
           {
             key: '<h4>',
-            label: 'Heading 4',
+            label: 'h4',
           },
           {
             key: '<h5>',
-            label: 'Heading 5',
+            label: 'h5',
           },
           {
             key: '<h6>',
-            label: 'Heading 6',
+            label: 'h6',
           },
           {
             key: '<p>',
@@ -97,27 +97,27 @@ export default {
             options: [
               {
                 key: '<h1>',
-                label: 'Heading 1',
+                label: 'h1',
               },
               {
                 key: '<h2>',
-                label: 'Heading 2',
+                label: 'h2',
               },
               {
                 key: '<h3>',
-                label: 'Heading 3',
+                label: 'h3',
               },
               {
                 key: '<h4>',
-                label: 'Heading 4',
+                label: 'h4',
               },
               {
                 key: '<h5>',
-                label: 'Heading 5',
+                label: 'h5',
               },
               {
                 key: '<h6>',
-                label: 'Heading 6',
+                label: 'h6',
               },
               {
                 key: '<p>',
