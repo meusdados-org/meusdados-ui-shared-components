@@ -90,7 +90,7 @@ header:not(.logo-header) {
 }
 
 .pattern1 {
-  top: 71px;
+  top: 0px;
 }
 
 .upperPattern1 {
@@ -102,7 +102,7 @@ header:not(.logo-header) {
 }
 
 .pattern2 {
-  top: 0px;
+  top: -90px;
 }
 
 footer {
