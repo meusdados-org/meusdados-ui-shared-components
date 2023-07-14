@@ -1,5 +1,5 @@
 <template>
-    <ButtonLink v-on:click="open = true" type="download" :bold="false">
+    <ButtonLink v-on:click="open = true" type="upload" :bold="false">
         Importar
     </ButtonLink>
     <ModalTemplate :open="open" @close="open = false">
