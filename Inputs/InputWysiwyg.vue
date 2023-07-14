@@ -53,7 +53,7 @@
       <ButtonLink @click="applyUl" class="button" @mousedown.prevent>
         <Icon type="list"/>
       </ButtonLink>
-      <ButtonLink @click="addAttachment" class="button" @mousedown.prevent>
+      <ButtonLink @click="addAttachment" class="button" @mousedown.prevent v-if="hasAttachment">
         <Icon type="paperclip"/>
       </ButtonLink>
     </div>
@@ -91,7 +91,24 @@ import TurndownService from 'turndown';
 
 export default {
     name: "InputWysiwyg",
-    props: ["value", "showSendButton", "maxHeight"],
+    props: {
+      value: {
+        type: String,
+        default: '',
+      },
+      showSendButton: {
+        type: Boolean,
+        default: false,
+      },
+      maxHeight: {
+        type: String,
+        default: 'none',
+      },
+      hasAttachment: {
+        type: Boolean,
+        default: true,
+      },
+    },
     data() {
         return {
             options: [
@@ -172,6 +189,9 @@ export default {
         document.execCommand('formatBlock', false, key)
       },
       addAttachment() {
+        if (!this.hasAttachment) {
+          return;
+        }
         const input = document.createElement('input');
         input.type = 'file';
         input.multiple = true;
@@ -209,6 +229,9 @@ export default {
           if (file.type.startsWith('image/')) {
             this.displayImage(file);
           } else {
+            if (!this.hasAttachment) {
+              return;
+            }
             this.saveAttachment(file);
           }
         }
@@ -238,6 +261,9 @@ export default {
             const file = item.getAsFile();
             this.displayImage(file);
           } else if (item.kind == 'file') {
+            if (!this.hasAttachment) {
+              return;
+            }
             const file = item.getAsFile();
             this.saveAttachment(file);
           }
