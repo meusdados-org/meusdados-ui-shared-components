@@ -1,12 +1,13 @@
 <template>
-    <div class="container-InputTextFieldField" :class="{ formGroupVersion }">
+  <div class="wrapper-inputTextField">
+    <div class="container-InputTextFieldField" :class="{ formGroupVersion, error }">
       <input
         v-if="!mask"
         v-bind="inputProps"
         :type="isPassword ? passwordFieldType : type"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
-        @blur="$emit('bluring')"
+        @blur="handleBlur"
       />
       <input
         v-else
@@ -14,70 +15,96 @@
         v-mask="mask"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
-        @blur="$emit('bluring')"
+        @blur="handleBlur"
       />
       <label v-if="label">{{ label }}</label>
     </div>
-  </template>
+    <FormError v-if="error">
+      Este campo é obrigatório
+    </FormError>
+  </div>
+</template>
 
-  <script>
-  export default {
-    name: 'InputTextFieldField',
+<script>
+import FormError from './Form/FormError.vue';
+
+export default {
+    name: "InputTextFieldField",
     props: {
-      label: {
-        type: String,
-        required: false,
-      },
-      type: {
-        type: String,
-        default: 'text',
-      },
-      value: {
-        type: String,
-        required: true,
-      },
-      maxlength: {
-        type: Number,
-        default: 50,
-      },
-      mask: {
-        type: String,
-      },
-      disabled: {
-        type: Boolean,
-        default: false,
-      },
-      formGroupVersion: {
-        type: Boolean,
-        default: false
-      }
+        label: {
+            type: String,
+            required: false,
+        },
+        type: {
+            type: String,
+            default: "text",
+        },
+        value: {
+            type: String,
+            required: true,
+        },
+        maxlength: {
+            type: Number,
+            default: 50,
+        },
+        mask: {
+            type: String,
+        },
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        formGroupVersion: {
+            type: Boolean,
+            default: false
+        },
+        required: {
+            type: Boolean,
+            default: false
+        }
     },
     data() {
-      return {
-        isPassword: false,
-        passwordFieldType: 'password',
-        inputProps: {
-          name: this.label ? this.label.toLowerCase() : Math.random(),
-          id: `InputTextFieldField-${this.label ? this.label.toLocaleLowerCase().replace(/\s/g, '-') : Math.random()}`,
-          disabled: this.disabled,
-          maxlength: this.maxlength,
-          placeholder: ' ',
-        },
-      };
+        return {
+            isPassword: false,
+            passwordFieldType: "password",
+            inputProps: {
+                name: this.label ? this.label.toLowerCase() : Math.random(),
+                id: `InputTextFieldField-${this.label ? this.label.toLocaleLowerCase().replace(/\s/g, "-") : Math.random()}`,
+                disabled: this.disabled,
+                maxlength: this.maxlength,
+                placeholder: " ",
+                required: this.required,
+            },
+            error: false,
+        };
     },
     methods: {
-      switchVisibility() {
-        this.passwordFieldType =
-          this.passwordFieldType === 'password' ? 'text' : 'password';
-      },
+        switchVisibility() {
+            this.passwordFieldType =
+                this.passwordFieldType === "password" ? "text" : "password";
+        },
+        handleBlur() {
+            this.error = this.required && !this.value;
+            this.$emit("bluring");
+        },
     },
     created() {
-      this.isPassword = this.type === 'password';
+        this.isPassword = this.type === "password";
     },
-  };
+    components: { FormError }
+};
   </script>
 
 <style scoped>
+
+.wrapper-inputTextField {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: .5rem;
+}
+
+
 .container-InputTextFieldField{
     display: flex;
     flex-direction: column;
@@ -103,6 +130,10 @@
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     background-color: transparent;
+}
+
+.container-InputTextFieldField.error > input{
+    border-bottom-color: var(--red-1);
 }
 
 .container-InputTextFieldField.formGroupVersion > input {
@@ -139,15 +170,7 @@
     box-sizing: border-box;
     padding: 0 .5rem;
 }
-.container-InputTextFieldField input:required:invalid + label{
-    color: var(--red-1);
-}
-.container-InputTextFieldField  input:focus:required:invalid{
-    border-bottom-color: var(--red-1);
-}
-.container-InputTextFieldField  input:required:invalid + label:before{
-    content: '*';
-}
+
 .container-InputTextFieldField  input:focus + label,
 .container-InputTextFieldField  input:not(:placeholder-shown) + label{
     font-size: 12px;

@@ -65,6 +65,9 @@
         <hr class="line"/>
         <FooterLateralVue :usuario="usuario" />
     </div>
+    <ModalTemplate :open="primeiroAcesso">
+        <CardRecuperarAcesso :firstAccessCard="true" @refresh="refresh" />
+    </ModalTemplate>
 </template>
 
 <script>
@@ -80,10 +83,12 @@ import Text3Component from '@/components/shared/Typography/Text/Text3Component.v
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue'
 import ButtonIcon from '@/components/shared/Actions/ButtonIcon.vue'
 import SideBarLinkGroup from './SideBarLinkGroup.vue'
+import CardRecuperarAcesso from '@/components/Cards/CardRecuperarAcesso/CardRecuperarAcesso.vue'
+import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue'
 
 export default {
     name: "BarraLateral",
-    components: { BarraLateralLink, FooterLateralVue, Icon, Text3Component, ButtonPrimary, ButtonIcon, SideBarLinkGroup },
+    components: { BarraLateralLink, FooterLateralVue, Icon, Text3Component, ButtonPrimary, ButtonIcon, SideBarLinkGroup, ModalTemplate, CardRecuperarAcesso },
     data() {
         return {
             usuario: {
@@ -95,6 +100,7 @@ export default {
             permissions: {},
             activeGroup: undefined,
             currentPage: '/dashboard',
+            primeiroAcesso: false,
             links: [
                 {
                     titleHeader: 'Dashboard',
@@ -206,7 +212,10 @@ export default {
     methods: {
         getUserInfo() {
             usuarioEmpresa.getUserInfo().then(response => {
-                this.usuario = response.data
+                this.usuario = response.data;
+                if (this.usuario.first_login) {
+                    this.primeiroAcesso = true;
+                }
                 localStorage.setItem('usuario', JSON.stringify(response.data));
             })
         },
@@ -214,10 +223,12 @@ export default {
             this.activeGroup = status ? titleHeader : undefined;
         },
         changeRoute(to, titleHeader = undefined) {
-
             this.activeGroup = titleHeader;
             this.currentPage = to;
-        }
+        },
+        refresh() {{
+            this.$router.go();
+        }}
     },
     setup() {
         return { collapsed, toggleSideBar, sidebarWidth, meusDados, meusDadosComTexto,};
