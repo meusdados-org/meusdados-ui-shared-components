@@ -102,6 +102,7 @@ export default {
   flex-direction: column;
   align-items: flex-start;
   gap: .5rem;
+  width: 100%;
 }
 
 

@@ -542,7 +542,9 @@ export default {
         if (this.clearOnSelect) this.search = ''
       }
       /* istanbul ignore else */
-      if (this.closeOnSelect) this.deactivate()
+      setTimeout(() => {
+        if (this.closeOnSelect) this.deactivate()
+      }, 1);
     },
     /**
      * Add the given group options to the list of selected options
@@ -636,7 +638,9 @@ export default {
       this.$emit('remove', option, this.id)
 
       /* istanbul ignore else */
-      if (this.closeOnSelect && shouldClose) this.deactivate()
+      setTimeout(() => {
+        if (this.closeOnSelect && shouldClose) this.deactivate()
+      }, 1);
     },
     /**
      * Calls this.removeElement() with the last element
