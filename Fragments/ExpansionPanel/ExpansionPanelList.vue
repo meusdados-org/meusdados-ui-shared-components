@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import ExpansionPanel from './ExpansionPanel.vue';
 import Text1Component from '@/components/shared/Typography/Text/Text1Component.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
@@ -22,6 +22,24 @@ const props = defineProps({
   },
   titleKey: {
     type: String
+  },
+  erroItem: {
+    type: String,
+    default: undefined
+  },
+  erroResponse: {
+    type: String,
+    default: undefined
+  }
+})
+
+const innerErroItem = ref<string>(props.erroItem);
+const innerErroResponse = ref<string>(props.erroResponse);
+
+watch(() => props.erroItem, (value) => {
+  const index = props.itemList.findIndex(x => x=== value);
+  if (index !== -1) {
+    open.value = index;
   }
 })
 
@@ -45,6 +63,9 @@ const switchOpen = (index: number) => {
   <div class="expansion-panel-wrapper">
     <ExpansionPanel v-for="(item, i) in itemList" :key="i" :has-title="itemList.length > 1" :title="isTitleKeyInForm ? item.form[titleKey] : item[titleKey]" :open="open === i" @open="switchOpen(i)">
       <template #content>
+        <FormError v-if="erroItem && erroItem === item">
+          {{ erroResponse }}
+        </FormError>
         <slot name="content" :item="item"></slot>
       </template>
     </ExpansionPanel>
