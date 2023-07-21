@@ -1,13 +1,20 @@
 <template>
-    <div class="container-container-textarea">
-        <label>{{ label }}</label>
-        <div class="container-textarea">
-            <textarea :value="value" :id="id" rows="6" @input="$emit('update:value', $event.target.value)" :placeholder="placeholder" :maxlength="maxlength"></textarea>
+    <div class="wrapper-InputTextArea">
+        <div class="container-container-textarea">
+            <label>{{ label }}</label>
+            <div class="container-textarea">
+                <textarea :value="value" :id="id" rows="6" @input="$emit('update:value', $event.target.value)" @blur="handleBlur" :placeholder="placeholder" :maxlength="maxlength"></textarea>
+            </div>
         </div>
+        <FormError v-if="error">
+            Este campo é obrigatório
+        </FormError>
     </div>
 </template>
 
 <script>
+import FormError from './Form/FormError.vue';
+
 export default {
     name: 'InputTextArea',
     props: {
@@ -33,11 +40,28 @@ export default {
             type: String,
             required: false,
             default: 'Digite um texto aqui...'
-        }
+        },
+        required: {
+            type: Boolean,
+            required: false,
+            default: true
+        },
     },
     data() {
         return {
-            id: `inputTextArea-${this.label ? this.label.toLowerCase().replace(/\s/g, '-') : Math.random()}`
+            id: `inputTextArea-${this.label ? this.label.toLowerCase().replace(/\s/g, '-') : Math.random()}`,
+            error: false,
+        }
+    },
+    components: {
+        FormError
+    },
+    methods: {
+        handleBlur() {
+            this.error = this.required && this.isBlank(this.value);
+        },
+        isBlank(str) {
+            return (!str || /^\s*$/.test(str));
         }
     },
 
@@ -45,6 +69,15 @@ export default {
 </script>
 
 <style scoped>
+
+.wrapper-InputTextArea {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
 .container-container-textarea{
     display: flex;
     flex-direction: column;
