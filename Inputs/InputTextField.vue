@@ -133,10 +133,6 @@ export default {
     background-color: transparent;
 }
 
-.container-InputTextFieldField.error > input{
-    border-bottom-color: var(--red-1);
-}
-
 .container-InputTextFieldField.formGroupVersion > input {
   height: 18px;
   font-size: 12px;

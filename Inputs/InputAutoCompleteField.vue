@@ -3,7 +3,8 @@
         <multiselect v-bind="$attrs" :placeholder="placeholder" :searchable="true"
         tag-placeholder=""
         :modelValue="value"
-        selectedLabel="Selecionado" @close="handleClose">
+        selectedLabel="Selecionado"
+        @close="handleClose">
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
                 <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>
@@ -51,7 +52,6 @@ export default {
     },
     methods: {
         handleClose(value, id) {
-            console.log(value, this.value);
             this.error = this.required && !value;
         }
     },
@@ -60,6 +60,7 @@ export default {
 
 <style scoped>
 .wrapper-InputAutoCompleteField {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
