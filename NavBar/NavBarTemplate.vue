@@ -23,14 +23,14 @@ export default {
 
 .options::-webkit-scrollbar {
     background-color: var(--gray-3);
-    border-radius: 10px;
+    border-radius: 8px;
     margin-bottom: -1rem;
     margin-top: 1rem;
     height: 5px;
 }
 
 .options::-webkit-scrollbar-thumb {
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: var(--blue-2);
 }
 </style>

@@ -5,7 +5,7 @@
               <div class="main-title">{{ title }}</div>
               <slot name="action">
                 <ButtonLink @click="$emit('close')">
-                  <Icon type="x"/>
+                  <Icon class="x-icon" type="x"/>
                 </ButtonLink>
               </slot>
           </div>
@@ -80,5 +80,9 @@ export default {
 .action {
   text-decoration: none;
   color: inherit;
+}
+
+.x-icon {
+  color: var(--gray-2) !important;
 }
 </style>

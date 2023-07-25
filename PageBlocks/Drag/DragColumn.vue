@@ -146,12 +146,12 @@ export default {
   position: relative;
   right: -250px;
   background-color: var(--gray-3);
-  border-radius: 10px;
+  border-radius: 8px;
   /* margin-left: 1rem; */
   width: 2px;
 }
 .background-options::-webkit-scrollbar-thumb {
-    border-radius: 10px;
+    border-radius: 8px;
     background-color: var(--blue-2);
 }
 
