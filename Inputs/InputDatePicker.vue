@@ -107,14 +107,11 @@ input[type="date"]:focus::-webkit-calendar-picker-indicator {
 
 .container-container-date  input:not(:focus) + label,
 .container-container-date  input:not(:placeholder-shown) + label{
-    color: var(--black);
+    color: var(--gray-1);
 }
 
 .container-container-date>  input:not(:focus){
     color: var(--black);
 }
-
-
-
 
 </style>
