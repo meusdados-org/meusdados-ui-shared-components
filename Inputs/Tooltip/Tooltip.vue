@@ -1,15 +1,13 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import Text3Component from '../../Typography/Text/Text3Component.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 const open = ref<boolean>(false);
+const tooltipContainerRef = ref<HTMLElement | null>(null);
+const tooltipHelpTextRef = ref<HTMLElement | null>(null);
 const props = defineProps({
   red: {
-    type: Boolean,
-    default: false
-  },
-  openToRight: {
     type: Boolean,
     default: false
   },
@@ -23,18 +21,39 @@ const props = defineProps({
   }
 })
 
-const switchOpen = () => {
-  open.value = !open.value;
+const switchOpen = (value) => {
+  open.value = value;
 }
+
+
+
+// Method to position the tooltip
+const positionTooltip = () => {
+  if (tooltipHelpTextRef.value) {
+    const iconElement = tooltipHelpTextRef.value.parentElement;
+    const iconRect = iconElement.getBoundingClientRect();
+    const tooltipContainerRect = tooltipHelpTextRef.value.getBoundingClientRect();
+    const tooltipStyle = tooltipHelpTextRef.value.style;
+
+    // Calculate the top and left positions based on the icon position and tooltip dimensions
+    const tooltipTop = iconRect.top - tooltipContainerRect.height - 20; // Adjust this value as needed
+    const tooltipLeft = iconRect.left + 21;
+
+    tooltipStyle.top = `${tooltipTop}px`;
+    tooltipStyle.left = `${tooltipLeft}px`;
+  }
+};
+// Call the positionTooltip method when the tooltip is opened
+onMounted(positionTooltip);
 
 </script>
 
 <template>
-<div class="tooltip-container" @mouseover="open = true" @mouseleave="open = false">
+<div class="tooltip-container" ref="tooltipContainerRef" @mouseover="switchOpen(true)" @mouseleave="switchOpen(false)">
   <slot name="icon">
     <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
   </slot>
-  <div class="help-text" :class="{ openToRight, fitContent, adjustTop }" v-if="open">
+  <div class="help-text" ref="tooltipHelpTextRef" :class="{ fitContent, adjustTop, open }">
     <Text3Component class="help-text__inner" id="help-text">
       <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
     </Text3Component>
@@ -55,6 +74,7 @@ const switchOpen = () => {
 .tooltip-container {
   position: relative;
   display: inline-block;
+  --tooltip-offset: 50%;
 }
 
 .red {
@@ -74,10 +94,15 @@ const switchOpen = () => {
   background-color: var(--gray-3);
   width: 182px;
   border-radius: var(--border-radius-1);
+  position: fixed;
   text-align: left;
-  position: absolute;
   z-index: 999;
-  bottom: 0px;
+  left: calc(var(--tooltip-offset, 0) - 0.5rem);
+  display: none;
+}
+
+.help-text.open {
+  display: block;
 }
 
 .help-text.fitContent {
@@ -88,18 +113,7 @@ const switchOpen = () => {
   display: block;
 }
 
-.help-text:not(.openToRight) {
-  left: 30px;
-}
 
-.help-text.adjustTop {
-  bottom: -30px;
-}
-
-.help-text.openToRight {
-  bottom: -10px;
-  right: 20px;
-}
 
 .close-help-text {
   position: absolute;
