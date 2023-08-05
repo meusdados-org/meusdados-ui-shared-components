@@ -189,7 +189,7 @@ export default {
                     },
                     {
                         title: 'Assinatura e Pagamentos',
-                        to: '#',
+                        to: '/configuracoes/assinaturas',
                         icon: 'settings'
                     },
                     {

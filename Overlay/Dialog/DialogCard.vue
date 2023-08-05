@@ -2,7 +2,7 @@
 <template>
     <div v-if="visible" class="dialog-overlay">
         <div class="dialog">
-            <div class="dialog-image">
+            <div class="dialog-image" v-if="type">
                 <img :src="icon" width="64" height="64"/>
             </div>
             <div class="dialog-message">
@@ -94,8 +94,7 @@ export default {
     row-gap: var(--spacing-5);
 
     width: 532px;
-    height: 292px;
-    padding: 0 1rem;
+    padding: 2rem 1rem;
     z-index: 997;
 
     background-color: var(--white);

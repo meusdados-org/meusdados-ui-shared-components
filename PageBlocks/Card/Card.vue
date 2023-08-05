@@ -4,7 +4,7 @@
           <div class="card-header">
               <div class="main-title">{{ title }}</div>
               <slot name="action">
-                <ButtonLink @click="$emit('close')">
+                <ButtonLink @click="$emit('close')" v-if="hasAction">
                   <Icon class="x-icon" type="x"/>
                 </ButtonLink>
               </slot>
@@ -35,6 +35,11 @@ export default {
       type: String,
       required: false
     },
+    hasAction: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
   },
   components: {
       Icon,
@@ -47,7 +52,10 @@ export default {
 .card-wrapper{
   border-radius: var(--border-radius-1);
   background-color: white;
+  overflow: hidden;
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 15%);
+  display: flex;
+  flex-direction: column;
 }
 
 .main-title {
@@ -60,7 +68,7 @@ export default {
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  flex: 1;
+  flex-grow: 1;
   row-gap: .5rem;
 }
 
@@ -74,7 +82,9 @@ export default {
 }
 
 .card-content {
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
 }
 
 .action {
