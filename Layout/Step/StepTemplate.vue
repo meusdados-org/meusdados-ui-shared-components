@@ -45,6 +45,7 @@ const props = defineProps({
         <img :src="pattern2"/>
       </div>
     </div>
+    <div style="height: 100px;"></div>
     <footer>
       <slot name="under-footer"></slot>
     </footer>
@@ -106,6 +107,10 @@ header:not(.logo-header) {
 }
 
 footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
   display: flex;
   justify-content: space-between;
   align-items: center;
