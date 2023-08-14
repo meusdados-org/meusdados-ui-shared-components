@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" :disabled="disabled"><span class="text-button"><slot></slot></span></button>
+    <button :type="type" :class="{ nohover }" :disabled="disabled"><span class="text-button"><slot></slot></span></button>
 </template>
 
 <script>
@@ -14,6 +14,10 @@ export default {
         type: {
             type: String,
             default: 'button'
+        },
+        nohover: {
+            type: Boolean,
+            default: false
         }
     }
 }
@@ -27,6 +31,7 @@ button {
     border-radius: var(--border-radius-1);
     border: none;
     color: var(--white);
+    cursor: pointer;
     opacity: 1;
 }
 
@@ -36,10 +41,9 @@ button {
     font-weight: 700;
 }
 
-button:hover {
+button:not(.nohover):hover {
     background-color: var(--purple-1);
     color: var(--white);
-    cursor: pointer;
 }
 
 button:focus {

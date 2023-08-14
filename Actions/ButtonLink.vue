@@ -1,5 +1,5 @@
 <template>
-    <button :class="{ 'boldButton': bold, borderBottom }" :disabled="disabled">
+    <button :class="{ 'boldButton': bold, borderBottom, nohover }" :disabled="disabled">
         <text1 :class="{ 'bold': bold }">
             <Icon v-if="type" :type="type" size="1rem"/>
             <slot></slot>
@@ -29,6 +29,10 @@ export default {
         borderBottom: {
             type: Boolean,
             default: true
+        },
+        nohover: {
+            type: Boolean,
+            default: false
         }
     },
     components: {
@@ -54,7 +58,7 @@ button {
     padding: 0;
 }
 
-button:hover {
+button:not(.nohover):hover {
     color: var(--purple-1);
 }
 
