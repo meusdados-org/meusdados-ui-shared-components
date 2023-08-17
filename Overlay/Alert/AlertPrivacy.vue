@@ -21,7 +21,6 @@ const redirect = () => {
         Utilizamos ferramentas e serviços de terceiros que utilizam cookies, elas nos ajudam a oferecer uma melhor experiência. Ao continuar a visualizar nosso site, você concorda com o uso de cookies.
       </Text3Component>
       <ButtonLink
-        nohover
         :bold="false"
         @click="redirect">
         <Text3Component>
@@ -29,7 +28,6 @@ const redirect = () => {
         </Text3Component>
       </ButtonLink>
       <ButtonPrimary
-        nohover
         @click="show = false"
         class="button-close">
         <Title4Component>
