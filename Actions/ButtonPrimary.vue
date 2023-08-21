@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" :class="{ nohover }" :disabled="disabled"><span class="text-button"><slot></slot></span></button>
+    <button :type="type" :class="{ nohover, sameColorBackground }" :disabled="disabled"><span class="text-button"><slot></slot></span></button>
 </template>
 
 <script>
@@ -16,6 +16,10 @@ export default {
             default: 'button'
         },
         nohover: {
+            type: Boolean,
+            default: false
+        },
+        sameColorBackground: {
             type: Boolean,
             default: false
         }
@@ -44,6 +48,11 @@ button {
 button:not(.nohover):hover {
     background-color: var(--purple-1);
     color: var(--white);
+}
+
+button.sameColorBackground:hover {
+    background-color: var(--blue-1);
+    color: var(--purple-1);
 }
 
 button:focus {
