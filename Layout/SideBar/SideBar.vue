@@ -182,11 +182,11 @@ export default {
                     titleHeader: 'Configurações',
                     iconHeader: 'settings',
                     children: [
-                    {
-                        title: 'Conta e cadastro',
-                        to: '#',
-                        icon: 'settings'
-                    },
+                    // {
+                    //     title: 'Conta e cadastro',
+                    //     to: '#',
+                    //     icon: 'settings'
+                    // },
                     {
                         title: 'Assinatura e Pagamentos',
                         to: '/configuracoes/assinaturas',
