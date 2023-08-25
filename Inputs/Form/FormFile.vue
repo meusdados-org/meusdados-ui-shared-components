@@ -1,17 +1,6 @@
 <template>
     <div class="container-form">
         <InputFile @select="select" :types-allowed="typesAllowed" :max-size="maxSize" />
-        <div v-if="currentFile" class="progress">
-            <div
-                role="progressbar"
-                :aria-valuenow="progress"
-                :aria-valuemin="0"
-                :aria-valuemax="100"
-                :style="{ width: progress + '%' }"
-            >
-                {{ progress }}%
-            </div>
-        </div>
         <ButtonPrimary id="button-upload-file" :disabled="!currentFile" v-on:click="upload">{{ title }}</ButtonPrimary>
     </div>
 </template>
