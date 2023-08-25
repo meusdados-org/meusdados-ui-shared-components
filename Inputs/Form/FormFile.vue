@@ -87,9 +87,9 @@ export default {
             this.progress = 0;
 
             const upload = this.arquivoMaturidade ? this.service.upload(this.id, this.currentFile, event => {
-                this.progress = Math.round((100 * event.loaded) / event.total) - 1;
+                this.progress = Math.round((100 * event.loaded) / event.total);
             }) : this.service.createBulk(this.currentFile, event => {
-                this.progress = Math.round((100 * event.loaded) / event.total) - 1;
+                this.progress = Math.round((100 * event.loaded) / event.total);
             });
 
             upload.then(response => {
