@@ -1,3 +1,4 @@
+
 <template>
   <div class="wrapper-inputTextField">
     <div class="container-InputTextFieldField" :class="{ formGroupVersion, error }">
@@ -8,6 +9,7 @@
         :value="value"
         @input="$emit('update:value', $event.target.value)"
         @blur="handleBlur"
+        :autocomplete="isPassword ? 'off' : 'on'"
       />
       <input
         v-else
@@ -16,6 +18,7 @@
         :value="value"
         @input="$emit('update:value', $event.target.value)"
         @blur="handleBlur"
+        :autocomplete="isPassword ? 'off' : 'on'"
       />
       <label v-if="label">{{ label }}</label>
     </div>
