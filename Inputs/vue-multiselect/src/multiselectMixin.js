@@ -479,7 +479,7 @@ export default {
      * @param  {Object||String||Integer} Passed option
      * @returns {Object||String}
      */
-    getOptionLabel (option, isTag = false) {
+    getOptionLabel (option, isTag = false, rawLabel = false) {
       if (isEmpty(option)) return ''
       /* istanbul ignore else */
       if (option.isTag) return option.label
@@ -489,6 +489,7 @@ export default {
       const label = this.customLabel(option, this.label)
       /* istanbul ignore else */
       if (isEmpty(label)) return ''
+      if (rawLabel) return label;
       return label.replace(new RegExp(this.search, 'ig'), match => {
         return isTag ? match : `<span class="highlightText">${match}</span>`
       });

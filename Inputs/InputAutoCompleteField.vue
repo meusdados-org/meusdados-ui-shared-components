@@ -1,10 +1,13 @@
 <template>
     <div class="wrapper-InputAutoCompleteField">
-        <multiselect v-bind="$attrs" :placeholder="placeholder" :searchable="true"
+        <multiselect v-bind="$attrs" :placeholder="placeholder" :label="label" :searchable="true"
         tag-placeholder=""
         :modelValue="value"
-        selectedLabel="Selecionado"
-        @close="handleClose">
+        selectedLabel=""
+        @close="handleClose"
+        :showAddOption="showAddOption"
+        ref="multiselect"
+        >
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
                 <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>
@@ -15,6 +18,9 @@
             <template v-slot:noResult>
                 Nenhum resultado encontrado.
             </template>
+            <template v-slot:option="slotProps">
+                <span style="display: flex; justify-content: space-between"><span v-html="slotProps.optionLabel"/> <Tag v-if="showTag(slotProps.option)" class="tag">{{ tagLabel }}</Tag></span>
+            </template>
         </multiselect>
         <FormError v-if="error">
             Este campo é obrigatório
@@ -24,19 +30,34 @@
 
 <script>
 import FormError from './Form/FormError.vue';
+import Tag from '@/components/shared/Inputs/Tag/Tag.vue';
 import Multiselect from './vue-multiselect/src/Multiselect.vue';
 import '@/assets/css/vue-multiselect.css';
 import Icon from '@/components/shared/Icon/Icon.vue';
 export default {
     name: 'InputAutoCompleteField',
     components: {
-    Multiselect,
-    Icon,
-    FormError
-},
+        Multiselect,
+        Icon,
+        FormError,
+        Tag
+    },
     props: {
         placeholder: String,
         value: String,
+        label: String,
+        showAddOption: {
+            type: Boolean,
+            default: false
+        },
+        tagLabel: {
+            type: String,
+            default: 'Rascunho'
+        },
+        showTag: {
+            type: Function,
+            default: () => false
+        },
         required: {
             type: Boolean,
             default: false
@@ -53,12 +74,15 @@ export default {
     methods: {
         handleClose(value, id) {
             this.error = this.required && !value;
+        },
+        close() {
+            this.$refs.multiselect.deactivate();
         }
     },
 }
 </script>
 
-<style scoped>
+<style>
 .wrapper-InputAutoCompleteField {
     width: 100%;
     display: flex;

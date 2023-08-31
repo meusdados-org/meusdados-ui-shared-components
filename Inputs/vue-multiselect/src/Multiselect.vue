@@ -108,6 +108,15 @@
             </span>
           </li>
           <template v-if="!max || internalValue.length < max">
+            <li class="multiselect__element">
+              <span
+                v-if="showAddOption && search && !filteredOptions.find(option => getOptionLabel(option, false, true).toLowerCase() === search.toLowerCase())"
+                class="multiselect__option">
+                <ButtonLink :bold="false" @click="$emit('createNewOption', search)" style="width: 100%; text-align: left;">
+                  Adicionar "{{ search }}"
+                </ButtonLink>
+              </span>
+            </li>
             <li class="multiselect__element"
                 v-for="(option, index) of filteredOptions"
                 :key="index"
@@ -122,7 +131,7 @@
                 :data-selected="selectedLabelText"
                 :data-deselect="deselectLabelText"
                 class="multiselect__option">
-                <slot name="option" :option="option" :search="search" :index="index">
+                <slot name="option" :option="option" :search="search" :index="index" :optionLabel="getOptionLabel(option)">
                   <span v-html="getOptionLabel(option)" :style="{color: this.optionColors ? this.optionColors[index] : 'inherit' }"></span>
                 </slot>
               </span>
@@ -140,7 +149,7 @@
               </span>
             </li>
           </template>
-          <li v-show="showNoResults && (filteredOptions.length === 0 && search && !loading)">
+          <li v-show="showNoResults && (filteredOptions.length === 0 && search && !loading && !showAddOption)">
             <span class="multiselect__option">
               <slot name="noResult" :search="search">No elements found. Consider changing the search query.</slot>
             </span>
@@ -158,6 +167,7 @@
 </template>
 
 <script>
+import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
 import multiselectMixin from './multiselectMixin';
 import pointerMixin from './pointerMixin';
 import Icon from '@/components/shared/Icon/Icon.vue';
@@ -166,8 +176,9 @@ export default {
   name: 'vue-multiselect',
   mixins: [multiselectMixin, pointerMixin],
   components: {
-    Icon
-  },
+    Icon,
+    ButtonLink
+},
   props: {
     /**
        * name attribute to match optional label element
@@ -322,7 +333,11 @@ export default {
     optionColors: {
       type: Array,
       default: undefined
-    }
+    },
+    showAddOption: {
+      type: Boolean,
+      default: false
+    },
   },
   computed: {
     hasOptionGroup () {
