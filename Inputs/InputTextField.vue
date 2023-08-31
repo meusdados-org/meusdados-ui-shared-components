@@ -10,6 +10,7 @@
         @input="$emit('update:value', $event.target.value)"
         @blur="handleBlur"
         :autocomplete="isPassword ? 'off' : 'on'"
+        :class="{'same-style': sameStyle }"
       />
       <input
         v-else
@@ -19,6 +20,7 @@
         @input="$emit('update:value', $event.target.value)"
         @blur="handleBlur"
         :autocomplete="isPassword ? 'off' : 'on'"
+        :class="{'same-style': sameStyle }"
       />
       <label v-if="label">{{ label }}</label>
     </div>
@@ -62,6 +64,10 @@ export default {
             default: false
         },
         required: {
+            type: Boolean,
+            default: false
+        },
+        sameStyle: {
             type: Boolean,
             default: false
         }
@@ -181,6 +187,12 @@ export default {
 .container-InputTextFieldField  input:not(:focus) + label,
 .container-InputTextFieldField  input:not(:placeholder-shown) + label{
     color: rgba(12, 12, 12, 0.651);
+}
+
+.container-InputTextFieldField > input:not(.same-style):disabled,
+.container-InputTextFieldField > input:not(.same-style):disabled + label{
+    border-bottom-color: var(--gray-2);
+    color: var(--gray-2);
 }
 
 /* Chrome, Safari, Edge, Opera */
