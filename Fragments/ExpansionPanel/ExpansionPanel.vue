@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Text1Component from '@/components/shared/Typography/Text/Text1Component.vue';
+import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 
 const emit = defineEmits(['open']);
 
@@ -19,9 +19,9 @@ const props = defineProps({
   <div class="expansion-panel-container">
     <div class="expansion-panel-header" v-if="title" v-on:click="emit('open')">
       <div class="expansion-panel-title">
-        <Text1Component class="title">
+        <BodyLarge class="title">
           {{ title }}
-        </Text1Component>
+        </BodyLarge>
       </div>
     </div>
     <div class="expansion-panel-content" :class="{ open: !title || props.open }">

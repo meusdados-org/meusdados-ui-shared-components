@@ -6,8 +6,8 @@
                 <img :src="icon" width="64" height="64"/>
             </div>
             <div class="dialog-message">
-                <Title3Component>{{ title }}</Title3Component>
-                <Text1Component>{{ message }}</Text1Component>
+                <TitleSmall>{{ title }}</TitleSmall>
+                <BodyLarge>{{ message }}</BodyLarge>
             </div>
             <div class="dialog-buttons">
                 <ButtonLink id="button-cancelar-dialog" v-if="showCancelButton" @click="onCancel">Cancelar</ButtonLink>
@@ -20,8 +20,8 @@
 <script>
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
-import Title3Component from '@/components/shared/Typography/Title/Title3Component.vue';
-import Text1Component from '@/components/shared/Typography/Text/Text1Component.vue';
+import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
+import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 import alertTriangle from '@/assets/img/alert-triangle.svg'
 import checkCircle from '@/assets/img/check-circle.svg'
 import xCircle from '@/assets/img/x-circle.svg'
@@ -31,8 +31,8 @@ export default {
     components: {
         ButtonPrimary,
         ButtonLink,
-        Title3Component,
-        Text1Component
+        TitleSmall,
+        BodyLarge
     },
     props: {
         type: String,

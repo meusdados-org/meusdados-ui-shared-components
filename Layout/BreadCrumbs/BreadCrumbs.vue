@@ -1,21 +1,21 @@
 <template>
     <span class="breadcrumbs">
         <span class="item" v-for="(item, i) in crumbs" :key="i" :class="{ nextItem: i > 0 }">
-            <Title3Component class="breadcrumb-title" :class="{ backLink: item.link, currentPage: isTheCurrentPage(i) && i !== 0 }" @click="routeTo(item.link)">{{ item.name }}</Title3Component><Icon v-if="!isTheCurrentPage(i)" type="chevron-right" />
+            <TitleSmall class="breadcrumb-title" :class="{ backLink: item.link, currentPage: isTheCurrentPage(i) && i !== 0 }" @click="routeTo(item.link)">{{ item.name }}</TitleSmall><Icon v-if="!isTheCurrentPage(i)" type="chevron-right" />
         </span>
     </span>
 </template>
 
 <script>
 import Icon from '@/components/shared/Icon/Icon.vue';
-import Title3Component from '@/components/shared/Typography/Title/Title3Component.vue';
+import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
 import Tag from '@/components/shared/Inputs/Tag/Tag.vue';
 
 export default {
     name: 'BreadCrumbs',
     components: {
         Icon,
-        Title3Component,
+        TitleSmall,
         Tag
     },
     computed: {

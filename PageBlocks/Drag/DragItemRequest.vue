@@ -1,8 +1,8 @@
 <script setup>
 import { Draggable } from 'vue3-smooth-dnd';
 import { dataConversorShortYear } from '@/utils/data';
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
-import Title4Component from '@/components/shared/Typography/Title/Title4Component.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import Tag from '@/components/shared/Inputs/Tag/Tag.vue';
 import FragmentIndicatorBullet from '@/components/shared/Fragments/FragmentIndicatorBullet.vue';
 
@@ -36,7 +36,7 @@ defineProps({
   <Draggable :class="{'item-drag-handle': !isTitular}">
     <div class="drag-item-request">
       <div class="drag-item-request-header">
-        <Text3Component v-if="!mini">{{ solicitacao.request_id }}</Text3Component>
+        <BodySmall v-if="!mini">{{ solicitacao.request_id }}</BodySmall>
         <div class="drag-item-request-indicators">
           <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
           <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular?.verificado && !mini && !isTitular"/>
@@ -44,13 +44,13 @@ defineProps({
         </div>
       </div>
       <div class="drag-item-request-content">
-        <Title4Component v-if="!isTitular">{{ solicitacao.titular?.nome }} {{ solicitacao.titular?.sobrenome }}</Title4Component>
-        <Title4Component v-else>{{ solicitacao.empresa?.razao_social }}</Title4Component>
+        <BodyMedium v-if="!isTitular">{{ solicitacao.titular?.nome }} {{ solicitacao.titular?.sobrenome }}</BodyMedium>
+        <BodyMedium v-else>{{ solicitacao.empresa?.razao_social }}</BodyMedium>
         <Tag background-color="var(--red-1)" color="var(--white)" v-if="mini && solicitacao.atrasado">Atrasado</Tag>
       </div>
       <div class="drag-item-request-footer">
-        <Text3Component>{{ solicitacao.tipo_solicitacao }}</Text3Component>
-        <Text3Component>{{ dataConversorShortYear(solicitacao.data_abertura) }}</Text3Component>
+        <BodySmall>{{ solicitacao.tipo_solicitacao }}</BodySmall>
+        <BodySmall>{{ dataConversorShortYear(solicitacao.data_abertura) }}</BodySmall>
       </div>
     </div>
   </Draggable>

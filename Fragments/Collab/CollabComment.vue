@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue';
 import Tag from '@/components/shared/Inputs/Tag/Tag.vue';
-import Title4Component from '@/components/shared/Typography/Title/Title4Component.vue';
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 import FragmentAttachment from '@/components/shared/Fragments/FragmentAttachment.vue';
 
 const emit = defineEmits(['download']);
@@ -39,9 +39,9 @@ const tagProps = computed(() => {
 <template>
   <div class="collab-comment">
     <div class="collab-comment-header">
-      <Tag v-bind="tagProps"><Title4Component class="externo-tag" v-if="mensagem.externo">Titular:</Title4Component> <Text3Component class="collab-comment-user">{{ mensagem.usuario.nome }}</Text3Component></Tag>
-      <Text3Component style="color: var(--gray-1);">{{ mensagem.data }}</Text3Component>
-      <Text3Component style="color: var(--gray-1);">{{ mensagem.hora }}</Text3Component>
+      <Tag v-bind="tagProps"><BodyMedium class="externo-tag" v-if="mensagem.externo">Titular:</BodyMedium> <BodySmall class="collab-comment-user">{{ mensagem.usuario.nome }}</BodySmall></Tag>
+      <BodySmall style="color: var(--gray-1);">{{ mensagem.data }}</BodySmall>
+      <BodySmall style="color: var(--gray-1);">{{ mensagem.hora }}</BodySmall>
     </div>
     <div
       class="collab-comment-content"

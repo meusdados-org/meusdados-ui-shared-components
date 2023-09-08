@@ -1,12 +1,12 @@
 <script setup>
-import Text3Component from '../../Typography/Text/Text3Component.vue';
+import BodySmall from '../../Typography/Body/BodySmall.vue';
 </script>
 
 <template>
   <div class="form-error">
-    <Text3Component>
+    <BodySmall>
       <slot></slot>
-    </Text3Component>
+    </BodySmall>
   </div>
 </template>
 

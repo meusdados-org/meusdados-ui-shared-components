@@ -5,12 +5,12 @@
     <ModalTemplate :open="open" @close="open = false">
         <CardTemplate class="card">
             <div class="body">
-                <Title3Component>{{ title }}</Title3Component>
-                <Text2Component>
+                <TitleSmall>{{ title }}</TitleSmall>
+                <BodyMedium>
                     <ul>
                         <li v-for="rule in rules" :key="rule">{{ rule }}</li>
                     </ul>
-                </Text2Component>
+                </BodyMedium>
             </div>
             <div class="footer">
                 <FormFile :service="service" />
@@ -24,8 +24,8 @@ import ModalTemplate from '@/components/shared/Overlay/Modal/ModalTemplate.vue';
 import CardTemplate from '@/components/shared/PageBlocks/Card/CardTemplate.vue';
 import FormFile from '@/components/shared/Inputs/Form/FormFile.vue';
 import { CallBackend } from '@/services/_backend';
-import Title3Component from '@/components/shared/Typography/Title/Title3Component.vue';
-import Text2Component from '@/components/shared/Typography/Text/Text2Component.vue';
+import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import ButtonLink from './ButtonLink.vue';
 
 export default {
@@ -33,8 +33,8 @@ export default {
         ModalTemplate,
         CardTemplate,
         FormFile,
-        Title3Component,
-        Text2Component,
+        TitleSmall,
+        BodyMedium,
         ButtonLink
     },
     props: {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 const props = defineProps({
@@ -28,9 +28,9 @@ const emit = defineEmits(['close']);
 <template>
   <span class="tag" :style="{ backgroundColor, color }">
     <Icon class="icon" :align="false" v-if="props.type" :type="props.type" size="12px"/>
-    <Text3Component class="text">
+    <BodySmall class="text">
       <slot>Texto 1</slot>
-    </Text3Component>
+    </BodySmall>
     <Icon class="icon close" v-if="props.canClose" type="x" size="12px" @click="emit('close')"/>
   </span>
 </template>

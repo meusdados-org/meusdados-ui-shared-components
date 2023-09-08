@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 const emit = defineEmits(['download', 'close'])
@@ -37,7 +37,7 @@ if (props.base64_) {
     <div class="icon-close-wrapper" v-else>
       <Icon class="icon" v-on:click="emit('close')" type="x"/>
     </div>
-    <Text3Component style="z-index: 1; flex: 1;">{{ fileName }}</Text3Component>
+    <BodySmall style="z-index: 1; flex: 1;">{{ fileName }}</BodySmall>
   </div>
 </template>
 

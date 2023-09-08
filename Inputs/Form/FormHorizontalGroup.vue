@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 
 defineProps({
   label: {
@@ -19,7 +19,7 @@ defineProps({
 
 <template>
   <div class="form-horizontal-group-container" :class="{ hasPadding, hasBackground }">
-    <Text3Component class="form-horizontal-group-label">{{ label }}</Text3Component>
+    <BodySmall class="form-horizontal-group-label">{{ label }}</BodySmall>
     <div class="form-horizontal-group-input">
       <slot></slot>
     </div>

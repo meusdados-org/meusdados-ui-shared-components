@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import text1 from '@/components/shared/Typography/Text/Text1Component.vue';
+import text1 from '@/components/shared/Typography/Body/BodyLarge.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 export default {

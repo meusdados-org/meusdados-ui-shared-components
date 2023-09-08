@@ -1,8 +1,8 @@
 <script setup>
 import { ref } from 'vue';
 import AlertTemplate from './AlertTemplate.vue';
-import Title4Component from '@/components/shared/Typography/Title/Title4Component.vue';
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 
@@ -16,25 +16,25 @@ const redirect = () => {
 <template>
   <AlertTemplate :show="show" class="alert-privacy-container">
     <div class="alert-privacy">
-      <Title4Component>Aviso de privacidade</Title4Component>
-      <Text3Component>
+      <BodyMedium>Aviso de privacidade</BodyMedium>
+      <BodySmall>
         Utilizamos ferramentas e serviços de terceiros que utilizam cookies, elas nos ajudam a oferecer uma melhor experiência. Ao continuar a visualizar nosso site, você concorda com o uso de cookies.
-      </Text3Component>
+      </BodySmall>
       <ButtonLink
         sameColorBackground
         :bold="false"
         @click="redirect">
-        <Text3Component>
+        <BodySmall>
           Obtenha mais informações
-        </Text3Component>
+        </BodySmall>
       </ButtonLink>
       <ButtonPrimary
         sameColorBackground
         @click="show = false"
         class="button-close">
-        <Title4Component>
+        <BodyMedium>
           Fechar
-        </Title4Component>
+        </BodyMedium>
       </ButtonPrimary>
     </div>
   </AlertTemplate>

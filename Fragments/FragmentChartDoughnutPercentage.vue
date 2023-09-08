@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
-import Title2Component from '../Typography/Title/Title2Component.vue';
+import TitleSmall from '../Typography/Title/TitleSmall.vue';
 
 const props = defineProps({
   percentage: {
@@ -58,9 +58,9 @@ const chartOptions = reactive({
     <div id="chart" class="chart">
       <apexchart type="donut" width="150px" :options="chartOptions" :series="series"></apexchart>
     </div>
-    <Title2Component class="percentage-text">
+    <TitleSmall class="percentage-text">
       {{ props.percentage }}%
-    </Title2Component>
+    </TitleSmall>
     <div class="chart-percentage-glass"></div>
   </div>
 </template>

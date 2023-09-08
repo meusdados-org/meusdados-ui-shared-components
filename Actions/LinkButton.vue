@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import text2 from '@/components/shared/Typography/Text/Text2Component.vue';
+import text2 from '@/components/shared/Typography/Body/BodyMedium.vue';
 
 export default {
     props: {

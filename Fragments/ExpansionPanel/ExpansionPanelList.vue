@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import ExpansionPanel from './ExpansionPanel.vue';
-import Text1Component from '@/components/shared/Typography/Text/Text1Component.vue';
+import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 const open = ref<number>(0);
@@ -72,10 +72,10 @@ const switchOpen = (index: number) => {
     <div class="expansion-panel-container" v-on:click="addNewItem">
       <div class="expansion-panel-header">
         <div class="expansion-panel-title">
-          <Text1Component style="color: var(--purple-1); font-weight: 400;">
+          <BodyLarge style="color: var(--purple-1); font-weight: 400;">
             <Icon type="plus" size="1rem"/>
             {{ itemName }}
-          </Text1Component>
+          </BodyLarge>
         </div>
       </div>
     </div>

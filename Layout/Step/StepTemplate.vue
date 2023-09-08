@@ -1,6 +1,6 @@
 <script setup>
-import Title4Component from '@/components/shared/Typography/Title/Title4Component.vue';
-import Title1Component from '@/components/shared/Typography/Title/Title1Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
+import TitleLarge from '@/components/shared/Typography/Title/TitleLarge.vue';
 import pattern1 from './assets/img/pattern1.svg';
 import pattern2 from './assets/img/pattern2.svg';
 import meusDadosColorido from './assets/img/meus-dados-colorido.png';
@@ -19,16 +19,16 @@ const props = defineProps({
   <div class="wrapper">
     <header class="logo-header">
       <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco" width="100" />
-      <Title4Component class="upperTitle" v-if="upperTitle">{{ upperTitle }}</Title4Component>
+      <BodyMedium class="upperTitle" v-if="upperTitle">{{ upperTitle }}</BodyMedium>
       <div style="width: 100px;"></div>
     </header>
     <div class="container">
       <header>
         <div class="steps" v-if="props.currentStep && props.finalStep">
-          <Title4Component>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</Title4Component>
+          <BodyMedium>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
         </div>
         <div class="main-title">
-          <Title1Component>{{ props.mainTitle }}</Title1Component>
+          <TitleLarge>{{ props.mainTitle }}</TitleLarge>
         </div>
         <slot name="header"></slot>
       </header>

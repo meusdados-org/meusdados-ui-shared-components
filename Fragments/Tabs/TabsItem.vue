@@ -1,5 +1,5 @@
 <script setup>
-import Text2Component from '@/components/shared/Typography/Text/Text2Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 
 defineProps({
   active: {
@@ -11,9 +11,9 @@ defineProps({
 
 <template>
   <button type="button" class="tab-item" :class="{ active }">
-    <Text2Component>
+    <BodyMedium>
       <slot></slot>
-    </Text2Component>
+    </BodyMedium>
   </button>
 </template>
 

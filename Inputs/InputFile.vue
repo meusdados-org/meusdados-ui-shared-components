@@ -5,22 +5,22 @@
                 <input class="input" type="file" ref="file" @change="selectFile" />
                 <span>{{ label }}</span>
             </label>
-            <span v-if="currentFile"><Text2Component :class="{'errorText': error}">{{ currentFile.name }}</Text2Component></span>
+            <span v-if="currentFile"><BodyMedium :class="{'errorText': error}">{{ currentFile.name }}</BodyMedium></span>
         </div>
-        <Text3Component class="error" v-if="error">{{ errorMessage }}</Text3Component>
+        <BodySmall class="error" v-if="error">{{ errorMessage }}</BodySmall>
     </div>
 </template>
 
 <script>
-import Text2Component from '@/components/shared/Typography/Text/Text2Component.vue';
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 
 export default {
     name: 'InputFile',
     emits: ['select'],
     components: {
-        Text2Component,
-        Text3Component
+        BodyMedium,
+        BodySmall
     },
     props: {
         value: {

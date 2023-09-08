@@ -72,14 +72,14 @@ import meusDados from '@/assets/img/meus-dados.png'
 import meusDadosComTexto from '@/assets/img/meus-dados-colorido.png'
 import FooterLateralVue from './SideBarFooter.vue'
 import Icon from '@/components/shared/Icon/Icon.vue'
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue'
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue'
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue'
 import ButtonIcon from '@/components/shared/Actions/ButtonIcon.vue'
 import SideBarLinkGroup from './SideBarLinkGroup.vue'
 
 export default {
     name: "BarraLateral",
-    components: { BarraLateralLink, FooterLateralVue, Icon, Text3Component, ButtonPrimary, ButtonIcon, SideBarLinkGroup },
+    components: { BarraLateralLink, FooterLateralVue, Icon, BodySmall, ButtonPrimary, ButtonIcon, SideBarLinkGroup },
     data() {
         return {
             usuario: {

@@ -1,13 +1,13 @@
 <script setup>
-import Text2Component from '@/components/shared/Typography/Text/Text2Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 
 </script>
 <template>
   <div class="tab-group">
     <div class="tab-title">
-      <Text2Component>
+      <BodyMedium>
         <slot name="title"></slot>
-      </Text2Component>
+      </BodyMedium>
     </div>
     <div class="tab-items">
       <slot name="items"></slot>

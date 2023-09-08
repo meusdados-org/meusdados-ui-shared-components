@@ -8,5 +8,6 @@
   font-size: 24px;
   font-weight: 600;
   line-height: 125%;
+  display: inline-block;
 }
 </style>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import Text3Component from '../../Typography/Text/Text3Component.vue';
+import BodySmall from '../../Typography/Body/BodySmall.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 
 const open = ref<boolean>(false);
@@ -54,9 +54,9 @@ onMounted(positionTooltip);
     <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
   </slot>
   <div class="help-text" ref="tooltipHelpTextRef" :class="{ fitContent, adjustTop, open }">
-    <Text3Component class="help-text__inner" id="help-text">
+    <BodySmall class="help-text__inner" id="help-text">
       <slot>Lorem ipsum dolor aaaaada asd asd asd asd asd sad aew ad</slot>
-    </Text3Component>
+    </BodySmall>
   </div>
 </div>
 </template>

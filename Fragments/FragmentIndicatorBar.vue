@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue';
-import Text3Component from '../Typography/Text/Text3Component.vue';
+import BodySmall from '../Typography/Body/BodySmall.vue';
 
 const props = defineProps({
   label: {
@@ -34,11 +34,11 @@ const color = computed(() => {
 
 <template>
 <div class="fragment-indicator-bar-container">
-  <Text3Component>{{ props.label }}</Text3Component>
+  <BodySmall>{{ props.label }}</BodySmall>
   <div class="fragment-indicator-bar">
     <div class="fragment-indicator-bar__indicator" :style="{'background-color': color, width: widthPercentage}"></div>
   </div>
-  <Text3Component>{{ props.value }} / {{ props.totalValue }}</Text3Component>
+  <BodySmall>{{ props.value }} / {{ props.totalValue }}</BodySmall>
 </div>
 </template>
 

@@ -1,6 +1,6 @@
 <script setup>
-import Text3Component from '@/components/shared/Typography/Text/Text3Component.vue';
-import Title3Component from '@/components/shared/Typography/Title/Title3Component.vue';
+import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
+import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
 
 const props = defineProps({
   label: {
@@ -22,8 +22,8 @@ const color = props.backgroundColor === 'transparent' ? 'var(--black)' : 'var(--
 
 <template>
   <div class="fragment-indicator-number" :style="{ backgroundColor, color }">
-    <Title3Component>{{ number }}</Title3Component>
-    <Text3Component>{{ label }}</Text3Component>
+    <TitleSmall>{{ number }}</TitleSmall>
+    <BodySmall>{{ label }}</BodySmall>
   </div>
 </template>
 

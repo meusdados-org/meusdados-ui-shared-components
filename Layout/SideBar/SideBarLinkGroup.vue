@@ -8,16 +8,16 @@
     </div>
     <ul class="link-group-children" :class="{ activeChildren: activeGroup }">
       <li v-for="child in children" :key="child.to">
-        <Text2Component v-if="!child.permission || userPermissions[child.permission]">
+        <BodyMedium v-if="!child.permission || userPermissions[child.permission]">
           <SideBarLink class="child" :to="child.to" v-on:changeRoute="to => $emit('changeRoute', to, titleHeader)" @isActive="mantainActive">{{ child.title }}</SideBarLink>
-        </Text2Component>
+        </BodyMedium>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import Text2Component from '@/components/shared/Typography/Text/Text2Component.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import SideBarLink from './SideBarLink.vue';
 
@@ -26,7 +26,7 @@ export default {
   name: 'SideBarLinkGroup',
   components: {
     SideBarLink,
-    Text2Component,
+    BodyMedium,
     Icon
   },
   props: {
