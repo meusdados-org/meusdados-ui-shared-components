@@ -25,7 +25,7 @@ const props = defineProps({
     <div class="container">
       <header>
         <div class="steps" v-if="props.currentStep && props.finalStep">
-          <BodyMedium>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
+          <BodyMedium strong>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
         </div>
         <div class="main-title">
           <TitleLarge>{{ props.mainTitle }}</TitleLarge>
