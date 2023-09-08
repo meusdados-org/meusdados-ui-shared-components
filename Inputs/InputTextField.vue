@@ -6,6 +6,7 @@
         v-if="!mask"
         v-bind="inputProps"
         :type="isPassword ? passwordFieldType : type"
+        :disabled="disabled_"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
         @blur="handleBlur"
@@ -16,6 +17,7 @@
         v-else
         v-bind="inputProps"
         v-mask="mask"
+        :disabled="disabled_"
         :value="value"
         @input="$emit('update:value', $event.target.value)"
         @blur="handleBlur"
@@ -79,13 +81,17 @@ export default {
             inputProps: {
                 name: this.label ? this.label.toLowerCase() : Math.random(),
                 id: `InputTextFieldField-${this.label ? this.label.toLocaleLowerCase().replace(/\s/g, "-") : Math.random()}`,
-                disabled: this.disabled,
                 maxlength: this.maxlength,
                 placeholder: " ",
                 required: this.required,
             },
             error: false,
         };
+    },
+    computed: {
+        disabled_() {
+            return this.disabled;
+        }
     },
     methods: {
         switchVisibility() {
