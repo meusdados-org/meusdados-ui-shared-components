@@ -79,6 +79,12 @@ export default {
       this.openForm = true;
     }
   },
+  created() {
+    const id = this.$route.query.id;
+    if (id) {
+      this.openModal(id);
+    }
+  },
 };
 </script>
 
