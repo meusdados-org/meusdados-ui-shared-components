@@ -134,7 +134,20 @@ export default {
                     entry[header.key]
                 )
                 const values = Object.values(entriesMapped);
-                const mappedValues = values.map(value => (typeof value === "string" || typeof value === "number") && String(value).toLowerCase().includes(this.search.toLowerCase()));
+                const mappedValues = values.map(value => {
+                    const typedSearches = this.search.split(' ').map(x => x.trim());
+                    return typedSearches.some(typedSearch => {
+                        const result = (
+                            (typeof value === "string" || typeof value === "number") && (
+                                String(value).toLowerCase().includes(typedSearch.toLowerCase())
+                            )
+                        )
+                        if (result) {
+                            console.log(value, typedSearch)
+                        }
+                        return result
+                    });
+                });
                 return mappedValues.some(x => x);
             })
             this.$refs.pagination.updatePageCounting(this.tableEntries);
