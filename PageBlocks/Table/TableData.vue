@@ -138,13 +138,11 @@ export default {
                     const typedSearches = this.search.split(' ').map(x => x.trim());
                     return typedSearches.some(typedSearch => {
                         const result = (
+                            typedSearch.length > 0 &&
                             (typeof value === "string" || typeof value === "number") && (
                                 String(value).toLowerCase().includes(typedSearch.toLowerCase())
                             )
                         )
-                        if (result) {
-                            console.log(value, typedSearch)
-                        }
                         return result
                     });
                 });
