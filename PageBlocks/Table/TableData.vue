@@ -182,8 +182,9 @@ export default {
             this.$router.push({ path });
         },
         compareEntry(entry, filter) {
-
-            if (typeof entry === 'boolean') {
+            if (entry === undefined || entry === null || entry === '') {
+                return filter === 'Não informado'
+            } else if (typeof entry === 'boolean') {
                 return entry ? filter === 'Sim' : filter === 'Não';
             } else if (Array.isArray(entry)) {
                 const filterArray = filter.split(', ');
