@@ -42,7 +42,7 @@ button {
 .text-button {
     font-family: 'Montserrat', sans-serif;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 600;
 }
 
 button:not(.nohover):hover {

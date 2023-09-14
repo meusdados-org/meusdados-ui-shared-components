@@ -12,10 +12,10 @@
       </template>
       <template v-slot:content>
         <div class="responsavel" v-if="!isTitular">
-          <BodySmall>
+          <BodyMedium>
             <Icon size="0.8rem" type="user" />
             {{ column.responsaveis?.length > 0 ? column.responsaveis.map(x => x.nome).join(', ') : 'Sem área/usuário específico' }}
-          </BodySmall>
+          </BodyMedium>
         </div>
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
@@ -37,7 +37,7 @@
 import { Draggable, Container } from "vue3-smooth-dnd";
 import Card from "@/components/shared/PageBlocks/Card/Card.vue";
 import Icon from "@/components/shared/Icon/Icon.vue";
-import BodySmall from "@/components/shared/Typography/Body/BodySmall.vue";
+import BodyMedium from "@/components/shared/Typography/Body/BodyMedium.vue";
 import { applyDrag } from "./helpers";
 import ButtonLink from "@/components/shared/Actions/ButtonLink.vue";
 import DragItemRequest from "./DragItemRequest.vue";
@@ -52,7 +52,7 @@ export default {
     Container,
     Card,
     Icon,
-    BodySmall,
+    BodyMedium,
     ButtonLink,
     DragItemRequest,
     DragAdd,

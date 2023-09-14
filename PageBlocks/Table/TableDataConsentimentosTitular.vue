@@ -267,7 +267,7 @@ export default {
 
 .table {
     border-radius: var(--border-radius-1);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     width: 100%;
     border: none;

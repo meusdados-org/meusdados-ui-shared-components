@@ -1,5 +1,5 @@
 <script setup>
-import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
 
 const props = defineProps({
@@ -23,7 +23,7 @@ const color = props.backgroundColor === 'transparent' ? 'var(--black)' : 'var(--
 <template>
   <div class="fragment-indicator-number" :style="{ backgroundColor, color }">
     <TitleSmall>{{ number }}</TitleSmall>
-    <BodySmall>{{ label }}</BodySmall>
+    <BodyMedium>{{ label }}</BodyMedium>
   </div>
 </template>
 

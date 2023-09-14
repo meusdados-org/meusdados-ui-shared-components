@@ -168,7 +168,7 @@ export default {
 }
 
 .razao-social {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1rem;
     text-align: left;
 }

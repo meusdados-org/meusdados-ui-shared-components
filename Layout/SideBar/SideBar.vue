@@ -15,7 +15,7 @@
                 </span>
             </h1>
             <h2 class="company-info" v-if="!collapsed">
-                <BodySmall>{{ usuario.empresa.razao_social }} {{ usuario.cnpj }}</BodySmall>
+                <BodyMedium>{{ usuario.empresa.razao_social }} {{ usuario.cnpj }}</BodyMedium>
             </h2>
             <div class="notification" v-if="!collapsed">
                 <div class="notification-text">
@@ -79,7 +79,7 @@ import meusDados from '@/assets/img/meus-dados.png'
 import meusDadosComTexto from '@/assets/img/meus-dados-colorido.png'
 import FooterLateralVue from './SideBarFooter.vue'
 import Icon from '@/components/shared/Icon/Icon.vue'
-import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue'
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue'
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue'
 import ButtonIcon from '@/components/shared/Actions/ButtonIcon.vue'
 import SideBarLinkGroup from './SideBarLinkGroup.vue'
@@ -88,7 +88,7 @@ import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue'
 
 export default {
     name: "BarraLateral",
-    components: { BarraLateralLink, FooterLateralVue, Icon, BodySmall, ButtonPrimary, ButtonIcon, SideBarLinkGroup, ModalTemplate, CardRecuperarAcesso },
+    components: { BarraLateralLink, FooterLateralVue, Icon, BodyMedium, ButtonPrimary, ButtonIcon, SideBarLinkGroup, ModalTemplate, CardRecuperarAcesso },
     data() {
         return {
             usuario: {
@@ -282,7 +282,7 @@ export default {
 }
 
 .razao-social {
-    font-weight: 700;
+    font-weight: 600;
     font-size: 1rem;
     text-align: left;
 }

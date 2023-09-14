@@ -1,7 +1,7 @@
 <script setup>
 import LinkComponent from '../Actions/Link/LinkComponent.vue';
 import Icon from '../Icon/Icon.vue';
-import BodySmall from '../Typography/Body/BodySmall.vue';
+import BodyMedium from '../Typography/Body/BodyMedium.vue';
 
 defineProps({
   taskList: {
@@ -19,7 +19,7 @@ defineProps({
           <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status }">
             <Icon type="check" size="9px" :align="false" v-if="info.status" />
           </span>
-          <BodySmall>{{ task }}</BodySmall>
+          <BodyMedium>{{ task }}</BodyMedium>
         </div>
         <div class="fragment-task-list__body__task__icon" v-if="!info.status">
           <LinkComponent :to="info.link">

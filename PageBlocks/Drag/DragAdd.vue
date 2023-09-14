@@ -1,13 +1,13 @@
 <script setup>
-import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 </script>
 
 <template>
   <button class="drag-add" type="button">
-    <BodySmall class="drag-add-text">
+    <BodyMedium class="drag-add-text">
       <Icon type="plus" stroke-width="1" :align="false" /> <slot></slot>
-    </BodySmall>
+    </BodyMedium>
   </button>
 </template>
 

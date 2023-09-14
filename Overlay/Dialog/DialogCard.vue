@@ -6,8 +6,8 @@
                 <img :src="icon" width="64" height="64"/>
             </div>
             <div class="dialog-message">
-                <TitleSmall>{{ title }}</TitleSmall>
-                <BodyLarge>{{ message }}</BodyLarge>
+                <BodyLarge class="title">{{ title }}</BodyLarge>
+                <BodyMedium>{{ message }}</BodyMedium>
             </div>
             <div class="dialog-buttons">
                 <ButtonLink id="button-cancelar-dialog" v-if="showCancelButton" @click="onCancel">Cancelar</ButtonLink>
@@ -20,7 +20,7 @@
 <script>
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
-import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 import alertTriangle from '@/assets/img/alert-triangle.svg'
 import checkCircle from '@/assets/img/check-circle.svg'
@@ -31,7 +31,6 @@ export default {
     components: {
         ButtonPrimary,
         ButtonLink,
-        TitleSmall,
         BodyLarge
     },
     props: {
@@ -99,6 +98,10 @@ export default {
 
     background-color: var(--white);
     border-radius: var(--border-radius-1);
+}
+
+.title {
+    font-weight: 600;
 }
 
 .dialog-image {

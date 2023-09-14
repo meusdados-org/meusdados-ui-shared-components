@@ -2,7 +2,7 @@
   <div class="card-wrapper">
       <div class="card-container">
           <div class="card-header">
-              <div class="main-title">{{ title }}</div>
+              <BodyMedium class="main-title">{{ title }}</BodyMedium>
               <slot name="action">
                 <ButtonLink @click="$emit('close')" v-if="hasAction">
                   <Icon class="x-icon" type="x"/>
@@ -22,6 +22,7 @@
 
 <script>
 import Icon from '@/components/shared/Icon/Icon.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue'
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
 
 export default {
@@ -43,7 +44,8 @@ export default {
   },
   components: {
       Icon,
-      ButtonLink
+      ButtonLink,
+      BodyMedium
   }
 }
 </script>  
@@ -59,9 +61,7 @@ export default {
 }
 
 .main-title {
-  font-size: 14px;
   color: var(--gray-2);
-  font-weight: 400;
 }
 
 .card-container{

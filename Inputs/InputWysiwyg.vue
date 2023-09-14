@@ -364,7 +364,7 @@ export default {
   min-height: 5px;
   max-height: 300px;
   max-width: 100%;
-  font-size: 14px;
+  font-size: 12px;
   padding: 1rem;;
   overflow-y: auto;
   outline: none;

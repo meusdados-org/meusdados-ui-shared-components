@@ -41,7 +41,7 @@ export default {
 
 .link.active {
     color: var(--purple-1);
-    font-weight: bold;
+    font-weight: 600;
 }
 
 .clickable {

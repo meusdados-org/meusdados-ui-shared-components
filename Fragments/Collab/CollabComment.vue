@@ -69,7 +69,7 @@ const tagProps = computed(() => {
 
 .collab-comment-content {
   width: 623px;
-  font-size: 14px;
+  font-size: 12px;
   text-align: left;
   word-break: break-all;
   overflow: hidden;

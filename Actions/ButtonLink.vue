@@ -48,12 +48,12 @@ export default {
 
 <style scoped>
 .bold {
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--spacing-5);
 }
 
 button {
-    font-size: 14px;
+    font-size: 12px;
     background-color: transparent;
     border: none;
     color: var(--blue-1);

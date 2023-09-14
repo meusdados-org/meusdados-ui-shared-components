@@ -158,7 +158,7 @@
     border-radius: 5px;
     border: 1px solid #e8e8e8;
     background: #fff;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .multiselect__tag {
@@ -184,7 +184,7 @@
     right: 0;
     top: 0;
     bottom: 0;
-    font-weight: 700;
+    font-weight: 600;
     font-style: initial;
     width: 22px;
     text-align: center;
@@ -196,7 +196,7 @@
   .multiselect__tag-icon::after {
     content: "×";
     color: #266d4d;
-    font-size: 14px;
+    font-size: 12px;
   }
 
   /* // Remove these lines to avoid green closing button

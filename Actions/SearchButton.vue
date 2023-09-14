@@ -42,7 +42,7 @@ export default {
     color: var(--purple-1);
     float:left;
     background-color:transparent;
-    font-size: 14px;
+    font-size: 12px;
     font-family: 'Montserrat', sans-serif;
     border:none;
     width: 100%;

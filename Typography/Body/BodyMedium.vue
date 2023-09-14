@@ -52,7 +52,7 @@ defineProps({
 }
 
 .strong {
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .italic {

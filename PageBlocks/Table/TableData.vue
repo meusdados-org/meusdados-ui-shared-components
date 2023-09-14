@@ -4,7 +4,9 @@
             <thead>
                 <tr>
                     <th v-for="th in tableHeader" :key="th" :class="{'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th)}" v-on:click="sort(th)">
-                        {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
+                        <BodyMedium>
+                            {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
+                        </BodyMedium>
                     </th>
                     <th v-if="actions" class="icons">
                         Ações
@@ -67,6 +69,7 @@
 <script>
 import { dataConversor } from '@/utils/data';
 import Icon from '@/components/shared/Icon/Icon.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import ButtonPagination from '@/components/shared/Actions/ButtonPagination.vue';
 import ButtonSwitch from '@/components/shared/Actions/ButtonSwitch.vue';
 import Tooltip from '../../Inputs/Tooltip/Tooltip.vue';
@@ -272,7 +275,7 @@ export default {
 
 .table {
     border-radius: var(--border-radius-1);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: normal;
     width: 100%;
     border: none;

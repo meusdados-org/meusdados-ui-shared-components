@@ -119,7 +119,7 @@ label.label input[type="file"] {
     padding: 0 1.5rem;
     height: 2.5rem;
     display: flex;
-    font-weight: 700;
+    font-weight: 600;
     align-items: center;
     justify-content: center;
     cursor: pointer;

@@ -31,7 +31,7 @@ export default {
 }
 
 .button-text {
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .button:hover {
