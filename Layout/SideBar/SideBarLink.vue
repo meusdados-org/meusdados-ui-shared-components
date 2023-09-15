@@ -4,9 +4,11 @@
             <IconVue :type="icon" size="1.25rem"/>
         </span>
         <span v-if="!collapsed">
-            <transition name="fade">
-                <slot/>
-            </transition>
+            <BodyMedium>
+                <transition name="fade">
+                    <slot/>
+                </transition>
+            </BodyMedium>
         </span>
     </LinkComponent>
 </template>
@@ -15,6 +17,7 @@
 import { collapsed } from './state'
 import LinkComponent from '@/components/shared/Actions/Link/LinkComponent.vue'
 import IconVue from '@/components/shared/Icon/Icon.vue';
+import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 
 export default {
     name: "BarraLateralLink",

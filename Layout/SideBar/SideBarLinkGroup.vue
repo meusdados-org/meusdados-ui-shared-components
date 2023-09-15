@@ -107,6 +107,7 @@ export default {
 }
 
 .child {
-  font-size: .875rem;
+  font-size: 12px;
 }
+
 </style>

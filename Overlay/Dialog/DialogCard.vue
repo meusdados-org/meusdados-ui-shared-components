@@ -31,7 +31,8 @@ export default {
     components: {
         ButtonPrimary,
         ButtonLink,
-        BodyLarge
+        BodyLarge,
+        BodyMedium
     },
     props: {
         type: String,

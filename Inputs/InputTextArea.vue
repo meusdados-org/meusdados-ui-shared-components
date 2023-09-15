@@ -110,7 +110,7 @@ textarea {
     padding: 0 var(--spacing-5);
 
     font-family: 'Montserrat';
-    font-size: .875rem;
+    font-size: 12px;
     font-weight: 400;
     line-height: 125%;
     resize: none;
