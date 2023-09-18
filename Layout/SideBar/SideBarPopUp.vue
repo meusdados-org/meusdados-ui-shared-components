@@ -43,7 +43,7 @@ export default {
     float: left;
     position: fixed;
     left: 271px;
-    padding: 1rem;
+    padding:  var(--spacing-small);
     bottom: var(--spacing-large);
     z-index: 2;
 
@@ -61,6 +61,6 @@ export default {
 
 .text{
     font-weight: 400;
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
 }
 </style>

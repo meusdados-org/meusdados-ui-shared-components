@@ -51,7 +51,7 @@ onMounted(positionTooltip);
 <template>
 <div class="tooltip-container" ref="tooltipContainerRef" @mouseover="switchOpen(true)" @mouseleave="switchOpen(false)">
   <slot name="icon">
-    <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="1rem" />
+    <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size=" var(--spacing-small)" />
   </slot>
   <div class="help-text" ref="tooltipHelpTextRef" :class="{ fitContent, adjustTop, open }">
     <BodySmall class="help-text__inner" id="help-text">
@@ -97,7 +97,7 @@ onMounted(positionTooltip);
   position: fixed;
   text-align: left;
   z-index: 999;
-  left: calc(var(--tooltip-offset, 0) - 0.5rem);
+  left: calc(var(--tooltip-offset, 0) - var(--spacing-xsmall));
   display: none;
 }
 

@@ -1,6 +1,6 @@
 <template>
     <ButtonPrimary class="button">
-        <Icon size="1rem" type="plus"/> Cadastrar
+        <Icon size=" var(--spacing-small)" type="plus"/> Cadastrar
     </ButtonPrimary>
 </template>
 

@@ -29,7 +29,7 @@ defineProps({
 <style scoped>
 .form-horizontal-group-container {
   display: flex;
-  column-gap: 1rem;
+  column-gap:  var(--spacing-small);
   width: 95%;
   align-items: center;
 }

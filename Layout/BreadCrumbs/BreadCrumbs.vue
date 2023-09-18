@@ -39,7 +39,7 @@ export default {
 <style scoped>
 
 .breadcrumb-title {
-    margin-right: 1rem;
+    margin-right:  var(--spacing-small);
     color: var(--blue-1);
 }
 
@@ -52,7 +52,7 @@ export default {
 }
 
 .nextItem {
-    margin-left: 1rem;
+    margin-left:  var(--spacing-small);
 }
 
 .currentPage {

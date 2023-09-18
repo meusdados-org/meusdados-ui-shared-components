@@ -139,7 +139,7 @@ export default {
 
     font-family: 'Montserrat';
     line-height: normal;
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
     font-weight: 400;
 
     transition: all .1s linear;

@@ -10,7 +10,7 @@
         >
         <template v-slot:caret="slotProps">
             <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
-                <Icon type="chevron-down" size="1rem" stroke-width="1"/></div>
+                <Icon type="chevron-down" size=" var(--spacing-small)" stroke-width="1"/></div>
             </template>
             <template v-slot:noOptions>
                 A lista está vazia.

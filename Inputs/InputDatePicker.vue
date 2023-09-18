@@ -61,7 +61,7 @@ export default {
     padding: 0 var(--spacing-xsmall);
 
     font-family: 'Montserrat';
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
     font-weight: 400;
 
     transition: all .1s linear;

@@ -63,7 +63,7 @@ defineProps({
 }
 
 .drag-item-request {
-  padding: 1rem;
+  padding:  var(--spacing-small);
   flex: 1;
   background-color: var(--white);
   box-shadow: var(--box-shadow-1);

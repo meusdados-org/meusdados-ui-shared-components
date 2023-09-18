@@ -41,7 +41,7 @@ button {
 
 .text-button {
     font-family: 'Montserrat', sans-serif;
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
     font-weight: 600;
 }
 

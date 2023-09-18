@@ -3,7 +3,7 @@
         <div class="user" :class="{ userCollapsed: collapsed }">
             <img :src="defaultProfilePic" class="profile-pic" :class="{ collapsed }"/>
             <span v-if="!collapsed" v-on:click="ativarPopup" class="username">{{ usuario.nome }}</span>
-            <Icon class="icon" v-on:click="ativarPopup"  type="chevron-right" :class="{popup}" size="1rem"/>
+            <Icon class="icon" v-on:click="ativarPopup"  type="chevron-right" :class="{popup}" size=" var(--spacing-small)"/>
         </div>
         <div v-if="popup">
             <SideBarPopUp @close="ativarPopup" :nome="usuario.nome" />

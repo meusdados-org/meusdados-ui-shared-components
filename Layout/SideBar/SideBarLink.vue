@@ -50,7 +50,7 @@ export default {
     cursor: pointer;
     position: relative;
     font-weight: 400;
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
     user-select: none;
 
     margin: 0.1em 0;

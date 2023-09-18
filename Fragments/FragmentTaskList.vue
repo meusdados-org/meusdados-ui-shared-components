@@ -41,7 +41,7 @@ defineProps({
   overflow-y: auto;
   width: 100%;
   max-height: 264px;
-  padding-right: 1rem;
+  padding-right:  var(--spacing-small);
   margin-right: calc(var(--spacing-small) * -1);
 }
 

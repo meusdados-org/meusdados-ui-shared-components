@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th v-for="th in tableHeader" :key="th" :class="{'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th)}" v-on:click="sort(th)">
-                        {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
+                        {{ th.label }} <Icon type="chevron-down" size=" var(--spacing-small)" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
                     </th>
                     <th v-if="actions" class="icons">
                         Ações
@@ -284,7 +284,7 @@ export default {
 
 .table td, .table th {
     text-align: left;
-    padding: 1rem;
+    padding:  var(--spacing-small);
     min-width: fit-content;
     max-width: var(--spacing-xxxlarge);
 }
@@ -294,7 +294,7 @@ export default {
 }
 
 .table th {
-    padding: 1rem;
+    padding:  var(--spacing-small);
     color: var(--black);
 }
 
@@ -374,7 +374,7 @@ export default {
     column-gap: 20px;
     align-items: center;
     width: 100%;
-    margin-top: 1rem;
+    margin-top:  var(--spacing-small);
 }
 
 .canBeSorted {

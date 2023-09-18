@@ -94,7 +94,7 @@ export default {
     row-gap: var(--spacing-small);
 
     width: 532px;
-    padding: var(--spacing-large) 1rem;
+    padding: var(--spacing-large)  var(--spacing-small);
     z-index: 997;
 
     background-color: var(--white);

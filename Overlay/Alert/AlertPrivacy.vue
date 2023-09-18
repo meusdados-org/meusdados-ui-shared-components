@@ -44,7 +44,7 @@ const redirect = () => {
 .alert-privacy-container {
   background-color: var(--purple-1);
   border-radius: var(--border-radius-small);
-  padding: 1rem;
+  padding:  var(--spacing-small);
 }
 
 .alert-privacy {

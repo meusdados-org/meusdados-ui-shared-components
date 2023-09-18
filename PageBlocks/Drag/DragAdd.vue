@@ -22,7 +22,7 @@ import Icon from '@/components/shared/Icon/Icon.vue';
   justify-content: center;
   align-items: center;
 
-  padding: 1rem;
+  padding:  var(--spacing-small);
   width: 100%;
   outline: var(--spacing-xxxsmall) solid var(--black-1);
   height: 47px;

@@ -1,7 +1,7 @@
 <template>
     <button :class="{ 'boldButton': bold, borderBottom, nohover, sameColorBackground }" :disabled="disabled">
         <text1 :class="{ 'bold': bold }">
-            <Icon v-if="type" :type="type" size="1rem"/>
+            <Icon v-if="type" :type="type" size=" var(--spacing-small)"/>
             <slot></slot>
         </text1>
     </button>

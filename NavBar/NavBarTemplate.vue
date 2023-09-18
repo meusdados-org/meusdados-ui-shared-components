@@ -25,7 +25,7 @@ export default {
     background-color: var(--gray-3);
     border-radius: var(--spacing-xsmall);
     margin-bottom: calc(var(--spacing-small) * -1);
-    margin-top: 1rem;
+    margin-top:  var(--spacing-small);
     height: 5px;
 }
 

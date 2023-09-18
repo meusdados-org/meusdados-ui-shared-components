@@ -75,7 +75,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.5rem;
+    gap: var(--spacing-xsmall);
 }
 
 .container-container-textarea{

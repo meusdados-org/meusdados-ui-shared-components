@@ -5,7 +5,7 @@
                 <tr>
                     <th v-for="th in tableHeader" :key="th" :class="{'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th)}" v-on:click="sort(th)">
                         <BodyMedium>
-                            {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
+                            {{ th.label }} <Icon type="chevron-down" size=" var(--spacing-small)" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
                         </BodyMedium>
                     </th>
                     <th v-if="actions" class="icons">
@@ -268,7 +268,7 @@ export default {
     overflow: auto;
     color: transparent;
     border-radius: var(--border-radius-small);
-    margin-top: 1rem;
+    margin-top:  var(--spacing-small);
     max-height: 70vh;
     box-shadow: var(--box-shadow-1);
 }
@@ -292,7 +292,7 @@ export default {
 
 .table td, .table th {
     text-align: left;
-    padding: 1rem;
+    padding:  var(--spacing-small);
     min-width: fit-content;
     max-width: var(--spacing-xxxlarge);
 }
@@ -302,7 +302,7 @@ export default {
 }
 
 .table th {
-    padding: 1rem;
+    padding:  var(--spacing-small);
     color: var(--black);
 }
 
@@ -354,7 +354,7 @@ export default {
     column-gap: 20px;
     align-items: center;
     width: 100%;
-    margin-top: 1rem;
+    margin-top:  var(--spacing-small);
 }
 
 .canBeSorted {

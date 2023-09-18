@@ -19,7 +19,7 @@
             </h2>
             <div class="notification" v-if="!collapsed">
                 <div class="notification-text">
-                    <Icon type="bell" size="1rem"/> Notificações
+                    <Icon type="bell" size=" var(--spacing-small)"/> Notificações
                 </div>
                 <div class="notification-quantitiy">
                     5
@@ -27,7 +27,7 @@
             </div>
             <div class="notification collapsed" v-else>
                 <div class="notification-text">
-                    <Icon type="bell" size="1rem"/>
+                    <Icon type="bell" size=" var(--spacing-small)"/>
                 </div>
                 <div class="notification-quantitiy">
                     5
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="create" style="display: none;" :class="{ collapsed }">
-            <ButtonPrimary id="button-criar-sidebar" v-if="!collapsed" class="button"><Icon type="plus" size="1rem"/> Criar</ButtonPrimary>
+            <ButtonPrimary id="button-criar-sidebar" v-if="!collapsed" class="button"><Icon type="plus" size=" var(--spacing-small)"/> Criar</ButtonPrimary>
             <ButtonIcon id="button-criar-minimizado-sidebar" v-else type="plus" />
         </div>
         <hr class="line"/>
@@ -256,8 +256,8 @@ export default {
     color: var(--gray-1);
     background-color: var(--white);
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.116);
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
+    border-top-right-radius:  var(--spacing-small);
+    border-bottom-right-radius:  var(--spacing-small);
     height: 100vh;
 
     float: left;
@@ -277,13 +277,13 @@ export default {
 .company-info {
     font-size: 0.9rem;
     font-weight: 300;
-    margin-bottom: 1rem;
-    padding: 1rem;
+    margin-bottom:  var(--spacing-small);
+    padding:  var(--spacing-small);
 }
 
 .razao-social {
     font-weight: 600;
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
     text-align: left;
 }
 
@@ -326,7 +326,7 @@ export default {
     display: flex;
     padding: var(--spacing-large);
     padding-top: var(--spacing-small);
-    font-size: 1rem;
+    font-size:  var(--spacing-small);
     justify-content: space-between;
     cursor: pointer;
     display: none;
@@ -337,7 +337,7 @@ export default {
 }
 
 .notification.collapsed {
-    padding: var(--spacing-large) 24px;
+    padding: var(--spacing-large) var(--spacing-medium);
     justify-content: center;
     column-gap: var(--spacing-xsmall);
 }
@@ -356,7 +356,7 @@ export default {
 }
 
 .logo {
-    padding: var(--spacing-large) 24px;
+    padding: var(--spacing-large) var(--spacing-medium);
     padding-bottom: var(--spacing-small);
 }
 
@@ -373,11 +373,11 @@ export default {
 
 
 .logo-open {
-    width: 7.1rem;
+    width: 71rem(--spacing-small);
 }
 
 .logo-collapsed {
-    width: 3.1rem;
+    width: 31rem(--spacing-small);
 }
 
 .company-info {
@@ -407,7 +407,7 @@ export default {
 }
 
 .create.collapsed {
-    padding: var(--spacing-large) 24px;
+    padding: var(--spacing-large) var(--spacing-medium);
 }
 
 .create.collapsed > .button {

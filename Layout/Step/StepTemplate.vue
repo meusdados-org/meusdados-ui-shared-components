@@ -68,7 +68,7 @@ const props = defineProps({
 header:not(.logo-header) {
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap:  var(--spacing-small);
   margin-bottom: 4rem;
 }
 
@@ -81,7 +81,7 @@ header:not(.logo-header) {
 
 .footer {
   padding: var(--spacing-large);
-  margin-bottom: 1rem;
+  margin-bottom:  var(--spacing-small);
 }
 
 .pattern1, .pattern2, .upperPattern1, .upperPattern2 {

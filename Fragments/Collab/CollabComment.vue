@@ -58,13 +58,13 @@ const tagProps = computed(() => {
   display: flex;
   flex-direction: column;
   max-width: 623px;
-  row-gap: 1rem;
+  row-gap:  var(--spacing-small);
 }
 
 .collab-comment-header {
   display: flex;
   align-items: center;
-  column-gap: 1rem;
+  column-gap:  var(--spacing-small);
 }
 
 .collab-comment-content {

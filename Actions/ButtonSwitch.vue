@@ -57,7 +57,7 @@ input {
     cursor: pointer;
     position: relative;
     width: var(--spacing-xlarge);
-    height: 24px;
+    height: var(--spacing-medium);
     border-radius: 40px;
     outline: none;
     background-color: #ccc;
@@ -77,8 +77,8 @@ input::after {
     left: 25%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    height: 1rem;
-    width: 1rem;
+    height:  var(--spacing-small);
+    width:  var(--spacing-small);
     background-color: white;
     transition: left .3s;
 }

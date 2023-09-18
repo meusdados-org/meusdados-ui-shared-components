@@ -33,6 +33,6 @@ import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
   display: flex;
   width: fit-content;
   align-items: center;
-  column-gap: 1rem;
+  column-gap:  var(--spacing-small);
 }
 </style>

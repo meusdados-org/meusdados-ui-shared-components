@@ -67,7 +67,7 @@ export default {
 .card-container{
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  padding:  var(--spacing-small);
   flex-grow: 1;
   row-gap: var(--spacing-xsmall);
 }

@@ -342,7 +342,7 @@ export default {
   display: flex;
   align-items: center;
   column-gap: var(--spacing-xsmall);
-  padding: var(--spacing-xsmall) 1rem;
+  padding: var(--spacing-xsmall)  var(--spacing-small);
   border-bottom: 1px solid var(--gray-1);
 }
 
@@ -365,7 +365,7 @@ export default {
   max-height: 300px;
   max-width: 100%;
   font-size: 12px;
-  padding: 1rem;;
+  padding:  var(--spacing-small);;
   overflow-y: auto;
   outline: none;
 }
@@ -386,7 +386,7 @@ export default {
   row-gap: var(--spacing-xsmall);
   width: 90%;
   flex-wrap: wrap;
-  padding: 1rem;
+  padding:  var(--spacing-small);
   padding-top: var(--spacing-xsmall);
 }
 </style>

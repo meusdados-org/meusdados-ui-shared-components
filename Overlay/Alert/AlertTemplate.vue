@@ -17,8 +17,8 @@ defineProps({
 <style scoped>
 .alert {
   position: fixed;
-  bottom: 3rem;
-  right: 3rem;
+  bottom: var(--spacing-xlarge);
+  right: var(--spacing-xlarge);
   z-index: 9999;
   width: 224px;
 }
