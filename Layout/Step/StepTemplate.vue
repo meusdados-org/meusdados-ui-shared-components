@@ -63,7 +63,7 @@ const props = defineProps({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-7);
+  padding: var(--spacing-large);
 }
 header:not(.logo-header) {
   display: flex;
@@ -114,6 +114,6 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: var(--spacing-7);
+  padding: var(--spacing-large);
 }
 </style>

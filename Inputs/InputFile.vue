@@ -99,14 +99,14 @@ export default {
     width: fit-content;
     display: flex;
     flex-direction: column;
-    row-gap: var(--spacing-3);
+    row-gap: var(--spacing-xsmall);
     justify-content: flex-start;
 }
 
 .input-button-container {
     display: flex;
     align-items: center;
-    column-gap: var(--spacing-5);
+    column-gap: var(--spacing-small);
 }
 
 label.label input[type="file"] {
@@ -135,7 +135,7 @@ label.label input[type="file"] {
 
 .label:has(input[type="file"]:focus) {
     outline: 2px solid var(--black);
-    outline-offset: var(--spacing-1);
+    outline-offset: var(--spacing-xxxsmall);
 }
 
 .error {
@@ -145,8 +145,8 @@ label.label input[type="file"] {
     align-items: center;
     line-height: 8px;
     text-align: left;
-    padding: 0 var(--spacing-3);
-    border-radius: var(--spacing-1);
+    padding: 0 var(--spacing-xsmall);
+    border-radius: var(--spacing-xxxsmall);
     width: fit-content;
     background-color: var(--red-1);
     background-color: rgba(221, 58, 58, 0.05);

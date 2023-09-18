@@ -37,14 +37,14 @@ const emit = defineEmits(['close']);
 
 <style scoped>
 .tag {
-  padding: 0 var(--spacing-3);
+  padding: 0 var(--spacing-xsmall);
   border-radius: var(--border-radius-1);
   height: 20px;
   width: fit-content;
 
   display: flex;
   align-items: center;
-  column-gap: var(--spacing-3);
+  column-gap: var(--spacing-xsmall);
 }
 
 .icon {
@@ -59,6 +59,6 @@ const emit = defineEmits(['close']);
 .text {
   display: flex;
   align-items: center;
-  column-gap: var(--spacing-2);
+  column-gap: var(--spacing-xxsmall);
 }
 </style>

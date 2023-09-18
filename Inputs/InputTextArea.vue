@@ -90,7 +90,7 @@ export default {
     display: flex;
     border: 1px solid var(--gray-2);
     border-radius: var(--border-radius-1);
-    padding: var(--spacing-5) 0;
+    padding: var(--spacing-small) 0;
     cursor: text;
 }
 
@@ -107,7 +107,7 @@ label{
 textarea {
     width: 100%;
     border: none;
-    padding: 0 var(--spacing-5);
+    padding: 0 var(--spacing-small);
 
     font-family: 'Montserrat';
     font-size: 12px;

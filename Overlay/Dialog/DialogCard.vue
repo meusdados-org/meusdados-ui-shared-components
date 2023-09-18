@@ -91,7 +91,7 @@ export default {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    row-gap: var(--spacing-5);
+    row-gap: var(--spacing-small);
 
     width: 532px;
     padding: 2rem 1rem;
@@ -114,13 +114,13 @@ export default {
     flex-direction: column;
     text-align: center;
     align-items: center;
-    row-gap: var(--spacing-3);
+    row-gap: var(--spacing-xsmall);
 }
 
 .dialog-buttons {
     display: flex;
-    margin-top: var(--spacing-5);
-    column-gap: var(--spacing-5);
+    margin-top: var(--spacing-small);
+    column-gap: var(--spacing-small);
 }
 
 .feather-alert-triangle {

@@ -72,11 +72,11 @@ export default {
     flex-direction: column;
     text-align: start;
     align-items: flex-start;
-    row-gap: var(--spacing-5);
+    row-gap: var(--spacing-small);
 }
 
 .footer {
-    margin-top: var(--spacing-5);
+    margin-top: var(--spacing-small);
     display: flex;
     width: 100%;
     align-items: center;

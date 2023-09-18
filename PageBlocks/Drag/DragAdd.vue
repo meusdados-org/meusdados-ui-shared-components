@@ -46,6 +46,6 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 
 .drag-add:focus {
   outline: 2px solid var(--black);
-  outline-offset: var(--spacing-1);
+  outline-offset: var(--spacing-xxxsmall);
 }
 </style>

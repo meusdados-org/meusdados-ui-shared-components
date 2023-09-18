@@ -69,12 +69,12 @@ export default {
   align-items: center;
   left: 0;
   top: 1px;
-  width: var(--spacing-5);
-  height: var(--spacing-5);
+  width: var(--spacing-small);
+  height: var(--spacing-small);
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  border: var(--spacing-1) solid var(--black);
+  border: var(--spacing-xxxsmall) solid var(--black);
   border-radius: 100%;
   background-color: var(--white);
 }
@@ -102,7 +102,7 @@ export default {
 
 .input:focus ~ .checkbox {
   border-color: var(--purple-1);
-  outline: var(--spacing-1) solid var(--black);
+  outline: var(--spacing-xxxsmall) solid var(--black);
   outline-offset: 1px;
 }
 

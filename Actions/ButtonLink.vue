@@ -49,7 +49,7 @@ export default {
 <style scoped>
 .bold {
     font-weight: 600;
-    font-size: var(--spacing-5);
+    font-size: var(--spacing-small);
 }
 
 button {
@@ -57,7 +57,7 @@ button {
     background-color: transparent;
     border: none;
     color: var(--blue-1);
-    column-gap: var(--spacing-3);
+    column-gap: var(--spacing-xsmall);
     cursor: pointer;
     padding: 0;
 }
