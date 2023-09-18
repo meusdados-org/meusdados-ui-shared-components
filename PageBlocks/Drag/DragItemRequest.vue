@@ -58,8 +58,8 @@ defineProps({
 <style scoped>
 .item-drag-handle:active {
   cursor: grab !important;
-  outline: 2px solid var(--black);
-  border-radius: var(--border-radius-1);
+  outline: var(--spacing-xxxsmall) solid var(--black);
+  border-radius: var(--border-radius-small);
 }
 
 .drag-item-request {
@@ -67,10 +67,10 @@ defineProps({
   flex: 1;
   background-color: var(--white);
   box-shadow: var(--box-shadow-1);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--spacing-xxsmall);
   z-index: 2;
 }
 
@@ -88,7 +88,7 @@ defineProps({
   display: flex;
   width: fit-content;
   align-items: center;
-  column-gap: .5rem;
+  column-gap: var(--spacing-xsmall);
 }
 
 .drag-item-request-content {

@@ -56,7 +56,7 @@ export default {
 input {
     cursor: pointer;
     position: relative;
-    width: 48px;
+    width: var(--spacing-xlarge);
     height: 24px;
     border-radius: 40px;
     outline: none;

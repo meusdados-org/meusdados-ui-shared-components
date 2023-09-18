@@ -267,14 +267,14 @@ export default {
 .table-wrapper {
     overflow: auto;
     color: transparent;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     margin-top: 1rem;
     max-height: 70vh;
     box-shadow: var(--box-shadow-1);
 }
 
 .table {
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     font-size: 12px;
     font-weight: normal;
     width: 100%;
@@ -294,7 +294,7 @@ export default {
     text-align: left;
     padding: 1rem;
     min-width: fit-content;
-    max-width: 10rem;
+    max-width: var(--spacing-xxxlarge);
 }
 
 .icons {
@@ -326,7 +326,7 @@ export default {
 .action-buttons {
     display: flex;
     justify-content: center;
-    column-gap: .5rem;
+    column-gap: var(--spacing-xsmall);
 }
 
 .edit {

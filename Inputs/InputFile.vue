@@ -116,7 +116,7 @@ label.label input[type="file"] {
 
 .label {
     width: fit-content;
-    padding: 0 1.5rem;
+    padding: 0 var(--spacing-medium);
     height: 2.5rem;
     display: flex;
     font-weight: 600;
@@ -125,7 +125,7 @@ label.label input[type="file"] {
     cursor: pointer;
     color: white;
     border: 1px solid #cccccc;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     background: var(--blue-1);
 }
 
@@ -134,7 +134,7 @@ label.label input[type="file"] {
 }
 
 .label:has(input[type="file"]:focus) {
-    outline: 2px solid var(--black);
+    outline: var(--spacing-xxxsmall) solid var(--black);
     outline-offset: var(--spacing-xxxsmall);
 }
 
@@ -143,7 +143,7 @@ label.label input[type="file"] {
     color: var(--red-1);
     display: flex;
     align-items: center;
-    line-height: 8px;
+    line-height: var(--spacing-xsmall);
     text-align: left;
     padding: 0 var(--spacing-xsmall);
     border-radius: var(--spacing-xxxsmall);

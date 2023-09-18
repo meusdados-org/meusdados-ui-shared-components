@@ -17,7 +17,7 @@ import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 
 <style scoped>
 .tab-group {
-  padding: .5rem 0;
+  padding: var(--spacing-xsmall) 0;
   border-bottom: 1px solid var(--gray-3);
   width: 100%;
   display: flex;

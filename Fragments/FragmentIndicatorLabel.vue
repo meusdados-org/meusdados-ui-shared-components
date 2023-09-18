@@ -29,8 +29,8 @@ const color = props.backgroundColor === 'transparent' ? 'var(--black)' : 'var(--
 
 <style scoped>
 .fragment-indicator-number {
-  padding: .5rem;
-  min-width: 48px;
+  padding: var(--spacing-xsmall);
+  min-width: var(--spacing-xlarge);
   margin: 0;
 
   display: flex;
@@ -38,6 +38,6 @@ const color = props.backgroundColor === 'transparent' ? 'var(--black)' : 'var(--
   align-items: flex-start;
   text-align: left;
 
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
 }
 </style>

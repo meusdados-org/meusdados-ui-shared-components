@@ -37,12 +37,12 @@ defineProps({
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--spacing-small);
   overflow-y: auto;
   width: 100%;
   max-height: 264px;
   padding-right: 1rem;
-  margin-right: -1rem;
+  margin-right: calc(var(--spacing-small) * -1);
 }
 
 .fragment-task-list__body {
@@ -50,7 +50,7 @@ defineProps({
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: flex-start;
-  gap: 16px;
+  gap: var(--spacing-small);
   width: 100%;
 }
 
@@ -61,7 +61,7 @@ defineProps({
   align-items: center;
   text-align: left;
   justify-content: space-between;
-  gap: 8px;
+  gap: var(--spacing-xsmall);
   width: 100%;
 }
 
@@ -71,7 +71,7 @@ defineProps({
   flex-wrap: nowrap;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: var(--spacing-xsmall);
 }
 
 .fragment-task-list__body__task__indicator {
@@ -82,7 +82,7 @@ defineProps({
   justify-content: center;
   width: 12px;
   height: 12px;
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   background-color: var(--gray-3);
 }
 

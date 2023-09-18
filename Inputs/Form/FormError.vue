@@ -13,7 +13,7 @@ import BodySmall from '../../Typography/Body/BodySmall.vue';
 <style lang="scss" scoped>
 .form-error {
   display: inline-flex;
-  padding: 4px;
+  padding: var(--spacing-xxsmall);
   align-items: flex-start;
   gap: 10px;
   width: fit-content;

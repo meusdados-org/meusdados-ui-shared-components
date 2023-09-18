@@ -48,14 +48,14 @@ export default {
       BodyMedium
   }
 }
-</script>  
+</script>
 
 <style scoped>
 .card-wrapper{
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   background-color: white;
   overflow: hidden;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 15%);
+  box-shadow: 0px 0px var(--spacing-xxsmall) 0px rgba(0, 0, 0, 15%);
   display: flex;
   flex-direction: column;
 }
@@ -69,7 +69,7 @@ export default {
   flex-direction: column;
   padding: 1rem;
   flex-grow: 1;
-  row-gap: .5rem;
+  row-gap: var(--spacing-xsmall);
 }
 
 .card-header{

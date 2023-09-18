@@ -183,9 +183,9 @@ export default {
 
     display: flex;
     justify-content: center;
-    min-width: 32px;
-    max-width: 32px;
-    height: 32px;
+    min-width: var(--spacing-large);
+    max-width: var(--spacing-large);
+    height: var(--spacing-large);
     align-items: center;
     cursor: pointer;
 
@@ -203,15 +203,15 @@ export default {
 }
 
 .line {
-    height: 2px;
+    height: var(--spacing-xxxsmall);
     background-color: var(--gray-3);
     border: none;
 }
 
 .notification {
     display: flex;
-    padding: 32px;
-    padding-top: 16px;
+    padding: var(--spacing-large);
+    padding-top: var(--spacing-small);
     font-size: 1rem;
     justify-content: space-between;
     cursor: pointer;
@@ -223,9 +223,9 @@ export default {
 }
 
 .notification.collapsed {
-    padding: 32px 24px;
+    padding: var(--spacing-large) 24px;
     justify-content: center;
-    column-gap: .5rem;
+    column-gap: var(--spacing-xsmall);
 }
 
 
@@ -238,23 +238,23 @@ export default {
     justify-content: center;
     width: 20px;
     height: 20px;
-    border-radius: 4px;
+    border-radius: var(--spacing-xxsmall);
 }
 
 .logo {
-    padding: 32px 24px;
-    padding-bottom: 16px;
+    padding: var(--spacing-large) 24px;
+    padding-bottom: var(--spacing-small);
 }
 
 .logo:has(.logo-open)  {
     display: flex;
-    padding: 32px;
-    padding-bottom: 16px;
+    padding: var(--spacing-large);
+    padding-bottom: var(--spacing-small);
 }
 
 
 .logo:has(.logo-open) ~ .company-info {
-    padding: 0 32px;
+    padding: 0 var(--spacing-large);
 }
 
 
@@ -279,7 +279,7 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 32px;
+    padding: var(--spacing-large);
     overflow-y: auto;
 }
 
@@ -289,26 +289,26 @@ export default {
 }
 
 .create {
-    padding: 32px;
+    padding: var(--spacing-large);
 }
 
 .create.collapsed {
-    padding: 32px 24px;
+    padding: var(--spacing-large) 24px;
 }
 
 .create.collapsed > .button {
-    width: 48px;
-    height: 48px;
+    width: var(--spacing-xlarge);
+    height: var(--spacing-xlarge);
 }
 
 .button {
     width: 100% !important;
-    height: 48px;
+    height: var(--spacing-xlarge);
 }
 
 
 .links.collapsed {
     margin: 0 auto;
-    padding: 32px  16px;
+    padding: var(--spacing-large)  var(--spacing-small);
 }
 </style>

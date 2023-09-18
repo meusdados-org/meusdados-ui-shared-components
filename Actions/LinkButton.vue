@@ -21,7 +21,7 @@ export default {
 <style scoped>
 button {
     color: var(--blue-1);
-    border-radius: .5rem;
+    border-radius: var(--spacing-xsmall);
     border: none;
     text-decoration: none;
     background: none;

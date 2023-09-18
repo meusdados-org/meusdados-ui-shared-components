@@ -39,7 +39,7 @@ const props = defineProps({
 
 .expansion-panel-header {
   display: flex;
-  padding: 1rem 2rem;
+  padding: 1rem var(--spacing-large);
   justify-content: space-between;
   border-bottom: 1px solid var(--gray-2);
 }
@@ -61,7 +61,7 @@ const props = defineProps({
 }
 
 .expansion-panel-content.open {
-  padding: 2rem;
+  padding: var(--spacing-large);
   transition: 0.25s ease-out;
   max-height: fit-content;
 }

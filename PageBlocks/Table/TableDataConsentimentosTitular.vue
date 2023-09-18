@@ -260,13 +260,13 @@ export default {
 .table-wrapper {
     overflow: auto;
     color: transparent;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     max-height: 70vh;
     box-shadow: var(--box-shadow-1);
 }
 
 .table {
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     font-size: 12px;
     font-weight: normal;
     width: 100%;
@@ -286,7 +286,7 @@ export default {
     text-align: left;
     padding: 1rem;
     min-width: fit-content;
-    max-width: 10rem;
+    max-width: var(--spacing-xxxlarge);
 }
 
 .icons {
@@ -318,7 +318,7 @@ export default {
 .action-buttons {
     display: flex;
     justify-content: center;
-    column-gap: .5rem;
+    column-gap: var(--spacing-xsmall);
 }
 
 .action-button {
@@ -330,7 +330,7 @@ export default {
     width: 14px;
     height: 14px;
     color: var(--white);
-    border-radius: 2px;
+    border-radius: var(--spacing-xxxsmall);
     cursor: pointer;
 }
 
@@ -384,7 +384,7 @@ export default {
 .status {
     display: flex;
     align-items: center;
-    gap: .5rem;
+    gap: var(--spacing-xsmall);
 }
 
 </style>

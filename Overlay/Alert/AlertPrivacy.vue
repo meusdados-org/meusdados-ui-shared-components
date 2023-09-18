@@ -9,7 +9,7 @@ import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 const show = ref(true);
 
 const redirect = () => {
-  window.open('https://meusdados.com/politicas-e-termos', '_blank');
+  window.open('https://meusdados.com/politicas-e-termos', '_blank');S
 }
 </script>
 
@@ -43,7 +43,7 @@ const redirect = () => {
 <style scoped>
 .alert-privacy-container {
   background-color: var(--purple-1);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   padding: 1rem;
 }
 
@@ -53,11 +53,11 @@ const redirect = () => {
   align-items: flex-start;
   color: white;
   text-align: left;
-  gap: .5rem;
+  gap: var(--spacing-xsmall);
 }
 
 .button-close {
-  padding: 8px 16px;
+  padding: var(--spacing-xsmall) var(--spacing-small);
   height: inherit;
 }
 </style>

@@ -306,12 +306,12 @@ export default {
   width: 100%;
   max-width: 100%;
   border: 1px solid var(--gray-1);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   overflow: hidden;
 }
 
 .wysiwyg-container .multiselect {
-  min-height: 1.5rem;
+  min-height: var(--spacing-medium);
 }
 
 .wysiwyg-container .multiselect__single {
@@ -319,18 +319,18 @@ export default {
 }
 
 .wysiwyg-container .multiselect__option {
-  padding: .25rem .5rem;
+  padding: var(--spacing-xxsmall) var(--spacing-xsmall);
   font-size: 12px;
   min-height: 0px;
 }
 
 .wysiwyg-container .multiselect__select {
-  top: 2px;
-  right: 8px;
+  top: var(--spacing-xxxsmall);
+  right: var(--spacing-xsmall);
 }
 
 .wysiwyg-container .multiselect__tags {
-  min-height: 1.5rem;
+  min-height: var(--spacing-medium);
 }
 
 .wysiwyg-container .multiselect__single {
@@ -341,8 +341,8 @@ export default {
   background-color: white;
   display: flex;
   align-items: center;
-  column-gap: .5rem;
-  padding: .5rem 1rem;
+  column-gap: var(--spacing-xsmall);
+  padding: var(--spacing-xsmall) 1rem;
   border-bottom: 1px solid var(--gray-1);
 }
 
@@ -376,17 +376,17 @@ export default {
 
 .send-button {
   position: absolute;
-  bottom: 8px;
-  right: 8px;
+  bottom: var(--spacing-xsmall);
+  right: var(--spacing-xsmall);
 }
 
 .attachments {
   display: flex;
-  column-gap: .5rem;
-  row-gap: .5rem;
+  column-gap: var(--spacing-xsmall);
+  row-gap: var(--spacing-xsmall);
   width: 90%;
   flex-wrap: wrap;
   padding: 1rem;
-  padding-top: .5rem;
+  padding-top: var(--spacing-xsmall);
 }
 </style>

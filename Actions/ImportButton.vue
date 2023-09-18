@@ -84,7 +84,7 @@ export default {
 }
 
 .import-button{
-    padding: 0 1.5rem;
+    padding: 0 var(--spacing-medium);
     background-color: transparent;
     color:var(--blue-1);
 }

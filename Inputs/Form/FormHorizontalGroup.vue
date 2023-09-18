@@ -35,12 +35,12 @@ defineProps({
 }
 
 .hasPadding {
-  padding: .5rem;
+  padding: var(--spacing-xsmall);
 }
 
 .hasBackground {
   background-color: var(--gray-4);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
 }
 
 .form-horizontal-group-label {

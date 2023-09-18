@@ -26,9 +26,9 @@ const progress = computed(() => {
 <style scoped>
 .progress-bar {
   width: 100%;
-  height: 4px;
+  height: var(--spacing-xxsmall);
   background-color: transparent;
-  border-radius: 4px;
+  border-radius: var(--spacing-xxsmall);
   overflow: hidden;
   position: fixed;
   top: 0;

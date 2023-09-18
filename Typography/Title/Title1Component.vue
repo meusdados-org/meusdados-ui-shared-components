@@ -6,7 +6,7 @@
 
 .title1_componente{
     font-family: 'Montserrat';
-    font-size: 2rem;
+    font-size: var(--spacing-large);
     font-weight: 600;
     line-height: 125%;
 }

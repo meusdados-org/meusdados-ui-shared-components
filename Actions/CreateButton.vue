@@ -19,6 +19,6 @@ export default {
 
 <style scoped>
 .button {
-    height: 2rem;
+    height: var(--spacing-large);
 }
 </style>

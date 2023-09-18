@@ -111,7 +111,7 @@ export default {
   width: 6px;
   background-color: var(--gray-2);
   border: none;
-  border-radius: 2px;
+  border-radius: var(--spacing-xxxsmall);
   display: block;
 }
 
@@ -120,7 +120,7 @@ export default {
   width: 6px;
   background-color: var(--white);
   border: none;
-  border-radius: 8px;
+  border-radius: var(--spacing-xsmall);
   display: block;
 }
 

@@ -42,9 +42,9 @@ const backgroundColor = computed(() => {
 
 <style scoped>
 .dot {
-  width: 8px;
-  height: 8px;
+  width: var(--spacing-xsmall);
+  height: var(--spacing-xsmall);
   background-color: var(--yellow-1);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
 }
 </style>

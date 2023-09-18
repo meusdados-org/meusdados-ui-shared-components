@@ -99,7 +99,7 @@ export default {
     display: flex;
     height: 2.5rem;
     width: 2.5rem;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     background-color: var(--white);
     border: solid 1px var(--black);
     justify-content: center;

@@ -13,8 +13,8 @@ export default {
 
 <style scoped>
 .card {
-    padding: 2rem;
-    border-radius: var(--border-radius-1);
+    padding: var(--spacing-large);
+    border-radius: var(--border-radius-small);
     box-shadow: 0px 0px 20px 0px rgb(0 0 0 / 20%);
     background-color: white;
 }

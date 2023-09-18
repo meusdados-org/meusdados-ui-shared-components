@@ -116,7 +116,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: .5rem;
+  gap: var(--spacing-xsmall);
   width: 100%;
 }
 
@@ -134,8 +134,8 @@ export default {
     border-top: none;
     border-left: none;
     border-right: none;
-    height: 2rem;
-    padding: 0 .5rem;
+    height: var(--spacing-large);
+    padding: 0 var(--spacing-xsmall);
 
     font-family: 'Montserrat';
     line-height: normal;
@@ -180,7 +180,7 @@ export default {
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     box-sizing: border-box;
-    padding: 0 .5rem;
+    padding: 0 var(--spacing-xsmall);
 }
 
 .container-InputTextFieldField  input:focus + label,

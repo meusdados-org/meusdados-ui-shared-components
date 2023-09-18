@@ -94,11 +94,11 @@ export default {
     row-gap: var(--spacing-small);
 
     width: 532px;
-    padding: 2rem 1rem;
+    padding: var(--spacing-large) 1rem;
     z-index: 997;
 
     background-color: var(--white);
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
 }
 
 .title {

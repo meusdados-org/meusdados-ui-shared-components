@@ -93,7 +93,7 @@ onMounted(positionTooltip);
   padding: 12px;
   background-color: var(--gray-3);
   width: 182px;
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   position: fixed;
   text-align: left;
   z-index: 999;
@@ -117,7 +117,7 @@ onMounted(positionTooltip);
 
 .close-help-text {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--spacing-xsmall);
+  right: var(--spacing-xsmall);
 }
 </style>

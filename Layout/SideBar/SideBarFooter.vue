@@ -42,11 +42,11 @@ export default {
 
 <style scoped>
 .user {
-    padding: 32px;
+    padding: var(--spacing-large);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1rem;
+    font-size: var(--spacing-small);
     font-weight: 500;
     text-align: left;
     color: var(--blue-1);
@@ -62,7 +62,7 @@ export default {
 }
 
 .user.userCollapsed {
-    padding: 32px 24px;
+    padding: var(--spacing-large) var(--spacing-medium);
 }
 
 .icon {
@@ -76,8 +76,8 @@ export default {
 }
 
 .profile-pic {
-    width: 48px;
-    height: 48px;
+    width: var(--spacing-xlarge);
+    height: var(--spacing-xlarge);
     border-radius: 100px;
 }
 

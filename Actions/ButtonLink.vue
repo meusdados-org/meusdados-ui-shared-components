@@ -71,7 +71,7 @@ button.sameColorBackground:hover {
 }
 
 .boldButton.borderBottom:focus {
-    border-bottom: 2px solid var(--black);
+    border-bottom: var(--spacing-xxxsmall) solid var(--black);
 }
 
 button.borderBottom:focus {

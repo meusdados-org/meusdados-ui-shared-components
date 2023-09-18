@@ -89,6 +89,6 @@ const switchOpen = (index: number) => {
   width: 100%;
   overflow: hidden;
   border-color: var(--gray-2);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
 }
 </style>

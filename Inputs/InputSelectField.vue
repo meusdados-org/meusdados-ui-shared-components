@@ -87,14 +87,14 @@ export default {
 }
 
 .formGroupVersion .multiselect__option {
-    padding: .25rem .5rem;
+    padding: var(--spacing-xxsmall) var(--spacing-xsmall);
     font-size: 12px;
     min-height: 0px;
 }
 
 .formGroupVersion .multiselect__select {
     top: -1px;
-    right: 8px;
+    right: var(--spacing-xsmall);
 }
 
 .formGroupVersion .multiselect__tags {

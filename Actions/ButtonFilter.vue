@@ -49,7 +49,7 @@ export default {
     min-width: 144px;
     max-width: fit-content;
     background-color: var(--white);
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     box-shadow: var(--box-shadow-1);
 }
 </style>

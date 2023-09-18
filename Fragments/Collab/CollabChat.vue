@@ -62,7 +62,7 @@ const download = (mensagemId, filename) => {
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
-  row-gap: 2rem;
+  row-gap: var(--spacing-large);
 }
 
 .collab-chat-separator {

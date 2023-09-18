@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 .button {
-    padding: .5rem;
+    padding: var(--spacing-xsmall);
     width: 2.5rem;
 }
 
@@ -44,6 +44,6 @@ export default {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    border-radius: 2px;
+    border-radius: var(--spacing-xxxsmall);
 }
 </style>

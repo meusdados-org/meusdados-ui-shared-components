@@ -31,7 +31,7 @@ export default {
 
 <style>
 .svg {
-    top: .125rem;
+    top: var(--spacing-xxxsmall);
     position: relative;
 }
 </style>

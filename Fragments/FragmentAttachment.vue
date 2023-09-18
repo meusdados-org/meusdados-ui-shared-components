@@ -48,14 +48,14 @@ if (props.base64_) {
   justify-content: left;
   text-align: left;
   min-width: 4rem;
-  max-width: 10rem;
+  max-width: var(--spacing-xxxlarge);
   width: fit-content;
   flex-direction: column;
   word-break: break-all;
-  row-gap: .5rem;
-  padding: .5rem;
+  row-gap: var(--spacing-xsmall);
+  padding: var(--spacing-xsmall);
   background-color: var(--gray-3);
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   color: var(--black);
   position: relative;
   overflow: hidden;
@@ -68,10 +68,10 @@ if (props.base64_) {
 
 .background-img {
   position: absolute;
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   width: 110%;
-  top: -.5rem;
-  left: -.5rem;
+  top: calc(var(--spacing-xsmall) * -1);
+  left: calc(var(--spacing-xsmall) * -1);
   z-index: 0;
   opacity: .5;
 }

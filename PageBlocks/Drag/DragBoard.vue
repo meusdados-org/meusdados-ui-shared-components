@@ -117,8 +117,8 @@ export default {
 .board {
   padding: 0;
   margin: 0;
-  padding-top: 2rem;
-  margin-top: -2rem;
+  padding-top: var(--spacing-large);
+  margin-top: calc(var(--spacing-large) * -1);
   overflow-x: auto;
 }
 .orientador-colunas {

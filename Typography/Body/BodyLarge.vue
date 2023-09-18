@@ -42,7 +42,7 @@ defineProps({
 <style scoped>
 .body-large {
   font-family: 'Montserrat', sans-serif;
-  font-size: 16px;
+  font-size: var(--spacing-small);
   font-weight: 400;
   line-height: 125%;
 }

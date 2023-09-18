@@ -48,17 +48,17 @@ const color = computed(() => {
   flex-direction: row;
   flex-wrap: nowrap;
   align-items: center;
-  gap: 8px;
+  gap: var(--spacing-xsmall);
   width: 100%;
 }
 .fragment-indicator-bar {
-  height: 8px;
+  height: var(--spacing-xsmall);
   flex: 1;
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
   background-color: var(--gray-3);
   overflow: hidden;
 }
 .fragment-indicator-bar__indicator {
-  height: 8px;
+  height: var(--spacing-xsmall);
 }
 </style>

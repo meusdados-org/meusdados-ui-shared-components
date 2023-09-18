@@ -86,7 +86,7 @@ const tagProps = computed(() => {
 
 .collab-comment-attachments {
   display: flex;
-  gap: .5rem;
+  gap: var(--spacing-xsmall);
   flex-wrap: wrap;
 }
 

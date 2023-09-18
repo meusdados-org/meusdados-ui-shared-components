@@ -29,7 +29,7 @@ export default {
 
 <style scoped>
 .button {
-    padding: .5rem;
+    padding: var(--spacing-xsmall);
     width: 2.5rem;
 }
 </style>

@@ -44,7 +44,7 @@ export default {
     position: fixed;
     left: 271px;
     padding: 1rem;
-    bottom: 32px;
+    bottom: var(--spacing-large);
     z-index: 2;
 
     box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.192);

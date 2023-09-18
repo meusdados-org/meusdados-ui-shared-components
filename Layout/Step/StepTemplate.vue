@@ -80,7 +80,7 @@ header:not(.logo-header) {
 }
 
 .footer {
-  padding: 2rem;
+  padding: var(--spacing-large);
   margin-bottom: 1rem;
 }
 

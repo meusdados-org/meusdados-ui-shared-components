@@ -47,7 +47,7 @@ export default {
     -webkit-transition: all .1s linear;
     -moz-transition: all .1s linear;
     box-sizing: border-box;
-    padding: 0 .5rem;
+    padding: 0 var(--spacing-xsmall);
     display: none;
 }
 
@@ -57,8 +57,8 @@ export default {
     border-top: none;
     border-left: none;
     border-right: none;
-    height: 2rem;
-    padding: 0 .5rem;
+    height: var(--spacing-large);
+    padding: 0 var(--spacing-xsmall);
 
     font-family: 'Montserrat';
     font-size: 1rem;
@@ -77,8 +77,8 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 1;
     display: block;
     background: url(https://i.imgur.com/pNJ7lTm.png) no-repeat;
-    width: 16px;
-    height: 16px;
+    width: var(--spacing-small);
+    height: var(--spacing-small);
     border-width: thin;
 }
 

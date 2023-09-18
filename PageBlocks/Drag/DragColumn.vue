@@ -134,9 +134,9 @@ export default {
 .background-options {
   display: flex;
   flex-direction: column;
-  padding: .5rem 1rem;
-  margin: -.5rem -1rem;
-  row-gap: .5rem;
+  padding: var(--spacing-xsmall) 1rem;
+  margin: calc(var(--spacing-xsmall) * -1) calc(var(--spacing-small) * -1);
+  row-gap: var(--spacing-xsmall);
   height: 350px;
   overflow-x: hidden;
   overflow-y: auto;
@@ -146,12 +146,12 @@ export default {
   position: relative;
   right: -250px;
   background-color: var(--gray-3);
-  border-radius: 8px;
+  border-radius: var(--spacing-xsmall);
   /* margin-left: 1rem; */
-  width: 2px;
+  width: var(--spacing-xxxsmall);
 }
 .background-options::-webkit-scrollbar-thumb {
-    border-radius: 8px;
+    border-radius: var(--spacing-xsmall);
     background-color: var(--blue-2);
 }
 
@@ -171,14 +171,14 @@ export default {
   color: var(--purple-1);
 }
 .edit-button-link {
-  margin-right: -.5rem;
+  margin-right: calc(var(--spacing-xsmall) * -1);
 }
 
 .responsavel {
     display: flex;
     align-items: flex-start;
-    column-gap: .25rem;
-    margin-bottom: .5rem;
+    column-gap: var(--spacing-xxsmall);
+    margin-bottom: var(--spacing-xsmall);
 }
 
 .column-drag-handle:active {

@@ -29,10 +29,10 @@ export default {
 
 <style scoped>
 button {
-    padding: 0 1.5rem;
+    padding: 0 var(--spacing-medium);
     height: 2.5rem;
     background: var(--blue-1) 0% 0% no-repeat padding-box;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     border: none;
     color: var(--white);
     cursor: pointer;
@@ -56,7 +56,7 @@ button.sameColorBackground:hover {
 }
 
 button:focus {
-    outline: 2px solid var(--black);
+    outline: var(--spacing-xxxsmall) solid var(--black);
     outline-offset: var(--spacing-xxxsmall);
 }
 

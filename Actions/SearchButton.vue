@@ -22,20 +22,20 @@ export default {
 }
 </script>
 
-<style scoped> 
+<style scoped>
 
 .busca {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0 var(--spacing-small);
     align-items: center;
     background-color: white;
     border:none;
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     box-shadow: var(--box-shadow-1);
     width: 319px;
-    height: 2rem;
+    height: var(--spacing-large);
 }
 
 .busca-text{

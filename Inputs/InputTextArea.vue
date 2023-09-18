@@ -89,7 +89,7 @@ export default {
 .container-textarea {
     display: flex;
     border: 1px solid var(--gray-2);
-    border-radius: var(--border-radius-1);
+    border-radius: var(--border-radius-small);
     padding: var(--spacing-small) 0;
     cursor: text;
 }
@@ -101,7 +101,7 @@ label{
     font-weight: 400;
 
     text-align: left;
-    padding-bottom: .25rem;
+    padding-bottom: var(--spacing-xxsmall);
 }
 
 textarea {

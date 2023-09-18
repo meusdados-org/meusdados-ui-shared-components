@@ -16,7 +16,7 @@ import Icon from '@/components/shared/Icon/Icon.vue';
   background-color: var(--white);
   box-shadow: var(--box-shadow-1);
   border: none;
-  border-radius: var(--border-radius-1);
+  border-radius: var(--border-radius-small);
 
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 
   padding: 1rem;
   width: 100%;
-  outline: 2px solid var(--black-1);
+  outline: var(--spacing-xxxsmall) solid var(--black-1);
   height: 47px;
 }
 
@@ -32,7 +32,7 @@ import Icon from '@/components/shared/Icon/Icon.vue';
   display: flex;
   align-items: center;
   width: fit-content;
-  column-gap: .5rem;
+  column-gap: var(--spacing-xsmall);
   color: var(--black);
 }
 
@@ -45,7 +45,7 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 }
 
 .drag-add:focus {
-  outline: 2px solid var(--black);
+  outline: var(--spacing-xxxsmall) solid var(--black);
   outline-offset: var(--spacing-xxxsmall);
 }
 </style>
