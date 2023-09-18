@@ -19,7 +19,7 @@
             </h2>
             <div class="notification" v-if="!collapsed">
                 <div class="notification-text">
-                    <Icon type="bell" size=" var(--spacing-small)"/> Notificações
+                    <Icon type="bell" size="16px"/> Notificações
                 </div>
                 <div class="notification-quantitiy">
                     5
@@ -27,7 +27,7 @@
             </div>
             <div class="notification collapsed" v-else>
                 <div class="notification-text">
-                    <Icon type="bell" size=" var(--spacing-small)"/>
+                    <Icon type="bell" size="16px"/>
                 </div>
                 <div class="notification-quantitiy">
                     5
@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="create" style="display: none;" :class="{ collapsed }">
-            <ButtonPrimary id="button-criar-sidebar" v-if="!collapsed" class="button"><Icon type="plus" size=" var(--spacing-small)"/> Criar</ButtonPrimary>
+            <ButtonPrimary id="button-criar-sidebar" v-if="!collapsed" class="button"><Icon type="plus" size=" 16px"/> Criar</ButtonPrimary>
             <ButtonIcon id="button-criar-minimizado-sidebar" v-else type="plus" />
         </div>
         <hr class="line"/>
@@ -373,11 +373,11 @@ export default {
 
 
 .logo-open {
-    width: 71rem(--spacing-small);
+    width: 7.1rem;
 }
 
 .logo-collapsed {
-    width: 31rem(--spacing-small);
+    width: 3.1rem;
 }
 
 .company-info {

@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span v-if="showText">
         {{this.contador}} de {{pageCounting}}
     </span>
     <div v-if="pageCounting == 0 ">
@@ -32,6 +32,11 @@ export default {
             type: Array,
             required: true,
         },
+        showText: {
+            type: Boolean,
+            required: false,
+            default: true
+        }
     },
     components: {
         ButtonIcon,

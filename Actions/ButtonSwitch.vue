@@ -62,7 +62,12 @@ input {
     outline: none;
     background-color: #ccc;
     -webkit-appearance: none;
-    transition: background .3s rgba(0,0,0,0.15);
+    transition: background .25s rgba(0,0,0,0.15);
+}
+
+input:focus {
+   outline: var(--spacing-xxxsmall) solid var(--black);
+   outline-offset: var(--spacing-xxxsmall);
 }
 
 .mini {
@@ -80,7 +85,7 @@ input::after {
     height:  var(--spacing-small);
     width:  var(--spacing-small);
     background-color: white;
-    transition: left .3s;
+    transition: left .25s;
 }
 
 .mini::after {

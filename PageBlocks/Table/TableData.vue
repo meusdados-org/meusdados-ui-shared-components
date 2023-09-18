@@ -5,7 +5,7 @@
                 <tr>
                     <th v-for="th in tableHeader" :key="th" :class="{'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th)}" v-on:click="sort(th)">
                         <BodyMedium>
-                            {{ th.label }} <Icon type="chevron-down" size=" var(--spacing-small)" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
+                            {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
                         </BodyMedium>
                     </th>
                     <th v-if="actions" class="icons">

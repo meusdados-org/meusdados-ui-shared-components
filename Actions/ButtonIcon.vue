@@ -1,6 +1,5 @@
 <template>
-    <ButtonPrimary :disabled="disabled" class="button" :class="{ tiny }">
-        <Icon :size="tiny ? '10px' : '1.25rem'" :type="type" :align="false" :stroke-width="tiny ? '3' : '1'"/>
+    <ButtonPrimary :disabled="disabled" :icon="type" onlyIcon>
     </ButtonPrimary>
 </template>
 
@@ -17,11 +16,11 @@ export default {
         },
         type: {
             type: String,
-            required: true,
+            required: true
         },
-        tiny: {
-            type: Boolean,
-            default: false,
+        size: {
+            type: String,
+            default: 'medium'
         },
     },
     components: {
@@ -30,20 +29,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.button {
-    padding: var(--spacing-xsmall);
-    width: 2.5rem;
-}
-
-.tiny {
-    padding: 0;
-    height: 14px !important;
-    width: 14px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: var(--spacing-xxxsmall);
-}
-</style>

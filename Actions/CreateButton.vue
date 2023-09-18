@@ -1,6 +1,6 @@
 <template>
-    <ButtonPrimary class="button">
-        <Icon size=" var(--spacing-small)" type="plus"/> Cadastrar
+    <ButtonPrimary icon="plus">
+        Cadastrar
     </ButtonPrimary>
 </template>
 
@@ -16,9 +16,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.button {
-    height: var(--spacing-large);
-}
-</style>

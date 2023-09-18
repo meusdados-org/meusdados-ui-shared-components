@@ -16,7 +16,7 @@
             </h1>
             <div class="notification" v-if="!collapsed">
                 <div class="notification-text">
-                    <Icon type="bell" size=" var(--spacing-small)"/> Notificações
+                    <Icon type="bell" size="16px"/> Notificações
                 </div>
                 <div class="notification-quantitiy">
                     5
@@ -24,7 +24,7 @@
             </div>
             <div class="notification collapsed" v-else>
                 <div class="notification-text">
-                    <Icon type="bell" size=" var(--spacing-small)"/>
+                    <Icon type="bell" size="16px"/>
                 </div>
                 <div class="notification-quantitiy">
                     5

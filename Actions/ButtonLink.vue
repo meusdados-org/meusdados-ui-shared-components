@@ -1,15 +1,23 @@
 <template>
     <button :class="{ 'boldButton': bold, borderBottom, nohover, sameColorBackground }" :disabled="disabled">
-        <text1 :class="{ 'bold': bold }">
-            <Icon v-if="type" :type="type" size=" var(--spacing-small)"/>
+        <Icon v-if="type" :type="type" :size="iconSize"/>
+        <LabelSmall v-if="size === 'small'">
             <slot></slot>
-        </text1>
+        </LabelSmall>
+        <LabelMedium v-else-if="size === 'medium'">
+            <slot></slot>
+        </LabelMedium>
+        <LabelLarge v-else>
+            <slot></slot>
+        </LabelLarge>
     </button>
 </template>
 
 <script>
-import text1 from '@/components/shared/Typography/Body/BodyLarge.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
+import LabelLarge from '@/components/shared/Typography/Label/LabelLarge.vue';
+import LabelMedium from '@/components/shared/Typography/Label/LabelMedium.vue';
+import LabelSmall from '@/components/shared/Typography/Label/LabelSmall.vue';
 
 export default {
     name: 'ButtonLink',
@@ -37,23 +45,37 @@ export default {
         sameColorBackground: {
             type: Boolean,
             default: false
-        }
+        },
+        size: {
+            type: String,
+            default: 'medium'
+        },
     },
     components: {
-        text1,
         Icon,
-    }
+        LabelSmall,
+        LabelMedium,
+        LabelLarge
+    },
+    data() {
+        return {
+            iconSize: '12px'
+        }
+    },
+    created() {
+        const iconSizes = {
+            small: '12px',
+            medium: '14px',
+            large: '18px'
+        }
+        this.iconSize = iconSizes[this.size];
+    },
 }
 </script>
 
 <style scoped>
-.bold {
-    font-weight: 600;
-    font-size: var(--spacing-small);
-}
 
 button {
-    font-size: 12px;
     background-color: transparent;
     border: none;
     color: var(--blue-1);
@@ -62,23 +84,33 @@ button {
     padding: 0;
 }
 
-button:not(.nohover):hover {
-    color: var(--purple-1);
-}
-
-button.sameColorBackground:hover {
+button.dark {
     color: var(--white);
 }
 
-.boldButton.borderBottom:focus {
+button.dark:hover {
+    border-bottom: var(--spacing-xxxsmall) solid var(--white);
+}
+
+button:hover {
+    color: var(--purple-1);
+    border-bottom: var(--spacing-xxxsmall) solid var(--purple-1);
+}
+
+
+button:focus {
     border-bottom: var(--spacing-xxxsmall) solid var(--black);
 }
 
-button.borderBottom:focus {
-    border-bottom: 1px solid var(--black);
+button.dark:focus {
+    border-bottom: var(--spacing-xxxsmall) solid var(--purple-1);
 }
 
 button:disabled {
     color: var(--gray-2);
+}
+
+button.dark:disabled {
+    opacity: .5;
 }
 </style>

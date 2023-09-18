@@ -1,6 +1,5 @@
 <template>
-    <ButtonOutline :disabled="disabled" class="button">
-        <Icon size="1.25rem" :type="type"/>
+    <ButtonOutline :disabled="disabled" :icon="type" :size="size" class="button" onlyIcon>
     </ButtonOutline>
 </template>
 
@@ -18,7 +17,11 @@ export default {
         type: {
             type: String,
             required: true,
-        }
+        },
+        size: {
+            type: String,
+            default: 'medium'
+        },
     },
     components: {
         Icon,
@@ -26,10 +29,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.button {
-    padding: var(--spacing-xsmall);
-    width: 2.5rem;
-}
-</style>

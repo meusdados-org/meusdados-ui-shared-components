@@ -3,7 +3,7 @@
     <Card :title="column.nome" :hasPadding="false" class="drag-column">
       <template v-slot:action v-if="!isTitular">
         <ButtonLink v-if="column.id" class="edit-button-link" @click="$emit('openForm', column.id)">
-          <Icon class="edit-column" size=" var(--spacing-small)" type="more-vertical"></Icon>
+          <Icon class="edit-column" size="16px" type="more-vertical"></Icon>
         </ButtonLink>
         <div style="width: 0; height: 0; display: none;"></div>
       </template>

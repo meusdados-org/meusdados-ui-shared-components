@@ -73,7 +73,7 @@ const switchOpen = (index: number) => {
       <div class="expansion-panel-header">
         <div class="expansion-panel-title">
           <BodyLarge style="color: var(--purple-1); font-weight: 400;">
-            <Icon type="plus" size=" var(--spacing-small)"/>
+            <Icon type="plus" size="16px"/>
             {{ itemName }}
           </BodyLarge>
         </div>

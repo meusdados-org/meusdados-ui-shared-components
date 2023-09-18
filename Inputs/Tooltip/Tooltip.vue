@@ -51,7 +51,7 @@ onMounted(positionTooltip);
 <template>
 <div class="tooltip-container" ref="tooltipContainerRef" @mouseover="switchOpen(true)" @mouseleave="switchOpen(false)">
   <slot name="icon">
-    <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size=" var(--spacing-small)" />
+    <Icon class="help-icon" :class="{ red: props.red }" type="help-circle" size="16px" />
   </slot>
   <div class="help-text" ref="tooltipHelpTextRef" :class="{ fitContent, adjustTop, open }">
     <BodySmall class="help-text__inner" id="help-text">
