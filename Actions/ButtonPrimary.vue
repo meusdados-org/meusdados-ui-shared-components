@@ -195,7 +195,7 @@ button.dark:hover {
 
 button.sameColorBackground:hover {
     background-color: var(--blue-1);
-    color: var(--purple-1);
+    color: var(--purple-1) !important;
 }
 
 button:focus {

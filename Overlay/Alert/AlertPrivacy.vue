@@ -23,18 +23,15 @@ const redirect = () => {
       <ButtonLink
         sameColorBackground
         :bold="false"
+        size="small"
         @click="redirect">
-        <BodySmall>
-          Obtenha mais informações
-        </BodySmall>
+        Obtenha mais informações
       </ButtonLink>
       <ButtonPrimary
         sameColorBackground
         @click="show = false"
-        class="button-close">
-        <BodyMedium>
-          Fechar
-        </BodyMedium>
+        size="small">
+        Fechar
       </ButtonPrimary>
     </div>
   </AlertTemplate>

@@ -92,9 +92,13 @@ button.dark:hover {
     border-bottom: var(--spacing-xxxsmall) solid var(--white);
 }
 
-button:hover {
+button:not(.sameColorBackground):hover {
     color: var(--purple-1);
     border-bottom: var(--spacing-xxxsmall) solid var(--purple-1);
+}
+
+button.sameColorBackground:hover {
+    border-bottom: var(--spacing-xxxsmall) solid var(--blue-1);
 }
 
 
