@@ -1,4 +1,5 @@
 <script setup>
+import ButtonLink from '../Actions/ButtonLink.vue';
 import LinkComponent from '../Actions/Link/LinkComponent.vue';
 import Icon from '../Icon/Icon.vue';
 import BodyMedium from '../Typography/Body/BodyMedium.vue';
@@ -23,7 +24,9 @@ defineProps({
         </div>
         <div class="fragment-task-list__body__task__icon" v-if="!info.status">
           <LinkComponent :to="info.link">
-            <Icon type="arrow-right" />
+            <ButtonLink>
+              <Icon type="arrow-right" />
+            </ButtonLink>
           </LinkComponent>
         </div>
       </div>

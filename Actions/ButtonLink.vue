@@ -78,6 +78,8 @@ export default {
 button {
     background-color: transparent;
     border: none;
+    border-top: var(--spacing-xxxsmall) solid transparent;
+    border-bottom: var(--spacing-xxxsmall) solid transparent;
     color: var(--blue-1);
     column-gap: var(--spacing-xsmall);
     cursor: pointer;

@@ -4,7 +4,7 @@
             <thead>
                 <tr>
                     <th v-for="th in tableHeader" :key="th" :class="{'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th)}" v-on:click="sort(th)">
-                        <BodyMedium>
+                        <BodyMedium strong>
                             {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
                         </BodyMedium>
                     </th>
@@ -44,16 +44,24 @@
                     <td v-if="actions">
                         <div class="action-buttons">
                             <div v-if="canEdit">
-                                <Icon class="edit" size="1.25rem" type="edit" v-on:click="editar(td.id)"/>
+                                <ButtonLink>
+                                    <Icon size="1.25rem" type="edit" v-on:click="editar(td.id)"/>
+                                </ButtonLink>
                             </div>
                             <div v-if="canDownload">
-                                <Icon class="download" size="1.25rem" type="download" v-on:click="download(td.file_name)"/>
+                                <ButtonLink>
+                                    <Icon class="download" size="1.25rem" type="download" v-on:click="download(td.file_name)"/>
+                                </ButtonLink>
                             </div>
                             <div v-if="canDelete">
-                                <Icon class="delete" size="1.25rem" type="x-square" v-on:click="deletar(td.id || td.file_name)" />
+                                <ButtonLink>
+                                    <Icon class="delete" size="1.25rem" type="x-square" v-on:click="deletar(td.id || td.file_name)" />
+                                </ButtonLink>
                             </div>
                             <div v-if="customAction">
-                                <slot :id="td.id" :item="td"></slot>
+                                <ButtonLink>
+                                    <slot :id="td.id" :item="td"></slot>
+                                </ButtonLink>
                             </div>
                         </div>
                     </td>
@@ -74,6 +82,7 @@ import ButtonPagination from '@/components/shared/Actions/ButtonPagination.vue';
 import ButtonSwitch from '@/components/shared/Actions/ButtonSwitch.vue';
 import Tooltip from '../../Inputs/Tooltip/Tooltip.vue';
 import { CallBackend } from '@/services/_backend';
+import ButtonLink from '../../Actions/ButtonLink.vue';
 
 const itemsPerTable = 10;
 
@@ -129,7 +138,7 @@ export default {
             return this.columns || [];
         },
     },
-    components: { Icon, ButtonPagination, ButtonSwitch, Tooltip },
+    components: { Icon, ButtonPagination, ButtonSwitch, Tooltip, ButtonLink, BodyMedium },
     watch: {
         search() {
             this.tableEntries = this.entries.filter(entry => {
@@ -339,13 +348,13 @@ export default {
     cursor: pointer;
 }
 
+.delete:hover {
+    color: var(--purple-1);
+}
+
 .download {
     color: var(--blue-2);
     cursor: pointer;
-}
-
-.action-buttons > *:hover {
-    opacity: 0.5;
 }
 
 .arrows-table{

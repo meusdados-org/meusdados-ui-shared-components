@@ -346,7 +346,7 @@
   .multiselect__option--selected {
     background: #f3f3f3;
     color: #35495e;
-    font-weight: bold;
+    font-weight: 600;
   }
 
   .multiselect__option--selected::after {

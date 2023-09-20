@@ -4,7 +4,7 @@
             <span class="collapse-icon"
                 @click="toggleSideBar"
                 :class="{ 'rotate-180': collapsed }">
-                <Icon size="1.25rem" type="arrow-left" :align="false"/>
+                <ButtonIcon class="icon" type="arrow-left" size="small"/>
             </span>
             <h1 class="logo" :class="{ collapsed }">
                 <span v-if="collapsed">
@@ -306,9 +306,8 @@ export default {
     transition: 0.2s linear;
 }
 
-.collapse-icon:hover {
-    background-color: var(--purple-1);
-    transition: none;
+.icon {
+    border-radius: var(--border-radius-full);
 }
 
 .rotate-180 {

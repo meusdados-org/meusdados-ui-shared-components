@@ -1,5 +1,5 @@
 <template>
-    <ButtonPrimary :disabled="disabled" :icon="type" onlyIcon>
+    <ButtonPrimary :disabled="disabled" :icon="type" :size="size" :strokeWidth="strokeWidth" onlyIcon>
     </ButtonPrimary>
 </template>
 
@@ -22,6 +22,10 @@ export default {
             type: String,
             default: 'medium'
         },
+        strokeWidth: {
+            type: String,
+            default: '2'
+        }
     },
     components: {
         Icon,

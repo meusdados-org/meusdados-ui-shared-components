@@ -2,6 +2,7 @@
     <button :type="type" :class="{
         nohover,
         sameColorBackground,
+        mini: size === 'mini',
         small: size === 'small',
         medium: size === 'medium',
         large: size === 'large',
@@ -9,7 +10,7 @@
         dark
     }" :disabled="disabled">
         <span class="text-button">
-            <Icon :align="false" v-if="icon" :type="icon" :size="iconSize" stroke-width="2" />
+            <Icon :align="false" v-if="icon" :type="icon" :size="iconSize" :stroke-width="strokeWidth" />
             <LabelSmall v-if="size === 'small'">
                 <slot></slot>
             </LabelSmall>
@@ -64,6 +65,10 @@ export default {
         onlyIcon: {
             type: Boolean,
             default: false
+        },
+        strokeWidth: {
+            type: String,
+            default: '2'
         }
     },
     components: { LabelSmall, LabelMedium, LabelLarge, Icon },
@@ -129,10 +134,16 @@ button.onlyIcon {
     padding: 0;
 }
 
+button.onlyIcon > .text-button {
+    gap: 0;
+}
+
 button.onlyIcon.mini {
     width: var(--spacing-small);
     height: var(--spacing-small);
+    padding: 0;
     color: var(--white);
+    border-radius: var(--border-radius-mini);
 }
 
 button.onlyIcon.small {

@@ -1,8 +1,8 @@
 <template>
     <LinkComponent :to="to" class="link">
-        <span class="icon" v-if="icon" :class="{ collapsed }">
+        <ButtonLink v-if="icon" class="icon">
             <IconVue :type="icon" size="1.25rem"/>
-        </span>
+        </ButtonLink>
         <span v-if="!collapsed">
             <BodyMedium>
                 <transition name="fade">
@@ -18,6 +18,7 @@ import { collapsed } from './state'
 import LinkComponent from '@/components/shared/Actions/Link/LinkComponent.vue'
 import IconVue from '@/components/shared/Icon/Icon.vue';
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
+import ButtonLink from '../../Actions/ButtonLink.vue';
 
 export default {
     name: "BarraLateralLink",
@@ -28,7 +29,7 @@ export default {
     setup() {
         return { collapsed };
     },
-    components: { LinkComponent, IconVue }
+    components: { LinkComponent, IconVue, ButtonLink }
 }
 </script>
 
