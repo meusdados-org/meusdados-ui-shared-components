@@ -1,6 +1,6 @@
 <script setup>
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
-import TitleLarge from '@/components/shared/Typography/Title/TitleLarge.vue';
+import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
 import pattern1 from './assets/img/pattern1.svg';
 import pattern2 from './assets/img/pattern2.svg';
 import meusDadosColorido from './assets/img/meus-dados-colorido.png';
@@ -28,7 +28,7 @@ const props = defineProps({
           <BodyMedium strong>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
         </div>
         <div class="main-title">
-          <TitleLarge>{{ props.mainTitle }}</TitleLarge>
+          <TitleSmall>{{ props.mainTitle }}</TitleSmall>
         </div>
         <slot name="header"></slot>
       </header>
