@@ -1,5 +1,5 @@
 <template>
-    <input type="checkbox" :disabled="isDisabled" :name="name" :id="id" :checked="value" @input="$emit('update:checked', $event.target.checked)" placeholder=" " v-on:click="$emit('switchFlag')" :class="{ mini, red }"/>
+    <input type="checkbox" :disabled="isDisabled" :name="name" :id="id" :checked="value" @input="$emit('update:checked', $event.target.checked)" placeholder=" " v-on:click="$emit('switchFlag')" :class="{ small, red }"/>
     <text1 v-if="showLabel">{{ label }}</text1>
 </template>
 
@@ -22,7 +22,7 @@ export default {
             required: false,
             default: false
         },
-        mini: {
+        small: {
             type: Boolean,
             default: true
         },
@@ -70,9 +70,9 @@ input:focus {
    outline-offset: var(--spacing-xxxsmall);
 }
 
-.mini {
-    width: 18px;
-    height: 12px;
+.small {
+    width: var(--spacing-large);
+    height: var(--spacing-small);
 }
 
 input::after {
@@ -88,10 +88,9 @@ input::after {
     transition: left .25s;
 }
 
-.mini::after {
-    height: 7px;
-    width: 7px;
-    left: 30%;
+.small::after {
+    height: 10px;
+    width: 10px;
 }
 
 input:checked {
@@ -108,10 +107,6 @@ input.red:checked ~ span{
 
 input:checked::after {
     left: 75%;
-}
-
-.mini:checked::after {
-    left: 70%;
 }
 
 </style>
