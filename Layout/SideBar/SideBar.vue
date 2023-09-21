@@ -217,6 +217,13 @@ export default {
                     this.primeiroAcesso = true;
                 }
                 localStorage.setItem('usuario', JSON.stringify(response.data));
+                if (this.usuario.perfil_obj.nome === 'Master') {
+                    this.links[5].children.push({
+                        title: 'Conta e cadastro',
+                        to: '/configuracoes/conta-cadastro',
+                        icon: 'settings'
+                    })
+                }
             })
         },
         activateGroup(status, titleHeader) {
