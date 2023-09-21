@@ -19,7 +19,7 @@ const props = defineProps({
   <div class="wrapper">
     <header class="logo-header">
       <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco" width="100" />
-      <BodyMedium class="upperTitle" v-if="upperTitle">{{ upperTitle }}</BodyMedium>
+      <BodyMedium class="upperTitle" v-if="upperTitle" strong>{{ upperTitle }}</BodyMedium>
       <div style="width: 100px;"></div>
     </header>
     <div class="container">
