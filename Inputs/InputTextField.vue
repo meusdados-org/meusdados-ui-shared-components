@@ -1,7 +1,14 @@
 
 <template>
   <div class="wrapper-inputTextField">
+
     <div class="container-InputTextFieldField" :class="{ formGroupVersion, error }">
+        <!-- <ButtonLink class="switch" v-if="isPassword" v-on:click="switchVisibility">
+            <Icon
+                :type="passwordFieldType === 'password' ? 'eye' : 'eye-off'"
+                size="13px"
+            />
+        </ButtonLink> -->
       <input
         v-if="!mask"
         v-bind="inputProps"
@@ -33,6 +40,8 @@
 </template>
 
 <script>
+import Icon from '../Icon/Icon.vue';
+import ButtonLink from '../Actions/ButtonLink.vue';
 import FormError from './Form/FormError.vue';
 
 export default {
@@ -106,7 +115,7 @@ export default {
     created() {
         this.isPassword = this.type === "password";
     },
-    components: { FormError }
+    components: { FormError, Icon, ButtonLink }
 };
   </script>
 
@@ -206,6 +215,13 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.switch {
+    position: relative;
+    bottom: -25px;
+    width: fit-content;
+    right: -93%;
 }
 
 </style>

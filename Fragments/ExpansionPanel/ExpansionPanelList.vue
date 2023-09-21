@@ -3,6 +3,7 @@ import { ref, watch } from 'vue';
 import ExpansionPanel from './ExpansionPanel.vue';
 import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
+import ButtonLink from '../../Actions/ButtonLink.vue';
 
 const open = ref<number>(0);
 
@@ -57,6 +58,14 @@ const switchOpen = (index: number) => {
   open.value = index;
 }
 
+const isOpen = (i, item) => {
+  // if (props.erroItem && props.erroItem === item) {
+  //   open.value = i;
+  //   return true;
+  // }
+  return open.value === i;
+}
+
 </script>
 
 <template>
@@ -66,16 +75,16 @@ const switchOpen = (index: number) => {
         <FormError v-if="erroItem && erroItem === item">
           {{ erroResponse }}
         </FormError>
-        <slot name="content" :item="item"></slot>
+        <slot name="content" :item="item" :i="i"></slot>
       </template>
     </ExpansionPanel>
     <div class="expansion-panel-container" v-on:click="addNewItem">
       <div class="expansion-panel-header">
         <div class="expansion-panel-title">
-          <BodyLarge style="color: var(--purple-1); font-weight: 400;">
-            <Icon type="plus" size="16px"/>
-            {{ itemName }}
-          </BodyLarge>
+          <ButtonLink size="large">
+            <Icon type="plus"/>
+            Adicionar {{ itemName }}
+          </ButtonLink>
         </div>
       </div>
     </div>

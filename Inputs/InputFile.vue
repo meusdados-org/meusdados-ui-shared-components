@@ -3,9 +3,9 @@
         <div class="input-button-container">
             <label class="label">
                 <input class="input" type="file" ref="file" @change="selectFile" />
-                <span>{{ label }}</span>
+                <LabelSmall class="inputLabel">{{ label }}</LabelSmall>
             </label>
-            <span v-if="currentFile"><BodyMedium :class="{'errorText': error}">{{ currentFile.name }}</BodyMedium></span>
+            <span v-if="currentFile || value"><BodyMedium :class="{'errorText': error}">{{ currentFile?.name || value }}</BodyMedium></span>
         </div>
         <BodySmall class="error" v-if="error">{{ errorMessage }}</BodySmall>
     </div>
@@ -14,14 +14,16 @@
 <script>
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
+import LabelSmall from '../Typography/Label/LabelSmall.vue';
 
 export default {
     name: 'InputFile',
     emits: ['select'],
     components: {
-        BodyMedium,
-        BodySmall
-    },
+    BodyMedium,
+    BodySmall,
+    LabelSmall
+},
     props: {
         value: {
             type: String,
@@ -109,6 +111,10 @@ export default {
     column-gap: var(--spacing-small);
 }
 
+.inputLabel {
+    line-height: 0;
+}
+
 label.label input[type="file"] {
   position: absolute;
   top: -1000px;
@@ -116,8 +122,8 @@ label.label input[type="file"] {
 
 .label {
     width: fit-content;
-    padding: 0 var(--spacing-medium);
-    height: 2.5rem;
+    padding: 7px var(--spacing-small);
+    height: var(--spacing-small);
     display: flex;
     font-weight: 600;
     align-items: center;
