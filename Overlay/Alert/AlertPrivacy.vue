@@ -21,14 +21,14 @@ const redirect = () => {
         Utilizamos ferramentas e serviços de terceiros que utilizam cookies, elas nos ajudam a oferecer uma melhor experiência. Ao continuar a visualizar nosso site, você concorda com o uso de cookies.
       </BodySmall>
       <ButtonLink
-        sameColorBackground
+        dark
         :bold="false"
         size="small"
         @click="redirect">
         Obtenha mais informações
       </ButtonLink>
       <ButtonPrimary
-        sameColorBackground
+        dark
         @click="show = false"
         size="small">
         Fechar

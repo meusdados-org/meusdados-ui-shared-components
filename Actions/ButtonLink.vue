@@ -1,5 +1,5 @@
 <template>
-    <button :class="{ 'boldButton': bold, borderBottom, nohover, sameColorBackground }" :disabled="disabled">
+    <button :class="{ 'boldButton': bold, borderBottom, nohover, dark }" :disabled="disabled">
         <Icon v-if="type" :type="type" :size="iconSize"/>
         <LabelSmall v-if="size === 'small'">
             <slot></slot>
@@ -42,7 +42,7 @@ export default {
             type: Boolean,
             default: false
         },
-        sameColorBackground: {
+        dark: {
             type: Boolean,
             default: false
         },
@@ -94,14 +94,11 @@ button.dark:hover {
     border-bottom: var(--spacing-xxxsmall) solid var(--white);
 }
 
-button:not(.sameColorBackground):hover {
+button:not(.dark):hover {
     color: var(--purple-1);
     border-bottom: var(--spacing-xxxsmall) solid var(--purple-1);
 }
 
-button.sameColorBackground:hover {
-    border-bottom: var(--spacing-xxxsmall) solid var(--blue-1);
-}
 
 
 button:focus {
@@ -109,7 +106,7 @@ button:focus {
 }
 
 button.dark:focus {
-    border-bottom: var(--spacing-xxxsmall) solid var(--purple-1);
+    border-bottom: var(--spacing-xxxsmall) solid var(--black);
 }
 
 button:disabled {
