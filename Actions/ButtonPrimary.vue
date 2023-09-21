@@ -80,7 +80,7 @@ export default {
     created() {
         const iconSizes = {
             small: '12px',
-            medium: '14px',
+            medium: '15px',
             large: '18px'
         }
 

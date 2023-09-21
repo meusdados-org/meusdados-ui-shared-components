@@ -1,5 +1,5 @@
 <template>
-    <vue-feather :type="type" :class="{svg: align}" :size="size" :stroke-width="strokeWidth"></vue-feather>
+    <vue-feather class="icon" :type="type" :class="{svg: align}" :size="size" :stroke-width="strokeWidth"></vue-feather>
 </template>
 
 <script>
@@ -33,5 +33,9 @@ export default {
 .svg {
     top: var(--spacing-xxxsmall);
     position: relative;
+}
+
+.icon {
+    line-height: 125%;
 }
 </style>
