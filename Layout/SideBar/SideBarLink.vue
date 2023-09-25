@@ -1,6 +1,6 @@
 <template>
     <LinkComponent :to="to" class="link">
-        <ButtonLink v-if="icon" class="icon" :type="icon" onlyIcon>
+        <ButtonLink v-if="icon" class="icon" :type="icon" size="large" onlyIcon>
         </ButtonLink>
         <span v-if="!collapsed">
             <BodyMedium>
