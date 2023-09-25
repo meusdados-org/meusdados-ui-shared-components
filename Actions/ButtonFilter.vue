@@ -48,8 +48,13 @@ export default {
 .filter {
     min-width: 144px;
     max-width: fit-content;
+    height: var(--spacing-large);
     background-color: var(--white);
     border-radius: var(--border-radius-small);
     box-shadow: var(--box-shadow-1);
+}
+
+.multiselect__select {
+    top: 9px;
 }
 </style>

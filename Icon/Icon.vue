@@ -28,14 +28,3 @@ export default {
     }
 }
 </script>
-
-<style>
-.svg {
-    top: var(--spacing-xxxsmall);
-    position: relative;
-}
-
-.icon {
-    line-height: 125%;
-}
-</style>

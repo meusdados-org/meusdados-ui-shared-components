@@ -1,7 +1,6 @@
 <template>
     <LinkComponent :to="to" class="link">
-        <ButtonLink v-if="icon" class="icon">
-            <IconVue :type="icon" size="1.25rem"/>
+        <ButtonLink v-if="icon" class="icon" :type="icon" onlyIcon>
         </ButtonLink>
         <span v-if="!collapsed">
             <BodyMedium>
@@ -47,6 +46,7 @@ export default {
 .link {
     display: flex;
     align-items: center;
+    gap: var(--spacing-small);
 
     cursor: pointer;
     position: relative;
@@ -73,8 +73,6 @@ export default {
 
 .link .icon {
     flex-shrink: 0;
-    width: 1.563rem;
-    margin-right: 0.625rem;
 }
 
 .icon.collapsed {

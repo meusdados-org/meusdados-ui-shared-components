@@ -1,15 +1,18 @@
 <template>
-    <button :class="{ 'boldButton': bold, borderBottom, nohover, dark }" :disabled="disabled">
-        <Icon v-if="type" :type="type" :size="iconSize"/>
-        <LabelSmall v-if="size === 'small'">
-            <slot></slot>
-        </LabelSmall>
-        <LabelMedium v-else-if="size === 'medium'">
-            <slot></slot>
-        </LabelMedium>
-        <LabelLarge v-else>
-            <slot></slot>
-        </LabelLarge>
+    <button :class="{ dark }" :disabled="disabled">
+        <div class="button" :class="{ onlyIcon }">
+            <Icon v-if="type && !afterIcon" :type="type" :size="iconSize_"/>
+            <LabelSmall v-if="size === 'small' && !onlyIcon">
+                <slot></slot>
+            </LabelSmall>
+            <LabelMedium v-else-if="size === 'medium' && !onlyIcon">
+                <slot></slot>
+            </LabelMedium>
+            <LabelLarge v-else-if="!onlyIcon">
+                <slot></slot>
+            </LabelLarge>
+            <Icon v-if="type && afterIcon" :type="type" :size="iconSize_"/>
+        </div>
     </button>
 </template>
 
@@ -50,6 +53,18 @@ export default {
             type: String,
             default: 'medium'
         },
+        afterIcon: {
+            type: Boolean,
+            default: false
+        },
+        onlyIcon: {
+            type: Boolean,
+            default: false
+        },
+        iconSize: {
+            type: String,
+            default: undefined
+        }
     },
     components: {
         Icon,
@@ -59,16 +74,20 @@ export default {
     },
     data() {
         return {
-            iconSize: '12px'
+            iconSize_: '12px'
         }
     },
     created() {
         const iconSizes = {
-            small: '12px',
-            medium: '14px',
-            large: '18px'
+            small: '10px',
+            medium: '12px',
+            large: '16px'
         }
-        this.iconSize = iconSizes[this.size];
+        this.iconSize_ = iconSizes[this.size];
+        if (this.iconSize) {
+            this.iconSize_ = this.iconSize;
+        }
+
     },
 }
 </script>
@@ -81,22 +100,40 @@ button {
     border-top: var(--spacing-xxxsmall) solid transparent;
     border-bottom: var(--spacing-xxxsmall) solid transparent;
     color: var(--blue-1);
-    column-gap: var(--spacing-xsmall);
     cursor: pointer;
     padding: 0;
+    text-decoration: none;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: var(--spacing-xxxsmall);
+}
+
+.button.onlyIcon {
+    column-gap: 0;
 }
 
 button.dark {
     color: var(--white);
 }
 
-button.dark:hover {
-    border-bottom: var(--spacing-xxxsmall) solid var(--white);
+button:not(.dark):hover, button:not(.dark):hover > .button {
+    color: var(--purple-1) !important;
 }
 
 button:not(.dark):hover {
-    color: var(--purple-1);
     border-bottom: var(--spacing-xxxsmall) solid var(--purple-1);
+}
+
+button.dark:hover, button.dark:hover > .button {
+    color: var(--white) !important;
+}
+
+button.dark:hover {
+    border-bottom: var(--spacing-xxxsmall) solid var(--white);
 }
 
 

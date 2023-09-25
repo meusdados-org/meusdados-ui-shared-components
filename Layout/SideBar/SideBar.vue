@@ -362,12 +362,15 @@ export default {
 }
 
 .logo {
-    padding: var(--spacing-large) var(--spacing-medium);
-    padding-bottom: var(--spacing-small);
+    padding: var(--spacing-large);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .logo:has(.logo-open)  {
     display: flex;
+    justify-content: flex-start;
     padding: var(--spacing-large);
     padding-bottom: var(--spacing-small);
 }

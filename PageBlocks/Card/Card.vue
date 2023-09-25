@@ -1,6 +1,6 @@
 <template>
   <div class="card-wrapper">
-      <div class="card-container">
+      <div class="card-container" :style="{ padding: customPadding }">
           <div class="card-header">
               <BodyMedium class="main-title">{{ title }}</BodyMedium>
               <slot name="action">
@@ -40,6 +40,11 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    customPadding: {
+      type: String,
+      required: false,
+      default: 'var(--spacing-small)'
     }
   },
   components: {
@@ -76,6 +81,7 @@ export default {
   display: flex;
   text-align: left;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
   font-size: 100%;
   color: var(--gray-2);

@@ -12,8 +12,8 @@
       </template>
       <template v-slot:content>
         <div class="responsavel" v-if="!isTitular">
+          <Icon size="12px" type="user" />
           <BodyMedium>
-            <Icon size="0.8rem" type="user" />
             {{ column.responsaveis?.length > 0 ? column.responsaveis.map(x => x.nome).join(', ') : 'Sem área/usuário específico' }}
           </BodyMedium>
         </div>
@@ -176,7 +176,7 @@ export default {
 
 .responsavel {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     column-gap: var(--spacing-xxsmall);
     margin-bottom: var(--spacing-xsmall);
 }

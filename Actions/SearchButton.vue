@@ -58,7 +58,6 @@ export default {
 }
 
 .icon{
-    top: 0rem;
     color: var(--gray-1);
 }
 

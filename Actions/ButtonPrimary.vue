@@ -79,9 +79,9 @@ export default {
     },
     created() {
         const iconSizes = {
-            small: '12px',
-            medium: '15px',
-            large: '18px'
+            small: '10px',
+            medium: '12px',
+            large: '16px'
         }
 
         this.iconSize = iconSizes[this.size]
