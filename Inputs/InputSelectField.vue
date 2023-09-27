@@ -7,7 +7,9 @@
             @close="handleClose">
                 <template v-slot:caret="slotProps">
                     <div @mousedown.prevent.stop="slotProps.toggle()" class="multiselect__select">
-                    <Icon type="chevron-down" size=" var(--spacing-small)" stroke-width="1"/></div>
+                    <Icon type="chevron-down" size="16px" stroke-width="1"/>
+                    <Tooltip v-if="tooltip">{{tooltip}}</Tooltip>
+                </div>
                 </template>
                 <template v-slot:noOptions>
                     A lista está vazia.
@@ -28,12 +30,14 @@ import Multiselect from './vue-multiselect/src/Multiselect.vue';
 import '@/assets/css/vue-multiselect.css';
 import FormError from './Form/FormError.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
+import Tooltip from '@/components/shared/Inputs/Tooltip/Tooltip.vue';
 export default {
     name: 'InputSelectField',
     components: {
         Multiselect,
         Icon,
-        FormError
+        FormError,
+        Tooltip
     },
     props: {
         placeholder: String,
@@ -55,6 +59,7 @@ export default {
             type: Array,
             default: undefined
         },
+        tooltip: String,
         required: {
             type: Boolean,
             default: false

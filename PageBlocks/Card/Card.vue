@@ -4,8 +4,7 @@
           <div class="card-header">
               <BodyMedium class="main-title">{{ title }}</BodyMedium>
               <slot name="action">
-                <ButtonLink @click="$emit('close')" v-if="hasAction">
-                  <Icon class="x-icon" type="x"/>
+                <ButtonLink @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
                 </ButtonLink>
               </slot>
           </div>
@@ -81,7 +80,7 @@ export default {
   display: flex;
   text-align: left;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
   font-size: 100%;
   color: var(--gray-2);

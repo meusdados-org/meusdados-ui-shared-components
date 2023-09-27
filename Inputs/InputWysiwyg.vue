@@ -69,7 +69,7 @@
       @dragleave="handleDragLeave"
       aria-label="Escreva um comentário..."
       aria-placeholder="Escreva um comentário..."
-      :style="{ 'max-height': maxHeight }"
+      :style="{ 'max-height': maxHeight, 'height': fixedHeight }"
       @paste="handlePaste"
     />
     <div class="attachments" v-if="files.length > 0">
@@ -101,6 +101,10 @@ export default {
         default: false,
       },
       maxHeight: {
+        type: String,
+        default: 'none',
+      },
+      fixedHeight: {
         type: String,
         default: 'none',
       },

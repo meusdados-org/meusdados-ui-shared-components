@@ -44,6 +44,7 @@ const emit = defineEmits(['close']);
 
   display: flex;
   align-items: center;
+  justify-content: center;
   column-gap: var(--spacing-xsmall);
 }
 

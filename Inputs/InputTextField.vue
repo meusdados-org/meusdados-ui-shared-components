@@ -2,7 +2,7 @@
 <template>
   <div class="wrapper-inputTextField">
 
-    <div class="container-InputTextFieldField" :class="{ formGroupVersion, error }">
+    <div class="container-InputTextFieldField" :class="{ formGroupVersion, error, search }">
         <!-- <ButtonLink class="switch" v-if="isPassword" v-on:click="switchVisibility">
             <Icon
                 :type="passwordFieldType === 'password' ? 'eye' : 'eye-off'"
@@ -32,6 +32,7 @@
         :class="{'same-style': sameStyle }"
       />
       <label v-if="label">{{ label }}</label>
+      <Icon v-if="search" class="search-icon" type="search" size="12px" />
     </div>
     <FormError v-if="error">
       Este campo é obrigatório
@@ -79,6 +80,10 @@ export default {
             default: false
         },
         sameStyle: {
+            type: Boolean,
+            default: false
+        },
+        search: {
             type: Boolean,
             default: false
         }
@@ -192,11 +197,16 @@ export default {
     padding: 0 var(--spacing-xsmall);
 }
 
-.container-InputTextFieldField  input:focus + label,
-.container-InputTextFieldField  input:not(:placeholder-shown) + label{
+.container-InputTextFieldField:not(.search)  input:focus + label,
+.container-InputTextFieldField:not(.search)  input:not(:placeholder-shown) + label{
     font-size: 12px;
     top: -12px;
     color: var(--purple-1);
+}
+
+.container-InputTextFieldField.search  input:focus + label,
+.container-InputTextFieldField.search  input:not(:placeholder-shown) + label{
+    display: none;
 }
 
 .container-InputTextFieldField  input:not(:focus) + label,
@@ -222,6 +232,12 @@ input::-webkit-inner-spin-button {
     bottom: -25px;
     width: fit-content;
     right: -93%;
+}
+
+.search-icon {
+    position: absolute;
+    right: var(--spacing-xsmall);
+    bottom: var(--spacing-xsmall);
 }
 
 </style>
