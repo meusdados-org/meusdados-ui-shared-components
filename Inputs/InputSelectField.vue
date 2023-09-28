@@ -116,4 +116,10 @@ export default {
     flex-direction: column;
     align-items: flex-start;
 }
+
+.multiselect__select {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxsmall);
+}
 </style>
