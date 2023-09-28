@@ -4,7 +4,7 @@ import DialogCard from './DialogCard.vue'
 
 const Dialog = {
   install(app) {
-    app.config.globalProperties.$dialog = ({ type = '', title = '', message = '', showCancelButton = false } = {}) => {
+    app.config.globalProperties.$dialog = ({ type = '', title = '', message = '', showCancelButton = false, cancelButtonLabel = 'Cancelar', buttonLabel = 'Confirmar' } = {}) => {
       return new Promise((resolve, reject) => {
         const dialogApp = createApp(DialogCard, {
           type,
@@ -12,7 +12,9 @@ const Dialog = {
           message,
           showCancelButton,
           resolve,
-          reject
+          reject,
+          cancelButtonLabel,
+          buttonLabel
         })
 
 

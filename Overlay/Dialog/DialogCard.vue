@@ -10,8 +10,8 @@
                 <BodyMedium>{{ message }}</BodyMedium>
             </div>
             <div class="dialog-buttons">
-                <ButtonLink id="button-cancelar-dialog" v-if="showCancelButton" @click="onCancel">Cancelar</ButtonLink>
-                <ButtonPrimary id="button-confirmar-dialog" @click="onConfirm">Confirmar</ButtonPrimary>
+                <ButtonLink id="button-cancelar-dialog" v-if="showCancelButton" @click="onCancel">{{ cancelButtonLabel }}</ButtonLink>
+                <ButtonPrimary id="button-confirmar-dialog" @click="onConfirm">{{ buttonLabel }}</ButtonPrimary>
             </div>
         </div>
     </div>
@@ -40,7 +40,15 @@ export default {
         message: String,
         showCancelButton: Boolean,
         resolve: Function,
-        reject: Function
+        reject: Function,
+        cancelButtonLabel: {
+            type: String,
+            default: 'Cancelar'
+        },
+        buttonLabel: {
+            type: String,
+            default: 'Confirmar'
+        }
     },
     data() {
         return {
