@@ -28,7 +28,7 @@
       </template>
     </Card>
   </Draggable>
-  <ModalTemplate :open="open" @close="open = false">
+  <ModalTemplate :open="open">
     <CardNovaSolicitacao :id_etapa="column.id" @refresh="$emit('refresh')" @close="open = false"/>
   </ModalTemplate>
 </template>
