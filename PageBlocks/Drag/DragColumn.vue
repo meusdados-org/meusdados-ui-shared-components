@@ -129,6 +129,7 @@ export default {
 .drag-column{
   display: flex;
   width: 18rem;
+  text-align: left;
 }
 
 .background-options {
