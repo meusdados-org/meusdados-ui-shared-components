@@ -114,4 +114,11 @@ input[type="date"]:focus::-webkit-calendar-picker-indicator {
     color: var(--black);
 }
 
+
+.container-container-date > input:not(.same-style):disabled,
+.container-container-date > input:not(.same-style):disabled + label{
+    border-bottom-color: var(--gray-2);
+    color: var(--gray-2);
+}
+
 </style>
