@@ -2,32 +2,41 @@
 import ButtonLink from '../Actions/ButtonLink.vue';
 import LinkComponent from '../Actions/Link/LinkComponent.vue';
 import Icon from '../Icon/Icon.vue';
+import Tooltip from '../Inputs/Tooltip/Tooltip.vue';
 import BodyMedium from '../Typography/Body/BodyMedium.vue';
 
 defineProps({
   taskList: {
     type: Object,
     required: true
+  },
+  collabVersion: {
+    type: Boolean,
+    default: false
   }
 })
 </script>
 
 <template>
   <div class="fragment-task-list-container">
-    <div class="fragment-task-list__body">
+    <div class="fragment-task-list__body" :class="{ collabVersion }">
       <div class="fragment-task-list__body__task" v-for="[task, info] in Object.entries(taskList)" :key="task.id">
         <div class="fragment-task-list__body__task__text">
           <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status }">
             <Icon type="check" size="9px" :align="false" v-if="info.status" />
+            <Icon type="git-commit" size="9px" :align="false" v-else-if="collabVersion" />
           </span>
-          <BodyMedium>{{ task }}</BodyMedium>
+          <BodyMedium>{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
         </div>
-        <div class="fragment-task-list__body__task__icon" v-if="!info.status">
+        <div class="fragment-task-list__body__task__icon" v-if="!info.status && info.link">
           <LinkComponent :to="info.link">
             <ButtonLink>
               <Icon type="arrow-right" />
             </ButtonLink>
           </LinkComponent>
+        </div>
+        <div v-else-if="info.data" style="color: var(--gray-1); flex-shrink: 0; padding-right: 1rem;">
+          <BodyMedium >{{ info.data }}</BodyMedium>
         </div>
       </div>
     </div>
@@ -55,6 +64,10 @@ defineProps({
   align-items: flex-start;
   gap: var(--spacing-small);
   width: 100%;
+}
+
+.fragment-task-list__body.collabVersion {
+  gap: var(--spacing-xsmall);
 }
 
 .fragment-task-list__body__task {
