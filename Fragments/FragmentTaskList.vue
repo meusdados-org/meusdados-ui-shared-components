@@ -5,7 +5,7 @@ import Icon from '../Icon/Icon.vue';
 import Tooltip from '../Inputs/Tooltip/Tooltip.vue';
 import BodyMedium from '../Typography/Body/BodyMedium.vue';
 
-defineProps({
+const props = defineProps({
   taskList: {
     type: Object,
     required: true
@@ -15,18 +15,21 @@ defineProps({
     default: false
   }
 })
+
 </script>
 
 <template>
   <div class="fragment-task-list-container">
     <div class="fragment-task-list__body" :class="{ collabVersion }">
       <div class="fragment-task-list__body__task" v-for="[task, info] in Object.entries(taskList)" :key="task.id">
-        <div class="fragment-task-list__body__task__text">
-          <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status }">
-            <Icon type="check" size="9px" :align="false" v-if="info.status" />
-            <Icon type="git-commit" size="9px" :align="false" v-else-if="collabVersion" />
+        <div class="fragment-task-list__body__task__text" :class="{ collabVersion }">
+          <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status, show: !info.customIcon }">
+            <Icon type="check" size="9px" :align="false" v-if="info.status && !info.customIcon" />
           </span>
+          <Icon :type="info.customIcon" size="12px" :align="false" v-if="info.customIcon" />
           <BodyMedium>{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
+          <template v-if="info.data">-</template>
+          <BodyMedium v-if="info.data">{{ info.data }}</BodyMedium>
         </div>
         <div class="fragment-task-list__body__task__icon" v-if="!info.status && info.link">
           <LinkComponent :to="info.link">
@@ -34,9 +37,6 @@ defineProps({
               <Icon type="arrow-right" />
             </ButtonLink>
           </LinkComponent>
-        </div>
-        <div v-else-if="info.data" style="color: var(--gray-1); flex-shrink: 0; padding-right: 1rem;">
-          <BodyMedium >{{ info.data }}</BodyMedium>
         </div>
       </div>
     </div>
@@ -67,7 +67,7 @@ defineProps({
 }
 
 .fragment-task-list__body.collabVersion {
-  gap: var(--spacing-xsmall);
+  gap: var(--spacing-xxsmall);
 }
 
 .fragment-task-list__body__task {
@@ -90,6 +90,10 @@ defineProps({
   gap: var(--spacing-xsmall);
 }
 
+.fragment-task-list__body__task__text.collabVersion {
+  color: var(--gray-1);
+}
+
 .fragment-task-list__body__task__indicator {
   display: flex;
   flex-direction: row;
@@ -105,5 +109,9 @@ defineProps({
 .fragment-task-list__body__task__indicator.active {
   background-color: var(--green-1);
   color: var(--white);
+}
+
+.fragment-task-list__body__task__indicator:not(.show) {
+  display: none;
 }
 </style>

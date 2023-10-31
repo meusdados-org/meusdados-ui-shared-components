@@ -5,6 +5,10 @@ import CollabChat from './CollabChat.vue';
 const emit = defineEmits(['download']);
 
 const props = defineProps({
+  dataAbertura: {
+    type: String,
+    default: '29/11/2022 - 14:44'
+  },
   log: {
     type: Array,
     default: [
@@ -67,10 +71,32 @@ const props = defineProps({
             ]
           }
         ]
+      },
+      {
+        'taskList': {
+          'Tipo de Solicitação - Alterado de "requisição de dados" para "retificação"': {
+            'customIcon': 'edit-3',
+            'status': true,
+            'data': '01/12/2022 9:45'
+          },
+          'Status - Atualizado de "fechado" para "aberto"': {
+            'customIcon': 'edit-3',
+            'status': true,
+            'data': '01/12/2022 9:45'
+          },
+        }
       }
     ]
   }
 })
+
+const aberturaTaskList = {
+  'Solicitação aberta': {
+    'customIcon': 'file-text',
+    'status': true,
+    'data': props.dataAbertura,
+  }
+}
 
 const isLastItem = (index) => {
   return index === props.log?.length - 1;
@@ -80,6 +106,7 @@ const isLastItem = (index) => {
 
 <template>
   <div class="collab-story">
+    <FragmentTaskList :taskList="aberturaTaskList" :collabVersion="true" />
     <template v-for="(story, index) in log" :key="index">
       <template v-if="story.mensagens">
         <CollabChat :mensagens="story.mensagens" @download="emit('download')"/>
@@ -100,7 +127,7 @@ const isLastItem = (index) => {
   overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  row-gap: var(--spacing-large);
+  row-gap: var(--spacing-medium);
 }
 
 .collab-story > * {
