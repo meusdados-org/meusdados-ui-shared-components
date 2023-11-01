@@ -4,6 +4,7 @@ import LinkComponent from '../Actions/Link/LinkComponent.vue';
 import Icon from '../Icon/Icon.vue';
 import Tooltip from '../Inputs/Tooltip/Tooltip.vue';
 import BodyMedium from '../Typography/Body/BodyMedium.vue';
+import { dataHora } from '@/utils/data';
 
 const props = defineProps({
   taskList: {
@@ -21,23 +22,25 @@ const props = defineProps({
 <template>
   <div class="fragment-task-list-container">
     <div class="fragment-task-list__body" :class="{ collabVersion }">
-      <div class="fragment-task-list__body__task" v-for="[task, info] in Object.entries(taskList)" :key="task.id">
-        <div class="fragment-task-list__body__task__text" :class="{ collabVersion }">
-          <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status, show: !info.customIcon }">
-            <Icon type="check" size="9px" :align="false" v-if="info.status && !info.customIcon" />
-          </span>
-          <Icon :type="info.customIcon" size="12px" :align="false" v-if="info.customIcon" />
-          <BodyMedium>{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
-          <template v-if="info.data">-</template>
-          <BodyMedium v-if="info.data">{{ info.data }}</BodyMedium>
-        </div>
-        <div class="fragment-task-list__body__task__icon" v-if="!info.status && info.link">
-          <LinkComponent :to="info.link">
-            <ButtonLink>
-              <Icon type="arrow-right" />
-            </ButtonLink>
-          </LinkComponent>
-        </div>
+      <div class="fragment-task-list__body__task" v-for="entry in taskList" :key="entry">
+        <template v-for="[task, info] in Object.entries(entry)">
+          <div class="fragment-task-list__body__task__text" :class="{ collabVersion }">
+            <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status, show: !info.customIcon }">
+              <Icon type="check" size="9px" :align="false" v-if="info.status && !info.customIcon" />
+            </span>
+            <Icon :type="info.customIcon" size="12px" :align="false" v-if="info.customIcon" />
+            <BodyMedium>{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
+            <template v-if="info.data">-</template>
+            <BodyMedium v-if="info.data">{{ dataHora(info.data) }}</BodyMedium>
+          </div>
+          <div class="fragment-task-list__body__task__icon" v-if="!info.status && info.link">
+            <LinkComponent :to="info.link">
+              <ButtonLink>
+                <Icon type="arrow-right" />
+              </ButtonLink>
+            </LinkComponent>
+          </div>
+        </template>
       </div>
     </div>
   </div>
