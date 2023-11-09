@@ -33,7 +33,7 @@ export default {
     background-color: white;
     border:none;
     border-radius: var(--border-radius-small);
-    box-shadow: var(--box-shadow-1);
+    box-shadow: var(--shadow-small);
     width: 319px;
     height: var(--spacing-large);
 }
@@ -63,5 +63,11 @@ export default {
 
 .iconActive {
     color: var(--purple-1);
+}
+
+@media (max-width: 768px) {
+    .busca {
+        width: inherit;
+    }
 }
 </style>

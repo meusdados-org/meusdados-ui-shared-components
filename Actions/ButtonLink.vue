@@ -1,5 +1,5 @@
 <template>
-    <button :class="{ dark }" :disabled="disabled">
+    <button :class="{ dark, isActive }" :disabled="disabled" v-on:click="goTo">
         <div class="button" :class="{ onlyIcon }">
             <Icon v-if="type && !afterIcon" :type="type" :size="iconSize_"/>
             <LabelSmall v-if="size === 'small' && !onlyIcon">
@@ -21,6 +21,8 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 import LabelLarge from '@/components/shared/Typography/Label/LabelLarge.vue';
 import LabelMedium from '@/components/shared/Typography/Label/LabelMedium.vue';
 import LabelSmall from '@/components/shared/Typography/Label/LabelSmall.vue';
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
     name: 'ButtonLink',
@@ -64,6 +66,10 @@ export default {
         iconSize: {
             type: String,
             default: undefined
+        },
+        to: {
+            type: String,
+            default: undefined
         }
     },
     components: {
@@ -72,16 +78,33 @@ export default {
         LabelMedium,
         LabelLarge
     },
+    methods: {
+        goTo() {
+            if (!this.to) return;
+            if (this.to === '#') {
+                this.$dialog({ title: 'Funcionalidade em construção', message: 'Ops... Estamos construindo ainda nessa funcionalidade.', type: 'alert' });
+                return;
+            }
+            this.$emit('changeRoute', this.to);
+            this.$router.push({ path: this.to });
+        }
+    },
     data() {
         return {
             iconSize_: '12px'
         }
     },
+    setup(props) {
+        const route = useRoute()
+        const isActive = computed(() => props.to ? route.path.includes(props.to) : false)
+        return { isActive }
+    },
     created() {
         const iconSizes = {
             small: '10px',
             medium: '12px',
-            large: '16px'
+            large: '16px',
+            xlarge: '24px'
         }
         this.iconSize_ = iconSizes[this.size];
         if (this.iconSize) {
@@ -103,6 +126,10 @@ button {
     cursor: pointer;
     padding: 0;
     text-decoration: none;
+}
+
+button.isActive {
+    color: var(--purple-1);
 }
 
 .button {

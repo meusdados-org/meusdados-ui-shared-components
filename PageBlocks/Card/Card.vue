@@ -4,10 +4,13 @@
           <div class="card-header">
               <BodyMedium class="main-title">{{ title }}</BodyMedium>
               <slot name="action">
-                <ButtonLink @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
+                <ButtonLink class="icon-desktop" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
+                </ButtonLink>
+                <ButtonLink class="icon-mobile" size="large" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
                 </ButtonLink>
               </slot>
           </div>
+          <hr/>
           <div class="card-content">
             <slot name="content"></slot>
           </div>
@@ -99,5 +102,42 @@ export default {
 
 .x-icon {
   color: var(--gray-2) !important;
+}
+
+.icon-mobile {
+  display: none;
+}
+
+hr {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .card-wrapper{
+    border-radius: 0;
+    box-shadow: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .icon-desktop {
+    display: none;
+  }
+
+  .card-header {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  hr {
+    display: block;
+    margin: var(--spacing-small) calc(var(--spacing-small) * -1);
+    margin-top: 6px;
+    width: 108%;
+  }
+
 }
 </style>
