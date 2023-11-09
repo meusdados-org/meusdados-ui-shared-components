@@ -127,6 +127,10 @@ hr {
     display: none;
   }
 
+  .icon-mobile {
+    display: block;
+  }
+
   .card-header {
     justify-content: space-between;
     align-items: center;
