@@ -130,14 +130,12 @@ footer {
   .container {
     display: flex;
     flex-direction: column;
-    height: 250vh;
     align-items: stretch;
     gap: var(--spacing-xlarge);
   }
 
   .content {
     flex-grow: 1;
-    flex-basis: 0;
     overflow-y: auto;
   }
   .logo-header {
