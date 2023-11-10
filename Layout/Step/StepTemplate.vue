@@ -11,7 +11,8 @@ const props = defineProps({
   currentStep: String,
   finalStep: String,
   upperTitle: String,
-  upperPattern: Boolean
+  upperPattern: Boolean,
+  noFooter: Boolean,
 })
 </script>
 
@@ -35,7 +36,7 @@ const props = defineProps({
       <div class="content">
         <slot name="content"></slot>
       </div>
-      <div class="footer">
+      <div class="footer" v-if="!noFooter">
         <slot name="footer"></slot>
       </div>
       <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern}">
@@ -45,8 +46,8 @@ const props = defineProps({
         <img :src="pattern2"/>
       </div>
     </div>
-    <div style="height: 100px;"></div>
-    <footer>
+    <div style="height: 100px;" v-if="!noFooter"></div>
+    <footer v-if="!noFooter">
       <slot name="under-footer"></slot>
     </footer>
   </div>
@@ -122,8 +123,39 @@ footer {
 }
 
 @media (max-width: 768px) {
-  .log {
+  .logo {
     width: 70px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    height: 250vh;
+    align-items: stretch;
+    gap: var(--spacing-xlarge);
+  }
+
+  .content {
+    flex-grow: 1;
+    flex-basis: 0;
+    overflow-y: auto;
+  }
+  .logo-header {
+    padding: var(--spacing-small);
+    padding-bottom: 0;
+    margin-bottom: var(--spacing-xlarge);
+  }
+  .pattern1, .pattern2{
+    display: none;
+  }
+
+  .footer {
+    padding: 0;
+    margin: 0;
+  }
+
+  header:not(.logo-header) {
+    margin-bottom: 0;
   }
 }
 </style>
