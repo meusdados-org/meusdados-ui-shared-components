@@ -18,7 +18,7 @@ const props = defineProps({
 <template>
   <div class="wrapper">
     <header class="logo-header">
-      <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco" width="100" />
+      <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco"/>
       <BodyMedium class="upperTitle" v-if="upperTitle" strong>{{ upperTitle }}</BodyMedium>
       <div style="width: 100px;"></div>
     </header>
@@ -106,6 +106,10 @@ header:not(.logo-header) {
   top: -90px;
 }
 
+.logo {
+  width: 100px;
+}
+
 footer {
   position: fixed;
   right: 0;
@@ -115,5 +119,11 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-large);
+}
+
+@media (max-width: 768px) {
+  .log {
+    width: 70px;
+  }
 }
 </style>

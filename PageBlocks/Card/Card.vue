@@ -1,5 +1,5 @@
 <template>
-  <div class="card-wrapper">
+  <div class="card-wrapper" :class="{ isModal }">
       <div class="card-container" :style="{ padding: customPadding }">
           <div class="card-header">
               <BodyMedium class="main-title">{{ title }}</BodyMedium>
@@ -47,6 +47,11 @@ export default {
       type: String,
       required: false,
       default: 'var(--spacing-small)'
+    },
+    isModal: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   components: {
@@ -116,11 +121,14 @@ hr {
   .card-wrapper{
     border-radius: 0;
     box-shadow: none;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .card-wrapper.isModal {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100vh;
   }
 
   .icon-desktop {

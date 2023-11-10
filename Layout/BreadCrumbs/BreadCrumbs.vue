@@ -84,6 +84,10 @@ export default {
     .breadcrumb-icon.mobile {
         display: inline;
     }
+
+    .breadcrumbs, .item {
+        display: flex;
+    }
 }
 
 </style>

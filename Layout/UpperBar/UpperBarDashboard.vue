@@ -13,6 +13,7 @@ const user = computed(() => {
 const logout = async () => {
   localStorage.clear();
   await authService.logout();
+  open.value = false;
 }
 
 const open = ref(false);
@@ -36,7 +37,7 @@ const open = ref(false);
     </div>
     <div class="actions">
       <router-link to="/conta/editar">
-        <ButtonLink type="user">
+        <ButtonLink type="user" v-on:click="open = false">
           Minha conta
         </ButtonLink>
       </router-link>

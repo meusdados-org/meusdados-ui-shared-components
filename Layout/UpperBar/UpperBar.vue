@@ -14,6 +14,7 @@ const user = computed(() => {
 const logout = async () => {
   localStorage.clear();
   await authService.logout();
+  open.value = false;
 }
 
 const open = ref(false);
@@ -23,7 +24,7 @@ const open = ref(false);
 <div class="upper-bar__wrapper">
   <div class="upper-bar">
     <div class="upper-bar__header">
-      <BreadCrumbs/>
+      <BreadCrumbs style="flex-grow: 1;"/>
       <img :src="defaultProfilePic" class="upper-bar__profile-pic" v-on:click="open = true" />
     </div>
   </div>
@@ -34,7 +35,7 @@ const open = ref(false);
     </div>
     <div class="actions">
       <router-link to="/conta/editar">
-        <ButtonLink type="user">
+        <ButtonLink type="user" v-on:click="open = false">
           Minha conta
         </ButtonLink>
       </router-link>
