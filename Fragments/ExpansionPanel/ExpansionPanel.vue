@@ -65,4 +65,10 @@ const props = defineProps({
   transition: 0.25s ease-out;
   max-height: fit-content;
 }
+
+@media (max-width: 768px) {
+  .expansion-panel-header, .expansion-panel-content.open {
+    padding:  var(--spacing-small);
+  }
+}
 </style>

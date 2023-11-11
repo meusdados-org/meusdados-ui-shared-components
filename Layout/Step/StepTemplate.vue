@@ -143,7 +143,7 @@ footer {
     padding-bottom: 0;
     margin-bottom: var(--spacing-xlarge);
   }
-  .pattern1, .pattern2{
+  .pattern1, .pattern2, .upperPattern1, .upperPattern2 {
     display: none;
   }
 
@@ -154,6 +154,31 @@ footer {
 
   header:not(.logo-header) {
     margin-bottom: 0;
+  }
+
+  .logo-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .logo-header:last-child {
+    display: none;
+  }
+
+  .upperTitle {
+    text-transform: uppercase;
+  }
+
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-large);
   }
 }
 </style>

@@ -100,4 +100,11 @@ const isOpen = (i, item) => {
   border-color: var(--gray-2);
   border-radius: var(--border-radius-small);
 }
+
+@media (max-width: 768px) {
+  .expansion-panel-wrapper {
+    border: none;
+    border-radius: 0;
+  }
+}
 </style>
