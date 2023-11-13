@@ -60,6 +60,7 @@ const download = (mensagemId, filename) => {
 .collab-chat {
   width: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   display: flex;
   flex-direction: column-reverse;
   row-gap: var(--spacing-large);
