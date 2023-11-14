@@ -3,6 +3,7 @@
         <multiselect v-bind="$attrs" :placeholder="placeholder" :label="label" :searchable="true"
         tag-placeholder=""
         :modelValue="value"
+        :max-height="maxHeight"
         selectedLabel=""
         @close="handleClose"
         :showAddOption="showAddOption"
@@ -46,6 +47,7 @@ export default {
         placeholder: String,
         value: String,
         label: String,
+        maxHeight: Number,
         showAddOption: {
             type: Boolean,
             default: false

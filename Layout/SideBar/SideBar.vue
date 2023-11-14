@@ -169,11 +169,11 @@ export default {
                     permission: 'titulares',
                     children: [
                         {
-                            title: 'Todos titulares',
+                            title: 'Todos Titulares',
                             to: '/titulares'
                         },
                         {
-                            title: 'Tipos de titular',
+                            title: 'Tipos de Titular',
                             to: '/tipos-titular'
                         }
                     ]
