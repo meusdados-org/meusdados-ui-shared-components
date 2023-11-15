@@ -1,13 +1,17 @@
 <template>
-  <div class="card-wrapper">
+  <div class="card-wrapper" :class="{ isModal }">
       <div class="card-container" :style="{ padding: customPadding }">
           <div class="card-header">
-              <BodyMedium class="main-title">{{ title }}</BodyMedium>
+              <BodyMedium class="main-title" v-if="loaded_">{{ title }}</BodyMedium>
+              <span class="skeletion labelmedium-skeleton" v-else></span>
               <slot name="action">
-                <ButtonLink @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
+                <ButtonLink class="icon-desktop" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
+                </ButtonLink>
+                <ButtonLink class="icon-mobile" size="large" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
                 </ButtonLink>
               </slot>
           </div>
+          <hr/>
           <div class="card-content">
             <slot name="content"></slot>
           </div>
@@ -44,12 +48,30 @@ export default {
       type: String,
       required: false,
       default: 'var(--spacing-small)'
+    },
+    loaded: {
+      type: Boolean,
+      required: false,
+      default: undefined
+    },
+    isModal: {
+      type: Boolean,
+      required: false,
+      default: true
     }
   },
   components: {
       Icon,
       ButtonLink,
       BodyMedium
+  },
+  computed: {
+    loaded_() {
+      if (this.loaded === undefined) {
+        return true;
+      }
+      return this.loaded;
+    }
   }
 }
 </script>
@@ -99,5 +121,76 @@ export default {
 
 .x-icon {
   color: var(--gray-2) !important;
+}
+
+
+.skeletion {
+  background-color: var(--black);
+  border-radius: var(--border-radius-small, 8px);
+  height: 66px;
+  animation: loading 1.5s infinite ease-in-out;
+}
+
+
+.labelmedium-skeleton {
+  width: 200px;
+  height: 20px;
+  border-radius: var(--border-radius-mini, 4px);
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+
+.icon-mobile {
+  display: none;
+}
+
+hr {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .card-wrapper{
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .card-wrapper.isModal {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .icon-desktop {
+    display: none;
+  }
+
+  .icon-mobile {
+    display: block;
+  }
+
+  .card-header {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  hr {
+    display: block;
+    margin: var(--spacing-small) calc(var(--spacing-small) * -1);
+    margin-top: 6px;
+    width: 108%;
+  }
+
 }
 </style>
