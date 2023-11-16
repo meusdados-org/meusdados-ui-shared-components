@@ -2,7 +2,8 @@
   <div class="card-wrapper" :class="{ isModal }">
       <div class="card-container" :style="{ padding: customPadding }">
           <div class="card-header">
-              <BodyMedium class="main-title">{{ title }}</BodyMedium>
+              <BodyMedium class="main-title" v-if="loaded_">{{ title }}</BodyMedium>
+              <span class="skeletion labelmedium-skeleton" v-else></span>
               <slot name="action">
                 <ButtonLink class="icon-desktop" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
                 </ButtonLink>
@@ -48,6 +49,11 @@ export default {
       required: false,
       default: 'var(--spacing-small)'
     },
+    loaded: {
+      type: Boolean,
+      required: false,
+      default: undefined
+    },
     isModal: {
       type: Boolean,
       required: false,
@@ -58,6 +64,14 @@ export default {
       Icon,
       ButtonLink,
       BodyMedium
+  },
+  computed: {
+    loaded_() {
+      if (this.loaded === undefined) {
+        return true;
+      }
+      return this.loaded;
+    }
   }
 }
 </script>
@@ -107,6 +121,33 @@ export default {
 
 .x-icon {
   color: var(--gray-2) !important;
+}
+
+
+.skeletion {
+  background-color: var(--black);
+  border-radius: var(--border-radius-small, 8px);
+  height: 66px;
+  animation: loading 1.5s infinite ease-in-out;
+}
+
+
+.labelmedium-skeleton {
+  width: 200px;
+  height: 20px;
+  border-radius: var(--border-radius-mini, 4px);
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.2;
+  }
 }
 
 .icon-mobile {

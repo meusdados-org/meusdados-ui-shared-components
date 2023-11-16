@@ -28,6 +28,7 @@ export default {
         async logout() {
             localStorage.clear();
             await authService.logout();
+            window.location.reload();
         }
     },
 }

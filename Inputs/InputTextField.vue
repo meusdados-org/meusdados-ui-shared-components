@@ -186,11 +186,11 @@ export default {
 }
 
 .container-InputTextFieldField > input:-webkit-autofill{
-    box-shadow: 0 0 0 30px var(--white) inset;
+    box-shadow: 0 0 0 30px var(--white-1) inset;
 }
 
 .container-InputTextFieldField > input:hover{
-    border-bottom-color: var(--black);
+    border-bottom-color: var(--black-1);
 }
 
 .container-InputTextFieldField > input:focus{
@@ -218,7 +218,7 @@ export default {
 .container-InputTextFieldField:not(.search)  input:not(:placeholder-shown) + label{
     font-size: 12px;
     top: -12px;
-    color: var(--purple-1);
+    color: var(--gray-1);
 }
 
 .container-InputTextFieldField.search  input:focus + label,
