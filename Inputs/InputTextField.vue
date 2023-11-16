@@ -19,6 +19,7 @@
         @blur="handleBlur"
         :autocomplete="isPassword ? 'off' : 'on'"
         :class="{'same-style': sameStyle }"
+        :style="{'font-size': sizeVar}"
       />
       <input
         v-else
@@ -30,8 +31,9 @@
         @blur="handleBlur"
         :autocomplete="isPassword ? 'off' : 'on'"
         :class="{'same-style': sameStyle }"
+        :style="{'font-size': sizeVar}"
       />
-      <label v-if="label">{{ label }}</label>
+      <label v-if="label" :style="{'font-size': sizeVar}" >{{ label }}</label>
       <Icon v-if="search" class="search-icon" type="search" size="12px" />
     </div>
     <FormError v-if="error">
@@ -86,6 +88,10 @@ export default {
         search: {
             type: Boolean,
             default: false
+        },
+        size: {
+            type: String,
+            default: 'large'
         }
     },
     data() {
@@ -98,8 +104,12 @@ export default {
                 maxlength: this.maxlength,
                 placeholder: " ",
                 required: this.required,
+                style: {
+                    'font-size': this.sizeVar
+                }
             },
             error: false,
+            sizeVar: ''
         };
     },
     computed: {
@@ -119,6 +129,13 @@ export default {
     },
     created() {
         this.isPassword = this.type === "password";
+
+        const sizes = {
+            large: '16px',
+            medium: '12px',
+            small: '10px',
+        }
+        this.sizeVar = sizes[this.size];
     },
     components: { FormError, Icon, ButtonLink }
 };

@@ -1,8 +1,14 @@
 <template>
   <div class="board">
-    <Container class="orientador-colunas" orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
+    <Container class="orientador-colunas" :orientation="horizontal" @drop="onColumnDrop" drag-handle-selector=".column-drag-handle" :drop-placeholder="upperDropPlaceHolder">
       <DragColumn v-for="(column, i) in scene?.children" :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" @refresh="$emit('refresh')" :items="column.solicitacoes" :isTitular="true"/>
     </Container>
+    <div class="orientador-colunas-mobile">
+      <div v-for="(column, i) in scene?.children">
+        <DragColumn  :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" @refresh="$emit('refresh')" :items="column.solicitacoes" :isTitular="true"/>
+        <hr style="margin-top: var(--spacing-small);"/>
+      </div>
+    </div>
     <ModalTemplate :open="open" @close="open = false">
       <CardDashboard :id="id" @refresh="$emit('refresh')" @close="open = false"/>
     </ModalTemplate>
@@ -94,14 +100,25 @@ export default {
   margin: 0;
 }
 .orientador-colunas {
-  border-collapse: separate;
-  margin-top: -14px;
-  margin-left: -14px;
-  margin-right: -14px;
-  border-spacing: 15px;
+  display: flex;
+  gap: var(--spacing-small);
 }
 
-.nova-etapa {
-  width: 288px;
+.orientador-colunas-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .orientador-colunas {
+    display: none;
+  }
+
+  .orientador-colunas-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: stretch;
+    gap: var(--spacing-large);
+  }
+
 }
 </style>

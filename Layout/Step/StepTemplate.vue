@@ -11,14 +11,15 @@ const props = defineProps({
   currentStep: String,
   finalStep: String,
   upperTitle: String,
-  upperPattern: Boolean
+  upperPattern: Boolean,
+  noFooter: Boolean,
 })
 </script>
 
 <template>
   <div class="wrapper">
     <header class="logo-header">
-      <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco" width="100" />
+      <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco"/>
       <BodyMedium class="upperTitle" v-if="upperTitle" strong>{{ upperTitle }}</BodyMedium>
       <div style="width: 100px;"></div>
     </header>
@@ -35,7 +36,7 @@ const props = defineProps({
       <div class="content">
         <slot name="content"></slot>
       </div>
-      <div class="footer">
+      <div class="footer" v-if="!noFooter">
         <slot name="footer"></slot>
       </div>
       <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern}">
@@ -45,8 +46,8 @@ const props = defineProps({
         <img :src="pattern2"/>
       </div>
     </div>
-    <div style="height: 100px;"></div>
-    <footer>
+    <div style="height: 100px;" v-if="!noFooter"></div>
+    <footer v-if="!noFooter">
       <slot name="under-footer"></slot>
     </footer>
   </div>
@@ -106,6 +107,10 @@ header:not(.logo-header) {
   top: -90px;
 }
 
+.logo {
+  width: 100px;
+}
+
 footer {
   position: fixed;
   right: 0;
@@ -115,5 +120,65 @@ footer {
   justify-content: space-between;
   align-items: center;
   padding: var(--spacing-large);
+}
+
+@media (max-width: 768px) {
+  .logo {
+    width: 70px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-xlarge);
+  }
+
+  .content {
+    flex-grow: 1;
+    overflow-y: auto;
+  }
+  .logo-header {
+    padding: var(--spacing-small);
+    padding-bottom: 0;
+    margin-bottom: var(--spacing-xlarge);
+  }
+  .pattern1, .pattern2, .upperPattern1, .upperPattern2 {
+    display: none;
+  }
+
+  .footer {
+    padding: 0;
+    margin: 0;
+  }
+
+  header:not(.logo-header) {
+    margin-bottom: 0;
+  }
+
+  .logo-header {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .logo-header:last-child {
+    display: none;
+  }
+
+  .upperTitle {
+    text-transform: uppercase;
+  }
+
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-large);
+  }
 }
 </style>

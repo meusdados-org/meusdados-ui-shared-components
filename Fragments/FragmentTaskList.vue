@@ -25,13 +25,15 @@ const props = defineProps({
       <div class="fragment-task-list__body__task" v-for="entry in taskList" :key="entry">
         <template v-for="[task, info] in Object.entries(entry)">
           <div class="fragment-task-list__body__task__text" :class="{ collabVersion }">
-            <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status, show: !info.customIcon }">
+            <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status, show: !info.customIcon }" :style="{ 'flex-shrink': 0 }">
               <Icon type="check" size="9px" :align="false" v-if="info.status && !info.customIcon" />
             </span>
-            <Icon :type="info.customIcon" size="12px" :align="false" v-if="info.customIcon" />
-            <BodyMedium>{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
-            <template v-if="info.data">-</template>
-            <BodyMedium v-if="info.data">{{ dataHora(info.data) }}</BodyMedium>
+            <Icon :type="info.customIcon" size="12px" :align="false" v-if="info.customIcon" :style="{ 'flex-shrink': 0 }" />
+            <BodyMedium class="text" :style="{ 'flex-grow': 0 }">{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
+            <div>
+              <template v-if="info.data">- </template>
+              <BodyMedium v-if="info.data">{{ dataHora(info.data) }}</BodyMedium>
+            </div>
           </div>
           <div class="fragment-task-list__body__task__icon" v-if="!info.status && info.link">
             <LinkComponent :to="info.link">
@@ -116,5 +118,27 @@ const props = defineProps({
 
 .fragment-task-list__body__task__indicator:not(.show) {
   display: none;
+}
+
+@media (max-width: 768px) {
+  .fragment-task-list-container {
+    flex-shrink: 0;
+    overflow: visible;
+    max-height: none;
+  }
+
+  .fragment-task-list__body__task__text {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    text-align: start;
+    gap: var(--spacing-xsmall);
+    width: 100%;
+  }
+
+  .fragment-task-list__body__task__text .text {
+    width: 250px;
+  }
 }
 </style>

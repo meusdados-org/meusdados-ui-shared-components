@@ -1,6 +1,6 @@
 <template>
   <Draggable class="drag-columns" :class="{ 'column-drag-handle': !(isTitular || column.nome === 'Fechado' || column.nome === 'Cancelado') }">
-    <Card :title="column.nome" :hasPadding="false" class="drag-column">
+    <Card :title="column.nome" :isModal="falseS" :hasPadding="false" class="drag-column">
       <template v-slot:action v-if="!isTitular">
         <ButtonLink v-if="column.id" class="edit-button-link" @click="$emit('openForm', column.id)">
           <Icon class="edit-column" size="16px" type="more-vertical"></Icon>
@@ -28,6 +28,35 @@
       </template>
     </Card>
   </Draggable>
+  <div class="mobile">
+    <Card :title="column.nome" :hasPadding="false" class="drag-column" :isModal="false">
+      <template v-slot:action v-if="!isTitular">
+        <ButtonLink v-if="column.id" class="edit-button-link" @click="$emit('openForm', column.id)">
+          <Icon class="edit-column" size="16px" type="more-vertical"></Icon>
+        </ButtonLink>
+        <div style="width: 0; height: 0; display: none;"></div>
+      </template>
+      <template v-slot:action v-else>
+        <div style="width: 0; height: 0; display: none;"></div>
+      </template>
+      <template v-slot:content>
+        <div class="responsavel" v-if="!isTitular">
+          <Icon size="12px" type="user" />
+          <BodyMedium>
+            {{ column.responsaveis?.length > 0 ? column.responsaveis.map(x => x.nome).join(', ') : 'Sem área/usuário específico' }}
+          </BodyMedium>
+        </div>
+        <div class="background-options">
+          <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
+            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="(!isTitular || index === 0) && !(column.nome === 'Fechado' || column.nome === 'Cancelado')">
+              Nova Solicitação
+            </DragAdd>
+            <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card" :isTitular="isTitular" mini/>
+          </Container>
+        </div>
+      </template>
+    </Card>
+  </div>
   <ModalTemplate :open="open">
     <CardNovaSolicitacao :id_etapa="column.id" @refresh="$emit('refresh')" @close="open = false"/>
   </ModalTemplate>
@@ -184,6 +213,29 @@ export default {
 
 .column-drag-handle:active {
   cursor: grab;
+}
+
+.mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .drag-columns {
+    display: none;
+  }
+
+  .drag-column {
+    width: 100%;
+    height: fit-content;
+  }
+
+  .background-options{
+    height: fit-content;
+  }
+
+  .mobile {
+    display: block;
+  }
 }
 
 </style>

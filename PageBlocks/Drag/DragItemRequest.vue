@@ -37,7 +37,7 @@ defineProps({
       <div class="drag-item-request-header">
         <BodyMedium v-if="!mini">{{ solicitacao.request_id }}</BodyMedium>
         <div class="drag-item-request-indicators">
-          <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado">Atrasado</Tag>
+          <Tag background-color="var(--red-1)" color="var(--white)" v-if="solicitacao.atrasado && !mini">Atrasado</Tag>
           <FragmentIndicatorBullet :prioridade="solicitacao.prioridade" v-if="solicitacao.titular?.verificado && !mini && !isTitular"/>
           <Tag v-else-if="!solicitacao.titular?.verificado && !isTitular">Não verificado</Tag>
         </div>
@@ -96,5 +96,11 @@ defineProps({
   align-items: center;
   justify-content: space-between;
   text-align: left;
+}
+
+@media (max-width: 768px) {
+  .drag-item-request {
+    padding:  var(--spacing-xsmall);
+  }
 }
 </style>
