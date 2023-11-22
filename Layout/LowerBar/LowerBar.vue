@@ -16,7 +16,7 @@ import LinkComponent from '../../Actions/Link/LinkComponent.vue';
 .lower-bar {
   padding: var(--spacing-small) var(--spacing-large);
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   background-color: var(--white);
   box-shadow: var(--shadow-small);
