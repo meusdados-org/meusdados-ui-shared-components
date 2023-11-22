@@ -24,40 +24,42 @@ const log_ = ref([]);
 if (props.preview) {
   // get the last message and the last task list
   const lastItem = props.log[0];
-
-  let lastTask = null;
-  if (Object.keys(lastItem)[0] === 'taskList') {
-    const taskList = lastItem.taskList;
-    lastTask = taskList[taskList.length - 1];
-    const lastTaskName = Object.keys(lastTask)[0];
-    if (lastTask[lastTaskName].template) {
-      log_.value.push(lastItem);
-    } else {
+  if (lastItem) {
+    let lastTask = null;
+    if (Object.keys(lastItem)[0] === 'taskList') {
+      const taskList = lastItem.taskList;
+      lastTask = taskList[taskList.length - 1];
+      const lastTaskName = Object.keys(lastTask)[0];
+      if (lastTask[lastTaskName].template) {
+        log_.value.push(lastItem);
+      } else {
+        log_.value.push({
+          'taskList': taskList.slice(0,1)
+        });
+      }
+    } else if (Object.keys(lastItem)[0] === 'mensagens') {
       log_.value.push({
-        'taskList': taskList.slice(0,1)
+        'mensagens': lastItem.mensagens.slice(0,2)
       });
     }
-  } else if (Object.keys(lastItem)[0] === 'mensagens') {
-    log_.value.push({
-      'mensagens': lastItem.mensagens.slice(0,2)
-    });
-  }
-  console.log(lastTask)
-  if (!lastTask?.template) {
-    // get the second last item if it exists
-    const secondLastItem = props.log[1];
-    if (secondLastItem) {
-      if (Object.keys(secondLastItem)[0] === 'taskList') {
-        const taskList = secondLastItem.taskList;
-        lastTask = taskList[taskList.length - 1];
-        log_.value.push(secondLastItem);
-      } else if (Object.keys(secondLastItem)[0] === 'mensagens') {
-        log_.value.push({
-          'mensagens': secondLastItem.mensagens.slice(0,1)
-        });
+    console.log(lastTask)
+    if (!lastTask?.template) {
+      // get the second last item if it exists
+      const secondLastItem = props.log[1];
+      if (secondLastItem) {
+        if (Object.keys(secondLastItem)[0] === 'taskList') {
+          const taskList = secondLastItem.taskList;
+          lastTask = taskList[taskList.length - 1];
+          log_.value.push(secondLastItem);
+        } else if (Object.keys(secondLastItem)[0] === 'mensagens') {
+          log_.value.push({
+            'mensagens': secondLastItem.mensagens.slice(0,1)
+          });
+        }
       }
     }
   }
+
 } else {
   log_.value = props.log;
 }
