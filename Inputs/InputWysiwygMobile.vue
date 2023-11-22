@@ -1,5 +1,27 @@
 <template>
-  <div class="wysiwyg-container" ref="wysiwygContainer">
+  <div class="wysiwyg-container-mobile" ref="wysiwygContainer">
+    <div class="inner_wysiwyg-container">
+      <div
+      @input="onInput"
+      v-html="innerValue"
+      contenteditable="true"
+      ref="wysiwyg"
+      class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300"
+      @dragover="handleDragOver"
+      @drop="handleDrop"
+      @dragenter="handleDragEnter"
+      @dragleave="handleDragLeave"
+      aria-label="Escreva um comentário..."
+      aria-placeholder="Escreva um comentário..."
+      @paste="handlePaste"
+      />
+      <ButtonLink v-if="showSendButton" @click="$emit('sendMessage', innerValue, files)" class="send-button">
+        <Icon type="send"/>
+      </ButtonLink>
+    </div>
+    <div class="attachments" v-if="files.length > 0">
+      <FragmentAttachment v-for="file in files" :key="file.name" :close="true" :base64_="file.type.startsWith('image/') ? convertIntoBase64(file): undefined" :fileName="file.name" @close="removeFile(file)"/>
+    </div>
     <div class="buttons">
       <InputSelectField
         class="select"
@@ -36,7 +58,7 @@
         label="label"
         placeholder=""
         :value="selected"
-        openDirection="bottom"
+        max-height="64"
         :allowEmpty="false"
         @select="applyHeading"
         @mousedown.prevent
@@ -57,27 +79,6 @@
         <Icon type="paperclip"/>
       </ButtonLink>
     </div>
-    <div
-      @input="onInput"
-      v-html="innerValue"
-      contenteditable="true"
-      ref="wysiwyg"
-      class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300"
-      @dragover="handleDragOver"
-      @drop="handleDrop"
-      @dragenter="handleDragEnter"
-      @dragleave="handleDragLeave"
-      aria-label="Escreva um comentário..."
-      aria-placeholder="Escreva um comentário..."
-      :style="{ 'max-height': maxHeight, 'height': fixedHeight }"
-      @paste="handlePaste"
-    />
-    <div class="attachments" v-if="files.length > 0">
-      <FragmentAttachment v-for="file in files" :key="file.name" :close="true" :base64_="file.type.startsWith('image/') ? convertIntoBase64(file): undefined" :fileName="file.name" @close="removeFile(file)"/>
-    </div>
-    <ButtonLink v-if="showSendButton" @click="$emit('sendMessage', innerValue, files)" class="send-button">
-      <Icon type="send"/>
-    </ButtonLink>
   </div>
 </template>
 
@@ -303,58 +304,54 @@ export default {
 </script>
 
 <style>
-.wysiwyg-container {
+.wysiwyg-container-mobile {
   display: flex;
   flex-direction: column;
-  position: relative;
   width: 100%;
-  max-width: 100%;
-  border: 1px solid var(--gray-1);
-  border-radius: var(--border-radius-small);
+  box-shadow: var(--shadow-small);
   overflow: hidden;
 }
-
-.wysiwyg-container .multiselect {
+.wysiwyg-container-mobile .multiselect {
   min-height: var(--spacing-medium);
 }
 
-.wysiwyg-container .multiselect__single {
+.wysiwyg-container-mobile .multiselect__single {
   color: var(--gray-1);
 }
 
-.wysiwyg-container .multiselect__option {
+.wysiwyg-container-mobile .multiselect__option {
   padding: var(--spacing-xxsmall) var(--spacing-xsmall);
   font-size: 12px;
   min-height: 0px;
 }
 
-.wysiwyg-container .multiselect__select {
+.wysiwyg-container-mobile .multiselect__select {
   top: var(--spacing-xxxsmall);
   right: var(--spacing-xsmall);
 }
 
-.wysiwyg-container .multiselect__tags {
+.wysiwyg-container-mobile .multiselect__tags {
   min-height: var(--spacing-medium);
 }
 
-.wysiwyg-container .multiselect__single {
+.wysiwyg-container-mobile .multiselect__single {
   font-size: 12px;
 }
 
-.wysiwyg-container .buttons {
+.wysiwyg-container-mobile .buttons {
   background-color: white;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   column-gap: var(--spacing-xsmall);
-  padding: var(--spacing-xsmall)  var(--spacing-small);
-  border-bottom: 1px solid var(--gray-1);
+  padding: var(--spacing-xsmall) var(--spacing-small);
 }
 
-.wysiwyg-container .active {
+.wysiwyg-container-mobile .active {
   color: var(--purple-1);
 }
 
-.wysiwyg-container .select {
+.wysiwyg-container-mobile .select {
   width: 112px;
   font-size: 12px;
 }
@@ -363,26 +360,31 @@ export default {
   color: var(--gray-2) !important;
 }
 
-.wysiwyg-output {
-  text-align: left;
-  min-height: 5px;
-  max-height: 300px;
-  max-width: 100%;
-  font-size: 12px;
-  padding:  var(--spacing-small);;
-  overflow-y: auto;
-  outline: none;
+.wysiwyg-container-mobile .inner_wysiwyg-container {
+  display: flex;
+  padding: var(--spacing-small);
+  align-items: center;
+  gap: var(--spacing-small);
+  justify-content: space-between;
 }
 
-.wysiwyg-container.dragover {
+.inner_wysiwyg-container .wysiwyg-output {
+  text-align: left;
+  min-height: calc(var(--spacing-large) - calc(var(--spacing-xsmall) * 2));
+  max-height: 100px;
+  font-size: 12px;
+  padding:  var(--spacing-xsmall) var(--spacing-small);
+  overflow-y: auto;
+  outline: none;
+  background-color: var(--gray-3);
+  border-radius: var(--border-radius-small);
+  flex: 1 0 0;
+}
+
+.wysiwyg-container-mobile.dragover {
   border-color: var(--purple-1);
 }
 
-.wysiwyg-container .send-button {
-  position: absolute;
-  bottom: var(--spacing-xsmall);
-  right: var(--spacing-xsmall);
-}
 
 .attachments {
   display: flex;

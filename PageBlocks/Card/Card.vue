@@ -11,11 +11,11 @@
                 </ButtonLink>
               </slot>
           </div>
-          <hr/>
+          <hr v-if="!isMobile"/>
           <div class="card-content">
             <slot name="content"></slot>
           </div>
-          <div class="card-footer">
+          <div class="card-footer" v-if="footer">
             <slot name="footer"></slot>
           </div>
       </div>
@@ -58,6 +58,11 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    footer: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   components: {
@@ -71,6 +76,9 @@ export default {
         return true;
       }
       return this.loaded;
+    },
+    isMobile() {
+      return window.innerWidth <= 768;
     }
   }
 }

@@ -35,4 +35,11 @@ import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
   align-items: center;
   column-gap:  var(--spacing-small);
 }
+
+@media (max-width: 768px) {
+  .tab-items {
+    justify-content: space-evenly;
+    width: 100%;
+  }
+}
 </style>

@@ -136,9 +136,5 @@ const props = defineProps({
     gap: var(--spacing-xsmall);
     width: 100%;
   }
-
-  .fragment-task-list__body__task__text .text {
-    width: 250px;
-  }
 }
 </style>

@@ -22,4 +22,13 @@ defineProps({
   z-index: 9999;
   width: 224px;
 }
+
+@media (max-width: 768px) {
+  .alert {
+    bottom: 0;
+    left: 0;
+    width: 94vw;
+  }
+  
+}
 </style>

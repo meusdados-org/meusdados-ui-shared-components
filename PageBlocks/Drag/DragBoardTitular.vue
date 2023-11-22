@@ -5,8 +5,8 @@
     </Container>
     <div class="orientador-colunas-mobile">
       <div v-for="(column, i) in scene?.children">
-        <DragColumn  :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" @refresh="$emit('refresh')" :items="column.solicitacoes" :isTitular="true"/>
-        <hr style="margin-top: var(--spacing-small);"/>
+        <DragColumn  :index="i" :scene="scene" :key="column.id" :title="column.name" :column="column" @open="openModal" @openForm="openModalForm" @refresh="$emit('refresh')" :items="column.solicitacoes" :isTitular="true" v-if="column.solicitacoes.length > 0"/>
+        <hr style="margin-top: var(--spacing-small);"  v-if="column.solicitacoes.length > 0"/>
       </div>
     </div>
     <ModalTemplate :open="open" @close="open = false">

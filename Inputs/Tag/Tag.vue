@@ -39,7 +39,7 @@ const emit = defineEmits(['close']);
 .tag {
   padding: 0 var(--spacing-xsmall);
   border-radius: var(--border-radius-small);
-  height: 20px;
+  height: var(--spacing-small);
   width: fit-content;
 
   display: flex;

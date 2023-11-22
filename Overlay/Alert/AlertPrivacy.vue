@@ -57,4 +57,10 @@ const redirect = () => {
   padding: var(--spacing-xsmall) var(--spacing-small);
   height: inherit;
 }
+
+@media (max-width: 768px) {
+  .alert-privacy-container {
+    border-radius: 0;
+  }
+}
 </style>

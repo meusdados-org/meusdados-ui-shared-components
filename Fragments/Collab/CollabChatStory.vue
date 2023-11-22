@@ -29,7 +29,8 @@ if (props.preview) {
   if (Object.keys(lastItem)[0] === 'taskList') {
     const taskList = lastItem.taskList;
     lastTask = taskList[taskList.length - 1];
-    if (lastTask.template) {
+    const lastTaskName = Object.keys(lastTask)[0];
+    if (lastTask[lastTaskName].template) {
       log_.value.push(lastItem);
     } else {
       log_.value.push({
@@ -72,13 +73,17 @@ const aberturaTaskList = [
 ]
 
 const isLastItem = (index) => {
-  return index === log_.value?.length - 1;
+  if (props.preview){
+    return index === log_.value.length - 1;
+  } else {
+    return false;
+  }
 }
 
 </script>
 
 <template>
-  <div class="collab-story">
+  <div class="collab-story" :class="{ preview }">
     <template v-for="(story, index) in log_" :key="index">
       <template v-if="story.mensagens">
         <CollabChat :mensagens="story.mensagens" @download="emit('download')"/>
@@ -86,7 +91,7 @@ const isLastItem = (index) => {
       <template v-else-if="story.taskList">
         <FragmentTaskList :taskList="story.taskList" :collabVersion="true"/>
       </template>
-      <hr class="collab-story-separator" v-if="!isLastItem(index) && preview" />
+      <hr class="collab-story-separator" v-if="!isLastItem(index)" />
     </template>
     <FragmentTaskList :taskList="aberturaTaskList" v-if="!preview" :collabVersion="true" />
   </div>
@@ -101,6 +106,10 @@ const isLastItem = (index) => {
   display: flex;
   flex-direction: column-reverse;
   row-gap: var(--spacing-medium);
+}
+
+.collab-story .preview {
+  row-gap: var(--spacing-xsmall);
 }
 
 .collab-story > * {
