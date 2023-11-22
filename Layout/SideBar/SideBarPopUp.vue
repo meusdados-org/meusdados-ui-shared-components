@@ -32,7 +32,7 @@ export default {
 
             // make it work on mobile too
             if (window.innerWidth < 768) {
-                window.location.href = '/login';
+                this.$router.push('/login');
             }
         }
     },
