@@ -27,7 +27,7 @@ const props = defineProps({
       <div style="width: 100px;"></div>
     </header>
     <div class="container">
-      <header>
+      <header v-if="props.currentStep">
         <div class="steps" v-if="props.currentStep && props.finalStep">
           <BodyMedium strong>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
         </div>
@@ -142,6 +142,8 @@ footer {
   .content {
     flex: 1 0 0;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
   .logo-header {
     padding: var(--spacing-small);
