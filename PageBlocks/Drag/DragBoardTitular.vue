@@ -117,7 +117,6 @@ export default {
     display: flex;
     flex-direction: column-reverse;
     align-items: stretch;
-    gap: var(--spacing-large);
   }
 
 }

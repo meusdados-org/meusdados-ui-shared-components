@@ -15,6 +15,7 @@ const logout = async () => {
   localStorage.clear();
   await authService.logout();
   open.value = false;
+  window.location.href = '/login';
 }
 
 const open = ref(false);
@@ -28,20 +29,22 @@ const open = ref(false);
       <img :src="defaultProfilePic" class="upper-bar__profile-pic" v-on:click="open = true" />
     </div>
   </div>
-  <div class="profile__menu" :class="{ open }">
-    <div class="profile-user">
-      <img :src="defaultProfilePic" class="upper-bar__profile-pic" v-on:click="open = false" />
-      <LabelLarge>{{ user?.nome }} {{ user?.sobrenome }}</LabelLarge>
-    </div>
-    <div class="actions">
-      <router-link to="/conta/editar">
-        <ButtonLink type="user" v-on:click="open = false">
-          Minha conta
+  <div class="profile-user__wrapper" :class="{ open }" @click="open = false">
+    <div class="profile__menu" :class="{ open }" @click.stop="">
+      <div class="profile-user">
+        <img :src="defaultProfilePic" class="upper-bar__profile-pic" v-on:click="open = false" />
+        <LabelLarge>{{ user?.nome }} {{ user?.sobrenome }}</LabelLarge>
+      </div>
+      <div class="actions">
+        <router-link to="/conta/editar">
+          <ButtonLink type="user" v-on:click="open = false">
+            Minha conta
+          </ButtonLink>
+        </router-link>
+        <ButtonLink v-on:click="logout" type="log-out">
+          Sair
         </ButtonLink>
-      </router-link>
-      <ButtonLink v-on:click="logout" type="log-out">
-        Sair
-      </ButtonLink>
+      </div>
     </div>
   </div>
 </div>
@@ -81,30 +84,48 @@ const open = ref(false);
   color: var(--white);
 }
 
+.profile-user__wrapper {
+  background-color: var(--black-xlow-opacity);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 90;
+  bottom: 0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+}
+
+.profile-user__wrapper.open {
+  visibility: visible;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+}
+
 .profile__menu {
   background-color: var(--white);
-  width: 0px;
-  z-index: 30;
+  z-index: 91;
   position: absolute;
   top: 0;
-  left: 50%;
-  height: 100vh;
+  right: -100px;
+  bottom: 0;
   visibility: hidden;
   opacity: 0;
-  transition: visibility 0s, opacity 0.5s linear;
-  transition: left 250ms ease-in-out;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+  transition: right 250ms ease-in-out;
 }
 
 .profile__menu.open {
   display: flex;
   visibility: visible;
-  width: 100%;
+  width: 320px;
   opacity: 1;
   flex-direction: column;
   align-items: flex-start;
-  left: 0;
+  right: 0;
   gap: var(--spacing-medium);
   padding: var(--spacing-small);
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+  transition: right 250ms ease-in-out;
 }
 
 .profile-user, .actions {
