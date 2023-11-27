@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 import FragmentTaskList from '../FragmentTaskList.vue';
 import CollabChat from './CollabChat.vue';
 
