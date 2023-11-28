@@ -11,11 +11,11 @@
                 </ButtonLink>
               </slot>
           </div>
-          <hr/>
+          <hr v-if="!isMobile"/>
           <div class="card-content">
             <slot name="content"></slot>
           </div>
-          <div class="card-footer">
+          <div class="card-footer" v-if="footer">
             <slot name="footer"></slot>
           </div>
       </div>
@@ -58,6 +58,11 @@ export default {
       type: Boolean,
       required: false,
       default: true
+    },
+    footer: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   components: {
@@ -71,6 +76,9 @@ export default {
         return true;
       }
       return this.loaded;
+    },
+    isMobile() {
+      return window.innerWidth <= 768;
     }
   }
 }
@@ -162,14 +170,19 @@ hr {
   .card-wrapper{
     border-radius: 0;
     box-shadow: none;
-    width: 100%;
-    height: 100vh;
   }
 
   .card-wrapper.isModal {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .card-container {
+    overflow-y: auto;
+    align-items: stretch;
   }
 
   .icon-desktop {
@@ -182,14 +195,16 @@ hr {
 
   .card-header {
     justify-content: space-between;
+    padding: 0 var(--spacing-small);
+    padding-top: var(--spacing-small);
+    padding-bottom: var(--spacing-xsmall);
+    width: inherit;
     align-items: center;
   }
 
   hr {
     display: block;
-    margin: var(--spacing-small) calc(var(--spacing-small) * -1);
-    margin-top: 6px;
-    width: 108%;
+    width: 100%;
   }
 
 }

@@ -216,7 +216,7 @@ export default {
 
 .container-InputTextFieldField:not(.search)  input:focus + label,
 .container-InputTextFieldField:not(.search)  input:not(:placeholder-shown) + label{
-    font-size: 12px;
+    font-size: 12px !important;
     top: -12px;
     color: var(--gray-1);
 }

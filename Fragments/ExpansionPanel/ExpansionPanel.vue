@@ -67,7 +67,7 @@ const props = defineProps({
 }
 
 @media (max-width: 768px) {
-  .expansion-panel-header, .expansion-panel-content.open {
+  .expansion-panel-header {
     padding:  var(--spacing-small);
   }
 }

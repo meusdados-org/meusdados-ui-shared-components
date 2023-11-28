@@ -29,6 +29,10 @@ export default {
             localStorage.clear();
             await authService.logout();
             window.location.reload();
+            // make it work on mobile too
+            if (window.innerWidth < 768) {
+                this.$router.push('/login');
+            }
         }
     },
 }

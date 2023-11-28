@@ -1,10 +1,13 @@
 <script setup>
+import { computed } from 'vue';
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
 import pattern1 from './assets/img/pattern1.svg';
 import pattern2 from './assets/img/pattern2.svg';
 import meusDadosColorido from './assets/img/meus-dados-colorido.png';
 import meusDadosBranco from './assets/img/meus-dados-branco.png';
+
+const isMobile = computed(() => window.innerWidth <= 768);
 
 const props = defineProps({
   mainTitle: String,
@@ -24,7 +27,7 @@ const props = defineProps({
       <div style="width: 100px;"></div>
     </header>
     <div class="container">
-      <header>
+      <header v-if="props.currentStep">
         <div class="steps" v-if="props.currentStep && props.finalStep">
           <BodyMedium strong>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
         </div>
@@ -46,8 +49,8 @@ const props = defineProps({
         <img :src="pattern2"/>
       </div>
     </div>
-    <div style="height: 100px;" v-if="!noFooter"></div>
-    <footer v-if="!noFooter">
+    <div style="height: 100px;" v-if="!noFooter && !isMobile"></div>
+    <footer v-if="!noFooter && !isMobile">
       <slot name="under-footer"></slot>
     </footer>
   </div>
@@ -58,7 +61,7 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  height: 100dvh;
 }
 .logo-header {
   display: flex;
@@ -131,12 +134,16 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: var(--spacing-xlarge);
+    justify-content: space-between;
+    flex-grow: 1;
+    gap: var(--spacing-large);
   }
 
   .content {
-    flex-grow: 1;
+    flex: 1 0 0;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
   }
   .logo-header {
     padding: var(--spacing-small);

@@ -6,9 +6,7 @@ import LinkComponent from '../../Actions/Link/LinkComponent.vue';
 
 <template>
   <div class="lower-bar">
-    <ButtonLink onlyIcon type="home" size="xlarge" to="/dashboard"/>
-    <ButtonLink onlyIcon type="file" size="xlarge" to="/solicitacoes" />
-    <ButtonLink onlyIcon type="user-check" size="xlarge" to="/consentimentos" />
+    <slot />
   </div>
 </template>
 
@@ -18,7 +16,7 @@ import LinkComponent from '../../Actions/Link/LinkComponent.vue';
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  background-color: var(--white);
+  background-color: transparent;
   box-shadow: var(--shadow-small);
 }
 </style>
