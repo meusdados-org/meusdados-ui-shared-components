@@ -16,17 +16,18 @@ const props = defineProps({
   upperTitle: String,
   upperPattern: Boolean,
   noFooter: Boolean,
+  mobileOnDesktop: Boolean
 })
 </script>
 
 <template>
-  <div class="wrapper">
-    <header class="logo-header">
+  <div class="wrapper" :class="{ mobileOnDesktop }">
+    <header class="logo-header" :class="{ mobileOnDesktop }">
       <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco"/>
       <BodyMedium class="upperTitle" v-if="upperTitle" strong>{{ upperTitle }}</BodyMedium>
       <div style="width: 100px;"></div>
     </header>
-    <div class="container">
+    <div class="container" :class="{ mobileOnDesktop }">
       <header v-if="props.currentStep">
         <div class="steps" v-if="props.currentStep && props.finalStep">
           <BodyMedium strong>PASSO {{ props.currentStep }} DE {{ props.finalStep }}</BodyMedium>
@@ -36,21 +37,21 @@ const props = defineProps({
         </div>
         <slot name="header"></slot>
       </header>
-      <div class="content">
+      <div class="content" :class="{ mobileOnDesktop }">
         <slot name="content"></slot>
       </div>
-      <div class="footer" v-if="!noFooter">
+      <div class="footer" v-if="!noFooter" :class="{ mobileOnDesktop }">
         <slot name="footer"></slot>
       </div>
-      <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern}">
+      <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern, mobileOnDesktop}">
         <img :src="pattern1"/>
       </div>
-      <div :class="{pattern2: !upperPattern, upperPattern2: upperPattern}">
+      <div :class="{pattern2: !upperPattern, upperPattern2: upperPattern, mobileOnDesktop}">
         <img :src="pattern2"/>
       </div>
     </div>
-    <div style="height: 100px;" v-if="!noFooter && !isMobile"></div>
-    <footer v-if="!noFooter && !isMobile">
+    <div style="height: 100px;" v-if="!noFooter && !isMobile && !mobileOnDesktop"></div>
+    <footer v-if="!noFooter && !isMobile" :class="{ mobileOnDesktop }">
       <slot name="under-footer"></slot>
     </footer>
   </div>
@@ -124,6 +125,42 @@ footer {
   align-items: center;
   padding: var(--spacing-large);
 }
+
+.logo.mobileOnDesktop {
+  width: 70px;
+}
+
+.container.mobileOnDesktop {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  flex-grow: 1;
+  gap: var(--spacing-large);
+}
+
+.content.mobileOnDesktop {
+  flex: 1 0 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.logo-header.mobileOnDesktop {
+  padding: var(--spacing-small);
+  padding-bottom: 0;
+  margin-bottom: var(--spacing-xlarge);
+}
+
+.pattern1.mobileOnDesktop, .pattern2.mobileOnDesktop, .upperPattern1.mobileOnDesktop, .upperPattern2.mobileOnDesktop {
+  display: none;
+}
+
+.footer.mobileOnDesktop {
+  padding: 0;
+  margin: 0;
+}
+
+
 
 @media (max-width: 768px) {
   .logo {
