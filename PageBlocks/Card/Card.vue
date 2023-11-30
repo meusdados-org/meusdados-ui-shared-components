@@ -4,7 +4,7 @@
           <div class="card-header">
               <BodyMedium class="main-title" v-if="loaded_">{{ title }}</BodyMedium>
               <span class="skeletion labelmedium-skeleton" v-else></span>
-              <slot name="action">
+              <slot name="action" v-if="hasAction">
                 <ButtonLink class="icon-desktop" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
                 </ButtonLink>
                 <ButtonLink class="icon-mobile" size="large" @click="$emit('close')" v-if="hasAction" type="x" onlyIcon>
