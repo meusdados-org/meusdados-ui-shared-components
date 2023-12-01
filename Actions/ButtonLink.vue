@@ -174,10 +174,15 @@ button.dark:focus {
 }
 
 button:disabled {
-    color: var(--gray-2);
+    color: var(--gray-2) !important;
 }
 
 button.dark:disabled {
     opacity: .5;
+}
+
+button:disabled:hover {
+    color: var(--gray-2) !important;
+    border-bottom: var(--spacing-xxxsmall) solid transparent;
 }
 </style>
