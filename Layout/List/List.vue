@@ -31,12 +31,10 @@ function isLastItem(index: number) {
   background-color: var(--white);
   border-radius: var(--border-radius-small);
   padding: var(--spacing-small) 0;
-  flex-grow: 1;
-  flex-basis: 0;
   overflow-y: auto;
 
   &__item {
-    padding: var(--spacing-small) var(--spacing-large);
+    padding: var(--spacing-xsmall) var(--spacing-large);
   }
 
   &__separator {
