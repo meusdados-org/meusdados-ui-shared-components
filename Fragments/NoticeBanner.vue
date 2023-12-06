@@ -60,6 +60,8 @@ const runAction = (notification) => {
   align-items: center;
   color: var(--white);
   border-radius: var(--border-radius-mini);
+  text-align: left;
+  gap: var(--spacing-xsmall);
 }
 
 .notice-banner__content__text {
@@ -106,4 +108,15 @@ button.notice-banner__content__actions__button:hover, button.notice-banner__cont
   color: var(--white) !important;
 }
 
+@media (max-width: 768px) {
+  .notice-banner {
+    border-radius: 0;
+    width: inherit;
+  }
+
+  .notice-banner__content__actions__button {
+    flex-shrink: 0;
+  }
+
+}
 </style>
