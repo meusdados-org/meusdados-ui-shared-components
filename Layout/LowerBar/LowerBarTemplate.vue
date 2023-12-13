@@ -19,4 +19,12 @@ import LinkComponent from '../../Actions/Link/LinkComponent.vue';
   background-color: transparent;
   box-shadow: var(--shadow-small);
 }
+
+@media (min-width: 768px) {
+  .lower-bar {
+    justify-content: center;
+    gap: var(--spacing-large);
+  }
+  
+}
 </style>
