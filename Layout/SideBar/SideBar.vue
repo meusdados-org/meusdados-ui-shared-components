@@ -198,12 +198,12 @@ export default {
                         to: '/configuracoes/usuarios',
                         icon: 'settings'
                     },
-                    {
-                        title: 'Perfis',
-                        permission: 'usuarios',
-                        to: '/configuracoes/perfis',
-                        icon: 'settings'
-                    },
+                    // {
+                    //    title: 'Perfis',
+                    //    permission: 'usuarios',
+                    //    to: '/configuracoes/perfis',
+                    //    icon: 'settings'
+                    // },
                   ]
                 }
             ]
