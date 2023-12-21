@@ -16,7 +16,8 @@ const props = defineProps({
   upperTitle: String,
   upperPattern: Boolean,
   noFooter: Boolean,
-  mobileOnDesktop: Boolean
+  mobileOnDesktop: Boolean,
+  noPattern: Boolean
 })
 </script>
 
@@ -43,10 +44,10 @@ const props = defineProps({
       <div class="footer" v-if="!noFooter" :class="{ mobileOnDesktop }">
         <slot name="footer"></slot>
       </div>
-      <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern, mobileOnDesktop}">
+      <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern, mobileOnDesktop: mobileOnDesktop || noPattern}">
         <img :src="pattern1"/>
       </div>
-      <div :class="{pattern2: !upperPattern, upperPattern2: upperPattern, mobileOnDesktop}">
+      <div :class="{pattern2: !upperPattern, upperPattern2: upperPattern, mobileOnDesktop: mobileOnDesktop || noPattern}">
         <img :src="pattern2"/>
       </div>
     </div>
@@ -208,10 +209,6 @@ footer {
 
   .logo-header:last-child {
     display: none;
-  }
-
-  .upperTitle {
-    text-transform: uppercase;
   }
 
   footer {
