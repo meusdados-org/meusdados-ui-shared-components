@@ -6,6 +6,7 @@ import pattern1 from './assets/img/pattern1.svg';
 import pattern2 from './assets/img/pattern2.svg';
 import meusDadosColorido from './assets/img/meus-dados-colorido.png';
 import meusDadosBranco from './assets/img/meus-dados-branco.png';
+import ButtonLink from '../../Actions/ButtonLink.vue';
 
 const isMobile = computed(() => window.innerWidth <= 768);
 
@@ -17,7 +18,8 @@ const props = defineProps({
   upperPattern: Boolean,
   noFooter: Boolean,
   mobileOnDesktop: Boolean,
-  noPattern: Boolean
+  noPattern: Boolean,
+  canBeClosed: Boolean
 })
 </script>
 
@@ -26,7 +28,9 @@ const props = defineProps({
     <header class="logo-header" :class="{ mobileOnDesktop }">
       <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco"/>
       <BodyMedium class="upperTitle" v-if="upperTitle" strong>{{ upperTitle }}</BodyMedium>
-      <div style="width: 100px;"></div>
+      <div style="width: 100px; display: flex; justify-content: flex-end; align-items: center;;">
+        <ButtonLink class="action" v-if="canBeClosed" @click="$emit('close')" type="x" :size="!isMobile ? 'xlarge' : 'large'" secondary/>
+      </div>
     </header>
     <div class="container" :class="{ mobileOnDesktop }">
       <header v-if="props.currentStep">
@@ -220,6 +224,12 @@ footer {
     justify-content: center;
     align-items: center;
     padding: var(--spacing-large);
+  }
+
+  .action {
+    position: absolute;
+    right: var(--spacing-small);
+    top: var(--spacing-small);
   }
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
-    <button :class="{ dark, isActive }" :disabled="disabled" v-on:click="goTo">
-        <div class="button" :class="{ onlyIcon }">
+    <button :class="{ dark, isActive, secondary }" :disabled="disabled" v-on:click="goTo">
+        <div class="button" :class="{ onlyIcon, secondary }">
             <Icon v-if="type && !afterIcon" :type="type" :size="iconSize_"/>
             <LabelSmall v-if="size === 'small' && !onlyIcon">
                 <slot></slot>
@@ -70,6 +70,10 @@ export default {
         to: {
             type: String,
             default: undefined
+        },
+        secondary: {
+            type: Boolean,
+            default: false
         }
     },
     components: {
@@ -128,6 +132,10 @@ button {
     text-decoration: none;
 }
 
+button.secondary {
+    color: var(--gray-2) !important;
+}
+
 button.isActive {
     color: var(--purple-1);
 }
@@ -138,6 +146,7 @@ button.isActive {
     align-items: center;
     column-gap: var(--spacing-xxxsmall);
 }
+
 
 .button.onlyIcon {
     column-gap: 0;

@@ -6,6 +6,9 @@
         small: size === 'small',
         medium: size === 'medium',
         large: size === 'large',
+        xlarge: size === 'xlarge',
+        xxlarge: size === 'xxlarge',
+        circle,
         onlyIcon,
         dark
     }" :disabled="disabled">
@@ -69,6 +72,10 @@ export default {
         strokeWidth: {
             type: String,
             default: '2'
+        },
+        circle: {
+            type: Boolean,
+            default: false
         }
     },
     components: { LabelSmall, LabelMedium, LabelLarge, Icon },
@@ -91,6 +98,8 @@ export default {
                 small: '16px',
                 medium: '18px',
                 large: '20px',
+                xlarge: '48px',
+                xxlarge: '80px'
            }
            this.iconSize = iconSizes[this.size]
         }
@@ -125,6 +134,10 @@ button {
     -o-transition-delay: 5s;
     transition: .25s all;
     transition-delay: .25s;
+}
+
+button.circle {
+    border-radius: var(--border-radius-full);
 }
 
 button.onlyIcon {
@@ -163,6 +176,20 @@ button.onlyIcon.medium {
 button.onlyIcon.large {
     width: var(--spacing-xlarge);
     height: var(--spacing-xlarge);
+    color: var(--white);
+    padding: 0;
+}
+
+button.onlyIcon.xlarge {
+    width: var(--spacing-xxlarge);
+    height: var(--spacing-xxlarge);
+    color: var(--white);
+    padding: 0;
+}
+
+button.onlyIcon.xxlarge {
+    width: var(--spacing-xxlarge);
+    height: var(--spacing-xxlarge);
     color: var(--white);
     padding: 0;
 }
