@@ -1,9 +1,20 @@
 <template>
     <div class="container">
         <div class="input-button-container">
-            <label class="label">
+            <label class="label"
+                :class="{
+                    'small': size === 'small',
+                    'medium': size === 'medium',
+                    'large': size === 'large',
+                    'xlarge': size === 'xlarge',
+                    'buttonLink': isButtonLink
+                }"
+            >
                 <input class="input" type="file" ref="file" @change="selectFile" />
-                <LabelSmall class="inputLabel">{{ label }}</LabelSmall>
+                <Icon :type="icon" :size="pixelSize" v-if="icon" />
+                <LabelSmall class="inputLabel" v-if="size === 'small'">{{ label }}</LabelSmall>
+                <LabelMedium class="inputLabel" v-else-if="size === 'medium'">{{ label }}</LabelMedium>
+                <LabelLarge class="inputLabel" v-else>{{ label }}</LabelLarge>
             </label>
             <span v-if="currentFile || value"><BodyMedium :class="{'errorText': error}">{{ currentFile?.name || value }}</BodyMedium></span>
         </div>
@@ -15,15 +26,21 @@
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue';
 import LabelSmall from '../Typography/Label/LabelSmall.vue';
+import LabelMedium from '../Typography/Label/LabelMedium.vue';
+import LabelLarge from '../Typography/Label/LabelLarge.vue';
+import Icon from '../Icon/Icon.vue';
 
 export default {
     name: 'InputFile',
     emits: ['select'],
     components: {
-    BodyMedium,
-    BodySmall,
-    LabelSmall
-},
+        BodyMedium,
+        BodySmall,
+        LabelSmall,
+        LabelMedium,
+        LabelLarge,
+        Icon
+    },
     props: {
         value: {
             type: String,
@@ -44,16 +61,49 @@ export default {
             type: String,
             required: false,
             default: 'Escolher Arquivo'
-        }
+        },
+        type: {
+            type: String,
+            required: false,
+            default: 'buttonPrimary'
+        },
+        icon: {
+            type: String,
+            required: false,
+            default: undefined
+        },
+        size: {
+            type: String,
+            required: false,
+            default: 'small'
+        },
+
     },
     data() {
         return {
             currentFile: undefined,
             errorMessage: undefined,
-            id: `inputFile-${this.label.toLocaleLowerCase().replace(/\s/g, '-')}`,
+            id: `inputFile-${(this.label || this.icon || Math.random()).toLocaleLowerCase().replace(/\s/g, '-')}`,
         }
     },
     computed: {
+        pixelSize() {
+            switch (this.size) {
+                case 'small':
+                    return '10px';
+                case 'medium':
+                    return '12px';
+                case 'large':
+                    return '16px';
+                case 'xlarge':
+                    return '48px';
+                default:
+                    return '12px';
+            }
+        },
+        isButtonLink() {
+            return this.type === 'buttonLink';
+        },
         error() {
             return this.errorMessage !== undefined;
         }
@@ -103,16 +153,18 @@ export default {
     flex-direction: column;
     row-gap: var(--spacing-xsmall);
     justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.inputLabel {
+    line-height: 200%;
 }
 
 .input-button-container {
     display: flex;
+    flex-direction: row-reverse;
     align-items: center;
     column-gap: var(--spacing-small);
-}
-
-.inputLabel {
-    line-height: 0;
 }
 
 label.label input[type="file"] {
@@ -121,22 +173,56 @@ label.label input[type="file"] {
 }
 
 .label {
-    width: fit-content;
-    padding: 7px var(--spacing-small);
-    height: var(--spacing-small);
-    display: flex;
-    font-weight: 600;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    color: white;
-    border: 1px solid #cccccc;
+    padding: 0 var(--spacing-medium);
+    background: var(--blue-1) 0% 0% no-repeat padding-box;
     border-radius: var(--border-radius-small);
-    background: var(--blue-1);
+    border: none;
+    color: var(--white);
+    cursor: pointer;
+    opacity: 1;
+    -webkit-transition: .5s all;
+    -webkit-transition-delay: 5s;
+    -moz-transition: .5s all;
+    -moz-transition-delay: 5s;
+    -ms-transition: .5s all;
+    -ms-transition-delay: 5s;
+    -o-transition: .5s all;
+    -o-transition-delay: 5s;
+    transition: .25s all;
+    transition-delay: .25s;
+}
+
+.label.buttonLink {
+    background-color: transparent;
+    border: none;
+    border-top: var(--spacing-xxxsmall) solid transparent;
+    border-bottom: var(--spacing-xxxsmall) solid transparent;
+    color: var(--blue-1);
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+}
+
+
+.label.small {
+    padding: 5px var(--spacing-small);
+}
+
+.label.medium {
+    padding: 8px var(--spacing-medium);
+}
+
+.label.large {
+    padding: 8px var(--spacing-large);
 }
 
 .label:hover {
   background: var(--purple-1);
+}
+
+.label.buttonLink:hover {
+    background-color: transparent;
+    color: var(--purple-1) !important;
 }
 
 .label:has(input[type="file"]:focus) {
