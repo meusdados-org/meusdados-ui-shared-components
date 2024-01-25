@@ -7,32 +7,7 @@ const props = defineProps({
   mensagens: {
     type: Array,
     default: [
-      {
-        id: 2,
-        externo: true,
-        mensagem: '<p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam</p>',
-        data: '29/11/2022',
-        hora: '14:44',
-        usuario: {
-          nome: 'Carol Gonçalves'
-        },
-        attachments: []
-      },
-      {
-        id: 1,
-        externo: false,
-        mensagem: 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam',
-        data: '29/11/2022',
-        hora: '14:44',
-        usuario: {
-          nome: 'Regis'
-        },
-        attachments: [
-          {
-            name: 'loremipsum.xls'
-          }
-        ]
-      }
+
     ]
   }
 })
