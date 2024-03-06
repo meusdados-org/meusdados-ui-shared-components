@@ -102,9 +102,9 @@ export default {
                     children: undefined
                 },
                 {
-                    titleHeader: 'Consentimentos',
+                    titleHeader: 'Meus Dados',
                     iconHeader: 'user-check',
-                    to: '/consentimentos',
+                    to: '/meus-dados',
                     children: undefined
                 },
             ]
