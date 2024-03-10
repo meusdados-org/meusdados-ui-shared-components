@@ -7,6 +7,6 @@
   font-family: 'Montserrat', sans-serif;
   font-size: 10px;
   font-weight: 600;
-  line-height: 125%;
+  /* line-height: 125%; */
 }
 </style>

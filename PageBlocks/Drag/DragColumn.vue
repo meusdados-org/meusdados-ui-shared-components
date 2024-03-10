@@ -19,10 +19,10 @@
         </div>
         <div class="background-options">
           <Container class="background-options" group-name="col" @drop="(e) => onCardDrop(column.id, e)" :get-child-payload="getCardPayload()" drag-class="card-ghost" drop-class="card-ghost-drop" :drop-placeholder="dropPlaceholderOptions" drag-handle-selector=".item-drag-handle">
-            <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card" :isTitular="isTitular"/>
-            <DragAdd @click="open = true" :class="{ hover: index !== 0 }" v-if="(!isTitular || index === 0) && !(column.nome === 'Fechado' || column.nome === 'Cancelado')">
+            <DragAdd @click="open = true" :class="{ hover: index !== 0  }" v-if="!(column.nome === 'Fechado' || column.nome === 'Cancelado')">
               Nova Solicitação
             </DragAdd>
+            <DragItemRequest v-for="solicitacoes in items" v-on:click="$emit('open', solicitacoes.id)" :key="solicitacoes.request_id" :solicitacao="solicitacoes" class="card" :isTitular="isTitular"/>
           </Container>
         </div>
       </template>
