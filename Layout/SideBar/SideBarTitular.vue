@@ -62,6 +62,9 @@
         <hr class="line"/>
         <FooterLateralVue :usuario="usuario" />
     </div>
+    <ModalTemplate :open="confirmarEmail">
+        <CardConfirmarEmail @refresh="refresh" />
+    </ModalTemplate>
 </template>
 
 <script>
@@ -76,10 +79,22 @@ import BodySmall from '@/components/shared/Typography/Body/BodySmall.vue'
 import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue'
 import ButtonIcon from '@/components/shared/Actions/ButtonIcon.vue'
 import SideBarLinkGroup from './SideBarLinkGroup.vue'
+import CardConfirmarEmail from '@/components/Cards/CardConfirmarEmail/CardConfirmarEmail.vue'
+import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue'
 
 export default {
     name: "BarraLateral",
-    components: { BarraLateralLink, FooterLateralVue, Icon, BodySmall, ButtonPrimary, ButtonIcon, SideBarLinkGroup },
+    components: {
+        BarraLateralLink,
+        FooterLateralVue,
+        Icon,
+        BodySmall,
+        ButtonPrimary,
+        ButtonIcon,
+        SideBarLinkGroup,
+        ModalTemplate,
+        CardConfirmarEmail
+    },
     data() {
         return {
             usuario: {
@@ -115,6 +130,9 @@ export default {
             new UsuarioTitularService().getUserInfo().then(response => {
                 console.log(response.data)
                 this.usuario = response.data
+                if (!this.usuario.confirmado_email) {
+                    this.confirmarEmail = true;
+                }
                 localStorage.setItem('usuario', JSON.stringify(response.data));
             })
         },
@@ -125,6 +143,9 @@ export default {
             console.log(to, titleHeader)
             this.activeGroup = titleHeader;
             this.currentPage = to;
+        },
+        refresh() {
+            this.$router.go();
         }
     },
     setup() {
@@ -310,5 +331,11 @@ export default {
 .links.collapsed {
     margin: 0 auto;
     padding: var(--spacing-large)  var(--spacing-small);
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        display: none;
+    }
 }
 </style>
