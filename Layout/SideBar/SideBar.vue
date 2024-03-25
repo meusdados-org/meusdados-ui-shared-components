@@ -68,6 +68,9 @@
     <ModalTemplate :open="primeiroAcesso">
         <CardRecuperarAcesso :firstAccessCard="true" @refresh="refresh" />
     </ModalTemplate>
+    <ModalTemplate :open="confirmarEmail">
+        <CardConfirmarEmail @refresh="refresh" />
+    </ModalTemplate>
 </template>
 
 <script>
@@ -84,11 +87,23 @@ import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue'
 import ButtonIcon from '@/components/shared/Actions/ButtonIcon.vue'
 import SideBarLinkGroup from './SideBarLinkGroup.vue'
 import CardRecuperarAcesso from '@/components/Cards/CardRecuperarAcesso/CardRecuperarAcesso.vue'
+import CardConfirmarEmail from '@/components/Cards/CardConfirmarEmail/CardConfirmarEmail.vue'
 import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue'
 
 export default {
     name: "BarraLateral",
-    components: { BarraLateralLink, FooterLateralVue, Icon, BodyMedium, ButtonPrimary, ButtonIcon, SideBarLinkGroup, ModalTemplate, CardRecuperarAcesso },
+    components: {
+        BarraLateralLink,
+        FooterLateralVue,
+        Icon,
+        BodyMedium,
+        ButtonPrimary,
+        ButtonIcon,
+        SideBarLinkGroup,
+        ModalTemplate,
+        CardRecuperarAcesso,
+        CardConfirmarEmail
+    },
     data() {
         return {
             usuario: {
@@ -101,6 +116,7 @@ export default {
             activeGroup: undefined,
             currentPage: '/dashboard',
             primeiroAcesso: false,
+            confirmarEmail: false,
             links: [
                 {
                     titleHeader: 'Dashboard',
@@ -215,6 +231,9 @@ export default {
                 this.usuario = response.data;
                 if (this.usuario.first_login) {
                     this.primeiroAcesso = true;
+                }
+                if (!this.usuario.confirmado_email) {
+                    this.confirmarEmail = true;
                 }
                 localStorage.setItem('usuario', JSON.stringify(response.data));
                 if (this.usuario.perfil_obj.nome === 'Master') {
