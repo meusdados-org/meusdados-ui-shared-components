@@ -37,7 +37,7 @@ const runAction = (notification) => {
 </script>
 
 <template>
-<div class="notice-banner" :style="{ backgroundColor: getBackgroundColor(notification) }">
+<div class="notice-banner" :style="{ backgroundColor: getBackgroundColor(notification) }" v-on:click="runAction(notification)">
   <div class="notice-banner__content__text">
     <LabelSmall>{{ notification.message }}</LabelSmall>
   </div>
@@ -62,6 +62,11 @@ const runAction = (notification) => {
   border-radius: var(--border-radius-mini);
   text-align: left;
   gap: var(--spacing-xsmall);
+}
+
+.notice-banner:hover {
+  opacity: 0.9;
+  cursor: pointer;
 }
 
 .notice-banner__content__text {
