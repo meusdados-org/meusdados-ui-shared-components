@@ -125,26 +125,6 @@ export default {
                     children: undefined
                 },
                 {
-                    titleHeader: 'Solicitações',
-                    iconHeader: 'file-text',
-                    children: [
-                        {
-                            title: 'Todas Solicitações',
-                            to: '/solicitacoes/todas-solicitacoes'
-                        },
-                        {
-                            title: 'Respostas Automáticas',
-                            to: '/solicitacoes/resposta-automatica'
-                        },
-                    ],
-                },
-                {
-                    titleHeader: 'Consentimentos',
-                    iconHeader: 'user-check',
-                    to: '/consentimentos',
-                    children: undefined
-                },
-                {
                     titleHeader: 'Mapeamento de Dados',
                     iconHeader: 'hard-drive',
                     permission: 'mapeamento_dados',
@@ -193,6 +173,26 @@ export default {
                             to: '/tipos-titular'
                         }
                     ]
+                },
+                {
+                    titleHeader: 'Consentimentos',
+                    iconHeader: 'user-check',
+                    to: '/consentimentos',
+                    children: undefined
+                },
+                {
+                    titleHeader: 'Solicitações',
+                    iconHeader: 'file-text',
+                    children: [
+                        {
+                            title: 'Todas Solicitações',
+                            to: '/solicitacoes/todas-solicitacoes'
+                        },
+                        {
+                            title: 'Respostas Automáticas',
+                            to: '/solicitacoes/resposta-automatica'
+                        },
+                    ],
                 },
                 {
                     titleHeader: 'Configurações',
