@@ -6,7 +6,9 @@
                 {{ item.name }}
             </LabelMedium> <Icon class="breadcrumb-icon mobile" size="14px" v-if="!isTheCurrentPage(i)" type="chevron-right" />
         </span>
+        <ButtonLink v-if="allowHelp && helpText" type="help-circle" size="large" onlyIcon v-on:click="open = true"></ButtonLink>
     </span>
+    <ModalHelp v-if="allowHelp && helpText" :open="open" :helpText="helpText" @close="open = false" />
 </template>
 
 <script>
@@ -14,6 +16,9 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
 import LabelMedium from '../../Typography/Label/LabelMedium.vue';
 import Tag from '@/components/shared/Inputs/Tag/Tag.vue';
+import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
+import ModalHelp from '@/components/Modals/ModalHelp.vue';
+import posthog from '@/utils/posthog-handler';
 
 export default {
     name: 'BreadCrumbs',
@@ -21,12 +26,23 @@ export default {
         Icon,
         TitleSmall,
         LabelMedium,
-        Tag
+        Tag,
+        ButtonLink,
+        ModalHelp
+    },
+    data() {
+        return {
+            allowHelp: false,
+            open: false
+        }
     },
     computed: {
         crumbs() {
             const crumbs = this.$route.meta.breadcrumb;
             return crumbs;
+        },
+        helpText() {
+            return this.$route.meta.helpText;
         }
     },
     methods: {
@@ -38,10 +54,24 @@ export default {
             return index === this.crumbs.length - 1;
         }
     },
+    created() {
+        const user = JSON.parse(localStorage.getItem('usuario'));
+        posthog.setPersonPropertiesForFlags({ cnpj: user.cnpj });
+        posthog.onFeatureFlags(() => {
+            const flag = posthog.getFeatureFlag('help-texts-ab-test');
+            const overwriteFlag = posthog.isFeatureEnabled('help-texts');
+            this.allowHelp = (flag == 'test' || overwriteFlag);
+        })
+    }
 };
 </script>
 
 <style scoped>
+
+.breadcrumbs {
+    width: 100%;
+    display: flex;
+}
 
 .breadcrumb-title {
     margin-right:  var(--spacing-small);
@@ -61,7 +91,7 @@ export default {
 }
 
 .currentPage {
-    color: var(--gray-2);
+    opacity: 0.63;
 }
 
 .mobile {

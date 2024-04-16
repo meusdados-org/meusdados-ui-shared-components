@@ -58,9 +58,8 @@
                 </template>
             </div>
         </div>
-        <div class="create" style="display: none;" :class="{ collapsed }">
-            <ButtonPrimary id="button-criar-sidebar" v-if="!collapsed" class="button"><Icon type="plus" size=" 16px"/> Criar</ButtonPrimary>
-            <ButtonIcon id="button-criar-minimizado-sidebar" v-else type="plus" />
+        <div class="help" :class="{ collapsed }">
+            <ButtonLink v-if="allowHelp" type="help-circle" v-on:click="help = true">Não sabe para onde ir?</ButtonLink>
         </div>
         <hr class="line"/>
         <FooterLateralVue :usuario="usuario" />
@@ -71,6 +70,7 @@
     <ModalTemplate :open="confirmarEmail">
         <CardConfirmarEmail @refresh="refresh" />
     </ModalTemplate>
+    <ModalHelp :open="help" :helpText="helpText" @close="help = false"/>
 </template>
 
 <script>
@@ -89,6 +89,9 @@ import SideBarLinkGroup from './SideBarLinkGroup.vue'
 import CardRecuperarAcesso from '@/components/Cards/CardRecuperarAcesso/CardRecuperarAcesso.vue'
 import CardConfirmarEmail from '@/components/Cards/CardConfirmarEmail/CardConfirmarEmail.vue'
 import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue'
+import ButtonLink from '@/components/shared/Actions/ButtonLink.vue'
+import ModalHelp from '@/components/Modals/ModalHelp.vue'
+import posthog from '@/utils/posthog-handler'
 
 export default {
     name: "BarraLateral",
@@ -102,7 +105,9 @@ export default {
         SideBarLinkGroup,
         ModalTemplate,
         CardRecuperarAcesso,
-        CardConfirmarEmail
+        CardConfirmarEmail,
+        ButtonLink,
+        ModalHelp
     },
     data() {
         return {
@@ -117,6 +122,31 @@ export default {
             currentPage: '/dashboard',
             primeiroAcesso: false,
             confirmarEmail: false,
+            allowHelp: false,
+            help: false,
+            helpText: `
+### Como navegar pela plataforma?
+- **Dashboard:** Obtenha uma visão geral da sua conta, incluindo atividades recentes, número de titulares e status de configurações.
+- **Mapeamento de Dados:** Gerencie os dados pessoais em conformidade com a LGPD com as subopções abaixo:
+    - **Área:** Registre setores que lidam com dados pessoais.
+    - **Bases Legais:** Veja as bases legais relacionadas à LGPD.
+    - **Sistemas:** Cadastre sistemas de TI que armazenam/processam dados pessoais.
+    - **Terceiros:** Registre parceiros com acesso a dados pessoais.
+    - **Termos de Uso:** Documente políticas de uso e privacidade.
+    - **Tipos de Dados:** Classifique os dados pessoais coletados.
+    - **Processo:** Documente processos internos de dados, do início ao fim.
+- **Titulares:** Gerencie dados pessoais em conformidade com a LGPD:
+    - **Todos os Titulares:** Cadastre e administre titulares e suas informações.
+    - **Tipos de Titular:** Categorize titulares em grupos, como clientes ou funcionários.
+- **Consentimentos:** Solicite e gerencie consentimentos dos titulares conforme a LGPD, garantindo transparência e permissão explícita.
+- **Solicitações:** Gerencie solicitações de titulares em conformidade com a LGPD:
+    - **Todas as Solicitações:** Visualize todas as solicitações de titulares, incluindo pedidos de acesso, correção ou exclusão de dados.
+    - **Respostas Automáticas:** Configure respostas automáticas para solicitações, melhorando a eficiência e experiência dos titulares.
+- **Configurações:** Gerencie configurações gerais da conta:
+    - **Assinatura e Pagamentos:** Controle sua assinatura, realize upgrades e gerencie pagamentos.
+    - **Usuários:** Adicione usuários para gerenciar a conta.
+    - **Conta e Cadastro:** Atualize informações de cadastro, como nome fantasia, endereço, representantes legais, DPO e responsável pela segurança da informação.
+            `,
             links: [
                 {
                     titleHeader: 'Dashboard',
@@ -243,6 +273,13 @@ export default {
                         icon: 'settings'
                     })
                 }
+                const user = response.data;
+                posthog.setPersonPropertiesForFlags({ cnpj: user.cnpj });
+                posthog.onFeatureFlags(() => {
+                    const flag = posthog.getFeatureFlag('help-texts-ab-test');
+                    const overwriteFlag = posthog.isFeatureEnabled('help-texts');
+                    this.allowHelp = (flag == 'test' || overwriteFlag);
+                })
             })
         },
         activateGroup(status, titleHeader) {
@@ -342,8 +379,9 @@ export default {
 }
 
 .line {
-    height: var(--spacing-xxxsmall);
-    background-color: var(--gray-3);
+    height: 1px;
+    background-color: var(--gray-2);
+    opacity: 0.75;
     border: none;
 }
 
@@ -430,8 +468,8 @@ export default {
     text-align: left;
 }
 
-.create {
-    padding: var(--spacing-large);
+.help {
+    padding: var(--spacing-small);
 }
 
 .create.collapsed {
