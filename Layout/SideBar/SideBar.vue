@@ -59,7 +59,7 @@
             </div>
         </div>
         <div class="help" :class="{ collapsed }">
-            <ButtonLink v-if="allowHelp" type="help-circle" v-on:click="help = true">Não sabe para onde ir?</ButtonLink>
+            <ButtonLink v-if="allowHelp" type="help-circle" v-on:click="help = true">Precisa de ajuda?</ButtonLink>
         </div>
         <hr class="line"/>
         <FooterLateralVue :usuario="usuario" />
@@ -274,12 +274,27 @@ export default {
                     })
                 }
                 const user = response.data;
-                posthog.setPersonPropertiesForFlags({ cnpj: user.cnpj });
-                posthog.onFeatureFlags(() => {
-                    const flag = posthog.getFeatureFlag('help-texts-ab-test');
-                    const overwriteFlag = posthog.isFeatureEnabled('help-texts');
-                    this.allowHelp = (flag == 'test' || overwriteFlag);
-                })
+                this.manageFeatureToggling(user);
+            })
+        },
+        manageFeatureToggling(user) {
+            posthog.setPersonPropertiesForFlags({ cnpj: user.cnpj });
+            let optionAdded = false;
+            posthog.onFeatureFlags(() => {
+                const helpTextsFlag = posthog.getFeatureFlag('help-texts-ab-test');
+                const overwriteHelpTextsFlag = posthog.isFeatureEnabled('help-texts');
+                this.allowHelp = (helpTextsFlag == 'test' || overwriteHelpTextsFlag);
+
+                const treinamentosFlag = posthog.getFeatureFlag('treinamentos-ab-test');
+                const overwriteTreinamentosFlag = posthog.isFeatureEnabled('treinamentos');
+                if ((treinamentosFlag == 'test' || overwriteTreinamentosFlag) && !optionAdded) {
+                    optionAdded = true;
+                    this.links.splice(1, 0, {
+                        titleHeader: 'Treinamentos',
+                        to: '/treinamentos',
+                        iconHeader: 'book-open'
+                    })
+                }
             })
         },
         activateGroup(status, titleHeader) {
