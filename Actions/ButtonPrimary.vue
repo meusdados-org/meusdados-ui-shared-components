@@ -124,16 +124,6 @@ button {
     color: var(--white);
     cursor: pointer;
     opacity: 1;
-    -webkit-transition: .5s all;
-    -webkit-transition-delay: 5s;
-    -moz-transition: .5s all;
-    -moz-transition-delay: 5s;
-    -ms-transition: .5s all;
-    -ms-transition-delay: 5s;
-    -o-transition: .5s all;
-    -o-transition-delay: 5s;
-    transition: .25s all;
-    transition-delay: .25s;
 }
 
 button.circle {
