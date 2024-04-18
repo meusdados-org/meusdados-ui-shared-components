@@ -1,36 +1,73 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, watch } from 'vue';
   import Card from '../Card/Card.vue';
   import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue';
   import ButtonIcon from '../../Actions/ButtonIcon.vue';
-  import { YoutubeIframe  } from '@vue-youtube/component';
+  import { YoutubeIframe } from '@vue-youtube/component';
+  import { TreinamentoService } from '@/services/treinamento';
 
   const emits = defineEmits(['close', 'like', 'dislike']);
+  const treinamentoService = new TreinamentoService();
   const props = defineProps({
     video_id: String,
     title: String,
-    open: Boolean
+    open: Boolean,
+    treinamento_id: String
   });
 
-  const onReady = (event) => {
-    console.log(event);
+  const liked = ref(false);
+  const disliked = ref(false);
+  const currentVideoEvent = ref();
+
+  watch((props.open), (value) => {
+    if (value) {
+      getInteractions();
+    }
+  });
+
+  const like = () => {
+    treinamentoService.like(props.treinamento_id).then(() => getInteractions());  
   }
 
-  const onPlay = (event) => {
-    console.log('playing');
-    console.log(event);
+  const dislike = () => {
+    treinamentoService.dislike(props.treinamento_id).then(() => getInteractions());
+  }
+
+  const getInteractions = () => {
+    treinamentoService.getInteractions(props.treinamento_id).then(({ data }) => {
+      liked.value = data.liked;
+      disliked.value = data.disliked;
+    });
+  }
+
+  const markView = async () => {
+    treinamentoService.view(props.treinamento_id);
+  }
+
+  const onPlay = async (event) => {
+    currentVideoEvent.value = event;
+    const secondsWatched = Math.round(event.target.playerInfo.currentTime);
+    await treinamentoService.viewTrack(props.treinamento_id, secondsWatched);
+  }
+
+  const close = async () => {
+    if (currentVideoEvent.value) {
+      currentVideoEvent.value.target.pauseVideo();
+      await new Promise(r => setTimeout(r, 100));
+    }
+    emits('close');
   }
 </script>
 
 <template>
-  <ModalTemplate :open="open" @close="emits('close')">
-    <Card :title="title" @close="emits('close')">
+  <ModalTemplate :open="open" @close="close">
+    <Card :title="title" @close="close">
       <template #content>
         <section class="content-container">
-          <youtube-iframe :video-id="video_id" @ready="onReady" @state-change="onPlay" width="1024" height="576" />
+          <youtube-iframe :video-id="video_id" @ready="markView()" @state-change="onPlay" width="1024" height="576" />
           <section class="buttons">
-            <ButtonIcon class="like" type="thumbs-up" size="large"/>
-            <ButtonIcon class="dislike" type="thumbs-down" size="large"/>
+            <ButtonIcon class="like" :class="{ active: liked }" type="thumbs-up" size="large" v-on:click="like"/>
+            <ButtonIcon class="dislike" :class="{ active: disliked }" type="thumbs-down" size="large" v-on:click="dislike"/>
           </section>
         </section>
       </template>
@@ -57,11 +94,11 @@
   background-color: var(--gray-2);
 }
 
-.like:hover, .like:active {
+.like:hover, .like.active {
   background-color: var(--green-1) !important;
 }
 
-.dislike:hover, .dislike:active {
+.dislike:hover, .dislike.active {
   background-color: var(--red-1) !important;
 }
 

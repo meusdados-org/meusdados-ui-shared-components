@@ -6,7 +6,8 @@ import VideoPlayer from './VideoPlayer.vue';
 
 const props = defineProps({
   video_id: String,
-  title: String
+  title: String,
+  treinamento_id: String
 });
 
 const open = ref(false);
@@ -28,7 +29,7 @@ const title_ = computed(() => {
       {{ title_ }}
     </LabelLarge>
   </Card>
-  <VideoPlayer :video_id="video_id" :title="title" :open="open" @close="open = false"/>
+  <VideoPlayer :video_id="video_id" :title="title" :open="open" :treinamento_id="treinamento_id" @close="open = false"/>
 </template>
 
 <style scoped>
