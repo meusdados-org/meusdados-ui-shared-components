@@ -56,10 +56,14 @@
       <ButtonLink @click="addAttachment" class="button" @mousedown.prevent v-if="hasAttachment">
         <Icon type="paperclip"/>
       </ButtonLink>
+      <ButtonLink @click="$emit('genAI')" v-if="aiGenerate && aiFeatureFlagEnabled" class="button" @mousedown.prevent type="edit-3">
+        Gerar automaticamente usando IA
+      </ButtonLink>
     </div>
     <div
+      v-if="!loading_"
       @input="onInput"
-      v-html="innerValue"
+      v-html="innerValue_"
       contenteditable="true"
       ref="wysiwyg"
       class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300"
@@ -72,6 +76,11 @@
       :style="{ 'max-height': maxHeight, 'height': fixedHeight }"
       @paste="handlePaste"
     />
+    <div v-else class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300">
+      <div class="loading-container">
+        <Icon type="loader" size="32px" class="animate-spin"/>
+      </div>
+    </div>
     <div class="attachments" v-if="files.length > 0">
       <FragmentAttachment v-for="file in files" :key="file.name" :close="true" :base64_="file.type.startsWith('image/') ? convertIntoBase64(file): undefined" :fileName="file.name" @close="removeFile(file)"/>
     </div>
@@ -88,9 +97,16 @@ import Icon from '@/components/shared/Icon/Icon.vue';
 import InputSelectField from './InputSelectField.vue';
 import { Marked } from '@ts-stack/markdown';
 import TurndownService from 'turndown';
+import { marked } from 'marked';
+import posthog from '../../../utils/posthog-handler.js';
 
 export default {
     name: "InputWysiwyg",
+    emits: [
+      'sendMessage',
+      'input',
+      'getAI'
+    ],
     props: {
       value: {
         type: String,
@@ -112,6 +128,14 @@ export default {
         type: Boolean,
         default: true,
       },
+      aiGenerate: {
+        type: Boolean,
+        default: false
+      },
+      loading: {
+        type: Boolean,
+        default: false,
+      },
     },
     data() {
         return {
@@ -120,7 +144,7 @@ export default {
                 key: '<h1>',
                 label: 'h1',
               },
-              {
+              {            
                 key: '<h2>',
                 label: 'h2',
               },
@@ -149,9 +173,10 @@ export default {
             isItalic: false,
             isUnderline: false,
             selected: '',
-            innerValue: Marked.parse(this.value) || '<p><br></p>',
             updated: false,
-            files: []
+            files: [],
+            innerValue: [Marked.parse(this.value) || '<p><br></p>'],
+            aiFeatureFlagEnabled: false,
         };
     },
     methods: {
@@ -165,12 +190,7 @@ export default {
         return false;
       },
       onInput(event) {
-        const turndown = new TurndownService({
-          emDelimiter: '_',
-          linkStyle: 'inlined',
-          headingStyle: 'atx'
-        })
-        this.$emit("input", Marked.parse(event.target.innerHTML));
+        this.$emit("input", marked(event.target.innerHTML));
       },
       applyBold() {
         document.execCommand('bold')
@@ -255,7 +275,6 @@ export default {
       saveAttachment(file) {
         // Lógica para salvar o arquivo em anexo
         this.files.push(file);
-        ;
       },
       handlePaste(event) {
         const items = (event.clipboardData || event.originalEvent.clipboardData).items;
@@ -289,6 +308,20 @@ export default {
     components: { Icon, InputSelectField, ButtonLink, FragmentAttachment },
     created() {
       this.selected = this.options[0];
+      const user = JSON.parse(localStorage.getItem('usuario') || {});
+      posthog.setPersonPropertiesForFlags({ 'cnpj': user.cnpj });
+      posthog.onFeatureFlags(() => {
+        this.aiFeatureFlagEnabled = posthog.isFeatureEnabled('termos-ai');
+      });
+    },
+    computed: {
+        loading_() {
+            return this.loading;
+        },
+        innerValue_() {
+            console.log(marked(this.innerValue[0]));
+            return marked(this.innerValue[0], { sanitize: true });
+        }
     },
     mounted() {
       document.execCommand('defaultParagraphSeparator', false, 'p')
@@ -312,6 +345,28 @@ export default {
   border: 1px solid var(--gray-1);
   border-radius: var(--border-radius-small);
   overflow: hidden;
+}
+
+.wysiwyg-container .loading-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: var(--spacing-xsmall);
+  flex-grow: 1;
+  height: 80%;
+}
+
+.animate-spin {
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .wysiwyg-container .multiselect {
@@ -366,12 +421,12 @@ export default {
 .wysiwyg-output {
   text-align: left;
   min-height: 5px;
-  max-height: 300px;
   max-width: 100%;
   font-size: 12px;
   padding:  var(--spacing-small);;
   overflow-y: auto;
   outline: none;
+  flex-grow: 1;
 }
 
 .wysiwyg-container.dragover {

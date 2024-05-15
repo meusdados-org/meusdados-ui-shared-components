@@ -1,5 +1,5 @@
 <template>
-    <button :class="{ dark, isActive, secondary }" :disabled="disabled" v-on:click="goTo">
+    <button :class="{ dark, isActive, secondary }" type="button" :disabled="disabled" v-on:click="goTo">
         <div class="button" :class="{ onlyIcon, secondary }">
             <Icon v-if="type && !afterIcon" :type="type" :size="iconSize_"/>
             <LabelSmall v-if="size === 'small' && !onlyIcon">
