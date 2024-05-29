@@ -83,7 +83,6 @@ import meusDadosComTexto from '@/assets/img/meus-dados-colorido.png'
 import FooterLateralVue from './SideBarFooter.vue'
 import Icon from '@/components/shared/Icon/Icon.vue'
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue'
-import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue'
 import ButtonIcon from '@/components/shared/Actions/ButtonIcon.vue'
 import SideBarLinkGroup from './SideBarLinkGroup.vue'
 import CardRecuperarAcesso from '@/components/Cards/CardRecuperarAcesso/CardRecuperarAcesso.vue'
@@ -100,7 +99,6 @@ export default {
         FooterLateralVue,
         Icon,
         BodyMedium,
-        ButtonPrimary,
         ButtonIcon,
         SideBarLinkGroup,
         ModalTemplate,
@@ -164,10 +162,6 @@ export default {
                             to: '/mapeamento-dados/areas'
                         },
                         {
-                            title: 'Processos',
-                            to: '/mapeamento-dados/processos'
-                        },
-                        {
                             title: 'Bases Legais',
                             to: '/mapeamento-dados/bases-legais'
                         },
@@ -186,6 +180,10 @@ export default {
                         {
                             title: 'Tipos de Dados',
                             to: '/mapeamento-dados/tipos-dados'
+                        },
+                        {
+                            title: 'Processos',
+                            to: '/mapeamento-dados/processos'
                         }
                     ]
                 },
