@@ -216,7 +216,7 @@ export default {
                 },
                 {
                     titleHeader: 'Solicitações',
-                    iconHeader: 'file-text',
+                    iconHeader: 'inbox',
                     children: [
                         {
                             title: 'Todas Solicitações',
