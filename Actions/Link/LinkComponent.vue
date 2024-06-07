@@ -28,7 +28,7 @@ export default {
                 return;
             }
             this.$emit('changeRoute', this.to);
-            this.$router.push({ path: this.to });
+            window.location.href = this.to;  
         }
     }
 }

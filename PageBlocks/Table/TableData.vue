@@ -20,11 +20,10 @@
                             <ButtonSwitch label="ativo" :value="td[column.key]" @switchFlag="changeAtivo(td)" :showLabel="false"/>
                         </div>
                         <div v-else-if="td[column.key] === true || td[column.key] === false">
-                            <div v-if="td[column.key] === false && column.reverse" class="icons">
-                                <Icon size="12px" type="check"/>
-                            </div>
-                            <div v-else-if="td[column.key] === true && !column.reverse" class="icons">
-                                <Icon size="12px" type="check"/>
+                            <div v-if="(td[column.key] === false && column.reverse) || (td[column.key] === true && !column.reverse)" class="icons">
+                                <slot name="boolIcon">
+                                    <Icon size="12px" type="check"/>
+                                </slot>
                             </div>
                         </div>
                         <div v-else-if="column.key.includes('data')">
@@ -50,7 +49,7 @@
                             </div>
                             <div v-if="canDownload">
                                 <ButtonLink>
-                                    <Icon class="download" size="1.25rem" type="download" v-on:click="download(td.file_name)"/>
+                                    <Icon class="download" size="1.25rem" type="download" v-on:click="download(td[fileNameLabel])"/>
                                 </ButtonLink>
                             </div>
                             <div v-if="canDelete">
@@ -120,6 +119,10 @@ export default {
         filters: {
             type: Array,
             default: () => []
+        },
+        fileNameLabel: {
+            type: String,
+            default: 'file_name'
         }
     },
     data(){
@@ -306,9 +309,17 @@ export default {
     max-width: var(--spacing-xxxlarge);
 }
 
-.icons {
+th.icons {
     text-align: center !important;
 }
+
+div.icons {
+    text-align: center !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .table th {
     padding:  var(--spacing-small);

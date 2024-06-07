@@ -188,6 +188,12 @@ export default {
                     ]
                 },
                 {
+                    titleHeader: 'Relatórios',
+                    iconHeader: 'file-text',
+                    to: '/relatorio',
+                    children: undefined,
+                },
+                {
                     titleHeader: 'Titulares',
                     iconHeader: 'users',
                     permission: 'titulares',
@@ -265,7 +271,7 @@ export default {
                 }
                 localStorage.setItem('usuario', JSON.stringify(response.data));
                 if (this.usuario.perfil_obj.nome === 'Master') {
-                    this.links[5].children.push({
+                    this.links[6].children.push({
                         title: 'Conta e cadastro',
                         to: '/configuracoes/conta-cadastro',
                         icon: 'settings'

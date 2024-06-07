@@ -10,6 +10,14 @@ const props = defineProps({
   withTooltip: {
     type: Boolean,
     default: true
+  },
+  size: {
+    type: String,
+    default: 'var(--spacing-xsmall)'
+  },
+  radius: {
+    type: String,
+    default: 'var(--border-radius-small)'
   }
 })
 
@@ -31,20 +39,11 @@ const backgroundColor = computed(() => {
 <template>
   <Tooltip v-if="withTooltip" :fit-content="true" :open-to-right="true">
     <template #icon>
-      <div class="dot" :style="{ 'background-color': backgroundColor }"/>
+      <div :style="{ 'background-color': backgroundColor, width: size, height: size, 'border-radius': radius }"/>
     </template>
     <template #default>
       {{ prioridade }}
     </template>
   </Tooltip>
-  <div v-else class="dot" :style="{ 'background-color': backgroundColor }"/>
+  <div v-else :style="{ 'background-color': backgroundColor, width: size, height: size, 'border-radius': radius }"/>
 </template>
-
-<style scoped>
-.dot {
-  width: var(--spacing-xsmall);
-  height: var(--spacing-xsmall);
-  background-color: var(--yellow-1);
-  border-radius: var(--border-radius-small);
-}
-</style>

@@ -1,6 +1,6 @@
 <template>
     <button :class="{ dark, isActive, secondary }" type="button" :disabled="disabled" v-on:click="goTo">
-        <div class="button" :class="{ onlyIcon, secondary }">
+        <div class="button" :class="{ onlyIcon, secondary, flexStart }">
             <Icon v-if="type && !afterIcon" :type="type" :size="iconSize_"/>
             <LabelSmall v-if="size === 'small' && !onlyIcon">
                 <slot></slot>
@@ -74,6 +74,10 @@ export default {
         secondary: {
             type: Boolean,
             default: false
+        },
+        flexStart: {
+            type: Boolean,
+            default: false,
         }
     },
     components: {
@@ -148,6 +152,10 @@ button.isActive {
     column-gap: var(--spacing-xxxsmall);
 }
 
+.button.flexStart {
+    justify-content: flex-start;
+    text-align: left !important;
+}
 
 .button.onlyIcon {
     column-gap: 0;
