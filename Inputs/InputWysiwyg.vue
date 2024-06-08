@@ -247,7 +247,6 @@ export default {
       handleDrop(event) {
         event.preventDefault();
         const files = event.dataTransfer.files;
-        ;
         for (let i = 0; i < files.length; i++) {
           const file = files[i];
           if (file.type.startsWith('image/')) {
@@ -311,7 +310,7 @@ export default {
       const user = JSON.parse(localStorage.getItem('usuario') || {});
       posthog.setPersonPropertiesForFlags({ 'cnpj': user.cnpj });
       posthog.onFeatureFlags(() => {
-        this.aiFeatureFlagEnabled = posthog.isFeatureEnabled('termos-ai');
+        this.aiFeatureFlagEnabled = posthog.isFeatureEnabled('politica-privacidade-ai');
       });
     },
     computed: {

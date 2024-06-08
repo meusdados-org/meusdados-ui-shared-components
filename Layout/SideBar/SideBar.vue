@@ -188,12 +188,6 @@ export default {
                     ]
                 },
                 {
-                    titleHeader: 'Relatórios',
-                    iconHeader: 'file-text',
-                    to: '/relatorio',
-                    children: undefined,
-                },
-                {
                     titleHeader: 'Titulares',
                     iconHeader: 'users',
                     permission: 'titulares',
@@ -271,7 +265,7 @@ export default {
                 }
                 localStorage.setItem('usuario', JSON.stringify(response.data));
                 if (this.usuario.perfil_obj.nome === 'Master') {
-                    this.links[6].children.push({
+                    this.links[this.links.length - 1].children.push({
                         title: 'Conta e cadastro',
                         to: '/configuracoes/conta-cadastro',
                         icon: 'settings'
@@ -284,6 +278,8 @@ export default {
         manageFeatureToggling(user) {
             posthog.setPersonPropertiesForFlags({ cnpj: user.cnpj });
             let optionAdded = false;
+            let relatorioAdded = false;
+            let politicasAdded = false;
             posthog.onFeatureFlags(() => {
                 const helpTextsFlag = posthog.getFeatureFlag('help-texts-ab-test');
                 const overwriteHelpTextsFlag = posthog.isFeatureEnabled('help-texts');
@@ -297,6 +293,27 @@ export default {
                         titleHeader: 'Treinamentos',
                         to: '/treinamentos',
                         iconHeader: 'book-open'
+                    })
+                }
+
+                const relatoriosFlag = posthog.isFeatureEnabled('relatorios');
+                if (relatoriosFlag && !relatorioAdded) {
+                    relatorioAdded = true;
+                    this.links.splice(3, 0, {
+                        titleHeader: 'Relatórios',
+                        to: '/relatorio',
+                        iconHeader: 'file-text'
+                    });
+                }
+
+                const politicasFlag = posthog.isFeatureEnabled('politicas');
+                if (politicasFlag && !politicasAdded) {
+                    const index = this.links.findIndex((link) => link.titleHeader === 'Mapeamento de Dados')
+                    politicasAdded = true;
+                    this.links.splice(index+1, 0, {
+                        titleHeader: 'Políticas de Privacidade',
+                        to: '/politicas-privacidade',
+                        iconHeader: 'file'
                     })
                 }
             })
