@@ -31,6 +31,10 @@ const props = defineProps({
   erroResponse: {
     type: String,
     default: undefined
+  },
+  addAction: {
+    type: Boolean,
+    default: true 
   }
 })
 
@@ -78,7 +82,7 @@ const isOpen = (i, item) => {
         <slot name="content" :item="item" :i="i"></slot>
       </template>
     </ExpansionPanel>
-    <div class="expansion-panel-container" v-on:click="addNewItem">
+    <div class="expansion-panel-container" v-if="addAction" v-on:click="addNewItem">
       <div class="expansion-panel-header">
         <div class="expansion-panel-title">
           <ButtonLink size="large">

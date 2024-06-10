@@ -56,9 +56,10 @@
       <ButtonLink @click="addAttachment" class="button" @mousedown.prevent v-if="hasAttachment">
         <Icon type="paperclip"/>
       </ButtonLink>
-      <ButtonLink @click="$emit('genAI')" v-if="aiGenerate && aiFeatureFlagEnabled" class="button" @mousedown.prevent type="edit-3">
+      <div class="filler" style="flex-grow: 1" v-if="aiGenerate && aiFeatureFlagEnabled"/>
+      <ButtonPrimary size="small" @click="$emit('genAI')" v-if="aiGenerate && aiFeatureFlagEnabled" class="button overflow-button" @mousedown.prevent icon="cpu">
         Gerar automaticamente usando IA
-      </ButtonLink>
+      </ButtonPrimary>
     </div>
     <div
       v-if="!loading_"
@@ -92,6 +93,7 @@
 
 <script>
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
+import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 import FragmentAttachment from '../Fragments/FragmentAttachment.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import InputSelectField from './InputSelectField.vue';
@@ -304,7 +306,7 @@ export default {
         this.files.splice(index, 1);
       },
     },
-    components: { Icon, InputSelectField, ButtonLink, FragmentAttachment },
+    components: { Icon, InputSelectField, ButtonLink, FragmentAttachment, ButtonPrimary },
     created() {
       this.selected = this.options[0];
       const user = JSON.parse(localStorage.getItem('usuario') || {});
