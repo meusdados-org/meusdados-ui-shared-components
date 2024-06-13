@@ -5,7 +5,6 @@ import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import ButtonLink from '../../Actions/ButtonLink.vue';
 
-const open = ref<number>(0);
 
 const props = defineProps({
   itemList: {
@@ -22,7 +21,8 @@ const props = defineProps({
     default: true
   },
   titleKey: {
-    type: String
+    type: String,
+    default: undefined
   },
   erroItem: {
     type: String,
@@ -38,6 +38,7 @@ const props = defineProps({
   }
 })
 
+const open = ref<number>(0);
 const innerErroItem = ref<string>(props.erroItem);
 const innerErroResponse = ref<string>(props.erroResponse);
 
@@ -62,19 +63,20 @@ const switchOpen = (index: number) => {
   open.value = index;
 }
 
-const isOpen = (i, item) => {
-  // if (props.erroItem && props.erroItem === item) {
-  //   open.value = i;
-  //   return true;
-  // }
-  return open.value === i;
+const getTitle = (item, i) => {
+    if (props.isTitleKeyInForm && props.titleKey) {
+       return item.form[props.titleKey] 
+    } else if (props.titleKey) {
+        return item[props.titleKey]
+    }
+    return i;
 }
 
 </script>
 
 <template>
   <div class="expansion-panel-wrapper">
-    <ExpansionPanel v-for="(item, i) in itemList" :key="i" :has-title="itemList.length > 1" :title="isTitleKeyInForm ? item.form[titleKey] : item[titleKey]" :open="open === i" @open="switchOpen(i)">
+    <ExpansionPanel v-for="(item, i) in itemList" :key="i" :has-title="itemList.length > 1" :title="getTitle(item, i)" :open="open === i" @open="switchOpen(i)">
       <template #content>
         <FormError v-if="erroItem && erroItem === item">
           {{ erroResponse }}

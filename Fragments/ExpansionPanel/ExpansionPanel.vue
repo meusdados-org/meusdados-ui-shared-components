@@ -70,5 +70,9 @@ const props = defineProps({
   .expansion-panel-header {
     padding:  var(--spacing-small);
   }
+
+  .expansion-panel-content.open {
+      padding: var(--spacing-small);
+  }
 }
 </style>
