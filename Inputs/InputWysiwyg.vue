@@ -65,7 +65,7 @@
       v-if="!loading_"
       @input="onInput"
       v-html="innerValue_"
-      contenteditable="true"
+      :contenteditable="!disabled"
       ref="wysiwyg"
       class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300"
       @dragover="handleDragOver"
@@ -138,6 +138,10 @@ export default {
         type: Boolean,
         default: false,
       },
+      disabled: {
+        type: Boolean,
+        default: false
+      }
     },
     data() {
         return {
