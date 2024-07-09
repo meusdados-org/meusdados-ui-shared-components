@@ -80,6 +80,9 @@
     <div v-else class="wysiwyg-output outline-none border-2 p-4 rounded-lg border-gray-300 focus:border-green-300">
       <div class="loading-container">
         <Icon type="loader" size="32px" class="animate-spin"/>
+        <div class="loading-message" v-if="loadingMessage">
+            <BodyMedium>{{ loadingMessage }}</BodyMedium>
+        </div>
       </div>
     </div>
     <div class="attachments" v-if="files.length > 0">
@@ -97,6 +100,7 @@ import ButtonPrimary from '@/components/shared/Actions/ButtonPrimary.vue';
 import FragmentAttachment from '../Fragments/FragmentAttachment.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import InputSelectField from './InputSelectField.vue';
+import BodyMedium from '../Typography/Body/BodyMedium.vue';
 import { Marked } from '@ts-stack/markdown';
 import TurndownService from 'turndown';
 import { marked } from 'marked';
@@ -141,6 +145,10 @@ export default {
       disabled: {
         type: Boolean,
         default: false
+      },
+      loadingMessage: {
+        type: String,
+        default: undefined
       }
     },
     data() {
@@ -310,7 +318,7 @@ export default {
         this.files.splice(index, 1);
       },
     },
-    components: { Icon, InputSelectField, ButtonLink, FragmentAttachment, ButtonPrimary },
+    components: { Icon, InputSelectField, ButtonLink, FragmentAttachment, ButtonPrimary, BodyMedium },
     created() {
       this.selected = this.options[0];
       const user = JSON.parse(localStorage.getItem('usuario') || {});
@@ -329,13 +337,17 @@ export default {
         }
     },
     mounted() {
-      document.execCommand('defaultParagraphSeparator', false, 'p')
-      // Adicionar ouvinte de evento para o editor
-      this.$refs.wysiwyg.addEventListener('focus', this.handleSelectionChange);
+      if (!this.loading) {
+          document.execCommand('defaultParagraphSeparator', false, 'p')
+          // Adicionar ouvinte de evento para o editor
+          this.$refs.wysiwyg.addEventListener('focus', this.handleSelectionChange);
+      }
     },
     beforeUnmount() {
       // Remover ouvinte de evento antes de desmontar o componente
-      this.$refs.wysiwyg.removeEventListener('focus', this.handleSelectionChange);
+      if (!this.loading) {
+              this.$refs.wysiwyg.removeEventListener('focus', this.handleSelectionChange);
+      }
     },
 }
 </script>
@@ -363,6 +375,7 @@ export default {
 
 .animate-spin {
   animation: spin 2s linear infinite;
+  flex-shrink: 0;
 }
 
 @keyframes spin {
