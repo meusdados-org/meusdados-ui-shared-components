@@ -242,6 +242,12 @@ export default {
                         to: '/configuracoes/usuarios',
                         icon: 'settings'
                     },
+                    {
+                        title: 'Meus créditos',
+                        permission: 'financeiro',
+                        to: '/configuracoes/creditos',
+                        icon: 'settings'
+                    }
                     // {
                     //    title: 'Perfis',
                     //    permission: 'usuarios',

@@ -57,8 +57,8 @@
         <Icon type="paperclip"/>
       </ButtonLink>
       <div class="filler" style="flex-grow: 1" v-if="aiGenerate && aiFeatureFlagEnabled"/>
-      <ButtonPrimary size="small" @click="$emit('genAI')" v-if="aiGenerate && aiFeatureFlagEnabled" class="button overflow-button" @mousedown.prevent icon="cpu">
-        Gerar automaticamente usando IA
+      <ButtonPrimary size="small" @click="$emit('genAI')" v-if="aiGenerate && aiFeatureFlagEnabled" :disabled="loading || creditos === 0" class="button overflow-button" @mousedown.prevent icon="cpu">
+        Gerar automaticamente usando IA. <template v-if="creditos !== undefined">Créditos Atuais: MD${{ creditos }}</template>
       </ButtonPrimary>
     </div>
     <div
@@ -149,6 +149,10 @@ export default {
       loadingMessage: {
         type: String,
         default: undefined
+      },
+      creditos: {
+        type: Number,
+        default: undefined,
       }
     },
     data() {

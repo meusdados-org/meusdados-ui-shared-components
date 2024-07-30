@@ -3,7 +3,7 @@
     </div>
     <Card class="grid-card" @click.stop="">
         <BarraLateralLink class='text' to="/conta/editar" icon="user">Minha Conta</BarraLateralLink>
-        <BarraLateralLink class='text' to="/login" v-on:click="logout" icon="log-out">Sair</BarraLateralLink>
+        <BarraLateralLink class='text' v-on:click="logout" icon="log-out">Sair</BarraLateralLink>
     </Card>
 </template>
 
@@ -25,14 +25,15 @@ export default {
         BarraLateralLink
     },
     methods: {
-        async logout() {
-            localStorage.clear();
-            await authService.logout();
-            window.location.reload();
-            // make it work on mobile too
-            if (window.innerWidth < 768) {
-                this.$router.push('/login');
-            }
+        logout() {
+            authService.logout().then(() => {
+                localStorage.clear();
+                window.location.reload();
+                // make it work on mobile too
+                if (window.innerWidth < 768) {
+                    this.$router.push('/login');
+                }
+            });
         }
     },
 }
