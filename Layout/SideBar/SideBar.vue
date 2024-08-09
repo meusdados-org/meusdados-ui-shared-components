@@ -184,14 +184,7 @@ export default {
                         {
                             title: 'Processos',
                             to: '/mapeamento-dados/processos'
-                        }
-                    ]
-                },
-                {
-                    titleHeader: 'Titulares',
-                    iconHeader: 'users',
-                    permission: 'titulares',
-                    children: [
+                        },
                         {
                             title: 'Todos Titulares',
                             to: '/titulares'
@@ -305,7 +298,7 @@ export default {
                 const relatoriosFlag = posthog.isFeatureEnabled('relatorios');
                 if (relatoriosFlag && !relatorioAdded) {
                     relatorioAdded = true;
-                    this.links.splice(3, 0, {
+                    this.links.splice(4, 0, {
                         titleHeader: 'Relatórios',
                         to: '/relatorio',
                         iconHeader: 'file-text'

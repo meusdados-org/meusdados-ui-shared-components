@@ -18,6 +18,7 @@ import LabelMedium from '../../Typography/Label/LabelMedium.vue';
 import Tag from '@/components/shared/Inputs/Tag/Tag.vue';
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue';
 import ModalHelp from '@/components/Modals/ModalHelp.vue';
+import { UsuarioEmpresaService } from '@/services/usuarioEmpresa';
 import posthog from '@/utils/posthog-handler';
 
 export default {
@@ -54,8 +55,12 @@ export default {
             return index === this.crumbs.length - 1;
         }
     },
-    created() {
-        const user = JSON.parse(localStorage.getItem('usuario'));
+    async created() {
+        let user = JSON.parse(localStorage.getItem('usuario'));
+        if  (!user) {
+            const { data } = await new UsuarioEmpresaService().getUserInfo();
+            user = data;
+        }
         posthog.setPersonPropertiesForFlags({ cnpj: user.cnpj });
         posthog.onFeatureFlags(() => {
             const flag = posthog.getFeatureFlag('help-texts-ab-test');
