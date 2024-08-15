@@ -259,7 +259,7 @@ export default {
                 if (this.usuario.first_login) {
                     this.primeiroAcesso = true;
                 }
-                if (!this.usuario.confirmado_email) {
+                if (!this.usuario.confirmado_email && !this.$route.query.firstAccess) {
                     this.confirmarEmail = true;
                 }
                 localStorage.setItem('usuario', JSON.stringify(response.data));

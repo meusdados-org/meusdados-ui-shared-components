@@ -1,6 +1,6 @@
 <template>
     <div class="container-form">
-        <InputFile @select="select" :types-allowed="typesAllowed" :max-size="maxSize" />
+        <InputFile @select="select" :types-allowed="typesAllowed" :max-size="maxSize" :value="currentFile" rightLabel />
         <ButtonPrimary id="button-upload-file" :disabled="!currentFile" v-on:click="upload">{{ title }}</ButtonPrimary>
     </div>
 </template>

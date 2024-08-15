@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <div class="input-button-container">
+        <div class="input-button-container" :class="{ rightLabel }">
             <label class="label"
                 :class="{
                     'small': size === 'small',
@@ -16,7 +16,7 @@
                 <LabelMedium class="inputLabel" v-else-if="size === 'medium'">{{ label }}</LabelMedium>
                 <LabelLarge class="inputLabel" v-else>{{ label }}</LabelLarge>
             </label>
-            <span v-if="currentFile || value"><BodyMedium :class="{'errorText': error}">{{ currentFile?.name || value }}</BodyMedium></span>
+            <span v-if="currentFile || value"><BodyMedium :class="{'errorText': error}">{{ name }}</BodyMedium></span>
         </div>
         <BodySmall class="error" v-if="error">{{ errorMessage }}</BodySmall>
     </div>
@@ -77,6 +77,10 @@ export default {
             required: false,
             default: 'small'
         },
+        rightLabel: {
+            type: Boolean,
+            default: false
+        }
 
     },
     data() {
@@ -106,6 +110,14 @@ export default {
         },
         error() {
             return this.errorMessage !== undefined;
+        },
+        name() {
+            if (typeof this.value === 'string') {
+                return this.value
+            } else if (this.value instanceof File) {
+                return this.value?.name;
+            }
+            return this.currentFile?.name;
         }
     },
     watch: {
@@ -165,6 +177,10 @@ export default {
     flex-direction: row-reverse;
     align-items: center;
     column-gap: var(--spacing-small);
+}
+
+.input-button-container.rightLabel {
+    flex-direction: row;
 }
 
 label.label input[type="file"] {
