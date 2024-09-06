@@ -2,7 +2,7 @@
 <template>
   <div class="wrapper-inputTextField">
 
-    <div class="container-InputTextFieldField" :class="{ formGroupVersion, error, search }">
+    <div class="container-InputTextFieldField" :class="{ formGroupVersion, error, search, dark }">
         <!-- <ButtonLink class="switch" v-if="isPassword" v-on:click="switchVisibility">
             <Icon
                 :type="passwordFieldType === 'password' ? 'eye' : 'eye-off'"
@@ -92,6 +92,10 @@ export default {
         size: {
             type: String,
             default: 'large'
+        },
+        dark: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -179,6 +183,10 @@ export default {
     background-color: transparent;
 }
 
+.container-InputTextFieldField.dark > input{
+    color: var(--white);
+}
+
 .container-InputTextFieldField.formGroupVersion > input {
   height: 18px;
   font-size: 12px;
@@ -193,11 +201,20 @@ export default {
     border-bottom-color: var(--black-1);
 }
 
+.container-InputTextFieldField.dark > input:hover {
+    border-bottom-color: var(--white);
+}
+
 .container-InputTextFieldField > input:focus{
     outline: none;
     border-bottom-color:var(--purple-1);
     transition: all .1s linear;
 }
+
+.container-InputTextFieldField.dark > input:focus{
+    border-bottom-color: var(--blue-3);
+}
+
 .container-InputTextFieldField input::placeholder{
     color: transparent;
 }
@@ -212,6 +229,10 @@ export default {
     -moz-transition: all .1s linear;
     box-sizing: border-box;
     padding: 0 var(--spacing-xsmall);
+}
+
+.container-InputTextFieldField.dark > label {
+    color: var(--white);
 }
 
 .container-InputTextFieldField:not(.search)  input:focus + label,
@@ -229,6 +250,11 @@ export default {
 .container-InputTextFieldField  input:not(:focus) + label,
 .container-InputTextFieldField  input:not(:placeholder-shown) + label{
     color: rgba(12, 12, 12, 0.651);
+}
+
+.container-InputTextFieldField.dark  input:not(:focus) + label,
+.container-InputTextFieldField.dark  input:not(:placeholder-shown) + label{
+    color: var(--gray-3);
 }
 
 .container-InputTextFieldField > input:not(.same-style):disabled,

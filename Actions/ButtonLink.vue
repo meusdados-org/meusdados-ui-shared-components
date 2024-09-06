@@ -11,7 +11,7 @@
             <LabelLarge v-else-if="!onlyIcon">
                 <slot></slot>
             </LabelLarge>
-            <Icon v-if="type && afterIcon" :type="type" :size="iconSize_"/>
+            <Icon v-if="type && afterIcon" :type="type" :size="iconSize_"/> 
         </div>
     </button>
 </template>
@@ -78,7 +78,7 @@ export default {
         flexStart: {
             type: Boolean,
             default: false,
-        }
+        },
     },
     components: {
         Icon,

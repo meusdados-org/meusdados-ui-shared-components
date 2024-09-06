@@ -1,9 +1,9 @@
 <template>
     <div class="wrapper-InputTextArea">
-        <div class="container-container-textarea">
-            <label>{{ label }}</label>
-            <div class="container-textarea">
-                <textarea :value="value" :id="id" rows="6" @input="$emit('update:value', $event.target.value)" @blur="handleBlur" :placeholder="placeholder" :maxlength="maxlength"></textarea>
+        <div class="container-container-textarea" :class="{ dark }">
+            <label :class="{ dark }">{{ label }}</label>
+            <div class="container-textarea" :class="{ dark }">
+                <textarea :class="{ dark }" :value="value" :id="id" rows="6" @input="$emit('update:value', $event.target.value)" @blur="handleBlur" :placeholder="placeholder" :maxlength="maxlength"></textarea>
             </div>
         </div>
         <FormError v-if="error">
@@ -46,6 +46,11 @@ export default {
             required: false,
             default: true
         },
+        dark: {
+            type: Boolean,
+            required: false,
+            default: false
+        }
     },
     data() {
         return {
@@ -94,6 +99,7 @@ export default {
     cursor: text;
 }
 
+
 label{
     color: var(--gray-1);
     font-family: 'Montserrat';
@@ -102,6 +108,10 @@ label{
 
     text-align: left;
     padding-bottom: var(--spacing-xxsmall);
+}
+
+label.dark {
+    color: var(--white);
 }
 
 textarea {
@@ -117,6 +127,10 @@ textarea {
     background-color: transparent;
 }
 
+textarea.dark {
+    color: var(--white);
+}
+
 textarea:focus {
     outline: none;
 }
@@ -125,11 +139,19 @@ textarea:focus {
     border-color: var(--black);
 }
 
+.container-textarea.dark:hover {
+    border-color: var(--white);
+}
+
 
 .container-textarea:has(textarea:focus){
     outline: none;
     border-color:var(--purple-1);
     transition: all .1s linear;
+}
+
+.container-textarea:has(textarea:focus) {
+    border-color: var(--blue-3);
 }
 
 .container-textarea:has(textarea:not(:focus)) {

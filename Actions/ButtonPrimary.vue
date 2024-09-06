@@ -45,8 +45,8 @@ export default {
             type: String,
             default: 'button'
         },
-        nohover: {
-            type: Boolean,
+            nohover: {
+                type: Boolean,
             default: false
         },
         sameColorBackground: {
