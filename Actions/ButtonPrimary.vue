@@ -10,7 +10,8 @@
         xxlarge: size === 'xxlarge',
         circle,
         onlyIcon,
-        dark
+        dark,
+        reverse
     }" :disabled="disabled">
         <span class="text-button">
             <Icon :align="false" v-if="icon" :type="icon" :size="iconSize" :stroke-width="strokeWidth" />
@@ -76,6 +77,10 @@ export default {
         circle: {
             type: Boolean,
             default: false
+        },
+        reverse: {
+            type: Boolean,
+            default: false
         }
     },
     components: { LabelSmall, LabelMedium, LabelLarge, Icon },
@@ -124,6 +129,10 @@ button {
     color: var(--white);
     cursor: pointer;
     opacity: 1;
+}
+
+button.reverse {
+    background: var(--purple-1) 0% 0% no-repeat padding-box;
 }
 
 button.circle {
@@ -213,6 +222,10 @@ button:not(.nohover):hover {
     -ms-transition-delay: 0s;
     -o-transition-delay: 0s;
     transition-delay: 0s;
+}
+
+button.reverse:not(.nohover):hover {
+    background-color: var(--blue-1);
 }
 
 button.dark:hover {
