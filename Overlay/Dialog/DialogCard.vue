@@ -7,7 +7,7 @@
             </div>
             <div class="dialog-message">
                 <BodyLarge class="title">{{ title }}</BodyLarge>
-                <BodyMedium>{{ message }}</BodyMedium>
+                <BodyMedium v-html="message"></BodyMedium>
             </div>
             <div class="dialog-buttons">
                 <ButtonLink id="button-cancelar-dialog" v-if="showCancelButton" @click="onCancel">{{ cancelButtonLabel }}</ButtonLink>
@@ -111,7 +111,9 @@ export default {
 
 .title {
     font-weight: 600;
+    color:#8b5cf6;
 }
+
 
 .dialog-image {
     max-height: 4rem;
