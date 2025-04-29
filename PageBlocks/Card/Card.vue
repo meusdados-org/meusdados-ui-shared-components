@@ -95,8 +95,10 @@ export default {
 }
 
 .main-title {
-  color: var(--gray-2);
+  color: #8b5cf6;
+  font-size: 1rem;
 }
+
 
 .card-container{
   display: flex;
