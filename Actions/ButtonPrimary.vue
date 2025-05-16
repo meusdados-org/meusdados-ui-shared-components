@@ -118,7 +118,7 @@ export default {
 
 button {
     padding: 0 var(--spacing-medium);
-    background: var(--blue-1) 0% 0% no-repeat padding-box;
+    background: #8b5cf6 0% 0% no-repeat padding-box;
     border-radius: var(--border-radius-small);
     border: none;
     color: var(--white);
@@ -206,7 +206,7 @@ button.large {
 }
 
 button:not(.nohover):hover {
-    background-color: var(--purple-1);
+    background-color: var(--blue-1);
     color: var(--white) !important;
     -webkit-transition-delay: 0s;
     -moz-transition-delay: 0s;

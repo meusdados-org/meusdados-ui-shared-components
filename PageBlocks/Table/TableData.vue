@@ -16,26 +16,26 @@
             <tbody>
                 <tr v-for="(td, i) in tableEntries.slice(this.start, this.stop) " :key="td">
                     <td v-for="column in tableHeader" :key="column">
-                        <div v-if="column.key === 'ativo'" class="icons">
+                        <div v-if="column.key === 'status'" class="icons">
+                            <ButtonSwitch label="status" :value="td[column.key]" @switchFlag="changeStatus(td)" :showLabel="false"/>
+                        </div>
+                        <div v-else-if="column.key === 'ativo'" class="icons">
                             <ButtonSwitch label="ativo" :value="td[column.key]" @switchFlag="changeAtivo(td)" :showLabel="false"/>
                         </div>
-                        <div v-else-if="td[column.key] === true || td[column.key] === false">
+                        <div v-else-if="(td[column.key] === true || td[column.key] === false) && column.key !== 'ativo' && column.key !== 'status'">
                             <div v-if="(td[column.key] === false && column.reverse) || (td[column.key] === true && !column.reverse)" class="icons">
                                 <slot name="boolIcon">
                                     <Icon size="12px" type="check"/>
                                 </slot>
                             </div>
                         </div>
-                        <div v-else-if="column.key.includes('data')">
-                            {{ td[column.key] ? dataConversor(td[column.key]) : '-' }}
-                        </div>
-                        <div v-else>
-                            {{(td[column.key] || '-').toString().substring(0, 50)}}<span v-if="(td[column.key] || '').toString().length >= 50">
+                        <div v-else-if="column.key.includes('data')">{{ td[column.key] ? dataConversor(td[column.key]) : '-' }}</div>
+                        <div v-else>{{(td[column.key] || '-').toString().substring(0, 50)}}
+                            <span v-if="(td[column.key] || '').toString().length >= 50">
                                 <Tooltip :adjust-top="i === 0">
                                     <template #icon>
-                                        ...
-                                    </template>
-                                    {{td[column.key]}}
+                                    ...
+                                    </template>{{td[column.key]}}
                                 </Tooltip>
                             </span>
                         </div>
@@ -43,18 +43,18 @@
                     <td v-if="actions">
                         <div class="action-buttons">
                             <div v-if="canEdit">
-                                <ButtonLink>
+                                <ButtonLink title="Editar">
                                     <Icon size="1.25rem" type="edit" v-on:click="editar(td.id)"/>
                                 </ButtonLink>
                             </div>
                             <div v-if="canDownload">
-                                <ButtonLink>
+                                <ButtonLink title="Baixar">
                                     <Icon class="download" size="1.25rem" type="download" v-on:click="download(td[fileNameLabel])"/>
                                 </ButtonLink>
                             </div>
                             <div v-if="canDelete">
-                                <ButtonLink>
-                                    <Icon class="delete" size="1.25rem" type="x-square" v-on:click="deletar(td.id || td.file_name)" />
+                                <ButtonLink title="Excluir">
+                                    <Icon class="delete" size="1.25rem" type="trash-2" v-on:click="deletar(td.id || td.file_name)" />
                                 </ButtonLink>
                             </div>
                             <div v-if="customAction">
@@ -236,6 +236,17 @@ export default {
             new this.service().updateAtivo(td.id, td).then(() => {}).catch(error => {
                 this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
                 td.ativo = !td.ativo;
+            })
+        },
+        changeStatus(td) {
+            td.status = !td.status;
+            new this.service().updateStatus(td.id, td.status)
+            .then(() => {
+                this.$emit('usuarioStatusAlterado'); 
+            })
+            .catch(error => {
+                this.$dialog({ title: 'Erro ao atualizar status!', message: error.response.data.error_message, type: 'error'});
+                td.status = !td.status; 
             })
         },
         sort(th) {

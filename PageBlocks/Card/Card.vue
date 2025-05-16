@@ -97,6 +97,7 @@ export default {
 .main-title {
   color: #8b5cf6;
   font-size: 1rem;
+  font-weight: 600;
 }
 
 

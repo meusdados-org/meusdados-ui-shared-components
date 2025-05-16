@@ -6,9 +6,12 @@
                 {{ item.name }}
             </LabelMedium> <Icon class="breadcrumb-icon mobile" size="14px" v-if="!isTheCurrentPage(i)" type="chevron-right" />
         </span>
-        <ButtonLink v-if="allowHelp && helpText" type="help-circle" size="large" onlyIcon v-on:click="open = true"></ButtonLink>
+        <span v-if="allowHelp && helpText" class="tooltip-wrapper">
+            <ButtonLink type="help-circle" size="large" onlyIcon />
+            <div class="tooltip-text" v-html="helpText"></div>
+        </span>
     </span>
-    <ModalHelp v-if="allowHelp && helpText" :open="open" :helpText="helpText" @close="open = false" />
+    <!-- <ModalHelp v-if="allowHelp && helpText" :open="open" :helpText="helpText" @close="open = false" />-->
 </template>
 
 <script>
@@ -123,6 +126,41 @@ export default {
     .breadcrumbs, .item {
         display: flex;
     }
+}
+
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 300px;
+  background-color: #8b5cf6; /* roxo principal da sua interface */
+  color: #FFFFFF; /* texto branco */
+  text-align: left;
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 1500;
+  bottom: auto;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.3s ease;
+  white-space: normal;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(108, 99, 255, 0.4);
+  pointer-events: none;
+  font-family: "Inter", sans-serif; /* ajusta conforme sua fonte */
+  line-height: 1.4;
+}
+
+.tooltip-wrapper:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
 }
 
 </style>
