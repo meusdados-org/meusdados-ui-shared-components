@@ -190,8 +190,12 @@ export default {
             this.stop = stop;
         },
         editar(id) {
-            const path = `${this.$route.path}/editar/${id}`;
-            this.$router.push({ path });
+            if (this.$.vnode.props?.onEditar) {
+                this.$emit('editar', id); 
+            } else {
+                const path = `${this.$route.path}/editar/${id}`;
+                this.$router.push({ path }); 
+            }
         },
         compareEntry(entry, filter) {
             if (entry === undefined || entry === null || entry === '') {

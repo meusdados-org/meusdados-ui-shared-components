@@ -125,6 +125,7 @@ export default {
     text-align: center;
     align-items: center;
     row-gap: var(--spacing-xsmall);
+    font-size: medium;
 }
 
 .dialog-buttons {
