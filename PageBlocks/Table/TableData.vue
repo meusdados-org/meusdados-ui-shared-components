@@ -219,6 +219,7 @@ export default {
                         entriesCopy.splice(index, 1);
                         this.$emit('delete', entriesCopy);
                         this.$refs.pagination.deleteItem(entriesCopy);
+                        this.$emit('usuarioStatusAlterado');
                     }).catch(error => {
 
                         this.$dialog({title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error'});
