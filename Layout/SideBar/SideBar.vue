@@ -130,7 +130,7 @@ export default {
     - **Bases Legais:** Veja as bases legais relacionadas à LGPD.
     - **Sistemas:** Cadastre sistemas de TI que armazenam/processam dados pessoais.
     - **Terceiros:** Registre parceiros com acesso a dados pessoais.
-    - **Termos de Uso:** Documente políticas de uso e privacidade.
+    - **Termos:** Documente políticas de uso e privacidade.
     - **Tipos de Dados:** Classifique os dados pessoais coletados.
     - **Processo:** Documente processos internos de dados, do início ao fim.
 - **Titulares:** Gerencie dados pessoais em conformidade com a LGPD:
@@ -174,7 +174,7 @@ export default {
                             to: '/mapeamento-dados/terceiros'
                         },
                         {
-                            title: 'Termos de Uso',
+                            title: 'Termos',
                             to: '/mapeamento-dados/termos-uso'
                         },
                         {
