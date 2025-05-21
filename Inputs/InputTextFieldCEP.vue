@@ -74,7 +74,7 @@ export default {
             default: false
         }
     },
-    emits:["update:value", "address-fetched"],
+    emits: ["update:value", "address-fetched"],
     data() {
         return {
             inputProps: {
@@ -98,21 +98,30 @@ export default {
     },
     methods: {
         //Evento de Blur.
-        handleBlur() {
+        async handleBlur(ev) {
             this.error = this.required && !this.value;
             console.log("deu blur")
             // this.$emit("bluring");
             //Validação do CEP
-            let rawCep = this.value
+            let rawCep = ev.target.value
+            console.log("raw cep com this.value" + rawCep)
             let numCep = rawCep.replace(/\D/g, '');
             console.log(`Raw cep = ${rawCep} Num cep = ${numCep}`)
 
             if (!this.validateCep(numCep)) {
+                console.log("cep invalido")
                 return
             }
 
             //Chamada da API
-            fetchData(numCep);
+            try {
+                console.log("entrei auqi no try do handleBlur")
+                let address = await this.fetchData(numCep);
+                console.log(address)
+                this.$emit('address-fetched', address);
+            } catch (error) {
+                console.log(`Erro ${error}`)
+            }
         },
         //Função que gera a máscara do CEP
         cepMask(value) {
@@ -146,37 +155,23 @@ export default {
             return true;
         },
 
-        fetchData(cep) {
+        async fetchData(cep) {
             const urlToFetch = `https://brasilapi.com.br/api/cep/v1/${cep}`;
-            let req = new XMLHttpRequest();
-            req.open("GET", urlToFetch); //Cria a requisição
-            req.send() //Envia a requisição para o servidor
-            address = {
-                city,
-                neighborhood,
-                street,
-                state
-            }
-            req.onload = () => {
-                if (req.status === 200) {
-                    let endereco = JSON.parse(req.response) //Recebe a requisição em JSON.
-                    address.city = endereco.city
-                    address.neighborhood = endereco.neighborhood
-                    address.state = endereco.state
-                    address.street = endereco.city
-                    console.log(`${address}`)
-                    this.$emit("address-fetched", address)
-                    return;
-                }
-                if (req.status === 404) {
-                    
-                    return "Erro no cep"
-                }
-                else {
-                    return "Erro na requisição"
-                }
+            const response = await fetch(urlToFetch);
+
+            if (!response.ok) {
+                throw new Error("CEP não encontrado");
             }
 
+            const endereco = await response.json();
+
+            return {
+                city: endereco.city,
+                neighborhood: endereco.neighborhood,
+                state: endereco.state,
+                street: endereco.street,
+                uf: endereco.state
+            }
         }
     },
     created() {
