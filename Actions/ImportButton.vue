@@ -8,7 +8,7 @@
                 <TitleSmall>{{ title }}</TitleSmall>
                 <BodyMedium>
                     <ul>
-                        <li v-for="rule in rules" :key="rule">{{ rule }}</li>
+                        <li v-for="rule in rules" :key="rule" v-html="rule"></li>
                     </ul>
                 </BodyMedium>
             </div>
@@ -102,4 +102,21 @@ export default {
     outline: auto;
     outline-color:var(--purple-1);
 }
+
+</style>
+
+<style>
+
+.modelo-link {
+  color: #8b5cf6;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.modelo-link:hover {
+  color: #7c3aed; 
+  text-decoration: underline;
+}
+
 </style>

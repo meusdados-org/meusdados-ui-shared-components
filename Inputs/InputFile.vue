@@ -190,7 +190,7 @@ label.label input[type="file"] {
 
 .label {
     padding: 0 var(--spacing-medium);
-    background: var(--blue-1) 0% 0% no-repeat padding-box;
+    background: var(--purple-1) 0% 0% no-repeat padding-box;
     border-radius: var(--border-radius-small);
     border: none;
     color: var(--white);
@@ -213,7 +213,7 @@ label.label input[type="file"] {
     border: none;
     border-top: var(--spacing-xxxsmall) solid transparent;
     border-bottom: var(--spacing-xxxsmall) solid transparent;
-    color: var(--blue-1);
+    color: var(--purple-1);
     cursor: pointer;
     padding: 0;
     text-decoration: none;
@@ -233,12 +233,12 @@ label.label input[type="file"] {
 }
 
 .label:hover {
-  background: var(--purple-1);
+  background: var(--blue-1);
 }
 
 .label.buttonLink:hover {
     background-color: transparent;
-    color: var(--purple-1) !important;
+    color: var(--blue-1) !important;
 }
 
 .label:has(input[type="file"]:focus) {
