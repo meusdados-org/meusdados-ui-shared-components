@@ -97,27 +97,27 @@ export default {
         }
     },
     methods: {
-        //Evento de Blur.
+        //Evento de Blur. Valida o CEP e chama a API do endereço
         async handleBlur(ev) {
             this.error = this.required && !this.value;
-            console.log("deu blur")
+            // console.log("deu blur")
             // this.$emit("bluring");
             //Validação do CEP
             let rawCep = ev.target.value
-            console.log("raw cep com this.value" + rawCep)
+            // console.log("raw cep com this.value" + rawCep)
             let numCep = rawCep.replace(/\D/g, '');
-            console.log(`Raw cep = ${rawCep} Num cep = ${numCep}`)
+            // console.log(`Raw cep = ${rawCep} Num cep = ${numCep}`)
 
             if (!this.validateCep(numCep)) {
-                console.log("cep invalido")
+                // console.log("cep invalido")
                 return
             }
 
             //Chamada da API
             try {
-                console.log("entrei auqi no try do handleBlur")
+                // console.log("entrei auqi no try do handleBlur")
                 let address = await this.fetchData(numCep);
-                console.log(address)
+                // console.log(address)
                 this.$emit('address-fetched', address);
             } catch (error) {
                 console.log(`Erro ${error}`)
@@ -142,12 +142,12 @@ export default {
         validateCep(cep) {
 
             if (!cep || cep.length !== 8) {
-                console.log("cep inválido. Matando a função aqui.")
+                // console.log("cep inválido. Matando a função aqui.")
                 return false;
             }
             let isNumCep = /^\d+$/.test(cep);
             if (!isNumCep) {
-                alert("CEP contém caracteres inválidos");
+                // alert("CEP contém caracteres inválidos");
                 this.error = true;
                 return false;
             }
