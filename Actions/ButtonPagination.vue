@@ -1,10 +1,13 @@
 <template>
-    <span v-if="showText">
-        {{this.contador}} de {{pageCounting}}
+    <!-- exibe apenas se existirem dados cadastrados -->
+   <span v-show="entries.length > 0">
+        Página {{this.contador}} de {{pageCounting}}
     </span>
+
     <div v-if="pageCounting == 0 ">
-        <span>Sem lista</span>
+        <span>Nenhum dado cadastrado</span>
     </div>
+    
     <div v-else class="buttons-pagination" :class="{'disabled': this.contador == 1 && this.contador == pageCounting}">
         <div>
             <ButtonIconOutline :disabled="this.contador == 1" v-on:click="voltar" type="arrow-left" />
