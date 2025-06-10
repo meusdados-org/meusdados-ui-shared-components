@@ -39,7 +39,7 @@ const redirect = () => {
 
 <style scoped>
 .alert-privacy-container {
-  background-color: var(--purple-1);
+  background-color: var(--blue-1);
   border-radius: var(--border-radius-small);
   padding:  var(--spacing-small);
 }
@@ -61,6 +61,7 @@ const redirect = () => {
 @media (max-width: 768px) {
   .alert-privacy-container {
     border-radius: 0;
+    width: 100%;
   }
 }
 </style>
