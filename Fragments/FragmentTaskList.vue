@@ -62,7 +62,7 @@ const props = defineProps({
 }
 
 .text-not-done, .not-done-icon{
-  color: #ff3333;
+  color: var(--red-1);
 }
 
 .fragment-task-list-container {
