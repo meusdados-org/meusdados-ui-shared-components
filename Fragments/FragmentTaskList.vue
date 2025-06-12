@@ -25,11 +25,18 @@ const props = defineProps({
       <div class="fragment-task-list__body__task" v-for="entry in taskList" :key="entry">
         <template v-for="[task, info] in Object.entries(entry)">
           <div class="fragment-task-list__body__task__text" :class="{ collabVersion }">
-            <span class="fragment-task-list__body__task__indicator" :class="{ active: info.status, show: !info.customIcon }" :style="{ 'flex-shrink': 0 }">
+            <span class="fragment-task-list__body__task__indicator"
+              :class="{ active: info.status }" :style="{ 'flex-shrink': 0 }">
               <Icon type="check" size="9px" :align="false" v-if="info.status && !info.customIcon" />
+               <Icon type="x" size="12px" :align="false" v-if="!info.status && !info.customIcon"
+              :style="{ 'flex-shrink': 0 }" class="not-done-icon"/>
             </span>
-            <Icon :type="info.customIcon" size="12px" :align="false" v-if="info.customIcon" :style="{ 'flex-shrink': 0 }" />
-            <BodyMedium class="text" :style="{ 'flex-grow': 0 }">{{ task }}</BodyMedium> <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
+           
+            <BodyMedium class="text" :style="{ 'flex-grow': 0 }" :class="{
+              'text-done': info.status,
+              'text-not-done': !info.status
+            }">{{ task }}</BodyMedium>
+            <Tooltip v-if="info.tooltip">{{ info.tooltip }}</Tooltip>
             <div>
               <template v-if="info.data">- </template>
               <BodyMedium v-if="info.data">{{ dataHora(info.data) }}</BodyMedium>
@@ -49,6 +56,15 @@ const props = defineProps({
 </template>
 
 <style scoped>
+.text-done {
+  color: var(--green-1);
+  text-decoration: line-through;
+}
+
+.text-not-done, .not-done-icon{
+  color: var(--red-1);
+}
+
 .fragment-task-list-container {
   display: flex;
   flex-direction: column;
@@ -58,7 +74,7 @@ const props = defineProps({
   overflow-y: auto;
   width: 100%;
   max-height: 264px;
-  padding-right:  var(--spacing-small);
+  padding-right: var(--spacing-small);
   margin-right: calc(var(--spacing-small) * -1);
 }
 
@@ -113,12 +129,11 @@ const props = defineProps({
 
 .fragment-task-list__body__task__indicator.active {
   background-color: var(--green-1);
-  color: var(--white);
 }
 
-.fragment-task-list__body__task__indicator:not(.show) {
+/* .fragment-task-list__body__task__indicator:not(.show) {
   display: none;
-}
+} */
 
 @media (max-width: 768px) {
   .fragment-task-list-container {

@@ -4,7 +4,7 @@
         Página {{this.contador}} de {{pageCounting}}
     </span>
 
-    <div v-if="pageCounting == 0 ">
+    <div v-if="pageCounting == 0 " id="zero-data-text">
         <span>Nenhum dado cadastrado</span>
     </div>
     
@@ -96,6 +96,14 @@ export default {
 </script>
 
 <style scoped>
+#zero-data-text{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
 .buttons-pagination{
     display: flex;
     align-items: center;
