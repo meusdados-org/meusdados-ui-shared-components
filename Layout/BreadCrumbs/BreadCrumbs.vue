@@ -137,7 +137,7 @@ export default {
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
-  width: 350px;
+  width: 420px;
   background-color: #8b5cf6; /* roxo principal da sua interface */
   color: #FFFFFF; /* texto branco */
   text-align: justify;
@@ -146,7 +146,7 @@ export default {
   position: absolute;
   z-index: 1500;
   bottom: auto;
-  top: 50%;
+  top: 90%;
   left: 200%;
   transform: translateY(-50%);
   transition: opacity 0.3s ease;
