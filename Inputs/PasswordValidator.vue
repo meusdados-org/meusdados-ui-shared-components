@@ -7,7 +7,7 @@
     <ul class="rules">
       <li :class="{ valid: rules.length }">
         <Icon class="rule-icon" size="1.25rem" :type="rules.length ? 'check-circle' : 'x-circle'" />
-        Pelo menos 8 caracteres;
+        Recomendado de 8 a 12 caracteres;
       </li>
       <li :class="{ valid: rules.upper }">
         <Icon class="rule-icon" size="1.25rem" :type="rules.upper ? 'check-circle' : 'x-circle'" />
