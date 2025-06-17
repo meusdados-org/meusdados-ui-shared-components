@@ -137,18 +137,18 @@ export default {
 .tooltip-text {
   visibility: hidden;
   opacity: 0;
-  width: 300px;
+  width: 350px;
   background-color: #8b5cf6; /* roxo principal da sua interface */
   color: #FFFFFF; /* texto branco */
-  text-align: left;
+  text-align: justify;
   border-radius: 8px;
   padding: 8px 12px;
   position: absolute;
   z-index: 1500;
   bottom: auto;
-  top: 110%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  left: 200%;
+  transform: translateY(-50%);
   transition: opacity 0.3s ease;
   white-space: normal;
   font-size: 14px;
