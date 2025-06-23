@@ -37,7 +37,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:value']);
+const emit = defineEmits(['update:value', 'erro']);
 const error = ref(false);
 const errorMessage = ref('');
 const rawValue = ref('');
@@ -73,6 +73,7 @@ function validateTelefone() {
     if(phoneNumber.length < 10 || phoneNumber.length > 11){
         errorMessage.value = 'Telefone inválido';
         error.value = true;
+        emit('erro', true);
         return;
     } 
 
@@ -80,17 +81,20 @@ function validateTelefone() {
     if(!validDDDs.includes(DDD)) {
         errorMessage.value = 'DDD inválido';
         error.value = true;
+        emit('erro', true);
         return;
     }
 
     if(allNumberEquals(phoneNumber)){
         errorMessage.value = 'Telefone inválido';
         error.value = true;
+        emit('erro', true);
         return;
     }
 
     errorMessage.value = '';
     error.value = false;
+    emit('erro', false);
 }
 </script>
 
