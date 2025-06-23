@@ -6,7 +6,7 @@
             <label v-if="label" :style="{ 'font-size': sizeVar }">{{ label }}</label>
         </div>
         <FormError v-if="error">
-            Este campo é obrigatório
+           {{error_message}}
         </FormError>
     </div>
 </template>
@@ -16,19 +16,21 @@ import { computed, watch, ref } from 'vue';
 import FormError from './Form/FormError.vue';
 
 const props = defineProps({
-    value: String,
+    // value: String,
     label: String,
     disabled: Boolean,
     inputProps: Object,
-    placeholder: String
+    placeholder: String,
+    modelValue: String,
+    validator: Function
 });
 
-const emit = defineEmits(['update:value']);
+const emit = defineEmits(['update:modelValue']);
 
 const rawValue = ref('');
 
 watch(
-    () => props.value,
+    () => props.modelValuea,
     (val) => {
         rawValue.value = unmask(val || '')
     },
@@ -45,7 +47,7 @@ function onInput(e) {
     rawValue.value = digits
 
     const formatted = maskDocument(digits)
-    emit('update:value', formatted) 
+    emit('update:modelValue', formatted) 
 }
 
 function unmask(val) {
@@ -66,8 +68,16 @@ function maskDocument(val) {
             .replace(/(\d{4})(\d)/, '$1-$2')
     }
 }
+const error = ref(false);
+const error_message = ref("");
 function validateDoc(){
-
+    if(props.validator){
+        const msg = props.validator(rawValue.value);
+        error_message.value = msg || '';
+        if(error_message.value !== ''){
+            error.value = true;
+        }
+    }
 }
 </script>
 
