@@ -3,9 +3,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th v-for="th in tableHeader" :key="th" :class="{'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th)}" v-on:click="sort(th)">
+                    <th v-for="th in tableHeader" :key="th"
+                        :class="{ 'icons': isBooleanColumn(th), 'canBeSorted': !isBooleanColumn(th) }"
+                        v-on:click="sort(th)">
                         <BodyMedium strong>
-                            {{ th.label }} <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th"/> <Icon type="chevron-up" v-if="!sorted && sortedBy === th"/>
+                            {{ th.label }}
+                            <Icon type="chevron-down" size="1rem" v-if="sorted && sortedBy === th" />
+                            <Icon type="chevron-up" v-if="!sorted && sortedBy === th" />
                         </BodyMedium>
                     </th>
                     <th v-if="actions" class="icons">
@@ -14,28 +18,33 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="(td, i) in tableEntries.slice(this.start, this.stop) " :key="td">
+                <tr v-for="(td, i) in tableEntries.slice(this.start, this.stop)" :key="td">
                     <td v-for="column in tableHeader" :key="column">
                         <div v-if="column.key === 'status'" class="icons">
-                            <ButtonSwitch label="status" :value="td[column.key]" @switchFlag="changeStatus(td)" :showLabel="false"/>
+                            <ButtonSwitch label="status" :value="td[column.key]" @switchFlag="changeStatus(td)"
+                                :showLabel="false" />
                         </div>
                         <div v-else-if="column.key === 'ativo'" class="icons">
-                            <ButtonSwitch label="ativo" :value="td[column.key]" @switchFlag="changeAtivo(td)" :showLabel="false"/>
+                            <ButtonSwitch label="ativo" :value="td[column.key]" @switchFlag="changeAtivo(td)"
+                                :showLabel="false" />
                         </div>
-                        <div v-else-if="(td[column.key] === true || td[column.key] === false) && column.key !== 'ativo' && column.key !== 'status'">
-                            <div v-if="(td[column.key] === false && column.reverse) || (td[column.key] === true && !column.reverse)" class="icons">
+                        <div
+                            v-else-if="(td[column.key] === true || td[column.key] === false) && column.key !== 'ativo' && column.key !== 'status'">
+                            <div v-if="(td[column.key] === false && column.reverse) || (td[column.key] === true && !column.reverse)"
+                                class="icons">
                                 <slot name="boolIcon">
-                                    <Icon size="12px" type="check"/>
+                                    <Icon size="12px" type="check" />
                                 </slot>
                             </div>
                         </div>
-                        <div v-else-if="column.key.includes('data')">{{ td[column.key] ? dataConversor(td[column.key]) : '-' }}</div>
-                        <div v-else>{{(td[column.key] || '-').toString().substring(0, 50)}}
+                        <div v-else-if="column.key.includes('data')">{{ td[column.key] ? dataConversor(td[column.key]) :
+                            '-' }}</div>
+                        <div v-else>{{ (td[column.key] || '-').toString().substring(0, 50) }}
                             <span v-if="(td[column.key] || '').toString().length >= 50">
                                 <Tooltip :adjust-top="i === 0">
                                     <template #icon>
-                                    ...
-                                    </template>{{td[column.key]}}
+                                        ...
+                                    </template>{{ td[column.key] }}
                                 </Tooltip>
                             </span>
                         </div>
@@ -44,17 +53,19 @@
                         <div class="action-buttons">
                             <div v-if="canEdit">
                                 <ButtonLink title="Editar">
-                                    <Icon size="1.25rem" type="edit" v-on:click="editar(td.id)"/>
+                                    <Icon size="1.25rem" type="edit" v-on:click="editar(td.id)" />
                                 </ButtonLink>
                             </div>
                             <div v-if="canDownload">
                                 <ButtonLink title="Baixar">
-                                    <Icon class="download" size="1.25rem" type="download" v-on:click="download(td[fileNameLabel])"/>
+                                    <Icon class="download" size="1.25rem" type="download"
+                                        v-on:click="download(td[fileNameLabel])" />
                                 </ButtonLink>
                             </div>
                             <div v-if="canDelete">
                                 <ButtonLink title="Excluir">
-                                    <Icon class="delete" size="1.25rem" type="trash-2" v-on:click="deletar(td.id || td.file_name)" />
+                                    <Icon class="delete" size="1.25rem" type="trash-2"
+                                        v-on:click="deletar(td.id || td.file_name)" />
                                 </ButtonLink>
                             </div>
                             <div v-if="customAction">
@@ -69,7 +80,8 @@
         </table>
     </div>
     <div class="arrows-table">
-        <ButtonPagination ref="pagination" :entries="tableEntries" :itemsPerTable="itemsPerTable" v-on:changePage="changePage" />
+        <ButtonPagination ref="pagination" :entries="tableEntries" :itemsPerTable="itemsPerTable"
+            v-on:changePage="changePage" />
     </div>
 </template>
 
@@ -126,7 +138,7 @@ export default {
             default: 'file_name'
         }
     },
-    data(){
+    data() {
         return {
             itemsPerTable: itemsPerTable,
             start: 0,
@@ -192,10 +204,10 @@ export default {
         },
         editar(id) {
             if (this.$.vnode.props?.onEditar) {
-                this.$emit('editar', id); 
+                this.$emit('editar', id);
             } else {
                 const path = `${this.$route.path}/editar/${id}`;
-                this.$router.push({ path }); 
+                this.$router.push({ path });
             }
         },
         compareEntry(entry, filter) {
@@ -211,6 +223,15 @@ export default {
 
         },
         deletar(id) {
+            //Impede excluir quando há apenas um usuário
+            if (this.tableEntries.length == 1) {
+                this.$dialog({
+                    type: 'error',
+                    title: 'Operação inválida.',
+                    message: 'Não é possível excluir o único usuário registrado'
+                })
+                return
+            }
             if (this.service) {
                 this.$dialog({
                     type: 'alert',
@@ -227,7 +248,7 @@ export default {
                         this.$emit('usuarioStatusAlterado');
                     }).catch(error => {
 
-                        this.$dialog({title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error'});
+                        this.$dialog({ title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error' });
                     })
                 })
             } else {
@@ -239,35 +260,35 @@ export default {
         },
         changeAtivo(td) {
             td.ativo = !td.ativo;
-            new this.service().updateAtivo(td.id, td).then(() => {}).catch(error => {
-                this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error'});
+            new this.service().updateAtivo(td.id, td).then(() => { }).catch(error => {
+                this.$dialog({ title: 'Não autorizado!', message: error.response.data.error_message, type: 'error' });
                 td.ativo = !td.ativo;
             })
         },
         async changeStatus(td) {
-   
-        td.status = !td.status;
-        try {
-            const usersCount = await new UsersActive().getInfo();
-            const users = usersCount.data.Usuarios;
-        if (users === 3 && td.status === true) {
-            this.$dialog({
-                title: 'Limite atingido',
-                message: 'O número máximo de usuários ativos já foi atingido.',
-                type: 'alert'
-            });
+
             td.status = !td.status;
-            return;
-        }
-            await new this.service().updateStatus(td.id, td.status);
-            this.$emit('usuarioStatusAlterado');
-        } catch (error) {
-            this.$dialog({
-            title: 'Erro ao atualizar status!',
-            message: error.response?.data?.error_message || 'Erro inesperado.',
-            type: 'error'
-            });
-            td.status = !td.status; 
+            try {
+                const usersCount = await new UsersActive().getInfo();
+                const users = usersCount.data.Usuarios;
+                if (users === 3 && td.status === true) {
+                    this.$dialog({
+                        title: 'Limite atingido',
+                        message: 'O número máximo de usuários ativos já foi atingido.',
+                        type: 'alert'
+                    });
+                    td.status = !td.status;
+                    return;
+                }
+                await new this.service().updateStatus(td.id, td.status);
+                this.$emit('usuarioStatusAlterado');
+            } catch (error) {
+                this.$dialog({
+                    title: 'Erro ao atualizar status!',
+                    message: error.response?.data?.error_message || 'Erro inesperado.',
+                    type: 'error'
+                });
+                td.status = !td.status;
             }
         },
         sort(th) {
@@ -277,7 +298,7 @@ export default {
             if (this.sortedBy === th && this.sorted) {
                 this.tableEntries = this.tableEntries.reverse();
                 this.sorted = false;
-            } else if (!this.sortedBy && !this.sorted){
+            } else if (!this.sortedBy && !this.sorted) {
                 this.tableEntries = this.tableEntries.sort((a, b) => {
                     if (th.key && th.key.includes('data')) {
                         return new Date(a[th.key]) - new Date(b[th.key]);
@@ -307,12 +328,11 @@ export default {
 </script>
 
 <style scoped>
-
 .table-wrapper {
     overflow: auto;
     color: transparent;
     border-radius: var(--border-radius-small);
-    margin-top:  var(--spacing-small);
+    margin-top: var(--spacing-small);
     max-height: 70vh;
     box-shadow: var(--box-shadow-1);
 }
@@ -334,9 +354,10 @@ export default {
     z-index: 1;
 }
 
-.table td, .table th {
+.table td,
+.table th {
     text-align: left;
-    padding:  var(--spacing-small);
+    padding: var(--spacing-small);
     min-width: fit-content;
     max-width: var(--spacing-xxxlarge);
 }
@@ -354,7 +375,7 @@ div.icons {
 
 
 .table th {
-    padding:  var(--spacing-small);
+    padding: var(--spacing-small);
     color: var(--black);
 }
 
@@ -371,7 +392,7 @@ div.icons {
 }
 
 
-.table > thead {
+.table>thead {
     width: 100%;
 }
 
@@ -400,17 +421,16 @@ div.icons {
     cursor: pointer;
 }
 
-.arrows-table{
+.arrows-table {
     display: flex;
     justify-content: right;
     column-gap: 20px;
     align-items: center;
     width: 100%;
-    margin-top:  var(--spacing-small);
+    margin-top: var(--spacing-small);
 }
 
 .canBeSorted {
     cursor: pointer;
 }
-
 </style>
