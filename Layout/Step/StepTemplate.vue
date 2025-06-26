@@ -2,7 +2,10 @@
 import { computed } from 'vue';
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
-import meusDadosBranco from './assets/img/log_meus_dados_white.png';
+import pattern1 from './assets/img/pattern1.svg';
+import pattern2 from './assets/img/pattern2.svg';
+import meusDadosColorido from './assets/img/meus-dados-colorido.png';
+import meusDadosBranco from './assets/img/meus-dados-branco.png';
 import ButtonLink from '../../Actions/ButtonLink.vue';
 
 const isMobile = computed(() => window.innerWidth <= 768);
@@ -21,9 +24,9 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="wrapper" :class="{ mobileOnDesktop }" >
+  <div class="wrapper" :class="{ mobileOnDesktop }">
     <header class="logo-header" :class="{ mobileOnDesktop }">
-      <img alt="Meus Dados Logo" class="logo" :src="meusDadosBranco"/>
+      <img alt="Meus Dados Logo" class="logo" :src="step !== 'final' ? meusDadosColorido : meusDadosBranco"/>
       <BodyMedium class="upperTitle" v-if="upperTitle" strong>{{ upperTitle }}</BodyMedium>
       <div style="width: 100px; display: flex; justify-content: flex-end; align-items: center;;">
         <ButtonLink class="action" v-if="canBeClosed" @click="$emit('close')" type="x" :size="!isMobile ? 'xlarge' : 'large'" secondary/>
@@ -42,40 +45,41 @@ const props = defineProps({
       <div class="content" :class="{ mobileOnDesktop }">
         <slot name="content"></slot>
       </div>
+      <div class="footer" v-if="!noFooter" :class="{ mobileOnDesktop }">
+        <slot name="footer"></slot>
+      </div>
+      <div :class="{pattern1: !upperPattern, upperPattern1: upperPattern, mobileOnDesktop: mobileOnDesktop || noPattern}">
+        <img :src="pattern1"/>
+      </div>
+      <div :class="{pattern2: !upperPattern, upperPattern2: upperPattern, mobileOnDesktop: mobileOnDesktop || noPattern}">
+        <img :src="pattern2"/>
+      </div>
     </div>
+    <div style="height: 100px;" v-if="!noFooter && !isMobile && !mobileOnDesktop"></div>
+    <footer v-if="!noFooter && !isMobile" :class="{ mobileOnDesktop }">
+      <slot name="under-footer"></slot>
+    </footer>
   </div>
 </template>
 
 <style scoped>
-
-html, body {
-  overflow: hidden;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
-
 .wrapper {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-  min-height: 100dvh;
-  background: linear-gradient(0deg, rgba(139, 92, 246, 0.75) 0%, rgba(139, 92, 246, 0.75) 100%), url("@/assets/img/bg-login.jpeg"), lightgray 50% / cover no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  height: 100dvh;
 }
 .logo-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-height: 4dvh;
+  padding: var(--spacing-large);
 }
 header:not(.logo-header) {
   display: flex;
   flex-direction: column;
   row-gap:  var(--spacing-small);
+  margin-bottom: 4rem;
 }
 
 .container {
@@ -83,16 +87,53 @@ header:not(.logo-header) {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  color: var(--blue-1);
+}
+
+.footer {
+  padding: var(--spacing-large);
+  margin-bottom:  var(--spacing-small);
+}
+
+.pattern1, .pattern2, .upperPattern1, .upperPattern2 {
+  position: absolute;
+  right: 0;
+  z-index: -1;
+}
+
+.pattern1 {
+  top: 0px;
+}
+
+.upperPattern1 {
+  top: -50px;
+}
+
+.upperPattern2 {
+  top: -130px;
+}
+
+.pattern2 {
+  top: -90px;
 }
 
 .logo {
-  width: 8dvw;
-  margin-top: 2dvw;
+  width: 100px;
+}
+
+footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-large);
 }
 
 .logo.mobileOnDesktop {
-  width: 15dvw;
-  margin-top: 1dvw;
+  width: 70px;
 }
 
 .container.mobileOnDesktop {
@@ -116,10 +157,20 @@ header:not(.logo-header) {
   margin-bottom: var(--spacing-xlarge);
 }
 
+.pattern1.mobileOnDesktop, .pattern2.mobileOnDesktop, .upperPattern1.mobileOnDesktop, .upperPattern2.mobileOnDesktop {
+  display: none;
+}
+
+.footer.mobileOnDesktop {
+  padding: 0;
+  margin: 0;
+}
+
+
+
 @media (max-width: 768px) {
   .logo {
-    width: 15dvw;
-    margin-top: 1dvw;
+    width: 70px;
   }
 
   .container {
@@ -142,47 +193,13 @@ header:not(.logo-header) {
     padding-bottom: 0;
     margin-bottom: var(--spacing-xlarge);
   }
-
-  header:not(.logo-header) {
-    margin-bottom: 0;
-  }
-
-  .logo-header {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .logo-header:last-child {
+  .pattern1, .pattern2, .upperPattern1, .upperPattern2 {
     display: none;
   }
-}
 
-@media (max-width: 1160px) {
-  .logo {
-    width: 10dvw;
-    margin-top: 1dvw;
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    justify-content: space-between;
-    flex-grow: 1;
-    gap: var(--spacing-large);
-  }
-
-  .content {
-    flex: 1 0 0;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-  }
-  .logo-header {
-    padding: var(--spacing-small);
-    padding-bottom: 0;
-    margin-bottom: var(--spacing-xlarge);
+  .footer {
+    padding: 0;
+    margin: 0;
   }
 
   header:not(.logo-header) {
@@ -198,6 +215,22 @@ header:not(.logo-header) {
   .logo-header:last-child {
     display: none;
   }
-}
 
+  footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-large);
+  }
+
+  .action {
+    position: absolute;
+    right: var(--spacing-small);
+    top: var(--spacing-small);
+  }
+}
 </style>
