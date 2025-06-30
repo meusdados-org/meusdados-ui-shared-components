@@ -37,6 +37,15 @@
                                 </slot>
                             </div>
                         </div>
+                        <div v-else-if="column.key === 'nome'">
+                            <span class="align-icon-text">{{ td[column.key] }}
+                                <Icon v-if="td.role === 'Master'" type="star" title="Usuário Master" class="masterIcon"
+                                    fill="#8B5CF6" />
+                                <Icon v-else-if="td.role !== 'Master' && usuarioLogadoRole === 'Master'" type="star"
+                                    title="Promover para Master" class="commonIcon"
+                                    @click="promoteUser(td.id, td.nome)" />
+                            </span>
+                        </div>
                         <div v-else-if="column.key.includes('data')">{{ td[column.key] ? dataConversor(td[column.key]) :
                             '-' }}</div>
                         <div v-else>{{ (td[column.key] || '-').toString().substring(0, 50) }}
@@ -146,7 +155,8 @@ export default {
             tableEntries: this.entries,
             ativo: false,
             sorted: false,
-            sortedBy: undefined
+            sortedBy: undefined,
+            usuarioLogadoRole: null
         }
     },
     computed: {
@@ -184,6 +194,9 @@ export default {
                     return this.compareEntry(entry[filter.header.key], filter.selected);
                 })
             })
+        },
+        tableEntries(newVal) {
+            this.atualizarUsuarioLogado();
         },
         entries() {
             this.tableEntries = this.entries;
@@ -245,7 +258,6 @@ export default {
                         entriesCopy.splice(index, 1);
                         this.$emit('delete', entriesCopy);
                         this.$refs.pagination.deleteItem(entriesCopy);
-                        this.$emit('usuarioStatusAlterado');
                     }).catch(error => {
 
                         this.$dialog({ title: 'Erro ao deletar!', message: error.response.data.error_message, type: 'error' });
@@ -319,15 +331,83 @@ export default {
             }
 
 
+        },
+        promoteUser(userId, userName) {
+            this.$dialog({
+                title: `Deseja promover o usuário ${userName} ao cargo de Master?`,
+                message: `Ao realizar essa ação, você deixará de ter permissão para excluir outros usuários,
+                pois o cargo de Master será transferido, já que é apenas permitido 01 usuário Master.`,
+                showCancelButton: true
+            }).then(() => {
+                new this.service().changeMaster(userId)
+                    .then(() => {
+                        this.$dialog({
+                            title: `Usuário Master atualizado com sucesso`,
+                            message: `O usuário ${userName} é o novo Master`,
+                            type: "success"
+                        }).then(() => {
+                            localStorage.setItem("role", "Comum");
+                            this.usuarioLogadoRole = "Comum"
+                            this.$emit('refreshUsuarios');
+                            window.location.reload();
+                        });
+                    })
+                    .catch(error => {
+                        const mensagem = error.response?.data?.error_message || 'Erro inesperado ao promover o usuário.';
+                        this.$dialog({
+                            title: 'Erro!',
+                            message: mensagem,
+                            type: 'error'
+                        });
+                    });
+            });
+        },
+        atualizarUsuarioLogado() {
+            const stored = localStorage.getItem("usuario");
+            if (stored) {
+                const user = JSON.parse(stored);
+                this.usuarioLogadoRole = user.role;
+            }
         }
     },
     created() {
         this.tableEntries = this.entries;
     },
+    mounted() {
+        /*Checa o localStorage e pega o usuario logado no momento. 
+        Usado para renderizar os ícones de troca de role apenas para o master.
+        */
+        try {
+            const stored = JSON.parse(localStorage.getItem("usuario"));
+            if (stored) {
+                this.usuarioLogadoRole = stored.role;
+            }
+        } catch (e) {
+            console.warn(`Erro ao ler a role do usuário: ${e}`);
+        }
+        console.log(`Minha role ${this.usuarioLogadoRole}`);
+    }
 }
 </script>
 
 <style scoped>
+.align-icon-text {
+    display: inline-flex;
+    align-items: center
+}
+
+.commonIcon {
+    cursor: pointer;
+}
+
+.masterIcon,
+.commonIcon {
+    size: 20px;
+    margin-left: 8px;
+    color: var(--purple-1);
+    vertical-align: center;
+}
+
 .table-wrapper {
     overflow: auto;
     color: transparent;
