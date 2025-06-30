@@ -1,5 +1,5 @@
 <template>
-    <ButtonLink v-on:click="open = true" type="upload" :bold="false">
+    <ButtonLink v-on:click="open = true" type="upload" :bold="false" :disabled="!userHasAccess">
         Importar
     </ButtonLink>
     <ModalTemplate :open="open" @close="open = false">
@@ -49,17 +49,21 @@ export default {
         rules: {
             type: Array,
             required: true
-        }
+        },
+        userHasAccess:{ type: Boolean, default: true }
     },
     data() {
         return {
             open: false
         }
-    },
+    }
 }
 </script>
 
 <style scoped>
+.disabled-btn{
+    pointer-events: none;
+}
 .card {
     display: flex;
     flex-direction: column;
