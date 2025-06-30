@@ -1,34 +1,30 @@
 <template>
   <div class="password-validator">
-    <div class="senha">
-      <p>Senha de Acesso</p>
-    </div>
-
     <ul class="rules">
-      <li :class="{ valid: rules.length }">
-        <Icon class="rule-icon" size="1.25rem" :type="rules.length ? 'check-circle' : 'x-circle'" />
-        Recomendado de 8 a 12 caracteres;
-      </li>
-      <li :class="{ valid: rules.upper }">
-        <Icon class="rule-icon" size="1.25rem" :type="rules.upper ? 'check-circle' : 'x-circle'" />
-        1 Letra Maiúscula;
-      </li>
-      <li :class="{ valid: rules.lower }">
-        <Icon class="rule-icon" size="1.25rem" :type="rules.lower ? 'check-circle' : 'x-circle'" />
-        1 Letra Minúscula;
-      </li>
-      <li :class="{ valid: rules.number }">
-        <Icon class="rule-icon" size="1.25rem" :type="rules.number ? 'check-circle' : 'x-circle'" />
-        1 Número;
-      </li>
-      <li :class="{ valid: rules.special }">
-        <Icon class="rule-icon" size="1.25rem" :type="rules.special ? 'check-circle' : 'x-circle'" />
-        1 caractere especial (ex: !, @, #, $, %);
-      </li>
-      <li :class="{ valid: rules.match }">
-        <Icon class="rule-icon" size="1.25rem" :type="rules.match ? 'check-circle' : 'x-circle'" />
-        As senhas coincidem;
-      </li>
+        <li :class="{ valid: rules.length }">
+          <Icon class="rule-icon" size="0.75rem" :type="rules.length ? 'check-circle' : 'x-circle'" />
+          Recomendado de 8 a 12 caracteres;
+        </li>
+        <li :class="{ valid: rules.upper }">
+          <Icon class="rule-icon" size="0.75rem" :type="rules.upper ? 'check-circle' : 'x-circle'" />
+          1 Letra Maiúscula;
+        </li>
+        <li :class="{ valid: rules.lower }">
+          <Icon class="rule-icon" size="0.75rem" :type="rules.lower ? 'check-circle' : 'x-circle'" />
+          1 Letra Minúscula;
+        </li>
+        <li :class="{ valid: rules.number }">
+          <Icon class="rule-icon" size="0.75rem" :type="rules.number ? 'check-circle' : 'x-circle'" />
+          1 Número;
+        </li>
+        <li :class="{ valid: rules.special }">
+          <Icon class="rule-icon" size="0.75rem" :type="rules.special ? 'check-circle' : 'x-circle'" />
+          1 caractere especial (ex: !, @, #, $, %);
+        </li>
+        <li :class="{ valid: rules.match }">
+          <Icon class="rule-icon" size="0.75rem" :type="rules.match ? 'check-circle' : 'x-circle'" />
+          As senhas coincidem;
+        </li>
     </ul>
   </div>
 </template>
@@ -75,23 +71,13 @@ export default {
   text-align: left;
 }
 
-.senha {
-  margin: 0;
-  color: var(--blue-1);
-  background-color: white;
-  font-size: large;
-  font-weight: 800;
-  margin-top: 1%;
-  margin-bottom: 2%;
-}
-
 .rules {
   list-style: none;
   padding-left: 0;
 }
 
 .rules li {
-  color: var(--red-1); 
+  color: var(--gray-1); 
   font-size: 14px; 
   margin-bottom: 4px;
   display: flex; 
@@ -101,14 +87,18 @@ export default {
 
 .rules li.valid {
   color: var(--green-1);
+  text-decoration-line: line-through;
 }
 
 .rules li .rule-icon {
-  color: var(--red-1); 
+  color: var(--gray-1); 
+  width: 4px;
+  height: 4px;
 }
 
 .rules li.valid .rule-icon {
   color: var(--green-1); 
+  text-decoration-line: line-through;
 }
 
 @media (max-width: 768px) {
