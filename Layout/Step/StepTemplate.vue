@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
-import pattern1 from './assets/img/pattern1.svg';
-import pattern2 from './assets/img/pattern2.svg';
+import pattern1 from './assets/img/Pattern-1-roxo.svg';
+import pattern2 from './assets/img/Pattern-2-roxo.svg';
 import meusDadosColorido from './assets/img/meus-dados-colorido.png';
 import meusDadosBranco from './assets/img/meus-dados-branco.png';
 import ButtonLink from '../../Actions/ButtonLink.vue';
@@ -102,7 +102,9 @@ header:not(.logo-header) {
 }
 
 .pattern1 {
-  top: 0px;
+  top: 325px;
+  right: 200px;
+  scale: 1.8;
 }
 
 .upperPattern1 {
@@ -114,7 +116,9 @@ header:not(.logo-header) {
 }
 
 .pattern2 {
-  top: -90px;
+   top: -80px;
+  right: -80px;
+  scale: 0.7;
 }
 
 .footer {
