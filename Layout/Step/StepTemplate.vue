@@ -9,7 +9,7 @@ import meusDadosBranco from './assets/img/meus-dados-branco.png';
 import ButtonLink from '../../Actions/ButtonLink.vue';
 
 const isMobile = computed(() => window.innerWidth <= 768);
-
+ 
 const props = defineProps({
   mainTitle: String,
   currentStep: String,
