@@ -2,8 +2,8 @@
 import { computed } from 'vue';
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import TitleSmall from '@/components/shared/Typography/Title/TitleSmall.vue';
-import pattern1 from './assets/img/Pattern-1-roxo.svg';
-import pattern2 from './assets/img/Pattern-2-roxo.svg';
+import pattern1 from '@/assets/img/Pattern-1-roxo.svg';
+import pattern2 from '@/assets/img/Pattern-2-roxo.svg';
 import meusDadosColorido from './assets/img/meus-dados-colorido.png';
 import meusDadosBranco from './assets/img/meus-dados-branco.png';
 import ButtonLink from '../../Actions/ButtonLink.vue';
