@@ -63,6 +63,7 @@ const props = defineProps({
 </template>
 
 <style scoped>
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -107,45 +108,23 @@ header:not(.logo-header) {
   scale: 1.8;
 }
 
+.pattern2 {
+ top: -85px;
+  right: -75px;
+  scale: 0.7;
+}
+
 .upperPattern1 {
   top: -50px;
 }
 
 .upperPattern2 {
   top: -130px;
-}
-
-.pattern2 {
-   top: -80px;
-  right: -80px;
-  scale: 0.7;
 }
 
 .footer {
   padding: var(--spacing-large);
   margin-bottom:  var(--spacing-small);
-}
-
-.pattern1, .pattern2, .upperPattern1, .upperPattern2 {
-  position: absolute;
-  right: 0;
-  z-index: -1;
-}
-
-.pattern1 {
-  top: 0px;
-}
-
-.upperPattern1 {
-  top: -50px;
-}
-
-.upperPattern2 {
-  top: -130px;
-}
-
-.pattern2 {
-  top: -90px;
 }
 
 .logo {
