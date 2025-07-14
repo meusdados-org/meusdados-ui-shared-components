@@ -70,6 +70,9 @@
     <ModalTemplate :open="confirmarEmail">
         <CardConfirmarEmail @refresh="refresh" />
     </ModalTemplate>
+    <ModalTemplate :open="confirmarIdentidade">
+        <CardConfirmarIdentidade @refresh="refresh"/>
+    </ModalTemplate>
     <ModalHelp :open="help" :helpText="helpText" @close="help = false"/>
 </template>
 
@@ -90,6 +93,7 @@ import CardConfirmarEmail from '@/components/Cards/CardConfirmarEmail/CardConfir
 import ModalTemplate from '../../Overlay/Modal/ModalTemplate.vue'
 import ButtonLink from '@/components/shared/Actions/ButtonLink.vue'
 import ModalHelp from '@/components/Modals/ModalHelp.vue'
+import CardConfirmarIdentidade from '@/components/Cards/CardConfirmarIdentidade/CardConfirmarIdentidade.vue'
 import posthog from '@/utils/posthog-handler'
 
 export default {
@@ -105,7 +109,8 @@ export default {
         CardRecuperarAcesso,
         CardConfirmarEmail,
         ButtonLink,
-        ModalHelp
+        ModalHelp,
+        CardConfirmarIdentidade
     },
     data() {
         return {
@@ -114,6 +119,7 @@ export default {
                     razao_social: ''
                 }
             },
+            confirmarIdentidade: false,
             popup: false,
             permissions: {},
             activeGroup: undefined,
@@ -326,13 +332,27 @@ export default {
         },
         refresh() {{
             this.$router.go();
-        }}
+        }},
+        checkIdentityValidation(){
+            /*
+                Função que controla a exibição do modal de verificação de identidade.
+                Seta a propriedade confirmarIdentidade como TRUE apenas se o email estiver confirmado
+                , evitando colabação de modais.
+            */
+            const user = JSON.parse(localStorage.getItem("usuario"));
+            if (!user?.empresa?.verificacao_identidade_completo && user?.confirmado_email){
+                this.confirmarIdentidade = true;
+                return;
+            }
+            return;
+        }
     },
     setup() {
         return { collapsed, toggleSideBar, sidebarWidth, meusDados, meusDadosComTexto,};
     },
     created() {
         this.getUserInfo();
+        this.checkIdentityValidation();
         const token = new Token(localStorage).getToken()
         this.permissions = token;
         this.currentPage = this.$route.path.split('/criar')[0].split('/editar')[0];
@@ -345,6 +365,17 @@ export default {
             })
         })
     },
+    watch: {
+        usuario: {
+            deep: true,
+            immediate: true,
+            handler(newVal){
+                if(newVal?.confirmado_email && !newVal?.verificacao_identidade_completo){
+                    this.confirmarIdentidade = true;
+                }
+            }
+        }
+    }
 }
 
 </script>
