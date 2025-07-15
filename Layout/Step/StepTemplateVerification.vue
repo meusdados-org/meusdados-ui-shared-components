@@ -104,21 +104,12 @@ header:not(.logo-header) {
 
 
 .pattern {
-  /* position: absolute;
-  right: 0;
-  z-index: 0;
-  max-width: 100%;
-  overflow: hidden; */
   position: absolute;
   z-index: 0;
   max-width: none
 }
 
 .pattern-top-right {
-  /* top: 50px;
-  right: 40px;
-  width: 100px;
-  opacity: 0.5; */
   top: 90px;
   right: 0px; /* encosta na borda */
   width: auto;
@@ -126,21 +117,12 @@ header:not(.logo-header) {
 }
 
 .pattern-bottom-right {
-  /* bottom: 200px;
-  right: 60px;
-  width: 180px;
-  opacity: 0.5; */
   bottom: 130px;
   right: 0px; /* encosta na borda */
   width: auto;
  
 }
 
-/* .pattern img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-} */
 .pattern img {
   max-width: 100vw;
   height: auto;
