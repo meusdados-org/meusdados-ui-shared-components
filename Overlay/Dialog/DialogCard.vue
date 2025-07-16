@@ -75,7 +75,7 @@ export default {
             alert: alertTriangle,
             success: checkCircle,
             error: xCircle,
-            successPurple: checkCirclepurple
+            successPurple: checkCirclePurple
         }
         this.icon = types[this.type]
     },
