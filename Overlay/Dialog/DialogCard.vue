@@ -24,6 +24,7 @@ import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import BodyLarge from '@/components/shared/Typography/Body/BodyLarge.vue';
 import alertTriangle from '@/assets/img/alert-triangle.svg'
 import checkCircle from '@/assets/img/check-circle.svg'
+import checkCirclePurple from '@/assets/img/checkCirclePurple.png'
 import xCircle from '@/assets/img/x-circle.svg'
 
 export default {
@@ -73,7 +74,8 @@ export default {
             question: alertTriangle,
             alert: alertTriangle,
             success: checkCircle,
-            error: xCircle
+            error: xCircle,
+            successPurple: checkCirclepurple
         }
         this.icon = types[this.type]
     },
