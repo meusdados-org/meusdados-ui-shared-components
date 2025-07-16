@@ -339,13 +339,14 @@ export default {
                 Seta a propriedade confirmarIdentidade como TRUE apenas se o email estiver confirmado
                 , evitando colabação de modais.
             */
-            const user = JSON.parse(localStorage.getItem("usuario"));
-            if (!user?.empresa?.verificacao_identidade_completo && user?.confirmado_email){
+             const user = JSON.parse(localStorage.getItem("usuario"));
+            if (!user?.empresa?.liberado && user?.confirmado_email){
                 this.confirmarIdentidade = true;
                 return;
+            } else { 
+                this.confirmarIdentidade = false;
             }
             return;
-        }
     },
     setup() {
         return { collapsed, toggleSideBar, sidebarWidth, meusDados, meusDadosComTexto,};
@@ -370,8 +371,12 @@ export default {
             deep: true,
             immediate: true,
             handler(newVal){
-                if(newVal?.confirmado_email && !newVal?.verificacao_identidade_completo){
+                console.log('[WATCH] usuario atualizado:', newVal);
+                console.log('[WATCH] Usuario liberado?', newVal.liberado);
+                 if(newVal?.confirmado_email && !newVal?.empresa?.liberado){
                     this.confirmarIdentidade = true;
+                } else { 
+                    this.confirmarIdentidade = false;
                 }
             }
         }
