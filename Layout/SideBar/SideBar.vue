@@ -340,11 +340,13 @@ export default {
                 , evitando colabação de modais.
             */
             const user = JSON.parse(localStorage.getItem("usuario"));
-            if (!user?.empresa?.verificacao_identidade_completo && user?.confirmado_email){
+            if (!user?.empresa?.liberado && user?.confirmado_email){
                 this.confirmarIdentidade = true;
                 return;
-            }
-            return;
+            } else {
+                this.confirmarIdentidade = false;
+                return;
+            }            
         }
     },
     setup() {
@@ -370,8 +372,10 @@ export default {
             deep: true,
             immediate: true,
             handler(newVal){
-                if(newVal?.confirmado_email && !newVal?.verificacao_identidade_completo){
+                if(newVal?.confirmado_email && !newVal?.empresa?.liberado){
                     this.confirmarIdentidade = true;
+                } else { 
+                    this.confirmarIdentidade = false;
                 }
             }
         }
