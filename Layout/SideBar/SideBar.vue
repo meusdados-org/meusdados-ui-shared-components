@@ -371,6 +371,8 @@ export default {
             deep: true,
             immediate: true,
             handler(newVal){
+                console.log('[WATCH] usuario atualizado:', newVal);
+                console.log('[WATCH] Usuario liberado?', newVal.liberado);
                  if(newVal?.confirmado_email && !newVal?.empresa?.liberado){
                     this.confirmarIdentidade = true;
                 } else { 
@@ -379,7 +381,7 @@ export default {
             }
         }
     }
-}
+} }
 
 </script>
 
