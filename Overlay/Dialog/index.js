@@ -44,7 +44,7 @@ const Dialog = {
 
     // Novo - Dialog customizado
     app.config.globalProperties.$dialogCustom = ({
-      type = '', // se você ainda quiser usar os ícones
+      type = '',
       title = '',
       message = '',
       showCancelButton = false,
