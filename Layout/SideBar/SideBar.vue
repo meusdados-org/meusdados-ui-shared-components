@@ -70,8 +70,8 @@
     <ModalTemplate :open="confirmarEmail">
         <CardConfirmarEmail @refresh="refresh" />
     </ModalTemplate>
-    <ModalTemplate :open="confirmarIdentidade">
-        <CardConfirmarIdentidade @refresh="refresh"/>
+    <ModalTemplate :open="confirmarIdentidade" @close="confirmarIdentidade = false">  
+        <CardConfirmarIdentidade @refresh="refresh"  @close="confirmarIdentidade = false"/>
     </ModalTemplate>
     <ModalHelp :open="help" :helpText="helpText" @close="help = false"/>
 </template>
