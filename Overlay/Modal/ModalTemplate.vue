@@ -1,5 +1,5 @@
 <template>
-    <div class="modal-wrapper" v-if="open" v-on:click="$emit('close');">
+    <div class="modal-wrapper" v-if="open" v-on:click="$emit('closeModalOnClickOutside');">
         <div class="modal" @click.stop="">
             <slot></slot>
         </div>
@@ -10,11 +10,25 @@
 
 
 export default {
-    name: 'ModalTemplate',
-    props: ['open'],
-    emits: ['close'],
-    components: {
+  name: 'ModalTemplate',
+  props: {
+    open: {
+      type: Boolean,
+      required: true
     },
+    canCloseOnClickOutside: {
+      type: Boolean,
+      default: true 
+    }
+  },
+  emits: ['close'],
+  methods: {
+    closeModalOnClickOutside() {
+      if (this.canCloseOnClickOutside) {
+        this.$emit('close');
+      }
+    }
+  },
 };
 
 </script>
