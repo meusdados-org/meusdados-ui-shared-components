@@ -26,8 +26,11 @@
                                 </slot>
                             </div>
                         </div>
+                        <div v-else-if="column.key === 'qtd_creditos'" :class="formatCredits(td.qtd_creditos)">
+                            {{ td[column.key] }}
+                        </div>
                         <div v-else-if="column.key.includes('data')">{{ td[column.key] ? dataConversor(td[column.key]) : '-' }}</div> 
-                        <div v-else>{{(td[column.key] || '-').toString().substring(0, 50)}}
+                        <div v-else class="format-text">{{(td[column.key] || '-').toString().substring(0, 50)}}
                             <span v-if="(td[column.key] || '').toString().length >= 50">
                                 <Tooltip :adjust-top="i === 0">
                                     <template #icon>
@@ -47,7 +50,7 @@
 </template>
 
 <script>
-import { dataConversor } from '@/utils/data';
+import { dataConversor, dataHora } from '@/utils/data';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import ButtonPagination from '@/components/shared/Actions/ButtonPagination.vue';
@@ -131,7 +134,7 @@ export default {
         }
     },
     methods: {
-        dataConversor: dataConversor,
+        dataConversor: dataHora,
         isBooleanColumn(th) {
             if (this.tableEntries.length <= 0) {
                 return false;
@@ -180,8 +183,12 @@ export default {
                 this.tableEntries = [...this.entries];
                 this.sortedBy = undefined;
             }
-
-
+        },
+        formatCredits(creditsQtd){
+           /*
+            Função que avalia a quantidade de créditos de uma linha e retorna uma classe para formatar a cor do número
+           */
+            return creditsQtd > 0 ? 'positive-credits' : 'negative-credits';
         }
     },
     created() {
@@ -191,7 +198,18 @@ export default {
 </script>
 
 <style scoped>
+.format-text{
+    text-transform: capitalize;
+}
 
+.negative-credits{
+    color: var(--red-1);
+    font-weight: bold;
+}
+.positive-credits{
+    color:var(--green-1);
+    font-weight: bold;
+}
 .table-wrapper {
     overflow: auto;
     color: transparent;
@@ -210,6 +228,7 @@ export default {
     border-collapse: collapse;
     background-color: white;
     word-wrap: break-word;
+    text-align: center;
 }
 
 .table th {
@@ -219,7 +238,7 @@ export default {
 }
 
 .table td, .table th {
-    text-align: left;
+    text-align: center;
     padding:  var(--spacing-small);
     min-width: fit-content;
     max-width: var(--spacing-xxxlarge);
@@ -259,6 +278,7 @@ div.icons {
 
 .table > thead {
     width: 100%;
+    text-align:center;
 }
 
 .action-buttons {
