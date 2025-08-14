@@ -39,22 +39,20 @@
             <div v-for="link in links" :key="link.titleHeader">
                 <template v-if="(!link.permission || permissions[link.permission])">
                     <SideBarLinkGroup
-                        v-if="link.children"
-                        :titleHeader="link.titleHeader"
-                        :iconHeader="link.iconHeader"
-                        :children="link.children"
-                        :activeGroup="activeGroup === link.titleHeader"
-                        :userPermissions="permissions"
-                        :currentPage="link.children.some(child => currentPage === child.to)"
-                        @activateGroup="activateGroup"
-                        @changeRoute="changeRoute"/>
-                    <BarraLateralLink
-                        v-else
-                        :icon="link.iconHeader"
-                        :to="link.to"
-                        @changeRoute="changeRoute">
-                        {{ link.titleHeader }}
-                    </BarraLateralLink>
+            v-if="link.children"
+            :titleHeader="link.titleHeader"
+            :iconHeader="link.iconHeader"
+            :children="link.children"
+            :userPermissions="permissions"
+            @changeRoute="changeRoute"
+          />
+          <BarraLateralLink
+            v-else
+            :icon="link.iconHeader"
+            :to="link.to"
+            @changeRoute="changeRoute">
+            {{ link.titleHeader }}
+          </BarraLateralLink>
                 </template>
             </div>
         </div>
@@ -168,8 +166,12 @@ export default {
                             to: '/mapeamento-dados/areas'
                         },
                         {
-                            title: 'Bases Legais',
-                            to: '/mapeamento-dados/bases-legais'
+                            title: 'Processos',
+                            to: '/mapeamento-dados/processos'
+                        },
+                        {
+                            title: 'Tipos de Dados',
+                            to: '/mapeamento-dados/tipos-dados'
                         },
                         {
                             title: 'Sistemas',
@@ -184,42 +186,60 @@ export default {
                             to: '/mapeamento-dados/termos-uso'
                         },
                         {
-                            title: 'Tipos de Dados',
-                            to: '/mapeamento-dados/tipos-dados'
+                            title: 'Bases Legais',
+                            to: '/mapeamento-dados/bases-legais'
                         },
                         {
-                            title: 'Processos',
-                            to: '/mapeamento-dados/processos'
-                        },
-                        {
-                            title: 'Todos Titulares',
-                            to: '/titulares'
-                        },
-                        {
-                            title: 'Tipos de Titular',
-                            to: '/tipos-titular'
+                            title: 'Titulares',
+                            icon: 'users', // Adicione um ícone para o item pai recursivo
+                            children: [
+
+                                {
+                                    title: 'Titulares',
+                                    to: '/titulares'
+                                },
+                                {
+                                    title: 'Tipos de Titular',
+                                    to: '/tipos-titular'
+                                }
+                            ]
                         }
                     ]
                 },
                 {
-                    titleHeader: 'Consentimentos',
-                    iconHeader: 'user-check',
+                    titleHeader: 'Gestão',
+                    iconHeader: 'folder',
                     to: '/consentimentos',
-                    children: undefined
-                },
-                {
-                    titleHeader: 'Solicitações',
-                    iconHeader: 'inbox',
                     children: [
                         {
-                            title: 'Todas Solicitações',
-                            to: '/solicitacoes/todas-solicitacoes'
+                            title: 'Consentimentos',
+                            to: '/consentimentos'
                         },
                         {
-                            title: 'Respostas Automáticas',
-                            to: '/solicitacoes/resposta-automatica'
+                            title: 'Solicitações',
+                            icon: 'inbox', // Adicione um ícone para o item pai recursivo
+                            children: [
+
+                                {
+                                    title: 'Solicitações',
+                                    to: '/solicitacoes/todas-solicitacoes'
+                                },
+                                {
+                                    title: 'Respostas Automáticas',
+                                    to: '/solicitacoes/resposta-automatica'
+                                }
+                            ]
                         },
-                    ],
+                        {
+                            title: 'Relatórios',
+                            to: '/relatorio'
+                        },
+                        {
+                            title: 'Política de Privacidade',
+                            to: '/politicas-privacidade'
+                        },
+
+                    ]
                 },
                 {
                     titleHeader: 'Configurações',
@@ -301,30 +321,30 @@ export default {
                     })
                 }
 
-                const relatoriosFlag = posthog.isFeatureEnabled('relatorios');
-                if (relatoriosFlag && !relatorioAdded) {
-                    relatorioAdded = true;
-                    this.links.splice(4, 0, {
-                        titleHeader: 'Relatórios',
-                        to: '/relatorio',
-                        iconHeader: 'file-text'
-                    });
-                }
+                // const relatoriosFlag = posthog.isFeatureEnabled('relatorios');
+                // if (relatoriosFlag && !relatorioAdded) {
+                //     relatorioAdded = true;
+                //     this.links.splice(4, 0, {
+                //         titleHeader: 'Relatórios',
+                //         to: '/relatorio',
+                //         iconHeader: 'file-text'
+                //     });
+                // }
 
-                const politicasFlag = posthog.isFeatureEnabled('politicas');
-                if (politicasFlag && !politicasAdded) {
-                    const index = this.links.findIndex((link) => link.titleHeader === 'Mapeamento de Dados')
-                    politicasAdded = true;
-                    this.links.splice(index+1, 0, {
-                        titleHeader: 'Políticas de Privacidade',
-                        to: '/politicas-privacidade',
-                        iconHeader: 'file'
-                    })
-                }
+                // const politicasFlag = posthog.isFeatureEnabled('politicas');
+                // if (politicasFlag && !politicasAdded) {
+                //     const index = this.links.findIndex((link) => link.titleHeader === 'Mapeamento de Dados')
+                //     politicasAdded = true;
+                //     this.links.splice(index+1, 0, {
+                //         titleHeader: 'Políticas de Privacidade',
+                //         to: '/politicas-privacidade',
+                //         iconHeader: 'file'
+                //     })
+                // }
             })
         },
         activateGroup(status, titleHeader) {
-            this.activeGroup = status ? titleHeader : undefined;
+            this.activeGroup = (this.activeGroup === titleHeader) ? undefined : titleHeader;
         },
         changeRoute(to, titleHeader = undefined) {
             this.activeGroup = titleHeader;

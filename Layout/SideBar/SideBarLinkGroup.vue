@@ -1,15 +1,30 @@
 <template>
   <div class="link-group-container">
-    <div class="link-group-header" v-on:click="activate">
-      <SideBarLink :icon="iconHeader" :class="{active: currentPage}">
+    <div class="link-group-header" v-on:click="toggleActive">
+      <SideBarLink :icon="iconHeader">
         <span>{{ titleHeader }}</span>
       </SideBarLink>
-      <Icon type="chevron-down" :class="{ activeGroup }"/>
+      <Icon type="arrow-down-circle" :class="{ activeGroup: isActive }"/>
     </div>
-    <ul class="link-group-children" :class="{ activeChildren: activeGroup }">
-      <li v-for="child in children" :key="child.to">
+    <ul class="link-group-children" :class="{ activeChildren: isActive }">
+      <li v-for="child in children" :key="child.to || child.titleHeader">
         <BodyMedium v-if="!child.permission || userPermissions[child.permission]">
-          <SideBarLink class="child" :to="child.to" v-on:changeRoute="to => $emit('changeRoute', to, titleHeader)" @isActive="mantainActive">{{ child.title }}</SideBarLink>
+          <SideBarLinkGroup
+            v-if="child.children"
+            :titleHeader="child.title"
+            :iconHeader="child.icon"
+            :children="child.children"
+            :userPermissions="userPermissions"
+            @changeRoute="changeRoute"
+          />
+          <SideBarLink 
+            v-else
+            class="child" 
+            :to="child.to" 
+            v-on:changeRoute="to => $emit('changeRoute', to, titleHeader)" 
+          >
+            {{ child.title }}
+          </SideBarLink>
         </BodyMedium>
       </li>
     </ul>
@@ -21,13 +36,13 @@ import BodyMedium from '@/components/shared/Typography/Body/BodyMedium.vue';
 import Icon from '@/components/shared/Icon/Icon.vue';
 import SideBarLink from './SideBarLink.vue';
 
-
 export default {
   name: 'SideBarLinkGroup',
   components: {
     SideBarLink,
     BodyMedium,
-    Icon
+    Icon,
+    SideBarLinkGroup: () => import('./SideBarLinkGroup.vue')
   },
   props: {
     iconHeader: {
@@ -46,31 +61,26 @@ export default {
       type: Object,
       required: true
     },
-    activeGroup: {
-      type: Boolean,
+    to: {
+      type: [String, Object],
       required: false,
-      default: false
+      default: null,
     },
-    currentPage: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
+  },
+  data() {
+    return {
+      isActive: false
+    };
   },
   methods: {
-    activate() {
-      this.$emit('activateGroup', !this.activeGroup, this.titleHeader)
+    toggleActive() {
+      this.isActive = !this.isActive;
+    },
+    changeRoute(to) {
+        this.$emit('changeRoute', to);
     }
   },
-  created() {
-    this.children.forEach(child => {
-      if(this.$route.path === child.to) {
-        this.$emit('activateGroup', true, this.titleHeader);
-      }
-    })
-  },
 };
-
 </script>
 
 <style scoped>
