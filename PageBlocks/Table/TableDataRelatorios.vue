@@ -19,12 +19,14 @@
             </thead>
             <tbody>
                 <tr v-for="(td, i) in tableEntries.slice(this.start, this.stop)" :key="td">
-                    <td v-for="column in tableHeader" :key="column">
+                    <td v-for="column in tableHeader" :key="column" :class="getCellClass(column.key, td.status)">
                         <div v-if="column.key === 'status'" :class="formatStatus(td.status)">
                             {{ td.status ? 'Ativo' : 'Expirado' }}
                         </div>
                         <div
-                            v-else-if="(td[column.key] === true || td[column.key] === false) && column.key !== 'ativo' && column.key !== 'status'">
+                            v-else-if="(td[column.key] === true || td[column.key] === false) && column.key !== 'ativo' && column.key !== 'status'"
+                            
+                        >
                             <div v-if="(td[column.key] === false && column.reverse) || (td[column.key] === true && !column.reverse)"
                                 class="icons">
                                 <slot name="boolIcon">
@@ -32,14 +34,14 @@
                                 </slot>
                             </div>
                         </div>
-                        <div v-else-if="column.key.includes('data')" :class="formatStatus(td.status)">{{ td[column.key]
+                        <div v-else-if="column.key.includes('data')"  >{{ td[column.key]
                             ? dataConversor(td[column.key]) : '-' }}</div>
-                        <div v-else>{{ (td[column.key] || '-').toString().substring(0, 50) }}
-                            <span v-if="(td[column.key] || '').toString().length >= 50">
+                        <div v-else >{{ (td[column.key] || '-').toString().substring(0, 50) }}
+                            <span v-if="(td[column.key] || '').toString().length >= 50"  >
                                 <Tooltip :adjust-top="i === 0">
                                     <template #icon>
                                         ...
-                                    </template>{{ td[column.key] }}
+                                    </template >{{ td[column.key] }}
                                 </Tooltip>
                             </span>
                         </div>
@@ -289,6 +291,12 @@ export default {
             */
             if (status) return 'active-report';
             else return 'inactive-report';
+        },
+        getCellClass(columnKey, status){
+            if(columnKey === 'exp_date' && !status){
+                return 'inactive-report'
+            }
+            return ''
         }
     },
     created() {
@@ -301,16 +309,6 @@ export default {
 </script>
 
 <style scoped>
-.active-report {
-    color: var(--green-1);
-    font-weight: bold;
-}
-
-.inactive-report {
-    color: var(--red-1);
-    font-weight: bold;
-}
-
 .table-wrapper {
     overflow: auto;
     color: transparent;
@@ -415,5 +413,17 @@ div.icons {
 
 .canBeSorted {
     cursor: pointer;
+}
+.active-report {
+    color: var(--green-1);
+    font-weight: bold;
+}
+
+.inactive-report {
+    color: var(--red-1);
+    font-weight: bold;
+}
+.inactive-report {
+    color: var(--red-1);
 }
 </style>
