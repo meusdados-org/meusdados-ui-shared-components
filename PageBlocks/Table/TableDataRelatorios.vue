@@ -423,7 +423,7 @@ div.icons {
     color: var(--red-1);
     font-weight: bold;
 }
-.inactive-report {
+.inactive-report-date {
     color: var(--red-1);
 }
 </style>
