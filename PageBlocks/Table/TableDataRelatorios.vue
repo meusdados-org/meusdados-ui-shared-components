@@ -294,7 +294,7 @@ export default {
         },
         getCellClass(columnKey, status){
             if(columnKey === 'exp_date' && !status){
-                return 'inactive-report'
+                return 'inactive-report-date'
             }
             return ''
         }
